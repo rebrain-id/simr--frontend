@@ -29,6 +29,10 @@ npm install
   |   |   |-- helper2.js
   |   |   |-- helper3.js
   |   |
+  |   |-- layouts
+  |   |   |-- layout1.js
+  |   |   |-- layout2.js
+  |   |
   |   |-- assets
   |   |   |-- images
   |   |   |   |-- image1.jpg
