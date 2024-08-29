@@ -7,6 +7,7 @@ npm install
 ```
 
 ## Struktur Folder
+````
   SIMR--FRONTEND
   |-- public
   |   |-- vite.svg
@@ -57,7 +58,7 @@ npm install
   |-- README.md
   |-- tailwind.config.js
   |-- vite.config.js
-
+````
 
 ## Library
 - tailwindcss (styling)
