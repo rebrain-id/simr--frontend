@@ -1,0 +1,10 @@
+/node_modules
+.vite.config.js
+.tailwind.config.js
+postcss.config.js
+package.json
+package.lock.json
+.prettierrc
+.prettierignore
+.eslintrc.cjs
+.eslintignore
