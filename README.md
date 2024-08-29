@@ -7,7 +7,7 @@ npm install
 ```
 
 ## Struktur Folder
-- SIMR--FRONTEND
+  SIMR--FRONTEND
   |-- public
   |   |-- vite.svg
   |
