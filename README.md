@@ -1,22 +1,42 @@
 # DOKUMENTASI
 
 ## Instalasi
-- requirement: NodeJS 22.7.0
+
+-   requirement: NodeJS 22.7.0
+
 ```bash
 npm install
 ```
 
 ## Struktur Folder
-````
+
+```
   SIMR--FRONTEND
   |-- public
-  |   |-- vite.svg
+  |   |-- logo.png
   |
   |-- node_modules
   |
   |-- src
+  |   |-- services
+  |   |   |-- config.js
+  |   |   |-- service1.js
+  |   |   |-- service2.js
+  |   |   |-- service3.js
+  |   |
+  |   |-- helpers
+  |   |   |-- helper1.js
+  |   |   |-- helper2.js
+  |   |   |-- helper3.js
+  |   |
   |   |-- assets
-  |   |   |-- react.svg
+  |   |   |-- images
+  |   |   |   |-- image1.jpg
+  |   |   |   |-- image2.jpg
+  |   |   |
+  |   |   |-- file
+  |   |   |   |-- file1.jpg
+  |   |   |   |-- file2.jpg
   |   |
   |   |-- elements
   |   |   |-- element1.jsx
@@ -50,7 +70,12 @@ npm install
   |   |-- index.css
   |   |-- main.jsx
   |
+  |-- .gitignore
+  |-- .env
+  |-- .env.example
   |-- eslint.config.js
+  |-- prettierrc
+  |-- prettierignore
   |-- index.html
   |-- package-lock.json
   |-- package.json
@@ -58,11 +83,12 @@ npm install
   |-- README.md
   |-- tailwind.config.js
   |-- vite.config.js
-````
+```
 
 ## Library
-- tailwindcss (styling)
-- fontawesome (icon)
-- react-query (fetching)
-- redux (state management)
-- formik (form)
+
+-   tailwindcss (styling)
+-   fontawesome (icon)
+-   react-query (fetching)
+-   redux (state management)
+-   formik (form)
