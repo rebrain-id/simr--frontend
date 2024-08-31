@@ -9,7 +9,7 @@ import NavLink from '../elements/NavLink';
 
 const Sidebar = () => {
 	return (
-		<nav className="min-h-screen w-1/5 bg-light-white rounded-lg px-3 pt-6 drop-shadow-right-bottom">
+		<nav className="min-h-screen w-80 bg-light-white rounded-lg px-3 pt-6 drop-shadow-right-bottom">
 			<header className="flex justify-between items-center mb-28">
 				<div className="flex gap-3">
 					<div className="mx-auto my-auto">
