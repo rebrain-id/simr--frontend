@@ -1,6 +1,6 @@
 import { faArrowRightFromBracket } from '@fortawesome/free-solid-svg-icons/faArrowRightFromBracket';
-import Button from './Button';
-import NavLink from './NavLink';
+import Button from '../elements/Button';
+import NavLink from '../elements/NavLink';
 import { faKey } from '@fortawesome/free-solid-svg-icons';
 
 const UserDropdown = () => {

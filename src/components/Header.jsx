@@ -1,6 +1,6 @@
 import { faUserAlt } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import UserDropdown from '../elements/UserDropdown';
+import UserDropdown from './UserDropdown';
 import { useState } from 'react';
 
 const Header = () => {
