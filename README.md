@@ -94,5 +94,6 @@ npm install
 -   tailwindcss (styling)
 -   fontawesome (icon)
 -   react-query (fetching)
--   redux (state management)
+-   react-redux (state management)
+-   redux/toolkit
 -   formik (form)
