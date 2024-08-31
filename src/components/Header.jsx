@@ -8,7 +8,10 @@ const Header = () => {
 	const toggleDropdown = () => setOpenDropdown(!openDropdown);
 
 	return (
-		<header className="px-20 py-5 flex justify-end w-full sticky top-0">
+		<header
+			className="py-5 flex justify-end w-full sticky top-0 z-10 bg-transparent"
+			style={{ backdropFilter: 'blur(5px)' }}
+		>
 			<div className="relative">
 				<div
 					onClick={toggleDropdown}
