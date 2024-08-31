@@ -4,13 +4,21 @@ import {
 	faDoorClosed,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useDispatch } from 'react-redux';
+import { setSelectedAgenda } from '../redux/actions/detailAgendaAction';
 
 const ListAgenda = (props) => {
-	const { title, time, date, room, isOwner = true } = props;
+	const { title, time, date, data, room, isOwner = true } = props;
+	const dispatch = useDispatch();
+
+	const handleClick = () => {
+		dispatch(setSelectedAgenda(data));
+	};
 
 	return (
 		<div
 			className={`px-5 py-3 border rounded flex items-center cursor-pointer ${isOwner ? 'border-light-primary' : 'border-light-warning'}`}
+			onClick={handleClick}
 		>
 			<div className="pe-3 w-1/2">
 				<h3 className="text-sm font-medium">{title}</h3>

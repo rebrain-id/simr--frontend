@@ -48,25 +48,38 @@ const Dashboard = () => {
 				<h1 className="text-base font-semibold">Agenda Hari Ini</h1>
 
 				<section className="mt-5 flex flex-col gap-3">
-					<ListAgenda
-						title="Akreditasi Prodi Sistem Informasi"
-						time="07.00 - 16.00 WIB"
-						date="1 September 2024"
-						room="Ruang B-1.1"
-						isOwner={false}
-					/>
-					<ListAgenda
-						title="Rapat Dekanat"
-						time="10.00 - 11.00 WIB"
-						date="1 September 2024"
-						room="Ruang B-1.1"
-					/>
-					<ListAgenda
-						title="Rapat Ploting Anggaran"
-						time="14.00 - 16.00 WIB"
-						date="1 September 2024"
-						room="Ruang B-1.1"
-					/>
+					{[
+						{
+							title: 'Akreditasi Prodi Sistem Informasi',
+							time: '07.00 - 16.00 WIB',
+							date: '1 September 2024',
+							room: 'Ruang B-1.1',
+							isOwner: false,
+						},
+						{
+							title: 'Rapat Ploting Anggaran',
+							time: '14.00 - 16.00 WIB',
+							date: '1 September 2024',
+							room: 'Ruang B-1.1',
+							isOwner: true,
+						},
+						{
+							title: 'Rapat Dekanat',
+							time: '10.00 - 11.00 WIB',
+							date: '1 September 2024',
+							room: 'Ruang B-1.1',
+							isOwner: true,
+						},
+					].map((item, index) => (
+						<ListAgenda
+							key={index}
+							data={item}
+							title={item.title}
+							time={item.time}
+							isOwner={item.isOwner}
+							room={item.room}
+						/>
+					))}
 				</section>
 			</main>
 		</>
