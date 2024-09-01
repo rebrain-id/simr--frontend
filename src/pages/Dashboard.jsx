@@ -75,6 +75,7 @@ const Dashboard = () => {
 							key={index}
 							data={item}
 							title={item.title}
+							date={item.date}
 							time={item.time}
 							isOwner={item.isOwner}
 							room={item.room}
