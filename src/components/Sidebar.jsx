@@ -6,8 +6,10 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import logo from '../assets/images/logo.png';
 import NavLink from '../elements/NavLink';
+import { useLocation } from 'react-router-dom';
 
 const Sidebar = () => {
+	const isActive = useLocation().pathname;
 	return (
 		<nav className="h-auto w-80 bg-light-white rounded-lg px-3 pt-6 drop-shadow-right-bottom">
 			<header className="flex justify-between items-center mb-28">
@@ -28,10 +30,44 @@ const Sidebar = () => {
 			</header>
 
 			<menu className="flex flex-col gap-2">
-				<NavLink icon={faTableColumns} title="Dashboard" to="/" />
-				<NavLink icon={faCalendarAlt} title="Agenda" to="/agenda" />
-				<NavLink icon={faSitemap} title="Program Studi" to="/prodi" />
-				<NavLink icon={faUserAlt} title="Dosen" to="/dosen" />
+				<NavLink
+					icon={faTableColumns}
+					title="Dashboard"
+					to="/"
+					variant={
+						isActive === '/' ? 'bg-light-primary text-white' : ''
+					}
+				/>
+				<NavLink
+					icon={faCalendarAlt}
+					title="Agenda"
+					to="/agenda"
+					variant={
+						isActive === '/agenda'
+							? 'bg-light-primary text-white'
+							: ''
+					}
+				/>
+				<NavLink
+					icon={faSitemap}
+					title="Program Studi"
+					to="/prodi"
+					variant={
+						isActive === '/prodi'
+							? 'bg-light-primary text-white'
+							: ''
+					}
+				/>
+				<NavLink
+					icon={faUserAlt}
+					title="Dosen"
+					to="/dosen"
+					variant={
+						isActive === '/dosen'
+							? 'bg-light-primary text-white'
+							: ''
+					}
+				/>
 			</menu>
 		</nav>
 	);
