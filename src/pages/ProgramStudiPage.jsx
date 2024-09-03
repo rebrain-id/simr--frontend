@@ -2,7 +2,24 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import Button from '../elements/Button';
 import ListProdi from '../elements/listProdi/';
-import EditDropdown from '../elements/listProdi/EditDropdown';
+
+const data = [
+	{
+		nama: 'Sistem Informasi',
+		username: 'sisteminformasi',
+		password: 'sisteminformasi',
+	},
+	{
+		nama: 'Teknik Informatika',
+		username: 'teknikinformatika',
+		password: 'teknikinformatika',
+	},
+	{
+		nama: 'Teknik Elektro',
+		username: 'teknikelektro',
+		password: 'teknikelektro',
+	},
+];
 
 const ProgramStudiPage = () => {
 	return (
@@ -20,20 +37,9 @@ const ProgramStudiPage = () => {
 				</div>
 
 				<section className="mt-5 flex flex-col gap-3">
-					{[
-						{
-							nama: 'Sistem Informasi',
-						},
-						{
-							nama: 'Teknik Informatika',
-						},
-						{
-							nama: 'Teknik Elektro',
-						},
-					].map((item, index) => (
+					{data.map((item, index) => (
 						<ListProdi key={index} data={item} nama={item.nama} />
 					))}
-					<EditDropdown />
 				</section>
 			</main>
 		</>

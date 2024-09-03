@@ -1,8 +1,23 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import Button from '../elements/Button';
-import ListDosen from '../elements/listDosen/';
-import EditDropdown from '../elements/listDosen/EditDropdown';
+import ListDosen from '../elements/ListDosen';
+import EditDropdown from '../components/EditDosenDropdown';
+
+const data = [
+	{
+		id: 1,
+		nama: 'Dosen 1',
+		email: 'j9fQp@example.com',
+		no: '082********',
+	},
+	{
+		id: 2,
+		nama: 'Dosen 2',
+		email: 'j9fQp@example.com',
+		no: '082********',
+	},
+];
 
 const DosenPage = () => {
 	return (
@@ -20,20 +35,9 @@ const DosenPage = () => {
 				</div>
 
 				<section className="mt-5 flex flex-col gap-3">
-					{[
-						{
-							nama: 'Behid',
-						},
-						{
-							nama: 'Benu',
-						},
-						{
-							nama: 'Dafi',
-						},
-					].map((item, index) => (
+					{data.map((item, index) => (
 						<ListDosen key={index} data={item} nama={item.nama} />
 					))}
-					<EditDropdown />
 				</section>
 			</main>
 		</>

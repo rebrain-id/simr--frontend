@@ -1,6 +1,7 @@
-import Button from '../../elements/Button';
+import Button from '../elements/Button';
 
-const EditDropdown = () => {
+const EditDropdown = (props) => {
+	const { data } = props;
 	return (
 		<>
 			<div className="px-5 bg-white shadow-md rounded pb-4">
@@ -10,15 +11,17 @@ const EditDropdown = () => {
 					<input
 						type="text"
 						className="w-full outline-none rounded border border-b-gray-200 py-2 pl-2"
-						placeholder="Nama Prodi"
+						placeholder="Nama Dosen"
+						value={data ? data.nama : ''}
 					/>
 				</div>
 				<div className="flex items-center gap-10 text-xs pb-2">
 					<p>E-mail</p>
 					<input
-						type="text"
+						type="email"
 						className="w-full outline-none rounded border border-b-gray-200 py-2 pl-2"
-						placeholder="Username"
+						placeholder="E-mail"
+						value={data ? data.email : ''}
 					/>
 				</div>
 				<div className="flex items-center gap-10 text-xs pb-2">
@@ -26,7 +29,8 @@ const EditDropdown = () => {
 					<input
 						type="number"
 						className="w-full outline-none rounded border border-b-gray-200 py-2 pl-2"
-						placeholder="*******"
+						placeholder="082********"
+						value={data ? data.no : ''}
 					/>
 				</div>
 				<div className="flex items-center gap-4">
