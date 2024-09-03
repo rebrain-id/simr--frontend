@@ -2,7 +2,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import Button from '../elements/Button';
 import ListDosen from '../elements/ListDosen';
-import EditDropdown from '../components/EditDosenDropdown';
+import CreateModal from '../components/CreateDosenModal';
+import { useState } from 'react';
 
 const data = [
 	{
@@ -20,6 +21,8 @@ const data = [
 ];
 
 const DosenPage = () => {
+	const [openModal, setOpenModal] = useState(false);
+	const handleModal = () => setOpenModal(!openModal);
 	return (
 		<>
 			<main className="bg-white px-10 py-5 rounded drop-shadow-bottom mt-5">
@@ -30,7 +33,7 @@ const DosenPage = () => {
 							icon={faPlus}
 							className="text-white border-0 outline-none pl-2"
 						/>
-						<Button text="Tambah Dosen" />
+						<Button text="Tambah Dosen" onClick={handleModal} />
 					</div>
 				</div>
 
@@ -40,6 +43,7 @@ const DosenPage = () => {
 					))}
 				</section>
 			</main>
+			{openModal && <CreateModal close={() => setOpenModal(false)} />}
 		</>
 	);
 };
