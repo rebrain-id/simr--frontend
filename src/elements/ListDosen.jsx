@@ -23,7 +23,12 @@ const ListDosen = (props) => {
 					<h3 className="text-sm font-medium">{nama}</h3>
 				</div>
 			</div>
-			{openDropdown && <EditDropdown data={data} />}
+			{openDropdown && (
+				<EditDropdown
+					data={data}
+					close={() => setOpenDropdown(false)}
+				/>
+			)}
 		</>
 	);
 };
