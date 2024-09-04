@@ -18,6 +18,24 @@ const data = [
 		email: 'j9fQp@example.com',
 		no: '082********',
 	},
+	{
+		id: 3,
+		nama: 'Dosen 3',
+		email: 'j9fQp@example.com',
+		no: '082********',
+	},
+	{
+		id: 4,
+		nama: 'Dosen 4',
+		email: 'j9fQp@example.com',
+		no: '082********',
+	},
+	{
+		id: 5,
+		nama: 'Dosen 5',
+		email: 'j9fQp@example.com',
+		no: '082********',
+	},
 ];
 
 const DosenPage = () => {
