@@ -1,7 +1,7 @@
 import Button from '../elements/Button';
 
 const EditDropdown = (props) => {
-	const { data } = props;
+	const { data, close } = props;
 	return (
 		<>
 			<div className="px-5 bg-white shadow-md rounded pb-4">
@@ -40,6 +40,7 @@ const EditDropdown = (props) => {
 					<Button
 						text="Batal"
 						variant="bg-light-primary/25 text-primary rounded text-sm"
+						onClick={close}
 					/>
 				</div>
 			</div>
