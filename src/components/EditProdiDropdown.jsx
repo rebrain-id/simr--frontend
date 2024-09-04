@@ -1,6 +1,6 @@
 import Button from '../elements/Button';
 
-const EditDropdown = (props) => {
+const EditProdiDropdown = (props) => {
 	const { data, close } = props;
 	return (
 		<>
@@ -48,4 +48,4 @@ const EditDropdown = (props) => {
 	);
 };
 
-export default EditDropdown;
+export default EditProdiDropdown;
