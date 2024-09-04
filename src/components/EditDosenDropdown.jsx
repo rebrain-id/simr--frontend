@@ -1,38 +1,39 @@
 import Button from '../elements/Button';
+import FormInput from '../elements/forms/FormInput';
 
 const EditDosenDropdown = (props) => {
 	const { data, close } = props;
 	return (
 		<>
 			<div className="px-5 bg-white shadow-md rounded pb-4">
-				<div className="flex items-center gap-4 text-xs py-2">
-					<p>Nama</p>
-					<input
-						type="text"
-						className="w-full outline-none rounded border border-b-gray-200 py-2 pl-2"
+				<div className="w-full flex items-center w">
+					<FormInput
+						variant="flex items-center text-sm w-full gap-10 py-2"
+						label="Nama Dosen"
 						placeholder="Nama Dosen"
-						value={data ? data.nama : ''}
+						labelvariant="w-1/6"
+						inputvariant="w-5/6"
 					/>
 				</div>
-				<div className="flex items-center gap-10 text-xs pb-2">
-					<p>E-mail</p>
-					<input
-						type="email"
-						className="w-full outline-none rounded border border-b-gray-200 py-2 pl-2"
-						placeholder="E-mail"
-						value={data ? data.email : ''}
+				<div className="w-full flex items-center">
+					<FormInput
+						label="E-mail"
+						placeholder="example@mail.com"
+						labelvariant="w-1/6"
+						inputvariant="w-5/6"
+						variant="flex items-center text-sm w-full gap-10 py-2"
 					/>
 				</div>
-				<div className="flex items-center gap-10 text-xs pb-2">
-					<p>No. Whatsapp</p>
-					<input
-						type="number"
-						className="w-full outline-none rounded border border-b-gray-200 py-2 pl-2"
-						placeholder="082********"
-						value={data ? data.no : ''}
+				<div className="w-full flex items-center">
+					<FormInput
+						labelvariant="w-1/6"
+						inputvariant="w-5/6"
+						variant="flex items-center text-sm w-full gap-10 py-2"
+						label="No. Whatsapp"
+						placeholder="08*********"
 					/>
 				</div>
-				<div className="flex items-center gap-4">
+				<div className="flex items-center gap-8">
 					<Button
 						text="Update"
 						variant="bg-light-primary text-white rounded text-sm"
