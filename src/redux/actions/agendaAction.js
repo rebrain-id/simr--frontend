@@ -15,6 +15,7 @@ export const fetchAgenda = createAsyncThunk(
 		try {
 			dispatch(fetchAgendaRequest());
 			const data = convertAgendaData(dataJson);
+
 			dispatch(fetchAgendaSuccess(data));
 		} catch (error) {
 			dispatch(fetchAgendaFailure(error));
@@ -56,7 +57,6 @@ export const fetchAgendaThisMonth = createAsyncThunk(
 					item.month.start == String(month + 1).padStart(2, '0') &&
 					item.year.start == year,
 			);
-			console.log(filteredAgenda);
 
 			const groupByDate = filteredAgenda.reduce((acc, item) => {
 				const date = item.date.start;
@@ -70,7 +70,6 @@ export const fetchAgendaThisMonth = createAsyncThunk(
 
 				return acc;
 			}, []);
-			console.log(groupByDate);
 
 			dispatch(fetchAgendaThisMonthSuccess(groupByDate));
 		} catch (error) {
@@ -80,12 +79,12 @@ export const fetchAgendaThisMonth = createAsyncThunk(
 );
 
 const convertAgendaData = (data) => {
-	return data.map((item) => {
-		const startTime = moment(item.start);
-		const finishTime = moment(item.finish);
+	return data.agenda.map((item) => {
+		const startTime = moment(item.agenda.start);
+		const finishTime = moment(item.agenda.finish);
 
 		return {
-			...item,
+			...item.agenda,
 			time: {
 				start: startTime.format('HH:mm'),
 				finish: finishTime.format('HH:mm'),
