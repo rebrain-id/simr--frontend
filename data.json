@@ -1,0 +1,962 @@
+[
+	{
+		"uuid": "1db9db28-f49b-40bf-84fb-a3d1e4340ec2",
+		"title": "Inverse encompassing info-mediaries",
+		"start": "2024-09-20T12:11:00.000Z",
+		"finish": "2024-09-20T13:53:00.000Z",
+		"typeAgenda": {
+			"uuid": "372550c5-ce4d-47dc-a010-5a7aae813d11",
+			"name": "Rapat Eksternal"
+		},
+		"location": "CC Lt 3.1",
+		"author": "Fakultas"
+	},
+	{
+		"uuid": "74acbcd2-3ca7-4586-b7f2-c1645decbae0",
+		"title": "Synchronised logistical database",
+		"start": "2024-10-21T03:15:00.000Z",
+		"finish": "2024-10-21T04:11:00.000Z",
+		"typeAgenda": {
+			"uuid": "cc0f309c-b626-4161-aa63-bc33287a9a70",
+			"name": "Rapat Eksternal"
+		},
+		"location": "CC Lt 5.3",
+		"author": "Fakultas"
+	},
+	{
+		"uuid": "2cb0a20e-d8bc-4d20-808f-badacbe816d3",
+		"title": "Mandatory web-enabled productivity",
+		"start": "2024-10-14T05:31:00.000Z",
+		"finish": "2024-10-14T06:42:00.000Z",
+		"typeAgenda": {
+			"uuid": "3c431911-1b34-4dab-b341-e7e0e2c58200",
+			"name": "Rapat Eksternal"
+		},
+		"location": "CC Lt 1.2",
+		"author": "Fakultas"
+	},
+	{
+		"uuid": "6240a765-5654-4d53-935c-aa3147f8862e",
+		"title": "Virtual system-worthy functionalities",
+		"start": "2024-10-01T02:06:00.000Z",
+		"finish": "2024-10-01T03:37:00.000Z",
+		"typeAgenda": {
+			"uuid": "4f3ba867-09f8-43d3-8b6a-59634c51ceb8",
+			"name": "Rapat Internal"
+		},
+		"location": "CC Lt 8.1",
+		"author": "Informatika"
+	},
+	{
+		"uuid": "1aa2085f-fa18-474e-af34-c6936157b032",
+		"title": "Diverse coherent contingency",
+		"start": "2024-10-29T06:27:00.000Z",
+		"finish": "2024-10-29T07:43:00.000Z",
+		"typeAgenda": {
+			"uuid": "c9d02ecd-4d3b-4269-8385-9670b46c2665",
+			"name": "Rapat Eksternal"
+		},
+		"location": "CC Lt 2.5",
+		"author": "Informatika"
+	},
+	{
+		"uuid": "2d36520b-39a9-476a-8a1d-139653a665d9",
+		"title": "Enterprise-wide tangible matrix",
+		"start": "2024-10-22T06:03:00.000Z",
+		"finish": "2024-10-22T07:08:00.000Z",
+		"typeAgenda": {
+			"uuid": "d7013ff6-a5e8-471b-9c54-87d7aca8faa8",
+			"name": "Rapat Eksternal"
+		},
+		"location": "CC Lt 5.3",
+		"author": "Fakultas"
+	},
+	{
+		"uuid": "b1134975-ee09-4d60-bf8f-acfb1937555e",
+		"title": "Polarised bifurcated info-mediaries",
+		"start": "2024-10-23T03:40:00.000Z",
+		"finish": "2024-10-23T04:50:00.000Z",
+		"typeAgenda": {
+			"uuid": "ace4cd36-2afc-4410-a5a6-a8701ea7b685",
+			"name": "Rapat Eksternal"
+		},
+		"location": "CC Lt 7.1",
+		"author": "Fakultas"
+	},
+	{
+		"uuid": "f66cd82b-721c-4f2a-a687-9f22fd48a685",
+		"title": "Team-oriented impactful conglomeration",
+		"start": "2024-10-04T12:34:00.000Z",
+		"finish": "2024-10-04T14:32:00.000Z",
+		"typeAgenda": {
+			"uuid": "871b70a0-cf83-4558-ae54-7d0912a915ac",
+			"name": "Rapat Eksternal"
+		},
+		"location": "CC Lt 1.5",
+		"author": "Informatika"
+	},
+	{
+		"uuid": "83921961-c977-45cb-b690-18956ddc1600",
+		"title": "Networked bottom-line forecast",
+		"start": "2024-10-10T05:41:00.000Z",
+		"finish": "2024-10-10T06:55:00.000Z",
+		"typeAgenda": {
+			"uuid": "89847824-aaac-4680-a063-591cd8362f4f",
+			"name": "Rapat Eksternal"
+		},
+		"location": "CC Lt 4.5",
+		"author": "Fakultas"
+	},
+	{
+		"uuid": "079c994d-9587-4e4b-9d05-e46183f4b067",
+		"title": "Synchronised bandwidth-monitored customer loyalty",
+		"start": "2024-10-13T08:20:00.000Z",
+		"finish": "2024-10-13T09:42:00.000Z",
+		"typeAgenda": {
+			"uuid": "5740f828-fd47-44bd-86d7-86650d91e22b",
+			"name": "Rapat Internal"
+		},
+		"location": "CC Lt 10.2",
+		"author": "Informatika"
+	},
+	{
+		"uuid": "00e8c8aa-2819-4de9-b7af-4909cd7bcbbe",
+		"title": "Multi-tiered human-resource product",
+		"start": "2024-09-22T09:14:00.000Z",
+		"finish": "2024-09-22T09:51:00.000Z",
+		"typeAgenda": {
+			"uuid": "242d5736-3e9d-4cf5-a207-9784d56f7cf4",
+			"name": "Rapat Internal"
+		},
+		"location": "CC Lt 5.4",
+		"author": "Fakultas"
+	},
+	{
+		"uuid": "1dfccc9d-c12d-4621-a0e2-829ffc9e1854",
+		"title": "Secured encompassing task-force",
+		"start": "2024-10-16T08:36:00.000Z",
+		"finish": "2024-10-16T09:13:00.000Z",
+		"typeAgenda": {
+			"uuid": "58843d4b-3927-4d70-9530-3338e45a1951",
+			"name": "Rapat Eksternal"
+		},
+		"location": "CC Lt 7.2",
+		"author": "Informatika"
+	},
+	{
+		"uuid": "06b34e28-639a-4b58-9485-7ce98279d7bd",
+		"title": "Triple-buffered tangible infrastructure",
+		"start": "2024-10-09T11:37:00.000Z",
+		"finish": "2024-10-09T12:38:00.000Z",
+		"typeAgenda": {
+			"uuid": "f9c55251-703c-43fe-abb2-92c5198dea07",
+			"name": "Rapat Internal"
+		},
+		"location": "CC Lt 10.4",
+		"author": "Fakultas"
+	},
+	{
+		"uuid": "5f21ad34-7226-49fd-9d53-b8f947d79bc2",
+		"title": "Multi-layered maximized initiative",
+		"start": "2024-09-16T02:16:00.000Z",
+		"finish": "2024-09-16T04:08:00.000Z",
+		"typeAgenda": {
+			"uuid": "5dd62ea2-4a5c-454f-b648-65cdeb0d9e6a",
+			"name": "Rapat Internal"
+		},
+		"location": "CC Lt 1.4",
+		"author": "Fakultas"
+	},
+	{
+		"uuid": "fc020a5f-e13f-4618-a9fc-58350f3ef12d",
+		"title": "Decentralized exuding intranet",
+		"start": "2024-09-26T11:08:00.000Z",
+		"finish": "2024-09-26T12:27:00.000Z",
+		"typeAgenda": {
+			"uuid": "619444f3-9d43-403e-9336-8396b0df8f4e",
+			"name": "Rapat Eksternal"
+		},
+		"location": "CC Lt 3.5",
+		"author": "Fakultas"
+	},
+	{
+		"uuid": "1fdb067c-dd21-4a55-9ae3-0b573fcccd1b",
+		"title": "Function-based explicit capacity",
+		"start": "2024-10-09T09:35:00.000Z",
+		"finish": "2024-10-09T10:43:00.000Z",
+		"typeAgenda": {
+			"uuid": "88509100-acd7-44cb-8e91-09710d12fc78",
+			"name": "Rapat Eksternal"
+		},
+		"location": "CC Lt 5.2",
+		"author": "Fakultas"
+	},
+	{
+		"uuid": "bd9ecf66-25b6-426a-8c70-bca4ea66fffa",
+		"title": "Open-architected cohesive adapter",
+		"start": "2024-09-03T12:18:00.000Z",
+		"finish": "2024-09-03T12:57:00.000Z",
+		"typeAgenda": {
+			"uuid": "3c0b690f-846c-45a8-9d04-11f58725c41b",
+			"name": "Rapat Eksternal"
+		},
+		"location": "CC Lt 1.1",
+		"author": "Fakultas"
+	},
+	{
+		"uuid": "e68fc6d4-353c-4221-872d-6a925d6a0426",
+		"title": "Exclusive contextually-based function",
+		"start": "2024-09-20T04:36:00.000Z",
+		"finish": "2024-09-20T05:22:00.000Z",
+		"typeAgenda": {
+			"uuid": "966c1710-0191-4ea9-b83e-43616c88185f",
+			"name": "Rapat Internal"
+		},
+		"location": "CC Lt 9.1",
+		"author": "Fakultas"
+	},
+	{
+		"uuid": "f5d7bbdf-a364-477c-81fb-a63743d0d8c8",
+		"title": "Customizable demand-driven knowledge user",
+		"start": "2024-10-13T00:13:00.000Z",
+		"finish": "2024-10-13T00:45:00.000Z",
+		"typeAgenda": {
+			"uuid": "6a82314e-0a89-4a4f-9b35-883b5d0c3444",
+			"name": "Rapat Internal"
+		},
+		"location": "CC Lt 3.2",
+		"author": "Fakultas"
+	},
+	{
+		"uuid": "5fbdbec8-2b72-47ad-8e78-d628da311cdd",
+		"title": "Compatible intermediate Graphical User Interface",
+		"start": "2024-09-18T07:56:00.000Z",
+		"finish": "2024-09-18T09:35:00.000Z",
+		"typeAgenda": {
+			"uuid": "c44e0d7d-2da7-44a5-912f-d27ebd4b3c27",
+			"name": "Rapat Eksternal"
+		},
+		"location": "CC Lt 6.3",
+		"author": "Informatika"
+	},
+	{
+		"uuid": "4ee4070f-310f-4236-95df-8606698ee4c8",
+		"title": "Vision-oriented zero defect frame",
+		"start": "2024-09-03T03:13:00.000Z",
+		"finish": "2024-09-03T04:03:00.000Z",
+		"typeAgenda": {
+			"uuid": "370c080e-9927-4b01-a104-b99da40ae27b",
+			"name": "Rapat Eksternal"
+		},
+		"location": "CC Lt 8.4",
+		"author": "Fakultas"
+	},
+	{
+		"uuid": "018b3f96-5276-4eea-a54b-267aedd598ee",
+		"title": "Pre-emptive next generation workforce",
+		"start": "2024-09-15T22:08:00.000Z",
+		"finish": "2024-09-15T23:08:00.000Z",
+		"typeAgenda": {
+			"uuid": "c93d5dcf-e302-4c0f-849b-1614ce0adc0e",
+			"name": "Rapat Eksternal"
+		},
+		"location": "CC Lt 2.2",
+		"author": "Fakultas"
+	},
+	{
+		"uuid": "f1bd0c97-8304-4989-b700-f1776b06019d",
+		"title": "Upgradable systemic function",
+		"start": "2024-10-30T23:12:00.000Z",
+		"finish": "2024-10-31T00:40:00.000Z",
+		"typeAgenda": {
+			"uuid": "0af88369-eb9d-4b9e-8f16-2d333750862d",
+			"name": "Rapat Eksternal"
+		},
+		"location": "CC Lt 10.4",
+		"author": "Fakultas"
+	},
+	{
+		"uuid": "7235e5c1-fd83-491e-9447-37f74ff18fdc",
+		"title": "Right-sized demand-driven matrices",
+		"start": "2024-10-26T23:31:00.000Z",
+		"finish": "2024-10-27T00:49:00.000Z",
+		"typeAgenda": {
+			"uuid": "8efcb297-9837-47bb-b688-2639cc885150",
+			"name": "Rapat Eksternal"
+		},
+		"location": "CC Lt 3.5",
+		"author": "Fakultas"
+	},
+	{
+		"uuid": "08a54641-f32b-4532-99e7-8687af0e35e0",
+		"title": "Synergistic next generation application",
+		"start": "2024-10-02T00:59:00.000Z",
+		"finish": "2024-10-02T02:44:00.000Z",
+		"typeAgenda": {
+			"uuid": "91d6f8a7-8daf-4f4b-b952-54cb3710ef1e",
+			"name": "Rapat Eksternal"
+		},
+		"location": "CC Lt 6.3",
+		"author": "Informatika"
+	},
+	{
+		"uuid": "f3095749-a809-4612-9df5-a2df337162d4",
+		"title": "Universal eco-centric instruction set",
+		"start": "2024-09-28T22:46:00.000Z",
+		"finish": "2024-09-28T23:47:00.000Z",
+		"typeAgenda": {
+			"uuid": "544f798e-9f28-497d-a66c-79cfac62541b",
+			"name": "Rapat Internal"
+		},
+		"location": "CC Lt 3.2",
+		"author": "Informatika"
+	},
+	{
+		"uuid": "b217b298-6b38-4ce4-a2bf-a7e36b522841",
+		"title": "Optimized radical groupware",
+		"start": "2024-09-05T00:50:00.000Z",
+		"finish": "2024-09-05T02:24:00.000Z",
+		"typeAgenda": {
+			"uuid": "8b16f8d6-4971-4975-8f62-207487530717",
+			"name": "Rapat Eksternal"
+		},
+		"location": "CC Lt 5.1",
+		"author": "Fakultas"
+	},
+	{
+		"uuid": "010f1417-103a-4074-9fa2-32413fc75917",
+		"title": "Organic static interface",
+		"start": "2024-10-16T08:19:00.000Z",
+		"finish": "2024-10-16T09:51:00.000Z",
+		"typeAgenda": {
+			"uuid": "e44624d2-b6f9-443f-924c-96e8af601dbb",
+			"name": "Rapat Internal"
+		},
+		"location": "CC Lt 1.1",
+		"author": "Informatika"
+	},
+	{
+		"uuid": "322db5af-8cf3-49d9-8729-2178b0717f57",
+		"title": "Polarised neutral definition",
+		"start": "2024-10-20T13:21:00.000Z",
+		"finish": "2024-10-20T14:47:00.000Z",
+		"typeAgenda": {
+			"uuid": "2850292a-01ac-44fa-8155-16d7eaa644a8",
+			"name": "Rapat Eksternal"
+		},
+		"location": "CC Lt 5.5",
+		"author": "Informatika"
+	},
+	{
+		"uuid": "f6614d5b-2fb5-4b16-a910-66eeea647157",
+		"title": "Customer-focused interactive application",
+		"start": "2024-09-14T01:31:00.000Z",
+		"finish": "2024-09-14T02:48:00.000Z",
+		"typeAgenda": {
+			"uuid": "e20bb4c8-8b91-4a6f-b05f-eef5053f06e7",
+			"name": "Rapat Eksternal"
+		},
+		"location": "CC Lt 8.5",
+		"author": "Fakultas"
+	},
+	{
+		"uuid": "36bd1920-de74-4e66-abc5-564d7725c853",
+		"title": "Upgradable bifurcated productivity",
+		"start": "2024-09-20T10:05:00.000Z",
+		"finish": "2024-09-20T10:37:00.000Z",
+		"typeAgenda": {
+			"uuid": "83e36074-1bf7-4a3f-aec9-f99023ebe2dc",
+			"name": "Rapat Eksternal"
+		},
+		"location": "CC Lt 7.2",
+		"author": "Informatika"
+	},
+	{
+		"uuid": "45891331-8d07-4c11-8495-406e086e8383",
+		"title": "Cross-group stable function",
+		"start": "2024-09-25T09:20:00.000Z",
+		"finish": "2024-09-25T10:35:00.000Z",
+		"typeAgenda": {
+			"uuid": "1d758b3e-df8a-4205-9b9f-9a2f46f9d2d6",
+			"name": "Rapat Internal"
+		},
+		"location": "CC Lt 6.4",
+		"author": "Fakultas"
+	},
+	{
+		"uuid": "b08509ba-1389-4e59-9012-6ec9ec35bf18",
+		"title": "Distributed object-oriented knowledge user",
+		"start": "2024-09-13T09:26:00.000Z",
+		"finish": "2024-09-13T09:56:00.000Z",
+		"typeAgenda": {
+			"uuid": "4fa62bb1-e7f9-4679-8757-a02b091960ff",
+			"name": "Rapat Internal"
+		},
+		"location": "CC Lt 7.2",
+		"author": "Informatika"
+	},
+	{
+		"uuid": "8f84e423-4d3e-419b-bf46-b3527e9c8c26",
+		"title": "Focused 24/7 process improvement",
+		"start": "2024-09-08T12:59:00.000Z",
+		"finish": "2024-09-08T14:53:00.000Z",
+		"typeAgenda": {
+			"uuid": "e1a00784-7cbf-4fa6-b949-fe5b4585e64b",
+			"name": "Rapat Internal"
+		},
+		"location": "CC Lt 10.5",
+		"author": "Fakultas"
+	},
+	{
+		"uuid": "29715c61-6b4a-4d6f-bd45-88c2eef0d2ed",
+		"title": "Compatible 4th generation neural-net",
+		"start": "2024-10-01T23:15:00.000Z",
+		"finish": "2024-10-01T23:46:00.000Z",
+		"typeAgenda": {
+			"uuid": "520a63ca-423e-4fcf-ae24-e6a9ff15ed74",
+			"name": "Rapat Eksternal"
+		},
+		"location": "CC Lt 6.4",
+		"author": "Fakultas"
+	},
+	{
+		"uuid": "812f76d5-9132-4c47-af98-6641f2d39a04",
+		"title": "Proactive maximized pricing structure",
+		"start": "2024-10-06T03:14:00.000Z",
+		"finish": "2024-10-06T04:20:00.000Z",
+		"typeAgenda": {
+			"uuid": "80e9833b-997f-4a80-b781-f4c141b5d430",
+			"name": "Rapat Internal"
+		},
+		"location": "CC Lt 6.1",
+		"author": "Informatika"
+	},
+	{
+		"uuid": "a81579ba-c838-4756-877a-73c5875f2048",
+		"title": "Persevering modular hardware",
+		"start": "2024-09-15T12:35:00.000Z",
+		"finish": "2024-09-15T14:30:00.000Z",
+		"typeAgenda": {
+			"uuid": "c0197bd0-7bba-4d0c-a24e-8bbc0a0e85c6",
+			"name": "Rapat Eksternal"
+		},
+		"location": "CC Lt 10.4",
+		"author": "Fakultas"
+	},
+	{
+		"uuid": "99403580-41bb-4e4a-a79a-92372b11c921",
+		"title": "Ergonomic clear-thinking budgetary management",
+		"start": "2024-09-25T00:09:00.000Z",
+		"finish": "2024-09-25T00:57:00.000Z",
+		"typeAgenda": {
+			"uuid": "637b011e-e2b5-43fc-b818-6d418011880d",
+			"name": "Rapat Eksternal"
+		},
+		"location": "CC Lt 7.5",
+		"author": "Fakultas"
+	},
+	{
+		"uuid": "2ec36031-29ab-4c8a-b345-5d2f63792381",
+		"title": "Future-proofed impactful open system",
+		"start": "2024-09-20T22:22:00.000Z",
+		"finish": "2024-09-20T23:28:00.000Z",
+		"typeAgenda": {
+			"uuid": "ff472845-2ea0-45c7-a910-5ec7e65bff19",
+			"name": "Rapat Eksternal"
+		},
+		"location": "CC Lt 6.1",
+		"author": "Fakultas"
+	},
+	{
+		"uuid": "ffe7945f-03d9-4302-b379-714c348283f4",
+		"title": "Integrated tangible budgetary management",
+		"start": "2024-10-28T22:50:00.000Z",
+		"finish": "2024-10-28T23:22:00.000Z",
+		"typeAgenda": {
+			"uuid": "fd88d44e-1ae4-494f-8ea3-00461dc9478e",
+			"name": "Rapat Eksternal"
+		},
+		"location": "CC Lt 6.5",
+		"author": "Informatika"
+	},
+	{
+		"uuid": "f798b507-a16b-41c6-bef2-3f6a19e88450",
+		"title": "Team-oriented didactic model",
+		"start": "2024-10-25T05:27:00.000Z",
+		"finish": "2024-10-25T07:21:00.000Z",
+		"typeAgenda": {
+			"uuid": "4367377e-e5e6-4d7c-a054-d7e676092356",
+			"name": "Rapat Internal"
+		},
+		"location": "CC Lt 1.3",
+		"author": "Informatika"
+	},
+	{
+		"uuid": "c1ceb377-e036-4b4d-91f2-7cd0f7fff14e",
+		"title": "Adaptive bifurcated portal",
+		"start": "2024-10-24T06:15:00.000Z",
+		"finish": "2024-10-24T07:40:00.000Z",
+		"typeAgenda": {
+			"uuid": "d1953fee-e7ad-4f40-aeb9-2ff92d330643",
+			"name": "Rapat Eksternal"
+		},
+		"location": "CC Lt 1.5",
+		"author": "Fakultas"
+	},
+	{
+		"uuid": "de0cd68b-57fc-4f1d-b6a5-d2e9bf238f77",
+		"title": "Synergized contextually-based methodology",
+		"start": "2024-09-08T22:04:00.000Z",
+		"finish": "2024-09-08T23:19:00.000Z",
+		"typeAgenda": {
+			"uuid": "11cdc78d-dc43-4acd-b1db-932b20b8c479",
+			"name": "Rapat Eksternal"
+		},
+		"location": "CC Lt 1.5",
+		"author": "Fakultas"
+	},
+	{
+		"uuid": "6a49f259-69f6-4ab0-a2cf-4a50f9cd2242",
+		"title": "Up-sized asynchronous capacity",
+		"start": "2024-09-19T08:36:00.000Z",
+		"finish": "2024-09-19T09:38:00.000Z",
+		"typeAgenda": {
+			"uuid": "656fd9e0-9936-4fa0-9d2a-4f1deba69cb6",
+			"name": "Rapat Internal"
+		},
+		"location": "CC Lt 2.5",
+		"author": "Informatika"
+	},
+	{
+		"uuid": "ebf6a57c-61f0-49df-a974-fc3f6c833842",
+		"title": "Front-line solution-oriented capacity",
+		"start": "2024-09-28T12:02:00.000Z",
+		"finish": "2024-09-28T12:37:00.000Z",
+		"typeAgenda": {
+			"uuid": "de95507d-ea38-42b0-aab5-25971a41565c",
+			"name": "Rapat Internal"
+		},
+		"location": "CC Lt 8.2",
+		"author": "Fakultas"
+	},
+	{
+		"uuid": "977a8b3c-8d3d-4618-9b73-e461e733b313",
+		"title": "Open-architected upward-trending moderator",
+		"start": "2024-10-26T11:29:00.000Z",
+		"finish": "2024-10-26T13:03:00.000Z",
+		"typeAgenda": {
+			"uuid": "40cf6f73-68de-49d9-abb6-b92b8da3b37a",
+			"name": "Rapat Eksternal"
+		},
+		"location": "CC Lt 7.4",
+		"author": "Informatika"
+	},
+	{
+		"uuid": "b16aabcb-7266-4e3f-811f-ba47e3256e85",
+		"title": "Organized stable contingency",
+		"start": "2024-09-06T01:39:00.000Z",
+		"finish": "2024-09-06T02:15:00.000Z",
+		"typeAgenda": {
+			"uuid": "a5439fb2-3e8b-49b8-ba37-813914c3bff3",
+			"name": "Rapat Internal"
+		},
+		"location": "CC Lt 9.4",
+		"author": "Fakultas"
+	},
+	{
+		"uuid": "03d3d060-2f67-49dd-a5ec-f6f50bc86247",
+		"title": "Streamlined logistical contingency",
+		"start": "2024-10-21T12:36:00.000Z",
+		"finish": "2024-10-21T14:18:00.000Z",
+		"typeAgenda": {
+			"uuid": "2ba8480d-0312-47fa-94eb-43678a82e0bd",
+			"name": "Rapat Internal"
+		},
+		"location": "CC Lt 9.1",
+		"author": "Fakultas"
+	},
+	{
+		"uuid": "73b672eb-3170-41d3-8bfa-0b5c213cbad7",
+		"title": "Front-line 5th generation hardware",
+		"start": "2024-09-18T22:57:00.000Z",
+		"finish": "2024-09-18T23:27:00.000Z",
+		"typeAgenda": {
+			"uuid": "6a1fd892-79de-4fdb-950c-f11dd01fa2fb",
+			"name": "Rapat Eksternal"
+		},
+		"location": "CC Lt 3.4",
+		"author": "Fakultas"
+	},
+	{
+		"uuid": "49b2c8f9-79a5-4b63-80f4-bdb65c8c031f",
+		"title": "Synchronised multi-tasking instruction set",
+		"start": "2024-09-03T12:54:00.000Z",
+		"finish": "2024-09-03T14:49:00.000Z",
+		"typeAgenda": {
+			"uuid": "f2e36609-6bc0-47df-a686-0149aa3a8f68",
+			"name": "Rapat Eksternal"
+		},
+		"location": "CC Lt 2.4",
+		"author": "Informatika"
+	},
+	{
+		"uuid": "ad9cc6aa-d5ed-40e0-a438-84d899cf6043",
+		"title": "Object-based demand-driven orchestration",
+		"start": "2024-09-30T00:47:00.000Z",
+		"finish": "2024-09-30T01:37:00.000Z",
+		"typeAgenda": {
+			"uuid": "e950052f-8c0a-45e4-a302-9026f01cd3c8",
+			"name": "Rapat Eksternal"
+		},
+		"location": "CC Lt 5.2",
+		"author": "Informatika"
+	},
+	{
+		"uuid": "6e3fae87-33a0-47e6-a554-a13bac1a69e2",
+		"title": "Ergonomic leading edge installation",
+		"start": "2024-10-16T22:50:00.000Z",
+		"finish": "2024-10-17T00:18:00.000Z",
+		"typeAgenda": {
+			"uuid": "019ad184-a9fe-4c2e-9777-f64908ff1bd1",
+			"name": "Rapat Eksternal"
+		},
+		"location": "CC Lt 6.4",
+		"author": "Fakultas"
+	},
+	{
+		"uuid": "3efe5ea1-a5b3-4f58-a069-15a174123488",
+		"title": "Compatible national contingency",
+		"start": "2024-10-18T08:40:00.000Z",
+		"finish": "2024-10-18T09:54:00.000Z",
+		"typeAgenda": {
+			"uuid": "8bc341f2-2d2b-4874-bb1a-21ca2cd077c4",
+			"name": "Rapat Internal"
+		},
+		"location": "CC Lt 8.5",
+		"author": "Informatika"
+	},
+	{
+		"uuid": "f700727a-1072-481b-899e-a4171597e11b",
+		"title": "Automated bi-directional structure",
+		"start": "2024-09-23T11:10:00.000Z",
+		"finish": "2024-09-23T12:54:00.000Z",
+		"typeAgenda": {
+			"uuid": "6f57ec1e-8cbd-46e3-ba49-94e95fe39908",
+			"name": "Rapat Internal"
+		},
+		"location": "CC Lt 1.2",
+		"author": "Informatika"
+	},
+	{
+		"uuid": "37fc955a-79c7-48b5-a893-27db5fb7de5a",
+		"title": "Multi-layered bifurcated structure",
+		"start": "2024-10-26T22:56:00.000Z",
+		"finish": "2024-10-27T00:48:00.000Z",
+		"typeAgenda": {
+			"uuid": "83c30b2f-b6a1-4bc4-a1b3-304a8a3312f0",
+			"name": "Rapat Eksternal"
+		},
+		"location": "CC Lt 4.2",
+		"author": "Informatika"
+	},
+	{
+		"uuid": "d491d462-0abc-40fb-927b-82759d26ba88",
+		"title": "Programmable analyzing project",
+		"start": "2024-10-08T03:39:00.000Z",
+		"finish": "2024-10-08T04:09:00.000Z",
+		"typeAgenda": {
+			"uuid": "2dec42b9-c28c-4f0b-927f-9d3e7b3d82a7",
+			"name": "Rapat Eksternal"
+		},
+		"location": "CC Lt 10.5",
+		"author": "Informatika"
+	},
+	{
+		"uuid": "95f15139-9e1c-4575-a0d2-f6bb2aaf8c51",
+		"title": "Enhanced asymmetric instruction set",
+		"start": "2024-10-15T13:48:00.000Z",
+		"finish": "2024-10-15T14:46:00.000Z",
+		"typeAgenda": {
+			"uuid": "a83c5570-8d9e-4bdb-bfeb-ebc7f564195d",
+			"name": "Rapat Internal"
+		},
+		"location": "CC Lt 2.1",
+		"author": "Fakultas"
+	},
+	{
+		"uuid": "de2536b8-9591-49de-9856-47d23d152c55",
+		"title": "Enterprise-wide clear-thinking knowledge user",
+		"start": "2024-09-05T13:33:00.000Z",
+		"finish": "2024-09-05T15:30:00.000Z",
+		"typeAgenda": {
+			"uuid": "a39de932-84ca-44f3-a696-2b512e44f322",
+			"name": "Rapat Eksternal"
+		},
+		"location": "CC Lt 9.5",
+		"author": "Informatika"
+	},
+	{
+		"uuid": "79c70dab-06c8-444b-b67e-240cc0d2321b",
+		"title": "Advanced exuding contingency",
+		"start": "2024-10-09T01:37:00.000Z",
+		"finish": "2024-10-09T02:10:00.000Z",
+		"typeAgenda": {
+			"uuid": "1d07d0c7-2195-4329-acf6-48026ca1f3b4",
+			"name": "Rapat Internal"
+		},
+		"location": "CC Lt 10.4",
+		"author": "Fakultas"
+	},
+	{
+		"uuid": "1dec6f09-5b8f-44d0-befe-e64dfd65f9b2",
+		"title": "Reverse-engineered asynchronous solution",
+		"start": "2024-09-29T12:08:00.000Z",
+		"finish": "2024-09-29T12:58:00.000Z",
+		"typeAgenda": {
+			"uuid": "d49da643-7980-4bcc-9ebf-79f8a6d305da",
+			"name": "Rapat Internal"
+		},
+		"location": "CC Lt 6.5",
+		"author": "Informatika"
+	},
+	{
+		"uuid": "e569e766-9d93-43ae-a416-03180f29ee6f",
+		"title": "Team-oriented systematic monitoring",
+		"start": "2024-09-12T01:54:00.000Z",
+		"finish": "2024-09-12T02:46:00.000Z",
+		"typeAgenda": {
+			"uuid": "a3696c62-9416-45f8-91c2-7a2f233133dd",
+			"name": "Rapat Eksternal"
+		},
+		"location": "CC Lt 10.1",
+		"author": "Informatika"
+	},
+	{
+		"uuid": "59972a06-e04e-4169-86f5-4a99f0034697",
+		"title": "Realigned explicit adapter",
+		"start": "2024-09-26T07:13:00.000Z",
+		"finish": "2024-09-26T08:18:00.000Z",
+		"typeAgenda": {
+			"uuid": "0a6e37c1-988b-41be-9e7f-a59e2c344bf3",
+			"name": "Rapat Internal"
+		},
+		"location": "CC Lt 1.4",
+		"author": "Informatika"
+	},
+	{
+		"uuid": "b561dd48-c8af-4510-8660-9f0f82aa8b6d",
+		"title": "Up-sized secondary customer loyalty",
+		"start": "2024-09-26T13:07:00.000Z",
+		"finish": "2024-09-26T14:50:00.000Z",
+		"typeAgenda": {
+			"uuid": "377e583e-f0d7-45bf-8ca5-2ed5656d2497",
+			"name": "Rapat Internal"
+		},
+		"location": "CC Lt 10.3",
+		"author": "Fakultas"
+	},
+	{
+		"uuid": "579971db-0a6d-4705-85cd-266ab7739cf5",
+		"title": "Synergistic transitional utilisation",
+		"start": "2024-10-27T22:44:00.000Z",
+		"finish": "2024-10-27T23:30:00.000Z",
+		"typeAgenda": {
+			"uuid": "f2aa7fcf-931d-43dd-9cdb-35b0841ffe80",
+			"name": "Rapat Eksternal"
+		},
+		"location": "CC Lt 5.5",
+		"author": "Informatika"
+	},
+	{
+		"uuid": "d7377ba9-0773-490d-af0e-f9301a858dc1",
+		"title": "Reduced zero tolerance conglomeration",
+		"start": "2024-09-14T09:56:00.000Z",
+		"finish": "2024-09-14T11:39:00.000Z",
+		"typeAgenda": {
+			"uuid": "f9474cb7-cb4f-480e-996d-4bec27210aa8",
+			"name": "Rapat Internal"
+		},
+		"location": "CC Lt 6.4",
+		"author": "Fakultas"
+	},
+	{
+		"uuid": "3af387dd-ee40-4a98-beb4-70d7541276b9",
+		"title": "Quality-focused coherent time-frame",
+		"start": "2024-09-21T09:11:00.000Z",
+		"finish": "2024-09-21T10:19:00.000Z",
+		"typeAgenda": {
+			"uuid": "4280f4d9-3914-4005-b560-950e6044be23",
+			"name": "Rapat Internal"
+		},
+		"location": "CC Lt 4.4",
+		"author": "Fakultas"
+	},
+	{
+		"uuid": "1a235eb5-2155-4299-88ea-7659635f4ef4",
+		"title": "Fundamental asymmetric orchestration",
+		"start": "2024-09-01T22:13:00.000Z",
+		"finish": "2024-09-01T23:15:00.000Z",
+		"typeAgenda": {
+			"uuid": "533aee63-9361-4abe-b038-f713644f26a8",
+			"name": "Rapat Eksternal"
+		},
+		"location": "CC Lt 9.4",
+		"author": "Fakultas"
+	},
+	{
+		"uuid": "2e54d834-2eec-451d-81ea-28543ffc1542",
+		"title": "Reverse-engineered needs-based definition",
+		"start": "2024-10-24T04:58:00.000Z",
+		"finish": "2024-10-24T06:03:00.000Z",
+		"typeAgenda": {
+			"uuid": "eeb61739-0c54-4caa-9c60-692263d02402",
+			"name": "Rapat Internal"
+		},
+		"location": "CC Lt 9.4",
+		"author": "Informatika"
+	},
+	{
+		"uuid": "da7ed446-0b67-4d56-9d79-fa70ead3ff37",
+		"title": "Distributed tangible analyzer",
+		"start": "2024-10-26T04:12:00.000Z",
+		"finish": "2024-10-26T05:19:00.000Z",
+		"typeAgenda": {
+			"uuid": "d2b1e0a9-d459-48dd-89c5-fe4ed6199405",
+			"name": "Rapat Internal"
+		},
+		"location": "CC Lt 2.5",
+		"author": "Fakultas"
+	},
+	{
+		"uuid": "ffad20bf-94e3-4e86-bb41-d83dc2c05e02",
+		"title": "Fully-configurable transitional capacity",
+		"start": "2024-09-15T05:55:00.000Z",
+		"finish": "2024-09-15T07:14:00.000Z",
+		"typeAgenda": {
+			"uuid": "98b6a7ef-74c3-4442-a183-ce28dea11296",
+			"name": "Rapat Internal"
+		},
+		"location": "CC Lt 2.4",
+		"author": "Fakultas"
+	},
+	{
+		"uuid": "723ea38f-8b04-4d4f-b2bf-96c39feaeab8",
+		"title": "Reverse-engineered didactic superstructure",
+		"start": "2024-10-16T06:34:00.000Z",
+		"finish": "2024-10-16T07:27:00.000Z",
+		"typeAgenda": {
+			"uuid": "f894e5db-1239-4571-8d5f-bc66ef1162f5",
+			"name": "Rapat Internal"
+		},
+		"location": "CC Lt 3.4",
+		"author": "Informatika"
+	},
+	{
+		"uuid": "5473b76a-ef8d-45e1-a3ca-0e8cff1ddcfb",
+		"title": "Multi-channelled foreground moratorium",
+		"start": "2024-09-14T22:37:00.000Z",
+		"finish": "2024-09-14T23:17:00.000Z",
+		"typeAgenda": {
+			"uuid": "5b6d9144-385e-41cf-97e0-755b4de2e04f",
+			"name": "Rapat Internal"
+		},
+		"location": "CC Lt 5.1",
+		"author": "Informatika"
+	},
+	{
+		"uuid": "456fd637-2087-4d45-b2fe-c35e2244e51b",
+		"title": "Seamless systematic focus group",
+		"start": "2024-10-16T00:25:00.000Z",
+		"finish": "2024-10-16T01:49:00.000Z",
+		"typeAgenda": {
+			"uuid": "13db4b4b-aa71-4914-9821-b92265579572",
+			"name": "Rapat Eksternal"
+		},
+		"location": "CC Lt 1.5",
+		"author": "Fakultas"
+	},
+	{
+		"uuid": "2761a90a-eb13-4c59-95a8-38c80dbaa982",
+		"title": "Assimilated 6th generation framework",
+		"start": "2024-09-05T11:42:00.000Z",
+		"finish": "2024-09-05T12:29:00.000Z",
+		"typeAgenda": {
+			"uuid": "ee39cfed-6c3a-4312-b0da-0e1b33529f60",
+			"name": "Rapat Eksternal"
+		},
+		"location": "CC Lt 8.2",
+		"author": "Fakultas"
+	},
+	{
+		"uuid": "5d58b095-eb78-4f1c-b19d-5f41e99708ca",
+		"title": "Cloned systematic function",
+		"start": "2024-09-05T07:41:00.000Z",
+		"finish": "2024-09-05T08:51:00.000Z",
+		"typeAgenda": {
+			"uuid": "7c27565b-37a1-4352-8251-4346df266d98",
+			"name": "Rapat Internal"
+		},
+		"location": "CC Lt 9.4",
+		"author": "Informatika"
+	},
+	{
+		"uuid": "1ddaef83-ff1f-46f8-a9ff-124e7921420e",
+		"title": "Programmable fault-tolerant architecture",
+		"start": "2024-09-28T05:32:00.000Z",
+		"finish": "2024-09-28T06:55:00.000Z",
+		"typeAgenda": {
+			"uuid": "9f8cd942-54b7-4347-85bd-04fe52d2b101",
+			"name": "Rapat Eksternal"
+		},
+		"location": "CC Lt 9.4",
+		"author": "Fakultas"
+	},
+	{
+		"uuid": "31072e45-d29b-4030-80a5-a7212537e584",
+		"title": "Vision-oriented multi-tasking productivity",
+		"start": "2024-09-13T09:00:00.000Z",
+		"finish": "2024-09-13T10:04:00.000Z",
+		"typeAgenda": {
+			"uuid": "000ff2e6-3638-4b4b-af0f-e34312192739",
+			"name": "Rapat Internal"
+		},
+		"location": "CC Lt 7.2",
+		"author": "Fakultas"
+	},
+	{
+		"uuid": "78ed4f90-2da7-4ee5-823a-627dce2acfed",
+		"title": "Ameliorated incremental portal",
+		"start": "2024-09-29T23:48:00.000Z",
+		"finish": "2024-09-30T01:39:00.000Z",
+		"typeAgenda": {
+			"uuid": "f6a63701-5ada-46b2-9c4a-a1ff02a56fa8",
+			"name": "Rapat Eksternal"
+		},
+		"location": "CC Lt 1.3",
+		"author": "Informatika"
+	},
+	{
+		"uuid": "0707fe7c-09d5-4b4e-907e-6a150b6c1524",
+		"title": "Cross-platform exuding utilisation",
+		"start": "2024-09-28T12:58:00.000Z",
+		"finish": "2024-09-28T14:42:00.000Z",
+		"typeAgenda": {
+			"uuid": "d194b285-3af4-44db-b90c-d2be0cf4dea1",
+			"name": "Rapat Internal"
+		},
+		"location": "CC Lt 7.3",
+		"author": "Fakultas"
+	},
+	{
+		"uuid": "68e4e45b-05d5-45b4-8ca4-7b001f8f77e0",
+		"title": "Decentralized zero administration access",
+		"start": "2024-09-27T06:45:00.000Z",
+		"finish": "2024-09-27T08:43:00.000Z",
+		"typeAgenda": {
+			"uuid": "72037a68-c913-4a8b-a7f8-9d2e7f9f4b3b",
+			"name": "Rapat Eksternal"
+		},
+		"location": "CC Lt 8.1",
+		"author": "Fakultas"
+	}
+]
