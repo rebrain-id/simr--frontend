@@ -6,6 +6,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import ButtonMenu from '../elements/calendar/ButtonMenu';
 import { useEffect, useState } from 'react';
+import CalendarList from '../elements/calendar/CalendarList';
 
 const Calendar = () => {
 	const getYear = new Date().getFullYear();
@@ -16,6 +17,11 @@ const Calendar = () => {
 	});
 	const [inputMonth, setInputMonth] = useState(getMonth);
 	const [inputYear, setInputYear] = useState(getYear);
+	const [menu, setMenu] = useState('calendar');
+
+	const handleMenu = (name) => {
+		setMenu(name);
+	};
 
 	useEffect(() => {
 		setInputMonth(optionValue.month);
@@ -131,23 +137,36 @@ const Calendar = () => {
 
 				<div>
 					<ButtonMenu
-						variant="rounded-s-md border-y border-s"
+						variant={`rounded-s-md border-y border-s ${menu === 'calendar' ? 'bg-light-primary text-white' : ''}`}
 						text="Kalender"
+						onClick={() => handleMenu('calendar')}
 					/>
-					<ButtonMenu variant="border" text="Daftar" />
 					<ButtonMenu
-						variant="rounded-e-md border-y border-e"
+						variant={`border ${menu === 'list' ? 'bg-light-primary text-white' : ''}`}
+						text="Daftar"
+						onClick={() => handleMenu('list')}
+					/>
+					<ButtonMenu
+						variant={`rounded-e-md border-y border-e ${menu === 'history' ? 'bg-light-primary text-white' : ''}`}
 						text="Riwayat"
+						onClick={() => handleMenu('history')}
 					/>
 				</div>
 			</div>
 
-			<CalendarGrid
-				month={optionValue.month}
-				year={optionValue.year}
-				thisYear={getYear}
-				thisMonth={getMonth}
-			/>
+			{menu === 'calendar' ? (
+				<CalendarGrid
+					month={optionValue.month}
+					year={optionValue.year}
+					thisYear={getYear}
+					thisMonth={getMonth}
+				/>
+			) : menu === 'list' ? (
+				<CalendarList
+					month={optionValue.month}
+					year={optionValue.year}
+				/>
+			) : null}
 		</>
 	);
 };

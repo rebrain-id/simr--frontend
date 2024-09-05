@@ -69,7 +69,7 @@ const CalendarGrid = (props) => {
 							className={
 								day.isCurrentMonth
 									? 'text-secondary text-sm'
-									: 'text-light-gray text-sm'
+									: 'text-secondary text-opacity-60 text-sm'
 							}
 						>
 							{day ? day.day : null}
