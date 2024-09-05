@@ -1,8 +1,45 @@
 import { faClock, faEnvelope } from '@fortawesome/free-regular-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import ListAgenda from '../elements/ListAgenda';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { fetchAgendaToday } from '../redux/actions/agendaAction';
+import moment from 'moment';
 
 const Dashboard = () => {
+	const monthList = [
+		'Januari',
+		'Februari',
+		'Maret',
+		'April',
+		'Mei',
+		'Juni',
+		'Juli',
+		'Agustus',
+		'September',
+		'Oktober',
+		'November',
+		'Desember',
+	];
+
+	const dispatch = useDispatch();
+	useEffect(() => {
+		dispatch(fetchAgendaToday());
+	}, [dispatch]);
+
+	const agenda = useSelector((state) => state.agenda.agendaToday);
+	const agendaInternal = agenda.filter(
+		(item) => item.typeAgenda.name == 'Rapat Internal',
+	);
+	const agendaExternal = agenda.filter(
+		(item) => item.typeAgenda.name == 'Rapat Eksternal',
+	);
+	const sortedAgenda = [...agenda].sort((a, b) => {
+		const timeA = moment(a.time.start, 'HH:mm');
+		const timeB = moment(b.time.start, 'HH:mm');
+		return timeA - timeB;
+	});
+
 	return (
 		<>
 			<header className="bg-white px-10 py-5 rounded drop-shadow-bottom">
@@ -21,7 +58,14 @@ const Dashboard = () => {
 								Agenda terdekat
 							</h3>
 							<h1 className="text-sm font-semibold">
-								Rapat Dekanat - 10.00 WIB
+								{agendaInternal.length > 0 ? (
+									<>
+										{agendaInternal[0]?.title} -{' '}
+										{agendaInternal[0]?.time.start} WIB
+									</>
+								) : (
+									'Belum ada agenda'
+								)}
 							</h1>
 						</div>
 					</aside>
@@ -37,7 +81,14 @@ const Dashboard = () => {
 								Undangan terdekat
 							</h3>
 							<h1 className="text-sm font-semibold">
-								Akreditasi Prodi Sistem Informasi - 07.00 WIB
+								{agendaExternal.length > 0 ? (
+									<>
+										{agendaExternal[0]?.title} -{' '}
+										{agendaExternal[0]?.time.start} WIB
+									</>
+								) : (
+									'Belum ada agenda'
+								)}
 							</h1>
 						</div>
 					</aside>
@@ -48,39 +99,27 @@ const Dashboard = () => {
 				<h1 className="text-base font-semibold">Agenda Hari Ini</h1>
 
 				<section className="mt-5 flex flex-col gap-3">
-					{[
-						{
-							title: 'Akreditasi Prodi Sistem Informasi',
-							time: '07.00 - 16.00 WIB',
-							date: '1 September 2024',
-							room: 'Ruang B-1.1',
-							isOwner: false,
-						},
-						{
-							title: 'Rapat Ploting Anggaran',
-							time: '14.00 - 16.00 WIB',
-							date: '1 September 2024',
-							room: 'Ruang B-1.1',
-							isOwner: true,
-						},
-						{
-							title: 'Rapat Dekanat',
-							time: '10.00 - 11.00 WIB',
-							date: '1 September 2024',
-							room: 'Ruang B-1.1',
-							isOwner: true,
-						},
-					].map((item, index) => (
-						<ListAgenda
-							key={index}
-							data={item}
-							title={item.title}
-							date={item.date}
-							time={item.time}
-							isOwner={item.isOwner}
-							room={item.room}
-						/>
-					))}
+					{sortedAgenda.length > 0 ? (
+						sortedAgenda.map((item, index) => (
+							<ListAgenda
+								key={index}
+								data={item}
+								title={item.title}
+								date={`${item.date.start} ${monthList[item.month.start - 1]} ${item.year.start}`}
+								time={`${item.time.start} - ${item.time.finish} WIB`}
+								isOwner={
+									item.typeAgenda.name === 'Rapat Internal'
+										? true
+										: false
+								}
+								room={item.location}
+							/>
+						))
+					) : (
+						<p className="text-xs text-light-secondary text-center">
+							Belum ada agenda
+						</p>
+					)}
 				</section>
 			</main>
 		</>
