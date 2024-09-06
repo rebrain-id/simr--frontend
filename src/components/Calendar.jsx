@@ -7,6 +7,8 @@ import {
 import ButtonMenu from '../elements/calendar/ButtonMenu';
 import { useEffect, useState } from 'react';
 import CalendarList from '../elements/calendar/CalendarList';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchAgendaThisMonth } from '../redux/actions/agendaAction';
 
 const Calendar = () => {
 	const getYear = new Date().getFullYear();
@@ -18,6 +20,9 @@ const Calendar = () => {
 	const [inputMonth, setInputMonth] = useState(getMonth);
 	const [inputYear, setInputYear] = useState(getYear);
 	const [menu, setMenu] = useState('calendar');
+	const dispatch = useDispatch();
+
+	const agenda = useSelector((state) => state.agenda.agendaThisMonth);
 
 	const handleMenu = (name) => {
 		setMenu(name);
@@ -26,7 +31,13 @@ const Calendar = () => {
 	useEffect(() => {
 		setInputMonth(optionValue.month);
 		setInputYear(optionValue.year);
-	}, [optionValue]);
+		dispatch(
+			fetchAgendaThisMonth({
+				year: optionValue.year,
+				month: optionValue.month,
+			}),
+		);
+	}, [optionValue, dispatch]);
 
 	const handleOptionValue = (event) => {
 		const { name, value } = event.target;
@@ -160,11 +171,12 @@ const Calendar = () => {
 					year={optionValue.year}
 					thisYear={getYear}
 					thisMonth={getMonth}
+					agendas={agenda}
 				/>
 			) : menu === 'list' ? (
 				<CalendarList
 					month={optionValue.month}
-					year={optionValue.year}
+					agendaThisMonth={agenda}
 				/>
 			) : null}
 		</>
