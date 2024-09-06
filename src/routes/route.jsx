@@ -4,6 +4,7 @@ import Dashboard from '../pages/Dashboard';
 import Agenda from '../pages/Agenda';
 import ProgramStudiPage from '../pages/ProgramStudiPage';
 import DosenPage from '../pages/DosenPage';
+import AgendaByDate from '../pages/AgendaByDate';
 
 export const router = createBrowserRouter([
 	{
@@ -17,6 +18,10 @@ export const router = createBrowserRouter([
 			{
 				path: 'agenda',
 				element: <Agenda />,
+			},
+			{
+				path: 'agenda/date',
+				element: <AgendaByDate />,
 			},
 			{
 				path: 'prodi',
