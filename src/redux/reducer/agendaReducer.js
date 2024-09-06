@@ -3,12 +3,14 @@ import {
 	FETCH_AGENDA_SUCCESS,
 	FETCH_AGENDA_TODAY_SUCCESS,
 	FETCH_AGENDA_THIS_MONTH_SUCCESS,
+	FETCH_AGENDA_BY_DATE_SUCCESS,
 } from '../actions/agendaAction';
 
 const initialState = {
 	agenda: [],
 	agendaToday: [],
 	agendaThisMonth: [],
+	agendaByDate: [],
 };
 
 const agendaReducer = (state = initialState, action) => {
@@ -31,6 +33,11 @@ const agendaReducer = (state = initialState, action) => {
 			return {
 				...state,
 				agendaThisMonth: [...action.payload],
+			};
+		case FETCH_AGENDA_BY_DATE_SUCCESS:
+			return {
+				...state,
+				agendaByDate: [...action.payload],
 			};
 		default:
 			return state;

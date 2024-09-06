@@ -6,6 +6,7 @@ import {
 	fetchAgendaSuccess,
 	fetchAgendaTodaySuccess,
 	fetchAgendaThisMonthSuccess,
+	fetchAgendaByDateSuccess,
 	fetchAgendaFailure,
 } from '../slices/agendaSlice';
 
@@ -72,6 +73,28 @@ export const fetchAgendaThisMonth = createAsyncThunk(
 			}, []);
 
 			dispatch(fetchAgendaThisMonthSuccess(groupByDate));
+		} catch (error) {
+			dispatch(fetchAgendaFailure(error.message));
+		}
+	},
+);
+
+export const fetchAgendaByDate = createAsyncThunk(
+	'agenda/fetchAgendaByDate',
+	async ({ year, month, date }, { dispatch }) => {
+		try {
+			dispatch(fetchAgendaRequest());
+
+			const dataByDate = convertAgendaData(dataJson);
+
+			const filteredAgenda = dataByDate.filter(
+				(item) =>
+					item.date.start == String(date).padStart(2, '0') &&
+					item.month.start == String(month).padStart(2, '0') &&
+					item.year.start == year,
+			);
+
+			dispatch(fetchAgendaByDateSuccess(filteredAgenda));
 		} catch (error) {
 			dispatch(fetchAgendaFailure(error.message));
 		}
