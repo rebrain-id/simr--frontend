@@ -15,7 +15,6 @@ const CalendarList = (props) => {
 	useEffect(() => {
 		dispatch(fetchAgendaThisMonth({ year, month }));
 	}, [dispatch, month, year]);
-	console.log(agendaThisMonth);
 
 	const monthList = [
 		'Januari',
@@ -59,7 +58,6 @@ const CalendarList = (props) => {
 										key={itemIndex}
 										data={item}
 										title={item.title}
-										date={`${item.date.start} ${monthList[item.month.start - 1]} ${item.year.start}`}
 										time={`${item.time.start} - ${item.time.finish} WIB`}
 										isOwner={
 											item.typeAgenda.name ===
