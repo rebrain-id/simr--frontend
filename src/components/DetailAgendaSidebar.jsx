@@ -71,18 +71,32 @@ const DetailAgendaSidebar = (props) => {
 				</section>
 
 				<section className="flex flex-col px-8 gap-3 mt-5">
-					<FormInput label="Agenda" value={data.title} />
 					<FormInput
+						inputvariant="text-sm font-normal"
+						labelvariant="text-xs"
+						label="Agenda"
+						value={data.title}
+					/>
+					<FormInput
+						inputvariant="text-sm font-normal"
+						labelvariant="text-xs"
 						label="Dari"
 						type="datetime-local"
 						value={data.date}
 					/>
 					<FormInput
+						inputvariant="text-sm font-normal"
+						labelvariant="text-xs"
 						label="Sampai"
 						type="datetime-local"
 						value={data.date}
 					/>
-					<FormInput label="Tempat" value={data.room} />
+					<FormInput
+						inputvariant="text-sm font-normal"
+						labelvariant="text-xs"
+						label="Tempat"
+						value={data.room}
+					/>
 					<FormTextarea label="Deskripsi" />
 					<FormSelect label="Kategori">
 						<option value="" className="text-light-secondary">
@@ -124,12 +138,16 @@ const DetailAgendaSidebar = (props) => {
 						))}
 					</FormCheckbox>
 					<FormInput
+						inputvariant="text-sm font-normal"
+						labelvariant="text-xs"
 						label="Notulensi"
 						type="file"
 						note="Pastikan file memiliki format .pdf, .doc, atau .docx"
 						fileAccept=".pdf, .doc, .docx"
 					/>
 					<FormInput
+						inputvariant="text-sm font-normal"
+						labelvariant="text-xs"
 						label="Absensi"
 						type="file"
 						note="Pastikan file memiliki format .jpg, .jpeg, atau .png"
