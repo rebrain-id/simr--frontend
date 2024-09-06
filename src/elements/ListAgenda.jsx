@@ -25,7 +25,7 @@ const ListAgenda = (props) => {
 			</div>
 
 			<div className="w-1/2 flex items-center gap-5">
-				<div className="w-1/3 flex items-center gap-2">
+				<div className="w-3/6 flex items-center gap-2">
 					<FontAwesomeIcon
 						icon={faClockFour}
 						className={
@@ -36,7 +36,7 @@ const ListAgenda = (props) => {
 					/>
 					<p className="text-xs font-medium">{time}</p>
 				</div>
-				<div className="w-1/3 flex items-center gap-2">
+				<div className="w-3/6 flex items-center gap-2">
 					<FontAwesomeIcon
 						icon={faCalendarAlt}
 						className={
