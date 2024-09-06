@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 const CalendarGrid = (props) => {
 	const { year, month, thisYear, thisMonth } = props;
 
@@ -30,7 +32,7 @@ const CalendarGrid = (props) => {
 		});
 	}
 
-	const totalRows = days.length > 35 || firstDayOfMonth >= 3 ? 6 : 5;
+	const totalRows = days.length >= 35 && firstDayOfMonth >= 3 ? 6 : 5;
 	const nextMonth = totalRows * 7 - days.length;
 	for (let i = 1; i <= nextMonth; i++) {
 		days.push({
@@ -61,7 +63,8 @@ const CalendarGrid = (props) => {
 			</div>
 			<div className="grid grid-cols-7 rounded-b">
 				{days.map((day, index) => (
-					<div
+					<Link
+						to={`/agenda/date?date=${day.day}&month=${month + 1}&year=${year}`}
 						key={index}
 						className={`min-h-20 h-auto border flex justify-start items-start p-3 cursor-pointer hover:bg-light-gray ${today === day.day && thisMonth === month && day.isCurrentMonth && thisYear === year ? 'bg-light-gray' : ''}`}
 					>
@@ -74,7 +77,7 @@ const CalendarGrid = (props) => {
 						>
 							{day ? day.day : null}
 						</p>
-					</div>
+					</Link>
 				))}
 			</div>
 		</>
