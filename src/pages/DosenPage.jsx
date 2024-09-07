@@ -3,7 +3,9 @@ import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import Button from '../elements/Button';
 import ListDosen from '../elements/ListDosen';
 import CreateModal from '../components/CreateDosenModal';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchDosens } from '../redux/actions/dosenAction';
 
 const data = [
 	{
@@ -41,6 +43,22 @@ const data = [
 const DosenPage = () => {
 	const [openModal, setOpenModal] = useState(false);
 	const handleModal = () => setOpenModal(!openModal);
+	const dispatch = useDispatch();
+	const [pending, setPending] = useState(true);
+	const datas = useSelector((state) => state.fetchDosens.dosens);
+
+	const getDosenId = (id) => {
+		console.log(id);
+	};
+
+	useEffect(() => {
+		const timeout = setTimeout(() => {
+			dispatch(fetchDosens());
+
+			setPending(false);
+		}, 500);
+		return () => clearTimeout(timeout);
+	}, [dispatch]);
 	return (
 		<>
 			<main className="bg-white px-10 py-5 rounded drop-shadow-bottom mt-5">
@@ -56,8 +74,14 @@ const DosenPage = () => {
 				</div>
 
 				<section className="mt-5 flex flex-col gap-3">
-					{data.map((item, index) => (
-						<ListDosen key={index} data={item} nama={item.nama} />
+					{datas.map((item, index) => (
+						<ListDosen
+							key={index}
+							data={item.dosen.name}
+							name={item.dosen.name}
+							email={item.dosen.email}
+							no={item.dosen.phoneNumber}
+						/>
 					))}
 				</section>
 			</main>
