@@ -5,6 +5,7 @@ import Agenda from '../pages/Agenda';
 import ProgramStudiPage from '../pages/ProgramStudiPage';
 import DosenPage from '../pages/DosenPage';
 import AgendaByDate from '../pages/AgendaByDate';
+import AddAgenda from '../pages/AddAgenda';
 
 export const router = createBrowserRouter([
 	{
@@ -22,6 +23,10 @@ export const router = createBrowserRouter([
 			{
 				path: 'agenda/date',
 				element: <AgendaByDate />,
+			},
+			{
+				path: 'agenda/new',
+				element: <AddAgenda />,
 			},
 			{
 				path: 'prodi',
