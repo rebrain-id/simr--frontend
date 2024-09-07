@@ -1,12 +1,12 @@
 const FormTextarea = (props) => {
-	const { label, note, variant } = props;
+	const { label, note, variant, rows = 5 } = props;
 
 	return (
 		<div className={variant ? variant : 'w-80'}>
 			<label className="text-xs font-medium">{label}</label>
 			<textarea
-				className="w-full border border-light-secondary text-sm rounded py-1 px-3 resize-none"
-				rows={5}
+				className="w-full border border-light-secondary text-sm rounded pt-1 pb-3 px-3 resize-none"
+				rows={rows}
 			></textarea>
 
 			{note && (
