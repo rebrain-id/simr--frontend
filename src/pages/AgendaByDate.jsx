@@ -1,12 +1,13 @@
 import {
 	faChevronLeft,
 	faChevronRight,
+	faPlus,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchAgendaByDate } from '../redux/actions/agendaAction';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import ListAgenda from '../elements/ListAgenda';
 
 const AgendaByDate = () => {
@@ -121,6 +122,18 @@ const AgendaByDate = () => {
 						sekarang
 					</p>
 				)}
+			</div>
+
+			<div className="w-full flex justify-end sticky bottom-10 z-10">
+				<Link
+					to={'/agenda/new'}
+					className="mt-10 flex justify-center items-center w-16 h-16 rounded-full bg-light-primary bg-opacity-80 hover:bg-opacity-100 cursor-pointer"
+				>
+					<FontAwesomeIcon
+						icon={faPlus}
+						className="text-4xl text-light-white"
+					/>
+				</Link>
 			</div>
 		</div>
 	);
