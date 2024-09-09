@@ -3,7 +3,20 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useState } from 'react';
 
 const FormInputCheckbox = (props) => {
-	const { text, isSelected, onClick, onChange, isRef, data } = props;
+	const {
+		text,
+		isSelected,
+		onClick,
+		onChange,
+		isRef,
+		data,
+		variant,
+		checkboxVariant,
+		labelVariant,
+		value,
+		name,
+		onSelect,
+	} = props;
 	const [openPopover, setOpenPopover] = useState(false);
 	const textConverted = text.replace(/\s+/g, '-').toLowerCase();
 
@@ -16,20 +29,25 @@ const FormInputCheckbox = (props) => {
 	};
 
 	return (
-		<div className="w-full text-sm py-1 px-3 flex items-center justify-between">
+		<div
+			className={`w-full text-sm py-1 flex items-center justify-between ${variant ? variant : 'px-3'}`}
+		>
 			<div className="flex items-center gap-3">
 				<input
 					type="checkbox"
-					className={`h-4 w-4 cursor-pointer`}
+					className={`h-4 w-4 cursor-pointer ${checkboxVariant}`}
 					ref={isRef}
 					checked={isSelected}
 					onChange={onChange}
 					onClick={onClick}
 					id={`checkbox-${textConverted}`}
+					value={value}
+					name={name}
+					onSelect={onSelect}
 				/>
 				<label
 					htmlFor={`checkbox-${textConverted}`}
-					className="text-sm font-normal cursor-pointer"
+					className={`cursor-pointer ${labelVariant ? labelVariant : 'text-sm font-normal'}`}
 				>
 					{text}
 				</label>
