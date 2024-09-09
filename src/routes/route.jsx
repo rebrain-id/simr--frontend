@@ -1,11 +1,11 @@
 import { createBrowserRouter } from 'react-router-dom';
 import MainLayout from '../layouts/MainLayout';
 import Dashboard from '../pages/Dashboard';
-import Agenda from '../pages/Agenda';
+import Agenda from '../pages/agendas/Agenda';
 import ProgramStudiPage from '../pages/ProgramStudiPage';
 import DosenPage from '../pages/DosenPage';
-import AgendaByDate from '../pages/AgendaByDate';
-import AddAgenda from '../pages/AddAgenda';
+import AgendaByDate from '../pages/agendas/AgendaByDate';
+import AddAgenda from '../pages/agendas/AddAgenda';
 
 export const router = createBrowserRouter([
 	{
