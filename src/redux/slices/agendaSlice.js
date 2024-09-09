@@ -5,6 +5,7 @@ const initialState = {
 	agendaToday: [],
 	agendaThisMonth: [],
 	agendaByDate: [],
+	agendaHistory: [],
 	loading: false,
 	error: null,
 };
@@ -32,6 +33,10 @@ const agendaSlice = createSlice({
 			state.loading = false;
 			state.agendaByDate = action.payload;
 		},
+		fetchAgendaHistorySuccess(state, action) {
+			state.loading = false;
+			state.agendaHistory = action.payload;
+		},
 		fetchAgendaFailure(state, action) {
 			state.loading = false;
 			state.error = action.payload;
@@ -45,6 +50,7 @@ export const {
 	fetchAgendaTodaySuccess,
 	fetchAgendaThisMonthSuccess,
 	fetchAgendaByDateSuccess,
+	fetchAgendaHistorySuccess,
 	fetchAgendaFailure,
 } = agendaSlice.actions;
 

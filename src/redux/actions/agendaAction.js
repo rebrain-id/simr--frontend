@@ -7,6 +7,7 @@ import {
 	fetchAgendaTodaySuccess,
 	fetchAgendaThisMonthSuccess,
 	fetchAgendaByDateSuccess,
+	fetchAgendaHistorySuccess,
 	fetchAgendaFailure,
 } from '../slices/agendaSlice';
 
@@ -15,7 +16,7 @@ export const fetchAgenda = createAsyncThunk(
 	async (_, { dispatch }) => {
 		try {
 			dispatch(fetchAgendaRequest());
-			const data = convertAgendaData(dataJson);
+			const data = convertAgendaData(dataJson.agenda);
 
 			dispatch(fetchAgendaSuccess(data));
 		} catch (error) {
@@ -30,7 +31,7 @@ export const fetchAgendaToday = createAsyncThunk(
 		try {
 			dispatch(fetchAgendaRequest());
 
-			const data = convertAgendaData(dataJson);
+			const data = convertAgendaData(dataJson.agenda);
 			const today = moment().format('DD');
 			const thisMonth = moment().format('MM');
 
@@ -51,7 +52,7 @@ export const fetchAgendaThisMonth = createAsyncThunk(
 	async ({ year, month }, { dispatch }) => {
 		try {
 			dispatch(fetchAgendaRequest());
-			const dataThisMonth = convertAgendaData(dataJson);
+			const dataThisMonth = convertAgendaData(dataJson.agenda);
 
 			const filteredAgenda = dataThisMonth.filter(
 				(item) =>
@@ -85,7 +86,7 @@ export const fetchAgendaByDate = createAsyncThunk(
 		try {
 			dispatch(fetchAgendaRequest());
 
-			const dataByDate = convertAgendaData(dataJson);
+			const dataByDate = convertAgendaData(dataJson.agenda);
 
 			const filteredAgenda = dataByDate.filter(
 				(item) =>
@@ -101,13 +102,101 @@ export const fetchAgendaByDate = createAsyncThunk(
 	},
 );
 
+export const fetchAgendaHistory = createAsyncThunk(
+	'agenda/fetchAgendaHistory',
+	async ({ dateFrom, dateTo, type, asc = false }, { dispatch }) => {
+		try {
+			dispatch(fetchAgendaRequest());
+
+			const data = dataJson.agenda;
+			const today = moment();
+			const convertDateFrom = dateFrom ? moment(dateFrom) : moment(0);
+			const convertDateTo = dateTo ? moment(dateTo) : today;
+
+			const filteredAgenda = data.filter((item) => {
+				const finishedDate = moment(item.finish);
+
+				if (dateFrom && dateTo) {
+					if (type && type == 'all') {
+						return (
+							finishedDate.isBetween(
+								convertDateFrom,
+								convertDateTo,
+								null,
+								'[)',
+							) && item.isDone === true
+						);
+					} else if (type) {
+						return (
+							finishedDate.isBetween(
+								convertDateFrom,
+								convertDateTo,
+								null,
+								'[)',
+							) &&
+							item.typeAgenda.name == `Rapat ${type}` &&
+							item.isDone === true
+						);
+					} else {
+						return (
+							finishedDate.isBetween(
+								convertDateFrom,
+								convertDateTo,
+								null,
+								'[)',
+							) &&
+							item.typeAgenda.name == `Rapat Internal` &&
+							item.isDone === true
+						);
+					}
+				} else {
+					if (type && type == 'all') {
+						return (
+							finishedDate.isBefore(convertDateTo) &&
+							item.isDone === true
+						);
+					} else if (type) {
+						return (
+							finishedDate.isBefore(convertDateTo) &&
+							item.typeAgenda.name == `Rapat ${type}` &&
+							item.isDone === true
+						);
+					} else {
+						return (
+							finishedDate.isBefore(convertDateTo) &&
+							item.typeAgenda.name == `Rapat Internal` &&
+							item.isDone === true
+						);
+					}
+				}
+			});
+
+			const sortedAgenda = filteredAgenda.sort((a, b) => {
+				const dateA = moment(a.finish);
+				const dateB = moment(b.finish);
+				if (asc) {
+					return dateA - dateB;
+				} else {
+					return dateB - dateA;
+				}
+			});
+
+			dispatch(
+				fetchAgendaHistorySuccess(convertAgendaData(sortedAgenda)),
+			);
+		} catch (error) {
+			dispatch(fetchAgendaFailure(error.message));
+		}
+	},
+);
+
 const convertAgendaData = (data) => {
-	return data.agenda.map((item) => {
-		const startTime = moment(item.agenda.start);
-		const finishTime = moment(item.agenda.finish);
+	return data.map((item) => {
+		const startTime = moment(item.start);
+		const finishTime = moment(item.finish);
 
 		return {
-			...item.agenda,
+			...item,
 			time: {
 				start: startTime.format('HH:mm'),
 				finish: finishTime.format('HH:mm'),
