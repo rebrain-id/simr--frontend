@@ -1,1406 +1,1286 @@
 {
-  "agenda": [
-    {
-      "agenda": {
-        "uuid": "1d9841d8-ba03-46fc-a76f-f0c7113d8590",
-        "title": "Team-oriented stable time-frame",
-        "start": "2024-09-15T01:23:00.000Z",
-        "finish": "2024-09-15T03:12:00.000Z",
-        "typeAgenda": {
-          "uuid": "dd577f61-815d-46b3-819d-2da0cc4ddb84",
-          "name": "Rapat Eksternal"
-        },
-        "location": "CC Lt 3.4",
-        "author": "Fakultas"
-      }
-    },
-    {
-      "agenda": {
-        "uuid": "9201af70-760e-48c6-aac4-cd55a0b519ae",
-        "title": "Assimilated context-sensitive customer loyalty",
-        "start": "2024-10-25T05:12:00.000Z",
-        "finish": "2024-10-25T06:01:00.000Z",
-        "typeAgenda": {
-          "uuid": "1a6687ae-aff2-4d32-b9d2-34cc477468fe",
-          "name": "Rapat Eksternal"
-        },
-        "location": "CC Lt 5.5",
-        "author": "Fakultas"
-      }
-    },
-    {
-      "agenda": {
-        "uuid": "e496f30d-d426-4cd6-bf68-4a7d4686c561",
-        "title": "Stand-alone client-driven analyzer",
-        "start": "2024-09-24T07:24:00.000Z",
-        "finish": "2024-09-24T08:11:00.000Z",
-        "typeAgenda": {
-          "uuid": "52b0d2df-d2ab-4468-866f-979f2e9f45af",
-          "name": "Rapat Internal"
-        },
-        "location": "CC Lt 8.3",
-        "author": "Fakultas"
-      }
-    },
-    {
-      "agenda": {
-        "uuid": "e51616c7-d486-4000-a06e-d689e8141430",
-        "title": "Cross-platform local firmware",
-        "start": "2024-09-21T13:35:00.000Z",
-        "finish": "2024-09-21T15:00:00.000Z",
-        "typeAgenda": {
-          "uuid": "50faa23f-0056-4b43-84a4-094bc74dc314",
-          "name": "Rapat Internal"
-        },
-        "location": "CC Lt 3.5",
-        "author": "Fakultas"
-      }
-    },
-    {
-      "agenda": {
-        "uuid": "62afb0be-bb7f-4b82-a83f-9579561ff9d4",
-        "title": "Cloned user-facing hierarchy",
-        "start": "2024-09-20T06:55:00.000Z",
-        "finish": "2024-09-20T08:21:00.000Z",
-        "typeAgenda": {
-          "uuid": "cb766b37-6547-4c21-9610-79d02255117c",
-          "name": "Rapat Eksternal"
-        },
-        "location": "CC Lt 9.1",
-        "author": "Fakultas"
-      }
-    },
-    {
-      "agenda": {
-        "uuid": "840f399e-f76c-4f3b-bf2c-4c0c1ee4be42",
-        "title": "Reactive regional synergy",
-        "start": "2024-10-21T22:39:00.000Z",
-        "finish": "2024-10-22T00:20:00.000Z",
-        "typeAgenda": {
-          "uuid": "938260b1-1be7-494e-821c-d897b85d0eeb",
-          "name": "Rapat Eksternal"
-        },
-        "location": "CC Lt 6.4",
-        "author": "Fakultas"
-      }
-    },
-    {
-      "agenda": {
-        "uuid": "a9de2457-c26e-4460-9ac3-f52464f34fd2",
-        "title": "Centralized incremental instruction set",
-        "start": "2024-10-02T09:04:00.000Z",
-        "finish": "2024-10-02T10:18:00.000Z",
-        "typeAgenda": {
-          "uuid": "2385a160-abc0-40e3-ba52-58a30fdf69c0",
-          "name": "Rapat Internal"
-        },
-        "location": "CC Lt 1.4",
-        "author": "Fakultas"
-      }
-    },
-    {
-      "agenda": {
-        "uuid": "5cfe276b-a5e6-42e4-a153-72db37b2e8f6",
-        "title": "Organized global support",
-        "start": "2024-10-06T05:04:00.000Z",
-        "finish": "2024-10-06T06:59:00.000Z",
-        "typeAgenda": {
-          "uuid": "c80d93d5-2571-4ac7-aa7b-018eace61384",
-          "name": "Rapat Eksternal"
-        },
-        "location": "CC Lt 2.1",
-        "author": "Informatika"
-      }
-    },
-    {
-      "agenda": {
-        "uuid": "f2309ecf-218e-42c8-aa38-cff6b991533c",
-        "title": "Organized contextually-based workforce",
-        "start": "2024-10-21T12:45:00.000Z",
-        "finish": "2024-10-21T13:44:00.000Z",
-        "typeAgenda": {
-          "uuid": "a108e82d-adcb-4aa5-a0c9-4d42d547d118",
-          "name": "Rapat Internal"
-        },
-        "location": "CC Lt 1.2",
-        "author": "Fakultas"
-      }
-    },
-    {
-      "agenda": {
-        "uuid": "7c4ee6e8-581d-459a-b330-99b114f8fbf0",
-        "title": "Distributed mobile local area network",
-        "start": "2024-09-02T10:32:00.000Z",
-        "finish": "2024-09-02T11:06:00.000Z",
-        "typeAgenda": {
-          "uuid": "189572f1-09ff-4c34-96f8-d6e3549413cc",
-          "name": "Rapat Eksternal"
-        },
-        "location": "CC Lt 1.1",
-        "author": "Fakultas"
-      }
-    },
-    {
-      "agenda": {
-        "uuid": "cca36180-1d78-488a-84c6-4646149a5c98",
-        "title": "Up-sized methodical synergy",
-        "start": "2024-10-31T11:51:00.000Z",
-        "finish": "2024-10-31T12:58:00.000Z",
-        "typeAgenda": {
-          "uuid": "70717e12-18a6-4a8b-a8ac-58e6ef37a260",
-          "name": "Rapat Eksternal"
-        },
-        "location": "CC Lt 9.5",
-        "author": "Fakultas"
-      }
-    },
-    {
-      "agenda": {
-        "uuid": "2f327de0-5df9-4db5-86b2-9b91bcfd703e",
-        "title": "Automated demand-driven leverage",
-        "start": "2024-09-03T12:11:00.000Z",
-        "finish": "2024-09-03T12:49:00.000Z",
-        "typeAgenda": {
-          "uuid": "6e0aa16b-836a-4b5e-ae2f-6d1fc1d9a230",
-          "name": "Rapat Eksternal"
-        },
-        "location": "CC Lt 10.2",
-        "author": "Fakultas"
-      }
-    },
-    {
-      "agenda": {
-        "uuid": "c80bb75d-704e-444e-adea-fc7c3fb8e4e8",
-        "title": "Implemented national knowledge user",
-        "start": "2024-10-02T01:04:00.000Z",
-        "finish": "2024-10-02T02:23:00.000Z",
-        "typeAgenda": {
-          "uuid": "e3eb4481-b13e-479a-b7e8-9e9339291782",
-          "name": "Rapat Internal"
-        },
-        "location": "CC Lt 2.4",
-        "author": "Fakultas"
-      }
-    },
-    {
-      "agenda": {
-        "uuid": "1c9facdb-295d-4b4c-9985-60e890cef6a3",
-        "title": "Centralized value-added matrix",
-        "start": "2024-09-02T03:16:00.000Z",
-        "finish": "2024-09-02T03:58:00.000Z",
-        "typeAgenda": {
-          "uuid": "3c65fc10-5af8-41f9-9475-cad9b5c88c4b",
-          "name": "Rapat Internal"
-        },
-        "location": "CC Lt 9.5",
-        "author": "Informatika"
-      }
-    },
-    {
-      "agenda": {
-        "uuid": "f9af63e6-8105-4655-a1e6-6652a40331ba",
-        "title": "Reduced systemic algorithm",
-        "start": "2024-10-06T04:48:00.000Z",
-        "finish": "2024-10-06T06:17:00.000Z",
-        "typeAgenda": {
-          "uuid": "d7b9d875-d747-4d10-b613-88103eeed20f",
-          "name": "Rapat Internal"
-        },
-        "location": "CC Lt 3.1",
-        "author": "Informatika"
-      }
-    },
-    {
-      "agenda": {
-        "uuid": "5f023773-36f0-44e9-a2cc-a79becdfccc7",
-        "title": "Synergistic directional superstructure",
-        "start": "2024-10-05T05:36:00.000Z",
-        "finish": "2024-10-05T07:34:00.000Z",
-        "typeAgenda": {
-          "uuid": "3b60937f-7d2a-4694-b76c-8ec80d03cb9c",
-          "name": "Rapat Internal"
-        },
-        "location": "CC Lt 8.5",
-        "author": "Fakultas"
-      }
-    },
-    {
-      "agenda": {
-        "uuid": "1a870687-567d-4ca8-97eb-c79c60772367",
-        "title": "Distributed next generation knowledge base",
-        "start": "2024-09-10T02:51:00.000Z",
-        "finish": "2024-09-10T04:29:00.000Z",
-        "typeAgenda": {
-          "uuid": "b20a3a01-2094-4170-b0a0-24083b6cdb95",
-          "name": "Rapat Eksternal"
-        },
-        "location": "CC Lt 9.2",
-        "author": "Fakultas"
-      }
-    },
-    {
-      "agenda": {
-        "uuid": "36cb648b-294c-45b2-a51d-72b7bea5ea88",
-        "title": "Team-oriented 4th generation solution",
-        "start": "2024-10-14T11:32:00.000Z",
-        "finish": "2024-10-14T12:13:00.000Z",
-        "typeAgenda": {
-          "uuid": "860c8bb4-2038-4e12-90c5-8abcfacfbdaa",
-          "name": "Rapat Internal"
-        },
-        "location": "CC Lt 8.3",
-        "author": "Fakultas"
-      }
-    },
-    {
-      "agenda": {
-        "uuid": "2c534a5b-0fa1-46af-b2bc-ea33d310c062",
-        "title": "Horizontal interactive installation",
-        "start": "2024-09-12T00:09:00.000Z",
-        "finish": "2024-09-12T01:02:00.000Z",
-        "typeAgenda": {
-          "uuid": "941f7a25-2c08-4def-9b68-4b4f4b797021",
-          "name": "Rapat Internal"
-        },
-        "location": "CC Lt 9.3",
-        "author": "Informatika"
-      }
-    },
-    {
-      "agenda": {
-        "uuid": "37078994-90d6-45cb-b7d1-e25b803e1422",
-        "title": "Synergistic motivating moratorium",
-        "start": "2024-10-22T06:14:00.000Z",
-        "finish": "2024-10-22T06:53:00.000Z",
-        "typeAgenda": {
-          "uuid": "f9cf4184-f9e9-4a9a-bc8e-34f2a2e7a1e6",
-          "name": "Rapat Internal"
-        },
-        "location": "CC Lt 3.4",
-        "author": "Fakultas"
-      }
-    },
-    {
-      "agenda": {
-        "uuid": "95abf80f-6844-4170-bddd-b924526fd49d",
-        "title": "Business-focused analyzing matrices",
-        "start": "2024-10-03T02:57:00.000Z",
-        "finish": "2024-10-03T03:44:00.000Z",
-        "typeAgenda": {
-          "uuid": "241aa299-9324-46db-a9d7-aa5e5e6a2a2c",
-          "name": "Rapat Eksternal"
-        },
-        "location": "CC Lt 5.5",
-        "author": "Informatika"
-      }
-    },
-    {
-      "agenda": {
-        "uuid": "855e17d2-b73f-4724-b079-7fa9f7b1dd5a",
-        "title": "Streamlined motivating policy",
-        "start": "2024-09-12T11:01:00.000Z",
-        "finish": "2024-09-12T11:44:00.000Z",
-        "typeAgenda": {
-          "uuid": "8453ec67-ae5c-46a0-b5eb-ad37ecc48607",
-          "name": "Rapat Eksternal"
-        },
-        "location": "CC Lt 2.5",
-        "author": "Informatika"
-      }
-    },
-    {
-      "agenda": {
-        "uuid": "ce3d3225-9182-4a5f-a8a1-e5b1e5e8ed49",
-        "title": "Re-contextualized exuding definition",
-        "start": "2024-10-12T12:41:00.000Z",
-        "finish": "2024-10-12T13:44:00.000Z",
-        "typeAgenda": {
-          "uuid": "7da03381-138d-474b-ad7a-0d7222282ebb",
-          "name": "Rapat Internal"
-        },
-        "location": "CC Lt 4.5",
-        "author": "Fakultas"
-      }
-    },
-    {
-      "agenda": {
-        "uuid": "3fbcceba-062c-4eeb-b5f5-ebef8654e143",
-        "title": "User-friendly context-sensitive monitoring",
-        "start": "2024-09-07T22:54:00.000Z",
-        "finish": "2024-09-08T00:06:00.000Z",
-        "typeAgenda": {
-          "uuid": "bdd506e7-8fd6-4355-b00b-94fb31dc574f",
-          "name": "Rapat Internal"
-        },
-        "location": "CC Lt 8.2",
-        "author": "Informatika"
-      }
-    },
-    {
-      "agenda": {
-        "uuid": "1d797b2a-b39d-48bb-a651-cc8ba9551b7f",
-        "title": "Robust high-level conglomeration",
-        "start": "2024-09-26T11:17:00.000Z",
-        "finish": "2024-09-26T12:22:00.000Z",
-        "typeAgenda": {
-          "uuid": "18af3efb-ff3c-4161-8a8e-e3a1d901d28e",
-          "name": "Rapat Eksternal"
-        },
-        "location": "CC Lt 2.4",
-        "author": "Fakultas"
-      }
-    },
-    {
-      "agenda": {
-        "uuid": "30829cb4-19e2-48d5-882f-07307b522e1f",
-        "title": "Integrated homogeneous model",
-        "start": "2024-09-15T00:58:00.000Z",
-        "finish": "2024-09-15T01:36:00.000Z",
-        "typeAgenda": {
-          "uuid": "06fd3d87-e696-4967-87eb-1b47526b6971",
-          "name": "Rapat Internal"
-        },
-        "location": "CC Lt 3.5",
-        "author": "Fakultas"
-      }
-    },
-    {
-      "agenda": {
-        "uuid": "bf3ea86a-6f08-47a2-9f5c-586ef316dc4d",
-        "title": "Multi-layered intermediate productivity",
-        "start": "2024-09-05T01:34:00.000Z",
-        "finish": "2024-09-05T03:26:00.000Z",
-        "typeAgenda": {
-          "uuid": "f47842fe-b633-43b5-b789-b03fefcd18b5",
-          "name": "Rapat Eksternal"
-        },
-        "location": "CC Lt 4.4",
-        "author": "Fakultas"
-      }
-    },
-    {
-      "agenda": {
-        "uuid": "ff131518-bf29-42e1-b0ba-b3bf814c2cd3",
-        "title": "Innovative coherent matrices",
-        "start": "2024-09-13T03:34:00.000Z",
-        "finish": "2024-09-13T04:30:00.000Z",
-        "typeAgenda": {
-          "uuid": "26214e3f-32da-4f9f-b7aa-bd6ffa4f0f59",
-          "name": "Rapat Internal"
-        },
-        "location": "CC Lt 8.1",
-        "author": "Fakultas"
-      }
-    },
-    {
-      "agenda": {
-        "uuid": "a9dacae2-93af-4ca4-8119-befce997208b",
-        "title": "Automated disintermediate task-force",
-        "start": "2024-10-05T22:08:00.000Z",
-        "finish": "2024-10-05T23:29:00.000Z",
-        "typeAgenda": {
-          "uuid": "6ee2ec68-a161-4ef2-92bf-0a89aaa566f7",
-          "name": "Rapat Eksternal"
-        },
-        "location": "CC Lt 2.3",
-        "author": "Informatika"
-      }
-    },
-    {
-      "agenda": {
-        "uuid": "0624e695-e978-4202-a58a-74d6eb120ac0",
-        "title": "Digitized secondary model",
-        "start": "2024-09-28T10:46:00.000Z",
-        "finish": "2024-09-28T12:01:00.000Z",
-        "typeAgenda": {
-          "uuid": "703ad28d-1133-4124-bc27-34b5812e804a",
-          "name": "Rapat Eksternal"
-        },
-        "location": "CC Lt 6.5",
-        "author": "Fakultas"
-      }
-    },
-    {
-      "agenda": {
-        "uuid": "2bbb2626-0672-4324-afc2-23e8ff1c48a7",
-        "title": "Optimized object-oriented info-mediaries",
-        "start": "2024-09-30T05:43:00.000Z",
-        "finish": "2024-09-30T07:15:00.000Z",
-        "typeAgenda": {
-          "uuid": "1de09835-bbd6-4c5a-8f4e-dc63b35871f8",
-          "name": "Rapat Eksternal"
-        },
-        "location": "CC Lt 1.3",
-        "author": "Informatika"
-      }
-    },
-    {
-      "agenda": {
-        "uuid": "da29e6d9-0db5-4f58-90bc-5195a6028026",
-        "title": "Digitized multi-tasking definition",
-        "start": "2024-09-21T09:05:00.000Z",
-        "finish": "2024-09-21T11:01:00.000Z",
-        "typeAgenda": {
-          "uuid": "d1ae750b-8459-4431-b60e-3d17c5c3ab83",
-          "name": "Rapat Internal"
-        },
-        "location": "CC Lt 1.2",
-        "author": "Informatika"
-      }
-    },
-    {
-      "agenda": {
-        "uuid": "a8da5af9-321e-49e2-ae59-eb311131b004",
-        "title": "Digitized multi-state matrix",
-        "start": "2024-09-28T23:06:00.000Z",
-        "finish": "2024-09-28T23:44:00.000Z",
-        "typeAgenda": {
-          "uuid": "545ba79e-71f7-471b-97b7-dd7e4d0c2e9d",
-          "name": "Rapat Eksternal"
-        },
-        "location": "CC Lt 6.3",
-        "author": "Fakultas"
-      }
-    },
-    {
-      "agenda": {
-        "uuid": "c3709ddb-500b-4fd5-baeb-a191e7e16c88",
-        "title": "Stand-alone solution-oriented matrices",
-        "start": "2024-09-01T02:29:00.000Z",
-        "finish": "2024-09-01T03:35:00.000Z",
-        "typeAgenda": {
-          "uuid": "6ea01536-cd58-4b31-b746-f999a69e2bbe",
-          "name": "Rapat Internal"
-        },
-        "location": "CC Lt 5.3",
-        "author": "Informatika"
-      }
-    },
-    {
-      "agenda": {
-        "uuid": "99d74d62-cc6b-4675-8538-2e40381af36f",
-        "title": "Proactive client-server firmware",
-        "start": "2024-09-18T03:18:00.000Z",
-        "finish": "2024-09-18T04:54:00.000Z",
-        "typeAgenda": {
-          "uuid": "3bdf684f-bad0-45bb-b503-930cf0c3344d",
-          "name": "Rapat Internal"
-        },
-        "location": "CC Lt 2.5",
-        "author": "Fakultas"
-      }
-    },
-    {
-      "agenda": {
-        "uuid": "e8d16542-10eb-4e6f-b605-3a074969641b",
-        "title": "Pre-emptive 5th generation middleware",
-        "start": "2024-10-16T01:49:00.000Z",
-        "finish": "2024-10-16T03:48:00.000Z",
-        "typeAgenda": {
-          "uuid": "dca7c02b-02c7-4948-9ba2-e01c7ea1100a",
-          "name": "Rapat Eksternal"
-        },
-        "location": "CC Lt 8.2",
-        "author": "Informatika"
-      }
-    },
-    {
-      "agenda": {
-        "uuid": "385a18cd-f92e-426e-9763-55c79d57be79",
-        "title": "Grass-roots full-range migration",
-        "start": "2024-09-25T22:21:00.000Z",
-        "finish": "2024-09-26T00:20:00.000Z",
-        "typeAgenda": {
-          "uuid": "34951540-d961-4bab-8e30-8478d8d8ebe9",
-          "name": "Rapat Internal"
-        },
-        "location": "CC Lt 4.2",
-        "author": "Informatika"
-      }
-    },
-    {
-      "agenda": {
-        "uuid": "ba707360-3507-4bf0-aa0c-9a898dca3ead",
-        "title": "Open-architected analyzing leverage",
-        "start": "2024-09-12T22:58:00.000Z",
-        "finish": "2024-09-13T00:52:00.000Z",
-        "typeAgenda": {
-          "uuid": "96b5c2c4-8f95-404d-90fa-9e3c78590a4f",
-          "name": "Rapat Internal"
-        },
-        "location": "CC Lt 7.5",
-        "author": "Informatika"
-      }
-    },
-    {
-      "agenda": {
-        "uuid": "13f673d3-85fb-4086-87cd-a6696b54ebd9",
-        "title": "Self-enabling maximized internet solution",
-        "start": "2024-09-09T06:17:00.000Z",
-        "finish": "2024-09-09T07:53:00.000Z",
-        "typeAgenda": {
-          "uuid": "a8d33ca0-495f-403e-a4a3-b6dc7cbfc354",
-          "name": "Rapat Eksternal"
-        },
-        "location": "CC Lt 5.2",
-        "author": "Fakultas"
-      }
-    },
-    {
-      "agenda": {
-        "uuid": "7382c43e-fcdc-44e0-8d2e-ac8d890a51f2",
-        "title": "Enterprise-wide analyzing function",
-        "start": "2024-10-08T03:46:00.000Z",
-        "finish": "2024-10-08T05:45:00.000Z",
-        "typeAgenda": {
-          "uuid": "3dd5d805-42b2-46eb-90b3-816b86e678d2",
-          "name": "Rapat Eksternal"
-        },
-        "location": "CC Lt 7.2",
-        "author": "Fakultas"
-      }
-    },
-    {
-      "agenda": {
-        "uuid": "d475ff4a-cae8-48f7-b80c-9a6004ad3042",
-        "title": "Ameliorated motivating hierarchy",
-        "start": "2024-10-31T11:50:00.000Z",
-        "finish": "2024-10-31T13:38:00.000Z",
-        "typeAgenda": {
-          "uuid": "32744253-a99e-4971-a828-144404564381",
-          "name": "Rapat Eksternal"
-        },
-        "location": "CC Lt 6.4",
-        "author": "Fakultas"
-      }
-    },
-    {
-      "agenda": {
-        "uuid": "49e3da3b-d481-4d73-88f4-6e9f2dc9fac1",
-        "title": "Sharable methodical throughput",
-        "start": "2024-10-27T07:03:00.000Z",
-        "finish": "2024-10-27T08:39:00.000Z",
-        "typeAgenda": {
-          "uuid": "0f575ea7-dd45-4572-8ac7-ce79f5d80865",
-          "name": "Rapat Eksternal"
-        },
-        "location": "CC Lt 3.5",
-        "author": "Fakultas"
-      }
-    },
-    {
-      "agenda": {
-        "uuid": "2598d154-2996-41d7-a9d2-5d82fe584fa3",
-        "title": "Seamless discrete knowledge user",
-        "start": "2024-10-25T12:05:00.000Z",
-        "finish": "2024-10-25T12:59:00.000Z",
-        "typeAgenda": {
-          "uuid": "51840ce7-0d18-4f9f-b56e-4a8ce7083266",
-          "name": "Rapat Eksternal"
-        },
-        "location": "CC Lt 9.3",
-        "author": "Informatika"
-      }
-    },
-    {
-      "agenda": {
-        "uuid": "220e521b-bf6b-4db6-8772-7e3b0017dffb",
-        "title": "Advanced dedicated support",
-        "start": "2024-10-24T11:35:00.000Z",
-        "finish": "2024-10-24T13:12:00.000Z",
-        "typeAgenda": {
-          "uuid": "fc87642a-7a6c-4833-b8e5-4d7a727a7237",
-          "name": "Rapat Internal"
-        },
-        "location": "CC Lt 2.3",
-        "author": "Informatika"
-      }
-    },
-    {
-      "agenda": {
-        "uuid": "3edc0215-70c7-4192-a24f-7d4ca7769d26",
-        "title": "Enterprise-wide bifurcated toolset",
-        "start": "2024-09-13T04:27:00.000Z",
-        "finish": "2024-09-13T06:15:00.000Z",
-        "typeAgenda": {
-          "uuid": "68f25aab-a604-46f0-9f49-870edc7e3ebc",
-          "name": "Rapat Internal"
-        },
-        "location": "CC Lt 8.3",
-        "author": "Informatika"
-      }
-    },
-    {
-      "agenda": {
-        "uuid": "3f07b9e2-95e2-449b-ab21-39a9a78afe76",
-        "title": "Synergistic interactive encryption",
-        "start": "2024-10-16T03:06:00.000Z",
-        "finish": "2024-10-16T04:01:00.000Z",
-        "typeAgenda": {
-          "uuid": "d34a0d37-baa4-4544-9daf-671b4e3f6b7a",
-          "name": "Rapat Internal"
-        },
-        "location": "CC Lt 2.5",
-        "author": "Informatika"
-      }
-    },
-    {
-      "agenda": {
-        "uuid": "d68442c9-29ca-48f6-9bcb-b60ad54ab4ed",
-        "title": "Seamless radical initiative",
-        "start": "2024-09-01T23:00:00.000Z",
-        "finish": "2024-09-01T23:55:00.000Z",
-        "typeAgenda": {
-          "uuid": "ade18b15-e413-4822-925a-b88f7d4d0564",
-          "name": "Rapat Eksternal"
-        },
-        "location": "CC Lt 5.2",
-        "author": "Informatika"
-      }
-    },
-    {
-      "agenda": {
-        "uuid": "0c9695b4-6526-47c7-a290-7a13dca99f09",
-        "title": "Self-enabling cohesive flexibility",
-        "start": "2024-10-16T03:52:00.000Z",
-        "finish": "2024-10-16T05:06:00.000Z",
-        "typeAgenda": {
-          "uuid": "1f4fe94a-16e5-4998-ab23-00f97ddde077",
-          "name": "Rapat Eksternal"
-        },
-        "location": "CC Lt 10.4",
-        "author": "Informatika"
-      }
-    },
-    {
-      "agenda": {
-        "uuid": "120bc51b-842f-4606-854c-e506c0bba092",
-        "title": "Expanded high-level forecast",
-        "start": "2024-10-11T10:09:00.000Z",
-        "finish": "2024-10-11T10:56:00.000Z",
-        "typeAgenda": {
-          "uuid": "0ed9f5a0-d81a-4c6e-8c74-bf15a91c7d76",
-          "name": "Rapat Internal"
-        },
-        "location": "CC Lt 3.1",
-        "author": "Fakultas"
-      }
-    },
-    {
-      "agenda": {
-        "uuid": "b1ab26d9-9f3f-4e8b-8ab2-2d67f60c3911",
-        "title": "Reverse-engineered optimizing extranet",
-        "start": "2024-09-08T09:59:00.000Z",
-        "finish": "2024-09-08T11:05:00.000Z",
-        "typeAgenda": {
-          "uuid": "2729d6a9-9dfe-46bc-b2f5-d360f1480072",
-          "name": "Rapat Internal"
-        },
-        "location": "CC Lt 7.3",
-        "author": "Fakultas"
-      }
-    },
-    {
-      "agenda": {
-        "uuid": "030feef4-8ce5-4d05-92de-56ff722a8922",
-        "title": "Adaptive needs-based collaboration",
-        "start": "2024-10-12T07:00:00.000Z",
-        "finish": "2024-10-12T08:42:00.000Z",
-        "typeAgenda": {
-          "uuid": "d87adf74-85ac-493e-b51c-c88229380b9e",
-          "name": "Rapat Internal"
-        },
-        "location": "CC Lt 3.4",
-        "author": "Fakultas"
-      }
-    },
-    {
-      "agenda": {
-        "uuid": "5934e160-92d5-4b29-ba11-056041bcf501",
-        "title": "Managed radical support",
-        "start": "2024-08-31T23:44:00.000Z",
-        "finish": "2024-09-01T01:30:00.000Z",
-        "typeAgenda": {
-          "uuid": "21abd669-79b7-4418-92da-533797d6026d",
-          "name": "Rapat Eksternal"
-        },
-        "location": "CC Lt 3.2",
-        "author": "Fakultas"
-      }
-    },
-    {
-      "agenda": {
-        "uuid": "0ed1139e-ac0d-4acc-b793-2e59bfa83ebc",
-        "title": "Vision-oriented non-volatile forecast",
-        "start": "2024-09-21T08:20:00.000Z",
-        "finish": "2024-09-21T09:58:00.000Z",
-        "typeAgenda": {
-          "uuid": "67adc646-b878-4335-a4a4-42f2fecfc033",
-          "name": "Rapat Eksternal"
-        },
-        "location": "CC Lt 6.5",
-        "author": "Informatika"
-      }
-    },
-    {
-      "agenda": {
-        "uuid": "92d8187f-6574-433b-abdd-d42442a5a4a1",
-        "title": "Self-enabling upward-trending definition",
-        "start": "2024-10-23T07:42:00.000Z",
-        "finish": "2024-10-23T09:21:00.000Z",
-        "typeAgenda": {
-          "uuid": "a11306c5-dc86-4ec3-a531-b108f91a627f",
-          "name": "Rapat Eksternal"
-        },
-        "location": "CC Lt 4.1",
-        "author": "Informatika"
-      }
-    },
-    {
-      "agenda": {
-        "uuid": "1541c886-1e01-4a4a-bfb1-b5355aac1247",
-        "title": "Implemented intermediate info-mediaries",
-        "start": "2024-09-26T03:03:00.000Z",
-        "finish": "2024-09-26T03:56:00.000Z",
-        "typeAgenda": {
-          "uuid": "3c4eab05-7c52-4fcf-b320-17fd76fdc53a",
-          "name": "Rapat Internal"
-        },
-        "location": "CC Lt 6.4",
-        "author": "Informatika"
-      }
-    },
-    {
-      "agenda": {
-        "uuid": "7510571c-39ac-451e-9d97-4e645d280148",
-        "title": "Triple-buffered zero tolerance focus group",
-        "start": "2024-09-24T04:45:00.000Z",
-        "finish": "2024-09-24T06:24:00.000Z",
-        "typeAgenda": {
-          "uuid": "b610f153-6e63-41a7-8da3-c38c875bbfd2",
-          "name": "Rapat Eksternal"
-        },
-        "location": "CC Lt 3.5",
-        "author": "Fakultas"
-      }
-    },
-    {
-      "agenda": {
-        "uuid": "e59090ae-3965-4c73-b14d-b73ecc2d468c",
-        "title": "Persevering radical circuit",
-        "start": "2024-10-04T01:57:00.000Z",
-        "finish": "2024-10-04T03:43:00.000Z",
-        "typeAgenda": {
-          "uuid": "2f1578ee-64eb-4d40-8aa0-7e09be9ef7f7",
-          "name": "Rapat Internal"
-        },
-        "location": "CC Lt 10.4",
-        "author": "Fakultas"
-      }
-    },
-    {
-      "agenda": {
-        "uuid": "4484d370-f2b3-4245-b578-56e3a0c95e22",
-        "title": "Automated 5th generation framework",
-        "start": "2024-10-24T22:05:00.000Z",
-        "finish": "2024-10-25T00:02:00.000Z",
-        "typeAgenda": {
-          "uuid": "8769451b-a140-4680-933e-3ed09d3f9b53",
-          "name": "Rapat Eksternal"
-        },
-        "location": "CC Lt 3.2",
-        "author": "Informatika"
-      }
-    },
-    {
-      "agenda": {
-        "uuid": "b34016ef-044c-41d9-828b-aaf4118aed6f",
-        "title": "Fundamental executive moratorium",
-        "start": "2024-10-30T04:50:00.000Z",
-        "finish": "2024-10-30T05:25:00.000Z",
-        "typeAgenda": {
-          "uuid": "ddcef79b-bdd1-40e0-8bd7-edc6a10233d3",
-          "name": "Rapat Eksternal"
-        },
-        "location": "CC Lt 2.5",
-        "author": "Informatika"
-      }
-    },
-    {
-      "agenda": {
-        "uuid": "ad40c8ef-2880-410e-9164-4840ff3812e6",
-        "title": "Adaptive modular hub",
-        "start": "2024-10-05T08:01:00.000Z",
-        "finish": "2024-10-05T09:03:00.000Z",
-        "typeAgenda": {
-          "uuid": "c6b1f65b-3235-499d-92f5-a59f0608c1e1",
-          "name": "Rapat Eksternal"
-        },
-        "location": "CC Lt 6.3",
-        "author": "Informatika"
-      }
-    },
-    {
-      "agenda": {
-        "uuid": "c40d047a-d2fa-4854-946c-f7482a3d625c",
-        "title": "Managed value-added database",
-        "start": "2024-09-16T09:33:00.000Z",
-        "finish": "2024-09-16T10:09:00.000Z",
-        "typeAgenda": {
-          "uuid": "b5fa1482-3a9b-4afd-a8b0-db3627e97851",
-          "name": "Rapat Eksternal"
-        },
-        "location": "CC Lt 7.3",
-        "author": "Fakultas"
-      }
-    },
-    {
-      "agenda": {
-        "uuid": "5f214122-4b54-4a84-899b-d7fc1a693665",
-        "title": "Enterprise-wide maximized solution",
-        "start": "2024-10-03T06:14:00.000Z",
-        "finish": "2024-10-03T08:13:00.000Z",
-        "typeAgenda": {
-          "uuid": "8e2700c7-de3d-41c2-91b5-11c34973fdfe",
-          "name": "Rapat Eksternal"
-        },
-        "location": "CC Lt 5.5",
-        "author": "Informatika"
-      }
-    },
-    {
-      "agenda": {
-        "uuid": "01ead8fc-5bc8-4327-a343-5d2a460c4b20",
-        "title": "Re-contextualized optimal middleware",
-        "start": "2024-09-17T22:59:00.000Z",
-        "finish": "2024-09-17T23:44:00.000Z",
-        "typeAgenda": {
-          "uuid": "b1e2281c-b0b2-44ff-ae4e-b9f9079ff3b2",
-          "name": "Rapat Internal"
-        },
-        "location": "CC Lt 10.2",
-        "author": "Fakultas"
-      }
-    },
-    {
-      "agenda": {
-        "uuid": "71987426-53c9-4583-ad1b-bf84325c7829",
-        "title": "Centralized 3rd generation leverage",
-        "start": "2024-10-09T04:08:00.000Z",
-        "finish": "2024-10-09T05:40:00.000Z",
-        "typeAgenda": {
-          "uuid": "fef57c02-1205-4dab-8256-316e9e61d5cd",
-          "name": "Rapat Eksternal"
-        },
-        "location": "CC Lt 4.4",
-        "author": "Informatika"
-      }
-    },
-    {
-      "agenda": {
-        "uuid": "c9b5687d-422f-4af9-9994-0c16bc41ee41",
-        "title": "Reduced 5th generation structure",
-        "start": "2024-10-23T04:07:00.000Z",
-        "finish": "2024-10-23T05:50:00.000Z",
-        "typeAgenda": {
-          "uuid": "c0106c88-2b0c-4cc5-9fbd-b677ad6ca4f1",
-          "name": "Rapat Eksternal"
-        },
-        "location": "CC Lt 2.3",
-        "author": "Informatika"
-      }
-    },
-    {
-      "agenda": {
-        "uuid": "c3907adb-b2a2-42b0-b686-2dbad2af245d",
-        "title": "Multi-layered value-added neural-net",
-        "start": "2024-09-30T22:11:00.000Z",
-        "finish": "2024-09-30T23:04:00.000Z",
-        "typeAgenda": {
-          "uuid": "db679580-e693-4409-b620-ec59ca8dd640",
-          "name": "Rapat Eksternal"
-        },
-        "location": "CC Lt 3.1",
-        "author": "Fakultas"
-      }
-    },
-    {
-      "agenda": {
-        "uuid": "87d0fc6e-ddfe-4001-999d-eeddf6c7e689",
-        "title": "Devolved real-time moderator",
-        "start": "2024-10-21T09:52:00.000Z",
-        "finish": "2024-10-21T10:57:00.000Z",
-        "typeAgenda": {
-          "uuid": "390fcbcf-0274-49f6-850d-007a9313ee83",
-          "name": "Rapat Internal"
-        },
-        "location": "CC Lt 7.3",
-        "author": "Fakultas"
-      }
-    },
-    {
-      "agenda": {
-        "uuid": "e9758431-847f-4576-9728-57e721eb9b41",
-        "title": "Enterprise-wide systemic orchestration",
-        "start": "2024-10-12T05:13:00.000Z",
-        "finish": "2024-10-12T06:06:00.000Z",
-        "typeAgenda": {
-          "uuid": "d6cbc843-eb89-48a2-926d-3fe9fc62c435",
-          "name": "Rapat Internal"
-        },
-        "location": "CC Lt 2.1",
-        "author": "Informatika"
-      }
-    },
-    {
-      "agenda": {
-        "uuid": "21224bb6-0c58-4e5d-b869-1ee3180206f0",
-        "title": "Total fresh-thinking standardization",
-        "start": "2024-09-10T00:01:00.000Z",
-        "finish": "2024-09-10T01:32:00.000Z",
-        "typeAgenda": {
-          "uuid": "12d33ec2-d9a6-4a08-bcd5-52b6fbcce7ff",
-          "name": "Rapat Internal"
-        },
-        "location": "CC Lt 2.1",
-        "author": "Informatika"
-      }
-    },
-    {
-      "agenda": {
-        "uuid": "b41ce597-3e52-4adb-97f5-a4d238fdd594",
-        "title": "Seamless actuating service-desk",
-        "start": "2024-09-07T08:36:00.000Z",
-        "finish": "2024-09-07T09:23:00.000Z",
-        "typeAgenda": {
-          "uuid": "933db7f6-1796-47fa-a18f-5c655b2579f7",
-          "name": "Rapat Eksternal"
-        },
-        "location": "CC Lt 5.5",
-        "author": "Fakultas"
-      }
-    },
-    {
-      "agenda": {
-        "uuid": "d01c286c-77a5-476a-b5c4-4de60bb4ecad",
-        "title": "Inverse logistical concept",
-        "start": "2024-09-26T07:38:00.000Z",
-        "finish": "2024-09-26T09:13:00.000Z",
-        "typeAgenda": {
-          "uuid": "fd383241-d174-4731-b95d-3547a007b261",
-          "name": "Rapat Eksternal"
-        },
-        "location": "CC Lt 3.3",
-        "author": "Informatika"
-      }
-    },
-    {
-      "agenda": {
-        "uuid": "4c439cf3-e63b-4fc8-a49c-8513fbc2f7f7",
-        "title": "Universal dedicated forecast",
-        "start": "2024-09-30T08:03:00.000Z",
-        "finish": "2024-09-30T09:05:00.000Z",
-        "typeAgenda": {
-          "uuid": "be0268c5-6011-444d-8c17-71da780a5b69",
-          "name": "Rapat Internal"
-        },
-        "location": "CC Lt 3.2",
-        "author": "Fakultas"
-      }
-    },
-    {
-      "agenda": {
-        "uuid": "063d2aea-b279-4765-8441-c207b5d26e99",
-        "title": "Re-contextualized explicit superstructure",
-        "start": "2024-10-14T08:28:00.000Z",
-        "finish": "2024-10-14T09:28:00.000Z",
-        "typeAgenda": {
-          "uuid": "9e8238b4-c129-429b-8238-cdfb5b6acb25",
-          "name": "Rapat Eksternal"
-        },
-        "location": "CC Lt 8.5",
-        "author": "Informatika"
-      }
-    },
-    {
-      "agenda": {
-        "uuid": "a8c1f6e5-43fc-4999-98bf-3aea61eabe8e",
-        "title": "Innovative neutral intranet",
-        "start": "2024-09-20T13:13:00.000Z",
-        "finish": "2024-09-20T14:59:00.000Z",
-        "typeAgenda": {
-          "uuid": "43d1bbd6-c298-4909-af2d-c526e99e0125",
-          "name": "Rapat Eksternal"
-        },
-        "location": "CC Lt 2.5",
-        "author": "Fakultas"
-      }
-    },
-    {
-      "agenda": {
-        "uuid": "2075a055-4c74-4351-b8dc-9c83ee0f4cc9",
-        "title": "Balanced optimizing concept",
-        "start": "2024-10-31T04:38:00.000Z",
-        "finish": "2024-10-31T05:29:00.000Z",
-        "typeAgenda": {
-          "uuid": "d49e57ff-12c0-412c-a221-09628f0796e7",
-          "name": "Rapat Internal"
-        },
-        "location": "CC Lt 4.3",
-        "author": "Informatika"
-      }
-    },
-    {
-      "agenda": {
-        "uuid": "710bdc3e-a170-4a55-afc5-941ebc2c076f",
-        "title": "Multi-lateral needs-based monitoring",
-        "start": "2024-09-22T02:34:00.000Z",
-        "finish": "2024-09-22T03:23:00.000Z",
-        "typeAgenda": {
-          "uuid": "29d3d64d-bccb-432d-81f4-48af3824f424",
-          "name": "Rapat Eksternal"
-        },
-        "location": "CC Lt 10.3",
-        "author": "Fakultas"
-      }
-    },
-    {
-      "agenda": {
-        "uuid": "b0a2883f-1d90-4eb1-b0a5-017569ab10dd",
-        "title": "Automated tangible internet solution",
-        "start": "2024-10-23T12:24:00.000Z",
-        "finish": "2024-10-23T13:37:00.000Z",
-        "typeAgenda": {
-          "uuid": "183b704e-d2fd-46ad-b84b-afccbcb81efe",
-          "name": "Rapat Eksternal"
-        },
-        "location": "CC Lt 10.3",
-        "author": "Informatika"
-      }
-    },
-    {
-      "agenda": {
-        "uuid": "dfa41899-3abc-4366-9786-7850b96c6934",
-        "title": "Synergistic systemic Graphical User Interface",
-        "start": "2024-10-08T11:53:00.000Z",
-        "finish": "2024-10-08T13:18:00.000Z",
-        "typeAgenda": {
-          "uuid": "41fa7042-b3c0-456a-adea-dcd5be4b0baf",
-          "name": "Rapat Eksternal"
-        },
-        "location": "CC Lt 8.5",
-        "author": "Fakultas"
-      }
-    },
-    {
-      "agenda": {
-        "uuid": "a8dd8bde-804d-4716-bc3a-c8517e3013a0",
-        "title": "Multi-tiered client-server methodology",
-        "start": "2024-09-02T07:19:00.000Z",
-        "finish": "2024-09-02T08:07:00.000Z",
-        "typeAgenda": {
-          "uuid": "ed6b3c94-7861-42c8-93e0-cc9be26b7c45",
-          "name": "Rapat Eksternal"
-        },
-        "location": "CC Lt 4.2",
-        "author": "Informatika"
-      }
-    },
-    {
-      "agenda": {
-        "uuid": "e91cc816-2609-449e-8c2e-1cfadc397fe3",
-        "title": "Seamless client-server info-mediaries",
-        "start": "2024-09-09T12:12:00.000Z",
-        "finish": "2024-09-09T13:00:00.000Z",
-        "typeAgenda": {
-          "uuid": "31aabd49-4abd-4fd9-b29f-46092c7f66f5",
-          "name": "Rapat Internal"
-        },
-        "location": "CC Lt 5.4",
-        "author": "Informatika"
-      }
-    }
-  ],
-  "dosen": [
-    {
-      "dosen": {
-        "uuid": "a1a1547a-c2db-41ab-868c-b0a1fe9e5ae9",
-        "name": "Nicholas Ondricka",
-        "email": "Jennings4@hotmail.com",
-        "phoneNumber": "+62 6184",
-        "department": {
-          "uuid": "ae4daf7c-39f9-4c7c-89d2-d6e2727bdbee",
-          "name": "Teknik Sipil"
-        },
-        "createdAt": "2024-10-18T17:45:57.532Z",
-        "updatedAt": "2024-10-18T17:45:57.532Z"
-      }
-    },
-    {
-      "dosen": {
-        "uuid": "fc563371-7d89-4726-b2f1-b0bbded10e1a",
-        "name": "Cornelius Wolff",
-        "email": "Paolo92@gmail.com",
-        "phoneNumber": "+62 60656",
-        "department": {
-          "uuid": "ae4daf7c-39f9-4c7c-89d2-d6e2727bdbee",
-          "name": "Teknik Mesin"
-        },
-        "createdAt": "2024-10-20T20:13:04.677Z",
-        "updatedAt": "2024-10-20T20:13:04.677Z"
-      }
-    },
-    {
-      "dosen": {
-        "uuid": "7bfa99d3-3690-445c-a35c-2c9cce67ea64",
-        "name": "Antonio Murazik",
-        "email": "Margie.Schuppe77@yahoo.com",
-        "phoneNumber": "+62 87001",
-        "department": {
-          "uuid": "ae4daf7c-39f9-4c7c-89d2-d6e2727bdbee",
-          "name": "Teknik Elektro"
-        },
-        "createdAt": "2024-09-28T00:34:44.494Z",
-        "updatedAt": "2024-09-28T00:34:44.494Z"
-      }
-    },
-    {
-      "dosen": {
-        "uuid": "67f1d6b5-3fe8-4ba0-82ce-6ae1ec34648a",
-        "name": "Michelle Franey",
-        "email": "Savanah87@gmail.com",
-        "phoneNumber": "+62 33349",
-        "department": {
-          "uuid": "ae4daf7c-39f9-4c7c-89d2-d6e2727bdbee",
-          "name": "Teknik Mesin"
-        },
-        "createdAt": "2024-09-17T19:01:15.515Z",
-        "updatedAt": "2024-09-17T19:01:15.515Z"
-      }
-    },
-    {
-      "dosen": {
-        "uuid": "225f109f-02e8-4402-9a35-3c4e8e954fc3",
-        "name": "Dean Muller",
-        "email": "Roy.Smith89@yahoo.com",
-        "phoneNumber": "+62 41539",
-        "department": {
-          "uuid": "ae4daf7c-39f9-4c7c-89d2-d6e2727bdbee",
-          "name": "Teknik Informatika"
-        },
-        "createdAt": "2024-09-02T00:24:58.310Z",
-        "updatedAt": "2024-09-02T00:24:58.310Z"
-      }
-    },
-    {
-      "dosen": {
-        "uuid": "0ff7adc0-307f-45a1-8f29-e2b737da8788",
-        "name": "Vernon Dicki",
-        "email": "Kaylah.Miller39@yahoo.com",
-        "phoneNumber": "+62 98300",
-        "department": {
-          "uuid": "ae4daf7c-39f9-4c7c-89d2-d6e2727bdbee",
-          "name": "Sistem Informasi"
-        },
-        "createdAt": "2024-10-28T21:34:06.523Z",
-        "updatedAt": "2024-10-28T21:34:06.523Z"
-      }
-    },
-    {
-      "dosen": {
-        "uuid": "d785e182-12f3-4d7d-b45e-bdfb97523fdc",
-        "name": "Ramon Gleichner",
-        "email": "Sienna_Cormier@gmail.com",
-        "phoneNumber": "+62 57002",
-        "department": {
-          "uuid": "ae4daf7c-39f9-4c7c-89d2-d6e2727bdbee",
-          "name": "Teknik Lingkungan"
-        },
-        "createdAt": "2024-10-11T17:26:14.012Z",
-        "updatedAt": "2024-10-11T17:26:14.012Z"
-      }
-    },
-    {
-      "dosen": {
-        "uuid": "d68568b0-e417-483c-b60f-d10581eab688",
-        "name": "Julian Hamill-Sanford",
-        "email": "Reed.Kunze@yahoo.com",
-        "phoneNumber": "+62 48238",
-        "department": {
-          "uuid": "ae4daf7c-39f9-4c7c-89d2-d6e2727bdbee",
-          "name": "Teknik Lingkungan"
-        },
-        "createdAt": "2024-10-01T23:50:58.822Z",
-        "updatedAt": "2024-10-01T23:50:58.822Z"
-      }
-    },
-    {
-      "dosen": {
-        "uuid": "5b3f9a82-85f9-44b6-92a6-9dce21a5605b",
-        "name": "Dr. Mitchell Lockman",
-        "email": "Bert_Conroy@yahoo.com",
-        "phoneNumber": "+62 87123",
-        "department": {
-          "uuid": "ae4daf7c-39f9-4c7c-89d2-d6e2727bdbee",
-          "name": "Teknik Elektro"
-        },
-        "createdAt": "2024-10-25T07:57:13.939Z",
-        "updatedAt": "2024-10-25T07:57:13.939Z"
-      }
-    },
-    {
-      "dosen": {
-        "uuid": "ba72e63a-ba0e-4184-9324-1657bb8b01fb",
-        "name": "Carole Walker IV",
-        "email": "Mafalda_Langosh@hotmail.com",
-        "phoneNumber": "+62 44350",
-        "department": {
-          "uuid": "ae4daf7c-39f9-4c7c-89d2-d6e2727bdbee",
-          "name": "Teknik Lingkungan"
-        },
-        "createdAt": "2024-08-31T23:31:12.742Z",
-        "updatedAt": "2024-08-31T23:31:12.742Z"
-      }
-    },
-    {
-      "dosen": {
-        "uuid": "887dd253-265d-402a-b9be-1334a2ec36e6",
-        "name": "Brandy Goodwin Sr.",
-        "email": "Lauretta40@gmail.com",
-        "phoneNumber": "+62 40259",
-        "department": {
-          "uuid": "ae4daf7c-39f9-4c7c-89d2-d6e2727bdbee",
-          "name": "Teknik Elektro"
-        },
-        "createdAt": "2024-10-09T10:21:25.911Z",
-        "updatedAt": "2024-10-09T10:21:25.911Z"
-      }
-    },
-    {
-      "dosen": {
-        "uuid": "281329c1-012c-48dd-a699-016802241f2e",
-        "name": "Corey Lind",
-        "email": "Alyce.Franey40@yahoo.com",
-        "phoneNumber": "+62 71468",
-        "department": {
-          "uuid": "ae4daf7c-39f9-4c7c-89d2-d6e2727bdbee",
-          "name": "Teknik Elektro"
-        },
-        "createdAt": "2024-10-20T05:04:49.078Z",
-        "updatedAt": "2024-10-20T05:04:49.078Z"
-      }
-    },
-    {
-      "dosen": {
-        "uuid": "e154c616-41c1-4a0e-b559-45fe928a18e8",
-        "name": "Kelvin Huel IV",
-        "email": "Myrtis_Purdy58@gmail.com",
-        "phoneNumber": "+62 93715",
-        "department": {
-          "uuid": "ae4daf7c-39f9-4c7c-89d2-d6e2727bdbee",
-          "name": "Teknik Sipil"
-        },
-        "createdAt": "2024-10-18T15:50:34.041Z",
-        "updatedAt": "2024-10-18T15:50:34.041Z"
-      }
-    },
-    {
-      "dosen": {
-        "uuid": "384cbb87-4b6a-4e1c-a2ea-a73ac9eedacf",
-        "name": "Kristy Monahan III",
-        "email": "Malachi73@yahoo.com",
-        "phoneNumber": "+62 62053",
-        "department": {
-          "uuid": "ae4daf7c-39f9-4c7c-89d2-d6e2727bdbee",
-          "name": "Teknik Mesin"
-        },
-        "createdAt": "2024-09-11T09:43:44.261Z",
-        "updatedAt": "2024-09-11T09:43:44.261Z"
-      }
-    },
-    {
-      "dosen": {
-        "uuid": "921edb11-84bd-4cae-8b24-f4b5d15c7136",
-        "name": "Mr. Horace Murazik",
-        "email": "Arianna_Simonis35@hotmail.com",
-        "phoneNumber": "+62 56438",
-        "department": {
-          "uuid": "ae4daf7c-39f9-4c7c-89d2-d6e2727bdbee",
-          "name": "Sistem Informasi"
-        },
-        "createdAt": "2024-09-30T12:09:56.624Z",
-        "updatedAt": "2024-09-30T12:09:56.624Z"
-      }
-    },
-    {
-      "dosen": {
-        "uuid": "493a516e-c828-44bc-8b51-2baf9ad5db53",
-        "name": "Tony Satterfield",
-        "email": "Dana_McCullough@gmail.com",
-        "phoneNumber": "+62 14498",
-        "department": {
-          "uuid": "ae4daf7c-39f9-4c7c-89d2-d6e2727bdbee",
-          "name": "Teknik Mesin"
-        },
-        "createdAt": "2024-10-06T02:11:31.706Z",
-        "updatedAt": "2024-10-06T02:11:31.706Z"
-      }
-    },
-    {
-      "dosen": {
-        "uuid": "e5461263-4021-4ade-9308-029714d64d02",
-        "name": "Jerome Bergnaum",
-        "email": "Mathew.Hills@yahoo.com",
-        "phoneNumber": "+62 48598",
-        "department": {
-          "uuid": "ae4daf7c-39f9-4c7c-89d2-d6e2727bdbee",
-          "name": "Teknik Elektro"
-        },
-        "createdAt": "2024-09-15T15:58:41.278Z",
-        "updatedAt": "2024-09-15T15:58:41.278Z"
-      }
-    },
-    {
-      "dosen": {
-        "uuid": "35c8c60e-a7d0-4357-8a93-5e0883bb897b",
-        "name": "Dr. Jan Mertz",
-        "email": "Abraham_Heidenreich@yahoo.com",
-        "phoneNumber": "+62 93799",
-        "department": {
-          "uuid": "ae4daf7c-39f9-4c7c-89d2-d6e2727bdbee",
-          "name": "Teknik Elektro"
-        },
-        "createdAt": "2024-09-26T12:55:58.619Z",
-        "updatedAt": "2024-09-26T12:55:58.619Z"
-      }
-    },
-    {
-      "dosen": {
-        "uuid": "7c023314-28c8-4df5-ace1-28704e9945df",
-        "name": "Allen Predovic",
-        "email": "Laurence_Boyle@yahoo.com",
-        "phoneNumber": "+62 32963",
-        "department": {
-          "uuid": "ae4daf7c-39f9-4c7c-89d2-d6e2727bdbee",
-          "name": "Teknik Sipil"
-        },
-        "createdAt": "2024-10-25T23:13:12.804Z",
-        "updatedAt": "2024-10-25T23:13:12.804Z"
-      }
-    },
-    {
-      "dosen": {
-        "uuid": "05b88ca6-cbfe-4465-a88f-1fe6759bc766",
-        "name": "Elmer Farrell",
-        "email": "Terrill.Bergnaum@yahoo.com",
-        "phoneNumber": "+62 67430",
-        "department": {
-          "uuid": "ae4daf7c-39f9-4c7c-89d2-d6e2727bdbee",
-          "name": "Sistem Informasi"
-        },
-        "createdAt": "2024-10-07T08:13:05.691Z",
-        "updatedAt": "2024-10-07T08:13:05.691Z"
-      }
-    }
-  ]
+	"agenda": [
+		{
+			"uuid": "3be6e507-47b1-4bff-b939-b21f6a791b16",
+			"title": "Streamlined grid-enabled throughput",
+			"start": "2024-09-22T04:00:00.000Z",
+			"finish": "2024-09-22T04:57:00.000Z",
+			"typeAgenda": {
+				"uuid": "6d7c874a-f688-455f-955d-bb535ff97249",
+				"name": "Rapat Eksternal"
+			},
+			"location": "CC Lt 9.1",
+			"author": "Informatika",
+			"isDone": true
+		},
+		{
+			"uuid": "79fdfe19-c475-415e-8635-b7104c8cff7e",
+			"title": "Phased scalable knowledge user",
+			"start": "2024-10-10T23:36:00.000Z",
+			"finish": "2024-10-11T01:23:00.000Z",
+			"typeAgenda": {
+				"uuid": "1e290bcf-fd28-4ccc-89a2-8cbd843736e2",
+				"name": "Rapat Internal"
+			},
+			"location": "CC Lt 2.1",
+			"author": "Fakultas",
+			"isDone": true
+		},
+		{
+			"uuid": "9c4c4ab8-6869-46ce-a826-0e90424db7ac",
+			"title": "Total eco-centric parallelism",
+			"start": "2024-09-02T07:20:00.000Z",
+			"finish": "2024-09-02T08:17:00.000Z",
+			"typeAgenda": {
+				"uuid": "114d8b3f-07d9-4b61-b126-422d9a1c080d",
+				"name": "Rapat Eksternal"
+			},
+			"location": "CC Lt 3.1",
+			"author": "Informatika",
+			"isDone": true
+		},
+		{
+			"uuid": "f6d346a1-1596-4947-807f-3256d3ee9c59",
+			"title": "Extended content-based leverage",
+			"start": "2024-10-24T12:44:00.000Z",
+			"finish": "2024-10-24T14:01:00.000Z",
+			"typeAgenda": {
+				"uuid": "64d8a7ec-5685-4ec4-903b-cd3c0c11ab85",
+				"name": "Rapat Internal"
+			},
+			"location": "CC Lt 8.4",
+			"author": "Fakultas",
+			"isDone": false
+		},
+		{
+			"uuid": "c83218f9-8d19-40b6-bfce-c848903d35e1",
+			"title": "Right-sized radical open system",
+			"start": "2024-10-20T06:21:00.000Z",
+			"finish": "2024-10-20T07:47:00.000Z",
+			"typeAgenda": {
+				"uuid": "4dd6eb89-1cc3-4e55-8cbd-ae1925fa34aa",
+				"name": "Rapat Eksternal"
+			},
+			"location": "CC Lt 4.3",
+			"author": "Fakultas",
+			"isDone": true
+		},
+		{
+			"uuid": "8d989822-ebd5-44cf-8f01-042cd0283538",
+			"title": "Configurable maximized collaboration",
+			"start": "2024-10-11T01:09:00.000Z",
+			"finish": "2024-10-11T01:58:00.000Z",
+			"typeAgenda": {
+				"uuid": "2abea630-06b6-4824-b60e-4d6c3c9365aa",
+				"name": "Rapat Eksternal"
+			},
+			"location": "CC Lt 8.2",
+			"author": "Informatika",
+			"isDone": false
+		},
+		{
+			"uuid": "6d122ef4-9e49-42e4-9b9e-71e7fecaa1fd",
+			"title": "Versatile executive database",
+			"start": "2024-09-03T08:39:00.000Z",
+			"finish": "2024-09-03T10:30:00.000Z",
+			"typeAgenda": {
+				"uuid": "fec20fc9-d55a-4a44-a4a6-073a3c23651f",
+				"name": "Rapat Internal"
+			},
+			"location": "CC Lt 3.2",
+			"author": "Informatika",
+			"isDone": false
+		},
+		{
+			"uuid": "7b9a16ce-1c6a-44d0-8185-e74871d91dc5",
+			"title": "Reactive dedicated info-mediaries",
+			"start": "2024-09-27T10:53:00.000Z",
+			"finish": "2024-09-27T11:54:00.000Z",
+			"typeAgenda": {
+				"uuid": "fe13c407-6643-43c1-b5c9-4af519a46a79",
+				"name": "Rapat Eksternal"
+			},
+			"location": "CC Lt 1.3",
+			"author": "Fakultas",
+			"isDone": true
+		},
+		{
+			"uuid": "f2e6c5a5-9855-4278-b3a6-4574feec050e",
+			"title": "Re-contextualized disintermediate adapter",
+			"start": "2024-10-15T11:38:00.000Z",
+			"finish": "2024-10-15T12:32:00.000Z",
+			"typeAgenda": {
+				"uuid": "ca19a80c-704a-4137-aff2-3a5367ce8740",
+				"name": "Rapat Internal"
+			},
+			"location": "CC Lt 7.4",
+			"author": "Informatika",
+			"isDone": true
+		},
+		{
+			"uuid": "8d785b4f-f3b1-44a6-8efc-823c1b5e39ec",
+			"title": "Networked dedicated middleware",
+			"start": "2024-09-25T07:55:00.000Z",
+			"finish": "2024-09-25T09:44:00.000Z",
+			"typeAgenda": {
+				"uuid": "37f3956e-4a95-44bd-86de-40cdb10bfd98",
+				"name": "Rapat Internal"
+			},
+			"location": "CC Lt 6.4",
+			"author": "Fakultas",
+			"isDone": true
+		},
+		{
+			"uuid": "8af6fc5f-298d-4192-a42f-9b10d21529bb",
+			"title": "Balanced fresh-thinking firmware",
+			"start": "2024-09-30T22:05:00.000Z",
+			"finish": "2024-09-30T23:16:00.000Z",
+			"typeAgenda": {
+				"uuid": "80792a30-e00c-40e3-bdef-45eeb0b40def",
+				"name": "Rapat Internal"
+			},
+			"location": "CC Lt 9.1",
+			"author": "Fakultas",
+			"isDone": false
+		},
+		{
+			"uuid": "112a08f0-2347-450e-b88d-30b5c8626ffb",
+			"title": "Switchable client-server encoding",
+			"start": "2024-09-18T09:13:00.000Z",
+			"finish": "2024-09-18T10:03:00.000Z",
+			"typeAgenda": {
+				"uuid": "3d3bee78-25a2-4e70-b59d-912a0effa1e0",
+				"name": "Rapat Eksternal"
+			},
+			"location": "CC Lt 3.2",
+			"author": "Informatika",
+			"isDone": true
+		},
+		{
+			"uuid": "916f1636-4167-4431-8a61-d193a2fd5759",
+			"title": "Team-oriented explicit matrices",
+			"start": "2024-10-20T01:17:00.000Z",
+			"finish": "2024-10-20T02:45:00.000Z",
+			"typeAgenda": {
+				"uuid": "306c68b5-d4db-4b28-b1b4-b068e7fc752b",
+				"name": "Rapat Internal"
+			},
+			"location": "CC Lt 2.5",
+			"author": "Informatika",
+			"isDone": false
+		},
+		{
+			"uuid": "cb0020cd-db56-4a79-9a1c-09a53bf09bc5",
+			"title": "Assimilated system-worthy complexity",
+			"start": "2024-09-14T23:05:00.000Z",
+			"finish": "2024-09-15T00:04:00.000Z",
+			"typeAgenda": {
+				"uuid": "1678b2b1-aa06-4217-bfcc-bdc868527f77",
+				"name": "Rapat Internal"
+			},
+			"location": "CC Lt 7.3",
+			"author": "Fakultas",
+			"isDone": false
+		},
+		{
+			"uuid": "32262188-f825-4e99-a62d-4fb28faa913a",
+			"title": "Cloned systemic capacity",
+			"start": "2024-10-23T23:50:00.000Z",
+			"finish": "2024-10-24T00:38:00.000Z",
+			"typeAgenda": {
+				"uuid": "c73936fd-38a5-4983-b375-a6e09635d0b1",
+				"name": "Rapat Internal"
+			},
+			"location": "CC Lt 6.4",
+			"author": "Fakultas",
+			"isDone": false
+		},
+		{
+			"uuid": "f4913f43-fc56-48aa-9df8-6f39e53bdacb",
+			"title": "Adaptive motivating contingency",
+			"start": "2024-09-21T23:34:00.000Z",
+			"finish": "2024-09-22T01:11:00.000Z",
+			"typeAgenda": {
+				"uuid": "e4df77b6-a0c6-4e1a-9c2f-080e18608670",
+				"name": "Rapat Internal"
+			},
+			"location": "CC Lt 2.4",
+			"author": "Informatika",
+			"isDone": false
+		},
+		{
+			"uuid": "c55baea4-77d5-40b1-8aa4-9520054147bc",
+			"title": "Right-sized grid-enabled implementation",
+			"start": "2024-09-16T06:23:00.000Z",
+			"finish": "2024-09-16T08:12:00.000Z",
+			"typeAgenda": {
+				"uuid": "397e5ae3-c2be-4003-9cd7-52953020f277",
+				"name": "Rapat Internal"
+			},
+			"location": "CC Lt 4.2",
+			"author": "Fakultas",
+			"isDone": true
+		},
+		{
+			"uuid": "a0d175fa-5d51-428a-a7bd-ab7e603159c6",
+			"title": "Function-based zero administration analyzer",
+			"start": "2024-10-05T00:28:00.000Z",
+			"finish": "2024-10-05T02:22:00.000Z",
+			"typeAgenda": {
+				"uuid": "cefb0344-4dfb-45d5-b18c-0181c2aea192",
+				"name": "Rapat Eksternal"
+			},
+			"location": "CC Lt 3.4",
+			"author": "Informatika",
+			"isDone": true
+		},
+		{
+			"uuid": "78595ba3-7510-4ea1-a750-13d598a4703b",
+			"title": "Self-enabling value-added Graphical User Interface",
+			"start": "2024-10-02T06:39:00.000Z",
+			"finish": "2024-10-02T08:38:00.000Z",
+			"typeAgenda": {
+				"uuid": "c6377c5a-7b25-41c1-aac9-072c6bbcf779",
+				"name": "Rapat Eksternal"
+			},
+			"location": "CC Lt 7.5",
+			"author": "Informatika",
+			"isDone": true
+		},
+		{
+			"uuid": "3f645663-f169-4192-a3ec-edcb78afdc24",
+			"title": "Multi-channelled context-sensitive interface",
+			"start": "2024-09-08T01:42:00.000Z",
+			"finish": "2024-09-08T02:50:00.000Z",
+			"typeAgenda": {
+				"uuid": "35baa21d-db25-482d-8624-793243c89d6e",
+				"name": "Rapat Eksternal"
+			},
+			"location": "CC Lt 1.5",
+			"author": "Fakultas",
+			"isDone": true
+		},
+		{
+			"uuid": "997a93b9-e40f-4e9d-b90a-a9712fc10828",
+			"title": "Synergistic local solution",
+			"start": "2024-10-02T07:18:00.000Z",
+			"finish": "2024-10-02T08:27:00.000Z",
+			"typeAgenda": {
+				"uuid": "5f7fdd0b-c533-4074-a58a-70eba00a3e68",
+				"name": "Rapat Eksternal"
+			},
+			"location": "CC Lt 1.3",
+			"author": "Fakultas",
+			"isDone": true
+		},
+		{
+			"uuid": "6c3fc517-a0bb-4090-9fcf-2defd00872ff",
+			"title": "Team-oriented multi-tasking extranet",
+			"start": "2024-09-20T03:12:00.000Z",
+			"finish": "2024-09-20T04:41:00.000Z",
+			"typeAgenda": {
+				"uuid": "b4e8aacc-6c20-4301-acda-4291813b0563",
+				"name": "Rapat Eksternal"
+			},
+			"location": "CC Lt 10.3",
+			"author": "Informatika",
+			"isDone": false
+		},
+		{
+			"uuid": "795792b1-6ee5-44d0-82d7-d3550e545a4d",
+			"title": "Pre-emptive systemic ability",
+			"start": "2024-10-15T22:19:00.000Z",
+			"finish": "2024-10-15T23:32:00.000Z",
+			"typeAgenda": {
+				"uuid": "32f75990-5c06-4134-a724-3097169330d9",
+				"name": "Rapat Internal"
+			},
+			"location": "CC Lt 3.5",
+			"author": "Fakultas",
+			"isDone": false
+		},
+		{
+			"uuid": "b0b9af2f-f6dd-4963-8f98-9d17ee7d7681",
+			"title": "Multi-layered fault-tolerant moratorium",
+			"start": "2024-10-11T10:25:00.000Z",
+			"finish": "2024-10-11T11:50:00.000Z",
+			"typeAgenda": {
+				"uuid": "818ec99b-838b-4a1c-b135-be759ae50482",
+				"name": "Rapat Internal"
+			},
+			"location": "CC Lt 3.1",
+			"author": "Fakultas",
+			"isDone": false
+		},
+		{
+			"uuid": "ae3b6605-0395-482a-ae10-7148f5ed4cf8",
+			"title": "Expanded optimal superstructure",
+			"start": "2024-10-02T09:08:00.000Z",
+			"finish": "2024-10-02T10:44:00.000Z",
+			"typeAgenda": {
+				"uuid": "44781e38-d2a5-41c2-bac5-05acfe9079c8",
+				"name": "Rapat Internal"
+			},
+			"location": "CC Lt 10.1",
+			"author": "Informatika",
+			"isDone": true
+		},
+		{
+			"uuid": "0f77f806-f413-402a-a99d-1b896ac32e07",
+			"title": "Automated value-added flexibility",
+			"start": "2024-09-07T11:25:00.000Z",
+			"finish": "2024-09-07T13:07:00.000Z",
+			"typeAgenda": {
+				"uuid": "b783f6b8-d3e3-475e-a34a-a626366fe4cf",
+				"name": "Rapat Eksternal"
+			},
+			"location": "CC Lt 10.2",
+			"author": "Informatika",
+			"isDone": false
+		},
+		{
+			"uuid": "e818d9d6-fdd3-4d0b-bded-847be66f7b4e",
+			"title": "Future-proofed uniform conglomeration",
+			"start": "2024-09-18T22:43:00.000Z",
+			"finish": "2024-09-19T00:32:00.000Z",
+			"typeAgenda": {
+				"uuid": "8ef05d90-b48f-4f12-ae0d-e95994bf6203",
+				"name": "Rapat Internal"
+			},
+			"location": "CC Lt 8.1",
+			"author": "Fakultas",
+			"isDone": true
+		},
+		{
+			"uuid": "bb5dbb21-bc1b-4487-8560-182a9b2b8e79",
+			"title": "Seamless hybrid implementation",
+			"start": "2024-10-05T10:57:00.000Z",
+			"finish": "2024-10-05T11:32:00.000Z",
+			"typeAgenda": {
+				"uuid": "545f372b-d731-4500-a1ff-58f58d049eae",
+				"name": "Rapat Internal"
+			},
+			"location": "CC Lt 8.4",
+			"author": "Informatika",
+			"isDone": true
+		},
+		{
+			"uuid": "b7da9ac9-381a-4616-8781-6850c41834ae",
+			"title": "Cross-group incremental structure",
+			"start": "2024-10-10T00:27:00.000Z",
+			"finish": "2024-10-10T01:38:00.000Z",
+			"typeAgenda": {
+				"uuid": "154bee41-ab6c-4004-b4ff-dbb3d4ff2cff",
+				"name": "Rapat Internal"
+			},
+			"location": "CC Lt 6.4",
+			"author": "Informatika",
+			"isDone": false
+		},
+		{
+			"uuid": "e51ce75c-5165-4369-8dd6-89cc6b1e37fd",
+			"title": "Profound zero tolerance architecture",
+			"start": "2024-09-01T05:51:00.000Z",
+			"finish": "2024-09-01T07:36:00.000Z",
+			"typeAgenda": {
+				"uuid": "f94bc0b2-5bb0-4a4c-9c16-ce0cacf07dda",
+				"name": "Rapat Internal"
+			},
+			"location": "CC Lt 6.1",
+			"author": "Fakultas",
+			"isDone": false
+		},
+		{
+			"uuid": "06e196d8-90ba-4986-b0f9-5c3ed8dda54a",
+			"title": "Innovative secondary archive",
+			"start": "2024-09-10T07:58:00.000Z",
+			"finish": "2024-09-10T09:32:00.000Z",
+			"typeAgenda": {
+				"uuid": "7ad9b89c-3311-4ded-8a11-cc2dd23ded20",
+				"name": "Rapat Internal"
+			},
+			"location": "CC Lt 4.3",
+			"author": "Fakultas",
+			"isDone": true
+		},
+		{
+			"uuid": "c8d2896d-c4c4-4bdd-bd22-2ceaf54cfb9c",
+			"title": "Extended next generation leverage",
+			"start": "2024-10-17T09:21:00.000Z",
+			"finish": "2024-10-17T10:17:00.000Z",
+			"typeAgenda": {
+				"uuid": "c2ae84c5-b02d-450b-aba3-5373348a5b61",
+				"name": "Rapat Eksternal"
+			},
+			"location": "CC Lt 8.1",
+			"author": "Informatika",
+			"isDone": true
+		},
+		{
+			"uuid": "ef094c19-2114-4614-b3bf-2eca80465e5b",
+			"title": "Realigned multi-state architecture",
+			"start": "2024-09-02T22:35:00.000Z",
+			"finish": "2024-09-02T23:51:00.000Z",
+			"typeAgenda": {
+				"uuid": "fd29902e-9724-465a-8ef4-1708cfffb078",
+				"name": "Rapat Internal"
+			},
+			"location": "CC Lt 8.5",
+			"author": "Informatika",
+			"isDone": false
+		},
+		{
+			"uuid": "85b6307a-2936-41c0-aa49-191483c644fa",
+			"title": "Quality-focused 3rd generation matrix",
+			"start": "2024-09-14T22:29:00.000Z",
+			"finish": "2024-09-15T00:14:00.000Z",
+			"typeAgenda": {
+				"uuid": "7430c367-122a-40f5-bd4e-4ace83c98076",
+				"name": "Rapat Eksternal"
+			},
+			"location": "CC Lt 6.1",
+			"author": "Fakultas",
+			"isDone": true
+		},
+		{
+			"uuid": "61e504ab-e86f-4dfe-9c9c-d2207e868b6b",
+			"title": "Virtual transitional budgetary management",
+			"start": "2024-09-08T23:53:00.000Z",
+			"finish": "2024-09-09T00:36:00.000Z",
+			"typeAgenda": {
+				"uuid": "2c1e70e2-9cdb-46f1-90e1-877e5d10e8c6",
+				"name": "Rapat Eksternal"
+			},
+			"location": "CC Lt 7.1",
+			"author": "Fakultas",
+			"isDone": false
+		},
+		{
+			"uuid": "41a4e0bd-bc5f-4de8-86fc-dc622de6fd6d",
+			"title": "Optimized directional challenge",
+			"start": "2024-09-29T13:09:00.000Z",
+			"finish": "2024-09-29T14:08:00.000Z",
+			"typeAgenda": {
+				"uuid": "7dae8ce6-cfab-450d-b6a4-29c21f22e34a",
+				"name": "Rapat Internal"
+			},
+			"location": "CC Lt 5.2",
+			"author": "Informatika",
+			"isDone": true
+		},
+		{
+			"uuid": "ba607823-4ea1-4261-82b2-adcf66adcc07",
+			"title": "Switchable disintermediate solution",
+			"start": "2024-10-09T22:07:00.000Z",
+			"finish": "2024-10-09T23:15:00.000Z",
+			"typeAgenda": {
+				"uuid": "4ee4b161-08d5-4fcc-83bc-7903dc6bc9b5",
+				"name": "Rapat Internal"
+			},
+			"location": "CC Lt 4.3",
+			"author": "Fakultas",
+			"isDone": true
+		},
+		{
+			"uuid": "c811d662-a642-4777-b745-0d9981838976",
+			"title": "Focused next generation concept",
+			"start": "2024-10-06T23:11:00.000Z",
+			"finish": "2024-10-06T23:42:00.000Z",
+			"typeAgenda": {
+				"uuid": "5d3f33e3-c797-40c1-93c0-cd8b84f9a7c4",
+				"name": "Rapat Internal"
+			},
+			"location": "CC Lt 2.2",
+			"author": "Informatika",
+			"isDone": true
+		},
+		{
+			"uuid": "d4d451df-e526-4209-a3f7-6d678364a3a3",
+			"title": "Synergized impactful algorithm",
+			"start": "2024-09-12T06:36:00.000Z",
+			"finish": "2024-09-12T08:09:00.000Z",
+			"typeAgenda": {
+				"uuid": "2f8eff0f-7c71-4c8a-8145-b99300b9f99b",
+				"name": "Rapat Eksternal"
+			},
+			"location": "CC Lt 6.3",
+			"author": "Fakultas",
+			"isDone": false
+		},
+		{
+			"uuid": "72b50e5c-2988-4467-bdc1-a1d8a43a944f",
+			"title": "Open-architected global emulation",
+			"start": "2024-10-02T10:25:00.000Z",
+			"finish": "2024-10-02T11:46:00.000Z",
+			"typeAgenda": {
+				"uuid": "4fc91831-fb4c-4644-b7a8-48991ee4b3d2",
+				"name": "Rapat Internal"
+			},
+			"location": "CC Lt 1.3",
+			"author": "Fakultas",
+			"isDone": false
+		},
+		{
+			"uuid": "fbac5528-f77f-4f9e-8ffd-8a7b801b1c6a",
+			"title": "Profound full-range core",
+			"start": "2024-10-01T23:43:00.000Z",
+			"finish": "2024-10-02T00:35:00.000Z",
+			"typeAgenda": {
+				"uuid": "72628bfb-8bea-442c-bdec-af61dbebad1f",
+				"name": "Rapat Eksternal"
+			},
+			"location": "CC Lt 3.4",
+			"author": "Fakultas",
+			"isDone": false
+		},
+		{
+			"uuid": "c55f9e4a-2a3d-4492-9b4e-074c485061c5",
+			"title": "Profound bifurcated collaboration",
+			"start": "2024-09-29T12:54:00.000Z",
+			"finish": "2024-09-29T13:36:00.000Z",
+			"typeAgenda": {
+				"uuid": "a75371a1-7bca-4c46-8eb1-9d89f5391ada",
+				"name": "Rapat Eksternal"
+			},
+			"location": "CC Lt 8.2",
+			"author": "Informatika",
+			"isDone": true
+		},
+		{
+			"uuid": "6bd3e38e-68af-41c9-93e9-c635bdfe6195",
+			"title": "Monitored dedicated toolset",
+			"start": "2024-09-09T00:35:00.000Z",
+			"finish": "2024-09-09T01:38:00.000Z",
+			"typeAgenda": {
+				"uuid": "b57e08c8-40e6-4062-b7c1-e02bc3accf02",
+				"name": "Rapat Internal"
+			},
+			"location": "CC Lt 8.5",
+			"author": "Fakultas",
+			"isDone": false
+		},
+		{
+			"uuid": "8f74e588-fa02-4f2c-b391-3c6837610688",
+			"title": "Synchronised fresh-thinking algorithm",
+			"start": "2024-09-02T06:09:00.000Z",
+			"finish": "2024-09-02T07:54:00.000Z",
+			"typeAgenda": {
+				"uuid": "cf4731a0-ce38-4450-be6c-7dc0c06bc93c",
+				"name": "Rapat Internal"
+			},
+			"location": "CC Lt 2.4",
+			"author": "Fakultas",
+			"isDone": true
+		},
+		{
+			"uuid": "f6b1ae39-7716-4cbb-81a2-ead5b44861c1",
+			"title": "Grass-roots systematic matrices",
+			"start": "2024-10-28T12:52:00.000Z",
+			"finish": "2024-10-28T14:11:00.000Z",
+			"typeAgenda": {
+				"uuid": "220355f8-dbe0-4ad1-b03b-44803eeac608",
+				"name": "Rapat Internal"
+			},
+			"location": "CC Lt 6.4",
+			"author": "Informatika",
+			"isDone": false
+		},
+		{
+			"uuid": "26d84c0b-aed4-4d5c-9f2e-a030ba2601a1",
+			"title": "Ameliorated client-driven standardization",
+			"start": "2024-09-06T11:43:00.000Z",
+			"finish": "2024-09-06T12:15:00.000Z",
+			"typeAgenda": {
+				"uuid": "6fe4f8db-d802-4846-b534-f9d50fab7c04",
+				"name": "Rapat Internal"
+			},
+			"location": "CC Lt 3.2",
+			"author": "Fakultas",
+			"isDone": true
+		},
+		{
+			"uuid": "b19bd8dc-31a1-4f1f-8ee4-15e549544c25",
+			"title": "Proactive maximized success",
+			"start": "2024-10-27T11:15:00.000Z",
+			"finish": "2024-10-27T13:04:00.000Z",
+			"typeAgenda": {
+				"uuid": "b3e13445-86e5-4c86-a18c-696f6d68ebb4",
+				"name": "Rapat Eksternal"
+			},
+			"location": "CC Lt 1.2",
+			"author": "Informatika",
+			"isDone": false
+		},
+		{
+			"uuid": "b7654548-52aa-4f2f-bd85-fa15e8267576",
+			"title": "Adaptive 5th generation local area network",
+			"start": "2024-10-04T09:28:00.000Z",
+			"finish": "2024-10-04T10:35:00.000Z",
+			"typeAgenda": {
+				"uuid": "f866aa46-5622-464c-8035-2eca6cd315cd",
+				"name": "Rapat Eksternal"
+			},
+			"location": "CC Lt 5.3",
+			"author": "Fakultas",
+			"isDone": false
+		},
+		{
+			"uuid": "d208e160-7447-45cc-b62e-f8a9e185fc32",
+			"title": "Enhanced intangible synergy",
+			"start": "2024-09-26T13:00:00.000Z",
+			"finish": "2024-09-26T13:39:00.000Z",
+			"typeAgenda": {
+				"uuid": "b08df065-20c2-4c3a-aab1-a27c0648545e",
+				"name": "Rapat Internal"
+			},
+			"location": "CC Lt 3.2",
+			"author": "Fakultas",
+			"isDone": false
+		},
+		{
+			"uuid": "b4f98318-bf35-4003-926e-75a31d90f8ae",
+			"title": "Public-key neutral forecast",
+			"start": "2024-10-09T10:28:00.000Z",
+			"finish": "2024-10-09T12:08:00.000Z",
+			"typeAgenda": {
+				"uuid": "a311163d-7649-4dac-8d73-4aa17fcf1aac",
+				"name": "Rapat Eksternal"
+			},
+			"location": "CC Lt 3.5",
+			"author": "Fakultas",
+			"isDone": false
+		},
+		{
+			"uuid": "30b60cc6-125f-4ee1-a19f-a1ad95b9d1c0",
+			"title": "Integrated 24/7 knowledge base",
+			"start": "2024-09-12T00:55:00.000Z",
+			"finish": "2024-09-12T02:35:00.000Z",
+			"typeAgenda": {
+				"uuid": "168269e7-4cc4-4a48-a773-ec524d7ac70d",
+				"name": "Rapat Internal"
+			},
+			"location": "CC Lt 4.4",
+			"author": "Informatika",
+			"isDone": true
+		},
+		{
+			"uuid": "829cd18c-c265-4291-aec8-8c58fcf8cc81",
+			"title": "Total leading edge help-desk",
+			"start": "2024-09-02T12:15:00.000Z",
+			"finish": "2024-09-02T13:58:00.000Z",
+			"typeAgenda": {
+				"uuid": "358e8323-3b70-4d54-a1e1-8dc883e3b7a7",
+				"name": "Rapat Internal"
+			},
+			"location": "CC Lt 4.3",
+			"author": "Fakultas",
+			"isDone": false
+		},
+		{
+			"uuid": "3a14f4e3-1b91-451b-aa16-3a773ceda6cb",
+			"title": "Networked neutral time-frame",
+			"start": "2024-09-18T07:57:00.000Z",
+			"finish": "2024-09-18T08:46:00.000Z",
+			"typeAgenda": {
+				"uuid": "4dd16ceb-a1be-4a50-832d-8f996d0e30d0",
+				"name": "Rapat Eksternal"
+			},
+			"location": "CC Lt 9.2",
+			"author": "Informatika",
+			"isDone": false
+		},
+		{
+			"uuid": "4e44a1c2-2606-4bb6-aa64-2987acc0228e",
+			"title": "Total demand-driven array",
+			"start": "2024-09-01T00:18:00.000Z",
+			"finish": "2024-09-01T01:31:00.000Z",
+			"typeAgenda": {
+				"uuid": "3f27f6dc-a80f-4205-b10b-a4744d446b30",
+				"name": "Rapat Eksternal"
+			},
+			"location": "CC Lt 1.5",
+			"author": "Informatika",
+			"isDone": true
+		},
+		{
+			"uuid": "fd143730-e56a-41b9-b103-6da2fe2d4891",
+			"title": "Mandatory motivating focus group",
+			"start": "2024-09-05T11:08:00.000Z",
+			"finish": "2024-09-05T12:51:00.000Z",
+			"typeAgenda": {
+				"uuid": "9195c77e-0462-4bf8-8994-1a29cc83e42d",
+				"name": "Rapat Eksternal"
+			},
+			"location": "CC Lt 10.3",
+			"author": "Fakultas",
+			"isDone": false
+		},
+		{
+			"uuid": "aadab108-80bf-4085-8a6c-26b41328a76c",
+			"title": "Innovative neutral matrices",
+			"start": "2024-09-08T00:12:00.000Z",
+			"finish": "2024-09-08T01:51:00.000Z",
+			"typeAgenda": {
+				"uuid": "01dcef09-8da9-4e0b-98ee-e17696aa86e5",
+				"name": "Rapat Internal"
+			},
+			"location": "CC Lt 2.4",
+			"author": "Fakultas",
+			"isDone": true
+		},
+		{
+			"uuid": "02254100-7640-4b94-871a-ce8c7a3844c1",
+			"title": "Function-based responsive open architecture",
+			"start": "2024-09-15T12:00:00.000Z",
+			"finish": "2024-09-15T13:22:00.000Z",
+			"typeAgenda": {
+				"uuid": "bc3110c4-e1b9-4653-8393-aff781adf2da",
+				"name": "Rapat Internal"
+			},
+			"location": "CC Lt 1.4",
+			"author": "Informatika",
+			"isDone": false
+		},
+		{
+			"uuid": "8e5220ff-250e-46a4-bc67-a47670fa6a9a",
+			"title": "Future-proofed high-level service-desk",
+			"start": "2024-10-05T06:10:00.000Z",
+			"finish": "2024-10-05T07:11:00.000Z",
+			"typeAgenda": {
+				"uuid": "7b62e5e2-7427-4c0f-b54d-9fbeadd2e8d5",
+				"name": "Rapat Eksternal"
+			},
+			"location": "CC Lt 5.2",
+			"author": "Fakultas",
+			"isDone": true
+		},
+		{
+			"uuid": "7d88cdca-63cf-4a7a-9e77-ae4187a99f6f",
+			"title": "Business-focused local intranet",
+			"start": "2024-09-13T11:10:00.000Z",
+			"finish": "2024-09-13T13:05:00.000Z",
+			"typeAgenda": {
+				"uuid": "c6e3b098-b18e-48b6-9cf8-c49e65a9131e",
+				"name": "Rapat Internal"
+			},
+			"location": "CC Lt 9.3",
+			"author": "Informatika",
+			"isDone": false
+		},
+		{
+			"uuid": "1e611934-2d71-4593-9ddf-421c9227618d",
+			"title": "Business-focused uniform task-force",
+			"start": "2024-09-09T00:43:00.000Z",
+			"finish": "2024-09-09T02:27:00.000Z",
+			"typeAgenda": {
+				"uuid": "b5fe6fca-0712-47a3-88e0-2202a8773f47",
+				"name": "Rapat Internal"
+			},
+			"location": "CC Lt 4.4",
+			"author": "Informatika",
+			"isDone": false
+		},
+		{
+			"uuid": "1b277a94-0cfa-47d6-8319-78caa61575e0",
+			"title": "Monitored static initiative",
+			"start": "2024-09-11T00:41:00.000Z",
+			"finish": "2024-09-11T01:48:00.000Z",
+			"typeAgenda": {
+				"uuid": "94024f14-bf24-4c03-a832-0ece356fc40e",
+				"name": "Rapat Internal"
+			},
+			"location": "CC Lt 4.1",
+			"author": "Fakultas",
+			"isDone": false
+		},
+		{
+			"uuid": "a22e2656-6ce2-4c85-bb91-6b4e6bb28824",
+			"title": "Operative upward-trending open architecture",
+			"start": "2024-09-15T23:08:00.000Z",
+			"finish": "2024-09-16T01:04:00.000Z",
+			"typeAgenda": {
+				"uuid": "129b7605-83ae-43bf-8de4-243c65bf8483",
+				"name": "Rapat Internal"
+			},
+			"location": "CC Lt 10.1",
+			"author": "Informatika",
+			"isDone": false
+		},
+		{
+			"uuid": "8ee11712-169d-439a-9e8b-02472529ab63",
+			"title": "Profound solution-oriented toolset",
+			"start": "2024-09-03T23:46:00.000Z",
+			"finish": "2024-09-04T01:05:00.000Z",
+			"typeAgenda": {
+				"uuid": "cd954fce-b1b8-45aa-a8b7-7dbcc4f5be24",
+				"name": "Rapat Internal"
+			},
+			"location": "CC Lt 6.3",
+			"author": "Fakultas",
+			"isDone": true
+		},
+		{
+			"uuid": "3d508187-c38d-45d7-8dfd-137595e88496",
+			"title": "Networked tertiary customer loyalty",
+			"start": "2024-10-11T01:25:00.000Z",
+			"finish": "2024-10-11T03:04:00.000Z",
+			"typeAgenda": {
+				"uuid": "31120ffc-f0b7-4823-ae2a-6ec6ca173591",
+				"name": "Rapat Internal"
+			},
+			"location": "CC Lt 1.2",
+			"author": "Informatika",
+			"isDone": false
+		},
+		{
+			"uuid": "c7cd9f6d-6c0e-4713-8443-2275e5921497",
+			"title": "Visionary bottom-line installation",
+			"start": "2024-10-01T10:19:00.000Z",
+			"finish": "2024-10-01T10:59:00.000Z",
+			"typeAgenda": {
+				"uuid": "c0662a65-02de-4320-863e-eaa4fb0fb3f2",
+				"name": "Rapat Eksternal"
+			},
+			"location": "CC Lt 8.5",
+			"author": "Fakultas",
+			"isDone": true
+		},
+		{
+			"uuid": "95d4263c-def8-488d-9e90-f42a5ee91752",
+			"title": "Open-source full-range local area network",
+			"start": "2024-09-27T06:04:00.000Z",
+			"finish": "2024-09-27T07:01:00.000Z",
+			"typeAgenda": {
+				"uuid": "d9c25c62-84f0-4b11-976c-9d5838ae8e4e",
+				"name": "Rapat Eksternal"
+			},
+			"location": "CC Lt 2.2",
+			"author": "Fakultas",
+			"isDone": false
+		},
+		{
+			"uuid": "e9485fc1-e9d4-42f0-af0d-dc8b4eeac58a",
+			"title": "Digitized system-worthy concept",
+			"start": "2024-09-25T03:31:00.000Z",
+			"finish": "2024-09-25T04:49:00.000Z",
+			"typeAgenda": {
+				"uuid": "883e2d40-d931-41e8-9f62-13af3b856a17",
+				"name": "Rapat Eksternal"
+			},
+			"location": "CC Lt 5.1",
+			"author": "Informatika",
+			"isDone": true
+		},
+		{
+			"uuid": "0438995e-c27f-4410-9274-cb3f5e9fd58d",
+			"title": "Pre-emptive disintermediate portal",
+			"start": "2024-09-03T12:34:00.000Z",
+			"finish": "2024-09-03T13:28:00.000Z",
+			"typeAgenda": {
+				"uuid": "bf44dcd9-07c2-4ba8-b93d-579649549853",
+				"name": "Rapat Internal"
+			},
+			"location": "CC Lt 9.5",
+			"author": "Informatika",
+			"isDone": false
+		},
+		{
+			"uuid": "b652c1a9-45f2-4fae-8132-d4e01b82fe7f",
+			"title": "Team-oriented multimedia utilisation",
+			"start": "2024-10-29T13:39:00.000Z",
+			"finish": "2024-10-29T15:05:00.000Z",
+			"typeAgenda": {
+				"uuid": "892bb1e3-4112-48d9-b078-860ccfaf640f",
+				"name": "Rapat Internal"
+			},
+			"location": "CC Lt 6.3",
+			"author": "Fakultas",
+			"isDone": false
+		},
+		{
+			"uuid": "92164d27-3ea2-404c-8b4e-87e1797a8a04",
+			"title": "Secured zero administration archive",
+			"start": "2024-10-12T01:57:00.000Z",
+			"finish": "2024-10-12T02:57:00.000Z",
+			"typeAgenda": {
+				"uuid": "82fc5af7-6168-4203-811d-ac9bacea41c2",
+				"name": "Rapat Internal"
+			},
+			"location": "CC Lt 8.1",
+			"author": "Fakultas",
+			"isDone": true
+		},
+		{
+			"uuid": "39c21c2d-2fdc-4778-9d86-1ea25d3537a9",
+			"title": "Expanded non-volatile database",
+			"start": "2024-10-25T22:13:00.000Z",
+			"finish": "2024-10-25T22:50:00.000Z",
+			"typeAgenda": {
+				"uuid": "a2d4c3ec-4111-4c9d-a108-bb151bf187f1",
+				"name": "Rapat Internal"
+			},
+			"location": "CC Lt 1.5",
+			"author": "Informatika",
+			"isDone": false
+		},
+		{
+			"uuid": "cbd548f8-8111-4773-b97d-3f775bd72376",
+			"title": "Secured incremental productivity",
+			"start": "2024-10-22T02:30:00.000Z",
+			"finish": "2024-10-22T03:57:00.000Z",
+			"typeAgenda": {
+				"uuid": "e133aabc-9969-4189-9466-bce3c7bf2aca",
+				"name": "Rapat Internal"
+			},
+			"location": "CC Lt 1.3",
+			"author": "Fakultas",
+			"isDone": false
+		},
+		{
+			"uuid": "4640a54d-0472-41d3-b8b0-bbffca857fa1",
+			"title": "Vision-oriented tertiary matrices",
+			"start": "2024-10-01T04:47:00.000Z",
+			"finish": "2024-10-01T05:54:00.000Z",
+			"typeAgenda": {
+				"uuid": "e01ac1cf-6ada-4232-afef-2f7af6547608",
+				"name": "Rapat Internal"
+			},
+			"location": "CC Lt 1.1",
+			"author": "Informatika",
+			"isDone": false
+		},
+		{
+			"uuid": "baecb8ab-1366-4cd9-9346-ed27c6a28c17",
+			"title": "Profound radical function",
+			"start": "2024-09-16T08:44:00.000Z",
+			"finish": "2024-09-16T09:16:00.000Z",
+			"typeAgenda": {
+				"uuid": "29588854-e0ee-4954-85d6-8c015459e02b",
+				"name": "Rapat Eksternal"
+			},
+			"location": "CC Lt 8.1",
+			"author": "Informatika",
+			"isDone": true
+		},
+		{
+			"uuid": "e930f7d7-cfbf-4818-a6a8-cf3b8eafd373",
+			"title": "Compatible hybrid function",
+			"start": "2024-10-01T23:35:00.000Z",
+			"finish": "2024-10-02T01:26:00.000Z",
+			"typeAgenda": {
+				"uuid": "eaeb6a27-a3ea-4809-83e9-a8cb09deb5ed",
+				"name": "Rapat Internal"
+			},
+			"location": "CC Lt 4.4",
+			"author": "Fakultas",
+			"isDone": true
+		},
+		{
+			"uuid": "b125a905-9ddb-4336-bc02-a005b39bb0a2",
+			"title": "Switchable zero defect throughput",
+			"start": "2024-09-20T10:23:00.000Z",
+			"finish": "2024-09-20T11:09:00.000Z",
+			"typeAgenda": {
+				"uuid": "a3b84d59-4b03-4985-b85b-a8dccb08a2ac",
+				"name": "Rapat Internal"
+			},
+			"location": "CC Lt 1.3",
+			"author": "Fakultas",
+			"isDone": false
+		},
+		{
+			"uuid": "a3c6b97d-861f-49a7-a995-5a741fc92bc4",
+			"title": "Organized optimal knowledge user",
+			"start": "2024-09-17T03:24:00.000Z",
+			"finish": "2024-09-17T04:23:00.000Z",
+			"typeAgenda": {
+				"uuid": "c0d6e808-e197-4e59-94d1-43fd68a58631",
+				"name": "Rapat Eksternal"
+			},
+			"location": "CC Lt 10.3",
+			"author": "Fakultas",
+			"isDone": false
+		},
+		{
+			"uuid": "682c6fde-ff4b-4e4e-b0be-ec790e3bcd72",
+			"title": "Programmable object-oriented matrix",
+			"start": "2024-09-25T06:34:00.000Z",
+			"finish": "2024-09-25T08:34:00.000Z",
+			"typeAgenda": {
+				"uuid": "a58681bf-d2f4-4a82-beec-a822872acac8",
+				"name": "Rapat Eksternal"
+			},
+			"location": "CC Lt 3.1",
+			"author": "Informatika",
+			"isDone": true
+		},
+		{
+			"uuid": "49b31319-26ae-4fc6-934b-b172eb1b7866",
+			"title": "Stand-alone optimizing open system",
+			"start": "2024-09-10T23:26:00.000Z",
+			"finish": "2024-09-11T01:07:00.000Z",
+			"typeAgenda": {
+				"uuid": "26fb690a-85db-472d-b051-f297a57c978e",
+				"name": "Rapat Eksternal"
+			},
+			"location": "CC Lt 1.5",
+			"author": "Fakultas",
+			"isDone": false
+		},
+		{
+			"uuid": "3c328cec-38d7-4e58-a8cf-7b7839f6bfe7",
+			"title": "Universal actuating extranet",
+			"start": "2024-10-23T00:55:00.000Z",
+			"finish": "2024-10-23T02:48:00.000Z",
+			"typeAgenda": {
+				"uuid": "062110ac-c1fb-4831-bf97-394f159b6d4e",
+				"name": "Rapat Eksternal"
+			},
+			"location": "CC Lt 10.5",
+			"author": "Informatika",
+			"isDone": false
+		}
+	],
+	"dosen": [
+		{
+			"uuid": "c344ab9a-32d4-41f9-8220-0c27885ff295",
+			"name": "Ruby Will",
+			"email": "Roel_Schmeler17@gmail.com",
+			"phoneNumber": "+62 75307",
+			"department": {
+				"uuid": "ae4daf7c-39f9-4c7c-89d2-d6e2727bdbee",
+				"name": "Teknik Sipil"
+			},
+			"createdAt": "2024-10-24T17:07:00.994Z",
+			"updatedAt": "2024-10-24T17:07:00.994Z"
+		},
+		{
+			"uuid": "bc0d4c92-0b5b-46b1-b1f6-7b6ec263cd18",
+			"name": "Traci Hintz V",
+			"email": "Leilani_Lemke44@hotmail.com",
+			"phoneNumber": "+62 80828",
+			"department": {
+				"uuid": "ae4daf7c-39f9-4c7c-89d2-d6e2727bdbee",
+				"name": "Teknik Elektro"
+			},
+			"createdAt": "2024-10-30T11:08:09.453Z",
+			"updatedAt": "2024-10-30T11:08:09.453Z"
+		},
+		{
+			"uuid": "f3e26cd5-5a11-4ed6-a651-2cf6383690ae",
+			"name": "Tina Morissette",
+			"email": "London88@gmail.com",
+			"phoneNumber": "+62 76555",
+			"department": {
+				"uuid": "ae4daf7c-39f9-4c7c-89d2-d6e2727bdbee",
+				"name": "Teknik Elektro"
+			},
+			"createdAt": "2024-09-29T19:32:59.856Z",
+			"updatedAt": "2024-09-29T19:32:59.856Z"
+		},
+		{
+			"uuid": "05abd246-f090-4141-bcc1-966fa99f5945",
+			"name": "Julian Hagenes",
+			"email": "Rachael_Herzog13@hotmail.com",
+			"phoneNumber": "+62 83467",
+			"department": {
+				"uuid": "ae4daf7c-39f9-4c7c-89d2-d6e2727bdbee",
+				"name": "Teknik Sipil"
+			},
+			"createdAt": "2024-10-04T23:12:23.512Z",
+			"updatedAt": "2024-10-04T23:12:23.512Z"
+		},
+		{
+			"uuid": "e72be073-c170-42f2-940f-31962c4258aa",
+			"name": "Phillip Wunsch",
+			"email": "Durward70@hotmail.com",
+			"phoneNumber": "+62 77934",
+			"department": {
+				"uuid": "ae4daf7c-39f9-4c7c-89d2-d6e2727bdbee",
+				"name": "Teknik Mesin"
+			},
+			"createdAt": "2024-09-28T11:48:26.244Z",
+			"updatedAt": "2024-09-28T11:48:26.244Z"
+		},
+		{
+			"uuid": "360d3396-a6b1-4d0f-9dec-812dad670e1c",
+			"name": "Wade Friesen",
+			"email": "Susie.Hagenes@gmail.com",
+			"phoneNumber": "+62 47562",
+			"department": {
+				"uuid": "ae4daf7c-39f9-4c7c-89d2-d6e2727bdbee",
+				"name": "Teknik Sipil"
+			},
+			"createdAt": "2024-09-16T15:49:35.249Z",
+			"updatedAt": "2024-09-16T15:49:35.249Z"
+		},
+		{
+			"uuid": "0a84c10e-42f7-4c40-8619-b042e7298a15",
+			"name": "Marshall Schroeder Jr.",
+			"email": "Providenci.Muller43@gmail.com",
+			"phoneNumber": "+62 64671",
+			"department": {
+				"uuid": "ae4daf7c-39f9-4c7c-89d2-d6e2727bdbee",
+				"name": "Teknik Sipil"
+			},
+			"createdAt": "2024-09-30T20:32:07.471Z",
+			"updatedAt": "2024-09-30T20:32:07.471Z"
+		},
+		{
+			"uuid": "5ae9db64-14b2-4080-89f1-9dee9416a283",
+			"name": "Raquel Boyer",
+			"email": "Alvera_Stiedemann75@hotmail.com",
+			"phoneNumber": "+62 6556",
+			"department": {
+				"uuid": "ae4daf7c-39f9-4c7c-89d2-d6e2727bdbee",
+				"name": "Teknik Elektro"
+			},
+			"createdAt": "2024-10-01T17:30:07.841Z",
+			"updatedAt": "2024-10-01T17:30:07.841Z"
+		},
+		{
+			"uuid": "b3fa4d23-274d-4ee2-ba1b-ddd055751e1e",
+			"name": "Kirk Jaskolski",
+			"email": "Earl.Cormier81@yahoo.com",
+			"phoneNumber": "+62 62036",
+			"department": {
+				"uuid": "ae4daf7c-39f9-4c7c-89d2-d6e2727bdbee",
+				"name": "Teknik Sipil"
+			},
+			"createdAt": "2024-09-12T04:17:54.515Z",
+			"updatedAt": "2024-09-12T04:17:54.515Z"
+		},
+		{
+			"uuid": "f811e15e-b99a-43b8-b3ed-1f5dab16b412",
+			"name": "Oliver Cruickshank",
+			"email": "Magali.Johnston@gmail.com",
+			"phoneNumber": "+62 35373",
+			"department": {
+				"uuid": "ae4daf7c-39f9-4c7c-89d2-d6e2727bdbee",
+				"name": "Teknik Informatika"
+			},
+			"createdAt": "2024-08-31T21:31:20.594Z",
+			"updatedAt": "2024-08-31T21:31:20.594Z"
+		},
+		{
+			"uuid": "99082dcf-7dfa-42e3-8db7-10ff7c803d39",
+			"name": "Alton Ryan",
+			"email": "Samir.Gleichner@yahoo.com",
+			"phoneNumber": "+62 60273",
+			"department": {
+				"uuid": "ae4daf7c-39f9-4c7c-89d2-d6e2727bdbee",
+				"name": "Teknik Informatika"
+			},
+			"createdAt": "2024-09-11T19:30:42.120Z",
+			"updatedAt": "2024-09-11T19:30:42.120Z"
+		},
+		{
+			"uuid": "fd381f49-9d35-43a5-989a-fc714272cb6e",
+			"name": "Dr. Nina Friesen DDS",
+			"email": "Gianni_Hessel-Waters94@gmail.com",
+			"phoneNumber": "+62 71262",
+			"department": {
+				"uuid": "ae4daf7c-39f9-4c7c-89d2-d6e2727bdbee",
+				"name": "Teknik Mesin"
+			},
+			"createdAt": "2024-10-30T20:44:25.019Z",
+			"updatedAt": "2024-10-30T20:44:25.019Z"
+		},
+		{
+			"uuid": "d5ad9d3e-f2ef-4587-97a3-b09144eeeeea",
+			"name": "Dr. Pete Osinski",
+			"email": "Ryann_Ullrich86@yahoo.com",
+			"phoneNumber": "+62 75057",
+			"department": {
+				"uuid": "ae4daf7c-39f9-4c7c-89d2-d6e2727bdbee",
+				"name": "Teknik Sipil"
+			},
+			"createdAt": "2024-10-30T20:29:34.139Z",
+			"updatedAt": "2024-10-30T20:29:34.139Z"
+		},
+		{
+			"uuid": "4c719c24-c312-4f11-ace2-c23dcafdbfc6",
+			"name": "Eula Veum",
+			"email": "Murphy.Huels6@gmail.com",
+			"phoneNumber": "+62 68915",
+			"department": {
+				"uuid": "ae4daf7c-39f9-4c7c-89d2-d6e2727bdbee",
+				"name": "Teknik Elektro"
+			},
+			"createdAt": "2024-10-20T13:31:21.457Z",
+			"updatedAt": "2024-10-20T13:31:21.457Z"
+		},
+		{
+			"uuid": "ab81fed9-b6a5-4aeb-af83-89386922b6c8",
+			"name": "Erma Rutherford",
+			"email": "Megane.DuBuque17@gmail.com",
+			"phoneNumber": "+62 10658",
+			"department": {
+				"uuid": "ae4daf7c-39f9-4c7c-89d2-d6e2727bdbee",
+				"name": "Teknik Informatika"
+			},
+			"createdAt": "2024-09-03T08:31:17.283Z",
+			"updatedAt": "2024-09-03T08:31:17.283Z"
+		},
+		{
+			"uuid": "21d05ae5-02a7-47c9-81aa-7a2b86cfa331",
+			"name": "Russell Rogahn",
+			"email": "Rosalinda.Skiles@yahoo.com",
+			"phoneNumber": "+62 9245",
+			"department": {
+				"uuid": "ae4daf7c-39f9-4c7c-89d2-d6e2727bdbee",
+				"name": "Teknik Informatika"
+			},
+			"createdAt": "2024-10-23T17:25:52.930Z",
+			"updatedAt": "2024-10-23T17:25:52.930Z"
+		},
+		{
+			"uuid": "33c236ef-d6a2-4224-b8f1-f767d62a3462",
+			"name": "Mark Langworth",
+			"email": "Sigurd58@yahoo.com",
+			"phoneNumber": "+62 64669",
+			"department": {
+				"uuid": "ae4daf7c-39f9-4c7c-89d2-d6e2727bdbee",
+				"name": "Sistem Informasi"
+			},
+			"createdAt": "2024-09-13T08:24:55.995Z",
+			"updatedAt": "2024-09-13T08:24:55.995Z"
+		},
+		{
+			"uuid": "36b2a7cd-142d-45c8-baf2-cb436cd2851f",
+			"name": "Mr. Dwight Borer",
+			"email": "Ashlee30@gmail.com",
+			"phoneNumber": "+62 57070",
+			"department": {
+				"uuid": "ae4daf7c-39f9-4c7c-89d2-d6e2727bdbee",
+				"name": "Teknik Sipil"
+			},
+			"createdAt": "2024-09-03T22:08:55.224Z",
+			"updatedAt": "2024-09-03T22:08:55.224Z"
+		},
+		{
+			"uuid": "6a2ca1eb-82c3-4aa6-a972-d6bfbdef6645",
+			"name": "Cheryl Rohan",
+			"email": "Donato45@hotmail.com",
+			"phoneNumber": "+62 48057",
+			"department": {
+				"uuid": "ae4daf7c-39f9-4c7c-89d2-d6e2727bdbee",
+				"name": "Sistem Informasi"
+			},
+			"createdAt": "2024-09-14T13:42:11.317Z",
+			"updatedAt": "2024-09-14T13:42:11.317Z"
+		},
+		{
+			"uuid": "31f0e6fe-593d-4c3d-affe-6252d2bd942c",
+			"name": "Ernest Kub",
+			"email": "German.Lindgren@gmail.com",
+			"phoneNumber": "+62 87503",
+			"department": {
+				"uuid": "ae4daf7c-39f9-4c7c-89d2-d6e2727bdbee",
+				"name": "Teknik Sipil"
+			},
+			"createdAt": "2024-09-07T02:04:37.491Z",
+			"updatedAt": "2024-09-07T02:04:37.491Z"
+		}
+	]
 }
