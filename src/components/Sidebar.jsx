@@ -42,7 +42,7 @@ const Sidebar = () => {
 				<NavLink
 					icon={faCalendarAlt}
 					title="Agenda"
-					to="/agenda"
+					to="/agenda?menu=calendar"
 					variant={
 						isActive('/agenda') ? 'bg-light-primary text-white' : ''
 					}
