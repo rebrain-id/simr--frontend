@@ -1,11 +1,11 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import Button from '../elements/Button';
-import ListDosen from '../elements/ListDosen';
+import ListLecturer from '../elements/listLecturer/';
 import CreateModal from '../components/CreateDosenModal';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchDosens } from '../redux/actions/dosenAction';
+import { fetchLecturers } from '../redux/actions/lecturerAction';
 
 const data = [
 	{
@@ -40,12 +40,12 @@ const data = [
 	},
 ];
 
-const DosenPage = () => {
+const Lecturer = () => {
 	const [openModal, setOpenModal] = useState(false);
 	const handleModal = () => setOpenModal(!openModal);
 	const dispatch = useDispatch();
 	const [pending, setPending] = useState(true);
-	const datas = useSelector((state) => state.fetchDosens.dosens);
+	const datas = useSelector((state) => state.fetchLecturers.lecturers);
 
 	const getDosenId = (id) => {
 		console.log(id);
@@ -53,7 +53,7 @@ const DosenPage = () => {
 
 	useEffect(() => {
 		const timeout = setTimeout(() => {
-			dispatch(fetchDosens());
+			dispatch(fetchLecturers());
 
 			setPending(false);
 		}, 500);
@@ -75,7 +75,7 @@ const DosenPage = () => {
 
 				<section className="mt-5 flex flex-col gap-3">
 					{datas.map((item, index) => (
-						<ListDosen
+						<ListLecturer
 							key={index}
 							data={item.dosen.name}
 							name={item.dosen.name}
@@ -90,4 +90,4 @@ const DosenPage = () => {
 	);
 };
 
-export default DosenPage;
+export default Lecturer;

@@ -1,31 +1,27 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import Button from '../elements/Button';
-import ListProdi from '../elements/listProdi/';
+import ListDepartment from '../elements/ListDepartment';
 import CreateModal from '../components/CreateProdiModal';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { fetchLecturers } from '../redux/actions/lecturerAction';
+import { useDispatch, useSelector } from 'react-redux';
 
-const data = [
-	{
-		nama: 'Sistem Informasi',
-		username: 'sisteminformasi',
-		password: 'sisteminformasi',
-	},
-	{
-		nama: 'Teknik Informatika',
-		username: 'teknikinformatika',
-		password: 'teknikinformatika',
-	},
-	{
-		nama: 'Teknik Elektro',
-		username: 'teknikelektro',
-		password: 'teknikelektro',
-	},
-];
-
-const ProgramStudiPage = () => {
+const Department = () => {
 	const [openModal, setOpenModal] = useState(false);
 	const handleModal = () => setOpenModal(!openModal);
+	const dispatch = useDispatch();
+	const [pending, setPending] = useState(true);
+	const datas = useSelector((state) => state.fetchLecturers.lecturers);
+
+	useEffect(() => {
+		const timeout = setTimeout(() => {
+			dispatch(fetchLecturers());
+
+			setPending(false);
+		}, 500);
+		return () => clearTimeout(timeout);
+	}, [dispatch]);
 	return (
 		<>
 			<main className="bg-white px-10 py-5 rounded drop-shadow-bottom mt-5">
@@ -44,8 +40,12 @@ const ProgramStudiPage = () => {
 				</div>
 
 				<section className="mt-5 flex flex-col gap-3">
-					{data.map((item, index) => (
-						<ListProdi key={index} data={item} nama={item.nama} />
+					{datas.map((item, index) => (
+						<ListDepartment
+							key={index}
+							data={item.dosen.department.name}
+							name={item.dosen.department.name}
+						/>
 					))}
 				</section>
 			</main>
@@ -54,4 +54,4 @@ const ProgramStudiPage = () => {
 	);
 };
 
-export default ProgramStudiPage;
+export default Department;

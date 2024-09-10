@@ -1,35 +1,35 @@
 import {
-    FETCH_DOSEN_REQUEST,
-    FETCH_DOSEN_SUCCESS,
-    FETCH_DOSEN_FAILURE
-} from '../actions/dosenAction'
+    FETCH_DEPARTMENT_REQUEST,
+    FETCH_DEPARTMENT_SUCCESS,
+    FETCH_DEPARTMENT_FAILURE
+} from '../actions/departmentAction'
 
 const initialState = {
-    dosens: [],
+    departments: [],
     loading: false,
-    error: 'Dosen not found'
+    error: 'Program Studi not found'
 }
 
-const dosenReducer = (state = initialState, action) => {
+const departmentReducer = (state = initialState, action) => {
     switch (action.type) {
-        case FETCH_DOSEN_REQUEST:
+        case FETCH_DEPARTMENT_REQUEST:
             return {
                 ...state,
                 loading: true
 
             }
-        case FETCH_DOSEN_SUCCESS:
+        case FETCH_DEPARTMENT_SUCCESS:
             return {
                 ...state,
                 loading: false,
-                dosens: action.payload,
+                departments: action.payload,
                 error: ''
             }
-        case FETCH_DOSEN_FAILURE:
+        case FETCH_DEPARTMENT_FAILURE:
             return {
                 ...state,
                 loadng: false,
-                dosens: [],
+                departments: [],
                 error: action.payload
             }
         default:
@@ -37,4 +37,4 @@ const dosenReducer = (state = initialState, action) => {
     }
 }
 
-export default dosenReducer
+export default departmentReducer

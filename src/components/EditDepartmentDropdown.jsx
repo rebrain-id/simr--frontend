@@ -2,55 +2,58 @@ import { useState } from 'react';
 import Button from '../elements/Button';
 import FormInput from '../elements/forms/FormInput';
 
-const EditDosenDropdown = (props) => {
-	const { uuid, name, email, no, close } = props;
+const EditDepartmentDropdown = (props) => {
+	const { name, username, password, close } = props;
 
-	const [formProduct, setFormProduct] = useState({
+	const [form, setForm] = useState({
 		name: name,
-		email: email,
-		no: no,
+		username: username,
+		password: password,
 	});
 
-	const handleFormProduct = (e) => {
-		setFormProduct({ ...formProduct, [e.target.name]: e.target.value });
+	const handleForm = (e) => {
+		setForm({ ...form, [e.target.name]: e.target.value });
 	};
 	return (
 		<>
 			<div className="px-5 bg-white shadow-md rounded pb-4">
-				<div className="w-full flex items-center w">
+				<div className="w-full flex items-center">
 					<FormInput
-						name="name"
+						name={name}
+						type="text"
 						variant="flex items-center text-sm w-full gap-10 py-2"
-						label="Nama Dosen"
-						placeholder="Nama Dosen"
-						labelvariant="w-1/6"
+						label="Nama Program Studi"
+						placeholder="Nama Program Studi"
+						labelvariant="w-1/5"
 						inputvariant="w-5/6"
-						value={formProduct.name}
-						onChange={handleFormProduct}
+						value={form.name}
+						onChange={handleForm}
 					/>
 				</div>
 				<div className="w-full flex items-center">
 					<FormInput
-						name="email"
-						label="E-mail"
-						placeholder="example@mail.com"
-						labelvariant="w-1/6"
-						inputvariant="w-5/6"
+						name={username}
+						type="text"
 						variant="flex items-center text-sm w-full gap-10 py-2"
-						value={formProduct.email}
-						onChange={handleFormProduct}
+						label="Username"
+						placeholder="Username"
+						labelvariant="w-1/5"
+						inputvariant="w-5/6"
+						value={form.username}
+						onChange={handleForm}
 					/>
 				</div>
 				<div className="w-full flex items-center">
 					<FormInput
-						name="phoneNumber"
-						labelvariant="w-1/6"
-						inputvariant="w-5/6"
+						name={password}
+						type="password"
 						variant="flex items-center text-sm w-full gap-10 py-2"
-						label="No. Whatsapp"
-						placeholder="08*********"
-						value={formProduct.no}
-						onChange={handleFormProduct}
+						label="Password"
+						placeholder="*********"
+						labelvariant="w-1/5"
+						inputvariant="w-5/6"
+						value={form.password}
+						onChange={handleForm}
 					/>
 				</div>
 				<div className="flex items-center gap-8">
@@ -69,4 +72,4 @@ const EditDosenDropdown = (props) => {
 	);
 };
 
-export default EditDosenDropdown;
+export default EditDepartmentDropdown;
