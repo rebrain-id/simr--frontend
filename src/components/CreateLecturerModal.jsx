@@ -1,44 +1,44 @@
 import { useState } from 'react';
-import Button from './../elements/Button';
-import Input from './../elements/forms/FormInput';
+import Button from '../elements/Button';
+import FormInput from '../elements/forms/FormInput';
 
-const CreateProdiModal = (props) => {
+const CreateLecturerModal = (props) => {
 	const { close } = props;
 	return (
 		<>
 			<div
-				className={`bg-black/25 w-full h-screen fixed top-0 left-0 z-10`}
+				className={`bg-black/25 h-screen fixed top-0 left-0 right-0 bottom-0 z-10`}
 			>
-				<div className="absolute w-1/2 px-8 rounded-lg shadow-lg right-0 top-0 transform -translate-x-1/2 translate-y-1/4 bg-white">
-					<h2 className="text-2xl font-medium pb-8 pt-4">
-						Tambah Data Program Studi
+				<div className="absolute w-1/2 px-8 rounded-lg shadow-lg right-0 top-0 transform -translate-x-1/2 translate-y-1/4 z-10  bg-white">
+					<h2 className="text-2xl font-medium pb-8 py-2">
+						Tambah Data Dosen
 					</h2>
-					<Input
+					<FormInput
 						variant="flex flex-col"
 						type="text"
-						label="Nama Program Studi"
+						label="Nama Dosen"
 						note="Wajib diisi"
 						labelvariant="text-md pb-2"
 						inputvariant="text-md"
-						placeholder="Nama Program Studi"
+						placeholder="Nama Dosen"
 					/>
-					<Input
-						variant="flex flex-col"
-						type="text"
-						label="Username"
+					<FormInput
+						variant="flex flex-col "
+						type="email"
+						label="E-mail"
 						note="Wajib diisi"
 						labelvariant="text-md py-2"
 						inputvariant="text-md"
-						placeholder="Username"
+						placeholder="example@mail.com"
 					/>
-					<Input
-						variant="flex flex-col"
-						type="password"
-						label="Password"
+					<FormInput
+						variant="flex flex-col "
+						type="number"
+						label="No. Whatsapp"
 						note="Wajib diisi"
 						labelvariant="text-md py-2"
 						inputvariant="text-md"
-						placeholder="*********"
+						placeholder="082********"
 					/>
 					<div className="flex items-center justify-end gap-4 pb-10">
 						<Button
@@ -57,4 +57,4 @@ const CreateProdiModal = (props) => {
 	);
 };
 
-export default CreateProdiModal;
+export default CreateLecturerModal;
