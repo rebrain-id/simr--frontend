@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import Button from '../elements/Button';
 import ListLecturer from '../elements/listLecturer/';
-import CreateModal from '../components/CreateDosenModal';
+import CreateModal from '../components/CreateLecturerModal';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchLecturers } from '../redux/actions/lecturerAction';

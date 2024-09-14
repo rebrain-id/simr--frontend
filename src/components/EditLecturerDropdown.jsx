@@ -56,11 +56,11 @@ const EditLecturerDropdown = (props) => {
 				<div className="flex items-center gap-8">
 					<Button
 						text="Update"
-						variant="bg-light-primary text-white rounded text-sm"
+						variant="bg-light-primary text-white rounded text-sm hover:bg-primary transition ease-in 3s"
 					/>
 					<Button
 						text="Batal"
-						variant="bg-light-primary/25 text-primary rounded text-sm"
+						variant="bg-light-primary/25 text-primary rounded text-sm hover:bg-danger hover:text-white transition ease-in 3s"
 						onClick={close}
 					/>
 				</div>
