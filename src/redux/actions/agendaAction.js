@@ -10,12 +10,14 @@ import {
 	fetchAgendaHistorySuccess,
 	fetchAgendaFailure,
 } from '../slices/agendaSlice';
+import { getAgenda } from '../../services/agenda';
 
 export const fetchAgenda = createAsyncThunk(
 	'agenda/fetchAgenda',
 	async (_, { dispatch }) => {
 		try {
 			dispatch(fetchAgendaRequest());
+
 			const data = convertAgendaData(dataJson.agenda);
 
 			dispatch(fetchAgendaSuccess(data));
@@ -30,6 +32,10 @@ export const fetchAgendaToday = createAsyncThunk(
 	async (_, { dispatch }) => {
 		try {
 			dispatch(fetchAgendaRequest());
+
+			const dataset = getAgenda();
+
+			console.log(dataset);
 
 			const data = convertAgendaData(dataJson.agenda);
 			const today = moment().format('DD');
