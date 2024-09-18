@@ -5,14 +5,14 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useDispatch } from 'react-redux';
-import { setSelectedAgenda } from '../redux/actions/detailAgendaAction';
+import { fetchDetailAgenda } from '../redux/actions/agendaAction';
 
 const ListAgenda = (props) => {
 	const { title, time, date, data, room, isOwner = true } = props;
 	const dispatch = useDispatch();
 
 	const handleClick = () => {
-		dispatch(setSelectedAgenda(data));
+		dispatch(fetchDetailAgenda({ uuid: data.uuid }));
 	};
 
 	return (
