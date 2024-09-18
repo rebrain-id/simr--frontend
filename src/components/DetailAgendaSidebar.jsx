@@ -10,7 +10,7 @@ import { useEffect, useState } from 'react';
 import moment from 'moment';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchTypeAgenda } from '../redux/actions/typeAgendaAction';
-import { fetchDepartment } from '../redux/actions/departmentAction';
+import { fetchDepartments } from '../redux/actions/departmentAction';
 
 const DetailAgendaSidebar = (props) => {
 	const { onClick, data, isShow = false } = props;
@@ -23,7 +23,7 @@ const DetailAgendaSidebar = (props) => {
 
 	useEffect(() => {
 		dispatch(fetchTypeAgenda());
-		dispatch(fetchDepartment());
+		dispatch(fetchDepartments());
 
 		// if (data && department) {
 		// 	const initialCheckboxStates = department.reduce((acc, dept) => {
