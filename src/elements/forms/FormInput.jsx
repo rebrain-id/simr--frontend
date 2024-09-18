@@ -11,6 +11,8 @@ const FormInput = (props) => {
 		placeholder,
 		inputvariant,
 		labelvariant,
+		onChange,
+		name,
 	} = props;
 
 	return (

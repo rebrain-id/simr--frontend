@@ -1,20 +1,27 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import moment from 'moment';
-import dataJson from '../../../data.json';
 import {
 	fetchAgendaRequest,
 	fetchAgendaSuccess,
 	fetchAgendaTodaySuccess,
 	fetchAgendaThisMonthSuccess,
+	fetchAgendaByDateSuccess,
+	fetchAgendaHistorySuccess,
+	fetchDetailAgendaSuccess,
+	closeDetailAgendaSuccess,
 	fetchAgendaFailure,
 } from '../slices/agendaSlice';
+import { getAgenda, getDetailAgenda } from '../../services/agenda';
 
 export const fetchAgenda = createAsyncThunk(
 	'agenda/fetchAgenda',
 	async (_, { dispatch }) => {
 		try {
 			dispatch(fetchAgendaRequest());
-			const data = convertAgendaData(dataJson);
+
+			const dataset = await getAgenda();
+
+			const data = convertAgendaData(dataset);
 
 			dispatch(fetchAgendaSuccess(data));
 		} catch (error) {
@@ -29,7 +36,10 @@ export const fetchAgendaToday = createAsyncThunk(
 		try {
 			dispatch(fetchAgendaRequest());
 
-			const data = convertAgendaData(dataJson);
+			const dataset = await getAgenda();
+
+			const data = convertAgendaData(dataset);
+
 			const today = moment().format('DD');
 			const thisMonth = moment().format('MM');
 
@@ -50,7 +60,9 @@ export const fetchAgendaThisMonth = createAsyncThunk(
 	async ({ year, month }, { dispatch }) => {
 		try {
 			dispatch(fetchAgendaRequest());
-			const dataThisMonth = convertAgendaData(dataJson);
+			const dataset = await getAgenda();
+
+			const dataThisMonth = convertAgendaData(dataset);
 
 			const filteredAgenda = dataThisMonth.filter(
 				(item) =>
@@ -78,13 +90,146 @@ export const fetchAgendaThisMonth = createAsyncThunk(
 	},
 );
 
+export const fetchAgendaByDate = createAsyncThunk(
+	'agenda/fetchAgendaByDate',
+	async ({ year, month, date }, { dispatch }) => {
+		try {
+			dispatch(fetchAgendaRequest());
+			const dataset = await getAgenda();
+
+			const dataByDate = convertAgendaData(dataset);
+
+			const filteredAgenda = dataByDate.filter(
+				(item) =>
+					item.date.start == String(date).padStart(2, '0') &&
+					item.month.start == String(month).padStart(2, '0') &&
+					item.year.start == year,
+			);
+
+			dispatch(fetchAgendaByDateSuccess(filteredAgenda));
+		} catch (error) {
+			dispatch(fetchAgendaFailure(error.message));
+		}
+	},
+);
+
+export const fetchAgendaHistory = createAsyncThunk(
+	'agenda/fetchAgendaHistory',
+	async ({ dateFrom, dateTo, type, asc = false }, { dispatch }) => {
+		try {
+			dispatch(fetchAgendaRequest());
+
+			const data = await getAgenda();
+			const today = moment();
+			const convertDateFrom = dateFrom ? moment(dateFrom) : moment(0);
+			const convertDateTo = dateTo ? moment(dateTo) : today;
+
+			const filteredAgenda = data.filter((item) => {
+				const finishedDate = moment(item.finish);
+
+				if (dateFrom && dateTo) {
+					if (type && type == 'all') {
+						return (
+							finishedDate.isBetween(
+								convertDateFrom,
+								convertDateTo,
+								null,
+								'[)',
+							) && item.isDone === true
+						);
+					} else if (type) {
+						return (
+							finishedDate.isBetween(
+								convertDateFrom,
+								convertDateTo,
+								null,
+								'[)',
+							) &&
+							item.typeAgenda.name == `Rapat ${type}` &&
+							item.isDone === true
+						);
+					} else {
+						return (
+							finishedDate.isBetween(
+								convertDateFrom,
+								convertDateTo,
+								null,
+								'[)',
+							) &&
+							item.typeAgenda.name == `Rapat Internal` &&
+							item.isDone === true
+						);
+					}
+				} else {
+					if (type && type == 'all') {
+						return (
+							finishedDate.isBefore(convertDateTo) &&
+							item.isDone === true
+						);
+					} else if (type) {
+						return (
+							finishedDate.isBefore(convertDateTo) &&
+							item.typeAgenda.name == `Rapat ${type}` &&
+							item.isDone === true
+						);
+					} else {
+						return (
+							finishedDate.isBefore(convertDateTo) &&
+							item.typeAgenda.name == `Rapat Internal` &&
+							item.isDone === true
+						);
+					}
+				}
+			});
+
+			const sortedAgenda = filteredAgenda.sort((a, b) => {
+				const dateA = moment(a.finish);
+				const dateB = moment(b.finish);
+				if (asc) {
+					return dateA - dateB;
+				} else {
+					return dateB - dateA;
+				}
+			});
+
+			dispatch(
+				fetchAgendaHistorySuccess(convertAgendaData(sortedAgenda)),
+			);
+		} catch (error) {
+			dispatch(fetchAgendaFailure(error.message));
+		}
+	},
+);
+
+export const fetchDetailAgenda = createAsyncThunk(
+	'agenda/fetchDetailAgenda',
+	async ({ uuid }, { dispatch }) => {
+		try {
+			dispatch(fetchAgendaRequest());
+
+			const data = await getDetailAgenda(uuid);
+
+			dispatch(fetchDetailAgendaSuccess(data));
+		} catch (error) {
+			dispatch(fetchAgendaFailure(error.message));
+		}
+	},
+);
+
+export const closeDetailAgenda = createAsyncThunk(
+	'agenda/closeDetailAgenda',
+	async (_, { dispatch }) => {
+		dispatch(closeDetailAgendaSuccess());
+	},
+);
+
 const convertAgendaData = (data) => {
-	return data.agenda.map((item) => {
-		const startTime = moment(item.agenda.start);
-		const finishTime = moment(item.agenda.finish);
+	return data.map((item) => {
+		const startTime = moment(item.start);
+		const finishTime = moment(item.finish);
 
 		return {
-			...item.agenda,
+			...item,
 			time: {
 				start: startTime.format('HH:mm'),
 				finish: finishTime.format('HH:mm'),

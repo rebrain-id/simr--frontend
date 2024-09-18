@@ -9,7 +9,8 @@ import NavLink from '../elements/NavLink';
 import { useLocation } from 'react-router-dom';
 
 const Sidebar = () => {
-	const isActive = useLocation().pathname;
+	const { pathname } = useLocation();
+	const isActive = (path) => pathname.includes(path);
 	return (
 		<nav className="h-auto w-80 bg-light-white rounded-lg px-3 pt-6 drop-shadow-right-bottom">
 			<header className="flex justify-between items-center mb-28">
@@ -35,17 +36,15 @@ const Sidebar = () => {
 					title="Dashboard"
 					to="/"
 					variant={
-						isActive === '/' ? 'bg-light-primary text-white' : ''
+						pathname === '/' ? 'bg-light-primary text-white' : ''
 					}
 				/>
 				<NavLink
 					icon={faCalendarAlt}
 					title="Agenda"
-					to="/agenda"
+					to="/agenda?menu=calendar"
 					variant={
-						isActive === '/agenda'
-							? 'bg-light-primary text-white'
-							: ''
+						isActive('/agenda') ? 'bg-light-primary text-white' : ''
 					}
 				/>
 				<NavLink
@@ -63,9 +62,7 @@ const Sidebar = () => {
 					title="Dosen"
 					to="/lecturer"
 					variant={
-						isActive === '/lecturer'
-							? 'bg-light-primary text-white'
-							: ''
+						isActive('/dosen') ? 'bg-light-primary text-white' : ''
 					}
 				/>
 			</menu>

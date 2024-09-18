@@ -1,21 +1,7 @@
-import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchAgendaThisMonth } from '../../redux/actions/agendaAction';
 import ListAgenda from '../ListAgenda';
 
 const CalendarList = (props) => {
-	const { month, year } = props;
-
-	const dispatch = useDispatch();
-
-	const agendaThisMonth = useSelector(
-		(state) => state.agenda.agendaThisMonth,
-	);
-
-	useEffect(() => {
-		dispatch(fetchAgendaThisMonth({ year, month }));
-	}, [dispatch, month, year]);
-	console.log(agendaThisMonth);
+	const { month, agendaThisMonth } = props;
 
 	const monthList = [
 		'Januari',
@@ -38,7 +24,7 @@ const CalendarList = (props) => {
 
 	return (
 		<div className="w-full">
-			{agendaThisMonth &&
+			{agendaThisMonth && agendaThisMonth.length > 0 ? (
 				[...agendaThisMonth]
 					.sort((a, b) => {
 						return a.date - b.date;
@@ -59,7 +45,6 @@ const CalendarList = (props) => {
 										key={itemIndex}
 										data={item}
 										title={item.title}
-										date={`${item.date.start} ${monthList[item.month.start - 1]} ${item.year.start}`}
 										time={`${item.time.start} - ${item.time.finish} WIB`}
 										isOwner={
 											item.typeAgenda.name ===
@@ -71,7 +56,12 @@ const CalendarList = (props) => {
 									/>
 								))}
 						</div>
-					))}
+					))
+			) : (
+				<p className="text-center text-xs text-light-secondary">
+					Belum ada agenda bulan ini
+				</p>
+			)}
 		</div>
 	);
 };
