@@ -9,12 +9,15 @@ const FormInput = (props) => {
 		placeholder,
 		inputvariant,
 		labelvariant,
+		onChange,
+		name,
 	} = props;
 
 	return (
 		<div className={variant ? variant : 'w-80'}>
 			<label className={`font-medium ${labelvariant}`}>{label}</label>
 			<input
+				name={name}
 				type={type}
 				className={
 					type === 'file'
@@ -24,6 +27,7 @@ const FormInput = (props) => {
 				{...(type === 'file' ? { accept: fileAccept } : {})}
 				value={value}
 				placeholder={placeholder}
+				onChange={onChange}
 			/>
 
 			{note && (

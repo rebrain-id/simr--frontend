@@ -7,8 +7,14 @@ import {
 import ButtonMenu from '../elements/calendar/ButtonMenu';
 import { useEffect, useState } from 'react';
 import CalendarList from '../elements/calendar/CalendarList';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchAgendaThisMonth } from '../redux/actions/agendaAction';
+import { useSearchParams } from 'react-router-dom';
+import AgendaHistory from './AgendaHistory';
 
 const Calendar = () => {
+	const [searchParam] = useSearchParams();
+	const menu = searchParam.get('menu');
 	const getYear = new Date().getFullYear();
 	const getMonth = new Date().getMonth();
 	const [optionValue, setOptionValue] = useState({
@@ -17,16 +23,20 @@ const Calendar = () => {
 	});
 	const [inputMonth, setInputMonth] = useState(getMonth);
 	const [inputYear, setInputYear] = useState(getYear);
-	const [menu, setMenu] = useState('calendar');
+	const dispatch = useDispatch();
 
-	const handleMenu = (name) => {
-		setMenu(name);
-	};
+	const agenda = useSelector((state) => state.agenda.agendaThisMonth);
 
 	useEffect(() => {
 		setInputMonth(optionValue.month);
 		setInputYear(optionValue.year);
-	}, [optionValue]);
+		dispatch(
+			fetchAgendaThisMonth({
+				year: optionValue.year,
+				month: optionValue.month,
+			}),
+		);
+	}, [optionValue, dispatch]);
 
 	const handleOptionValue = (event) => {
 		const { name, value } = event.target;
@@ -84,89 +94,122 @@ const Calendar = () => {
 
 	return (
 		<>
-			<div className="flex items-center justify-between mb-5">
-				<div className="flex items-center gap-3 text-secondary">
-					<button onClick={decrementMonth}>
-						<FontAwesomeIcon
-							icon={faChevronLeft}
-							className="cursor-pointer"
-						/>
-					</button>
-					<button onClick={incrementMonth}>
-						<FontAwesomeIcon
-							icon={faChevronRight}
-							className="cursor-pointer"
-						/>
-					</button>
+			{menu !== 'history' ? (
+				<>
+					<div className="flex items-center justify-between mb-5">
+						<div className="flex items-center gap-3 text-secondary">
+							<button onClick={decrementMonth}>
+								<FontAwesomeIcon
+									icon={faChevronLeft}
+									className="cursor-pointer"
+								/>
+							</button>
+							<button onClick={incrementMonth}>
+								<FontAwesomeIcon
+									icon={faChevronRight}
+									className="cursor-pointer"
+								/>
+							</button>
 
-					<div className="flex justify-center items-center font-semibold text-xl gap-2">
-						<select
-							className="appearance-none cursor-pointer focus:outline-none focus:ring-0 focus:border-transparent text-center"
-							name="month"
-							onChange={handleOptionValue}
-							value={optionValue.month}
-						>
-							{monthList.map((month, index) => (
-								<option
-									className="text-sm"
-									key={index}
-									value={index}
+							<div className="flex justify-center items-center font-semibold text-xl gap-2">
+								<select
+									className="appearance-none cursor-pointer focus:outline-none focus:ring-0 focus:border-transparent text-center"
+									name="month"
+									onChange={handleOptionValue}
+									value={optionValue.month}
 								>
-									{month}
-								</option>
-							))}
-						</select>
-						<select
-							className="appearance-none cursor-pointer focus:outline-none focus:ring-0 focus:border-transparent text-center"
-							name="year"
-							onChange={handleOptionValue}
-							value={optionValue.year}
-						>
-							{yearList.map((year, index) => (
-								<option
-									className="text-sm"
-									key={index}
-									value={year}
+									{monthList.map((month, index) => (
+										<option
+											className="text-sm"
+											key={index}
+											value={index}
+										>
+											{month}
+										</option>
+									))}
+								</select>
+								<select
+									className="appearance-none cursor-pointer focus:outline-none focus:ring-0 focus:border-transparent text-center"
+									name="year"
+									onChange={handleOptionValue}
+									value={optionValue.year}
 								>
-									{year}
-								</option>
-							))}
-						</select>
+									{yearList.map((year, index) => (
+										<option
+											className="text-sm"
+											key={index}
+											value={year}
+										>
+											{year}
+										</option>
+									))}
+								</select>
+							</div>
+						</div>
+
+						<div>
+							<ButtonMenu
+								link={'/agenda?menu=calendar'}
+								variant={`rounded-s-md border-y border-s ${menu === 'calendar' ? 'bg-light-primary text-white' : ''}`}
+								text="Kalender"
+							/>
+							<ButtonMenu
+								link={'/agenda?menu=list'}
+								variant={`border ${menu === 'list' ? 'bg-light-primary text-white' : ''}`}
+								text="Daftar"
+							/>
+							<ButtonMenu
+								link={'/agenda?menu=history'}
+								variant={`rounded-e-md border-y border-e ${menu === 'history' ? 'bg-light-primary text-white' : ''}`}
+								text="Riwayat"
+							/>
+						</div>
 					</div>
-				</div>
 
-				<div>
-					<ButtonMenu
-						variant={`rounded-s-md border-y border-s ${menu === 'calendar' ? 'bg-light-primary text-white' : ''}`}
-						text="Kalender"
-						onClick={() => handleMenu('calendar')}
-					/>
-					<ButtonMenu
-						variant={`border ${menu === 'list' ? 'bg-light-primary text-white' : ''}`}
-						text="Daftar"
-						onClick={() => handleMenu('list')}
-					/>
-					<ButtonMenu
-						variant={`rounded-e-md border-y border-e ${menu === 'history' ? 'bg-light-primary text-white' : ''}`}
-						text="Riwayat"
-						onClick={() => handleMenu('history')}
-					/>
-				</div>
-			</div>
+					{menu === 'calendar' ? (
+						<CalendarGrid
+							month={optionValue.month}
+							year={optionValue.year}
+							thisYear={getYear}
+							thisMonth={getMonth}
+							agendas={agenda}
+						/>
+					) : menu === 'list' ? (
+						<CalendarList
+							month={optionValue.month}
+							agendaThisMonth={agenda}
+						/>
+					) : null}
+				</>
+			) : (
+				<>
+					<div className="flex justify-between items-center mb-5">
+						<h1 className="text-xl font-semibold">
+							Agenda History
+						</h1>
 
-			{menu === 'calendar' ? (
-				<CalendarGrid
-					month={optionValue.month}
-					year={optionValue.year}
-					thisYear={getYear}
-					thisMonth={getMonth}
-				/>
-			) : menu === 'list' ? (
-				<CalendarList
-					month={optionValue.month}
-					year={optionValue.year}
-				/>
-			) : null}
+						<div>
+							<ButtonMenu
+								link={'/agenda?menu=calendar'}
+								variant={`rounded-s-md border-y border-s`}
+								text="Kalender"
+							/>
+							<ButtonMenu
+								link={'/agenda?menu=list'}
+								variant={`border`}
+								text="Daftar"
+							/>
+							<ButtonMenu
+								link={'/agenda?menu=history'}
+								variant={`rounded-e-md border-y border-e bg-light-primary text-white`}
+								text="Riwayat"
+							/>
+						</div>
+					</div>
+
+					<AgendaHistory />
+				</>
+			)}
 		</>
 	);
 };
