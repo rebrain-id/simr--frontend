@@ -4,7 +4,7 @@ import Button from '../elements/Button';
 import ListDepartment from '../elements/ListDepartment';
 import CreateModal from '../components/CreateDepartmentModal';
 import { useEffect, useState } from 'react';
-import { fetchLecturers } from '../redux/actions/lecturerAction';
+import { fetchDepartments } from '../redux/actions/departmentAction';
 import { useDispatch, useSelector } from 'react-redux';
 
 const Department = () => {
@@ -12,11 +12,11 @@ const Department = () => {
 	const handleModal = () => setOpenModal(!openModal);
 	const dispatch = useDispatch();
 	const [pending, setPending] = useState(true);
-	const datas = useSelector((state) => state.fetchLecturers.lecturers);
+	const datas = useSelector((state) => state.fetchDepartments.departments);
 
 	useEffect(() => {
 		const timeout = setTimeout(() => {
-			dispatch(fetchLecturers());
+			dispatch(fetchDepartments());
 
 			setPending(false);
 		}, 500);
@@ -43,8 +43,8 @@ const Department = () => {
 					{datas.map((item, index) => (
 						<ListDepartment
 							key={index}
-							data={item.dosen.department.name}
-							name={item.dosen.department.name}
+							data={item.name}
+							name={item.name}
 						/>
 					))}
 				</section>

@@ -1,4 +1,4 @@
-import dataJson from "../../../data.json"
+import { getDepartment } from "../../services/department"
 export const FETCH_DEPARTMENT_REQUEST = 'FETCH_DEPARTMENT_REQUEST'
 export const FETCH_DEPARTMENT_SUCCESS = 'FETCH_DEPARTMENT_SUCCESS'
 export const FETCH_DEPARTMENT_FAILURE = 'FETCH_DEPARTMENT_FAILURE'
@@ -21,7 +21,7 @@ export const fetchDepartments = () => {
 	return async (dispatch) => {
 		dispatch(fetchDepartmentsRequest());
 		try {
-			const data = await dataJson.prodi;
+			const data = await getDepartment();
             console.log(data);
 			dispatch(fetchDepartmentsSuccess(data));
 		} catch (error) {
