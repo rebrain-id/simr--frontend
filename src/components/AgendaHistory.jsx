@@ -57,7 +57,7 @@ const AgendaHistory = () => {
 
 			{openFilter && <FilterDropdown typeAgenda={getType} />}
 
-			{agendaHistory && (
+			{agendaHistory.lenght > 0 ? (
 				<div className="mt-5 flex flex-col gap-3">
 					{agendaHistory.map((item, itemIndex) => (
 						<ListAgenda
@@ -75,6 +75,10 @@ const AgendaHistory = () => {
 						/>
 					))}
 				</div>
+			) : (
+				<p className="text-center text-xs text-light-secondary">
+					Tidak ada riwayat
+				</p>
 			)}
 		</div>
 	);
