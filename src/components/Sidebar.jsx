@@ -50,7 +50,7 @@ const Sidebar = () => {
 				<NavLink
 					icon={faSitemap}
 					title="Program Studi"
-					to="/department"
+					to="/prodi"
 					variant={
 						isActive === '/department'
 							? 'bg-light-primary text-white'
@@ -60,7 +60,7 @@ const Sidebar = () => {
 				<NavLink
 					icon={faUserAlt}
 					title="Dosen"
-					to="/lecturer"
+					to="/dosen"
 					variant={
 						isActive('/dosen') ? 'bg-light-primary text-white' : ''
 					}

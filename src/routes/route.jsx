@@ -37,11 +37,11 @@ export const router = createBrowserRouter([
 				element: <AddAgenda />,
 			},
 			{
-				path: 'department',
+				path: 'prodi',
 				element: <Department />,
 			},
 			{
-				path: 'lecturer',
+				path: 'dosen',
 				element: <Lecturer />,
 			},
 		],
