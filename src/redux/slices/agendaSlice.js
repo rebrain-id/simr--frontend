@@ -48,6 +48,10 @@ const agendaSlice = createSlice({
 			state.showSidebar = false;
 			state.detailAgenda = null;
 		},
+		updateDetailAgendaSuccess(state, action) {
+			state.loading = false;
+			state.detailAgenda = action.payload;
+		},
 		fetchAgendaFailure(state, action) {
 			state.loading = false;
 			state.error = action.payload;
@@ -64,6 +68,7 @@ export const {
 	fetchAgendaHistorySuccess,
 	fetchDetailAgendaSuccess,
 	closeDetailAgendaSuccess,
+	updateDetailAgendaSuccess,
 	fetchAgendaFailure,
 } = agendaSlice.actions;
 

@@ -10,8 +10,13 @@ import {
 	fetchDetailAgendaSuccess,
 	closeDetailAgendaSuccess,
 	fetchAgendaFailure,
+	updateDetailAgendaSuccess,
 } from '../slices/agendaSlice';
-import { getAgenda, getDetailAgenda } from '../../services/agenda';
+import {
+	getAgenda,
+	getDetailAgenda,
+	updateAgenda,
+} from '../../services/agenda';
 
 export const fetchAgenda = createAsyncThunk(
 	'agenda/fetchAgenda',
@@ -220,6 +225,21 @@ export const closeDetailAgenda = createAsyncThunk(
 	'agenda/closeDetailAgenda',
 	async (_, { dispatch }) => {
 		dispatch(closeDetailAgendaSuccess());
+	},
+);
+
+export const updateDetailAgenda = createAsyncThunk(
+	'agenda/updateDetailAgenda',
+
+	async ({ data }, { dispatch }) => {
+		try {
+			dispatch(fetchAgendaRequest());
+
+			const response = await updateAgenda(data.uuid, data);
+			dispatch(updateDetailAgendaSuccess(response));
+		} catch (error) {
+			dispatch(fetchAgendaFailure(error.message));
+		}
 	},
 );
 
