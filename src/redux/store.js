@@ -1,10 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit';
-import detailAgendaReducer from './reducer/detailAgendaReducer';
 import agendaSlice from './slices/agendaSlice';
+import typeAgendaSlice from './slices/typeAgendaSlice';
+import departmentSlice from './slices/departmentSlice';
 
 export default configureStore({
 	reducer: {
 		agenda: agendaSlice,
-		datailAgenda: detailAgendaReducer,
+		typeAgenda: typeAgendaSlice,
+		department: departmentSlice,
 	},
 });
