@@ -7,39 +7,6 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchLecturers } from '../redux/actions/lecturerAction';
 
-const data = [
-	{
-		id: 1,
-		nama: 'Dosen 1',
-		email: 'j9fQp@example.com',
-		no: '082********',
-	},
-	{
-		id: 2,
-		nama: 'Dosen 2',
-		email: 'j9fQp@example.com',
-		no: '082********',
-	},
-	{
-		id: 3,
-		nama: 'Dosen 3',
-		email: 'j9fQp@example.com',
-		no: '082********',
-	},
-	{
-		id: 4,
-		nama: 'Dosen 4',
-		email: 'j9fQp@example.com',
-		no: '082********',
-	},
-	{
-		id: 5,
-		nama: 'Dosen 5',
-		email: 'j9fQp@example.com',
-		no: '082********',
-	},
-];
-
 const Lecturer = () => {
 	const [openModal, setOpenModal] = useState(false);
 	const handleModal = () => setOpenModal(!openModal);
@@ -77,10 +44,10 @@ const Lecturer = () => {
 					{datas.map((item, index) => (
 						<ListLecturer
 							key={index}
-							data={item.dosen.name}
-							name={item.dosen.name}
-							email={item.dosen.email}
-							no={item.dosen.phoneNumber}
+							data={item.name}
+							name={item.name}
+							email={item.email}
+							no={item.phoneNumber}
 						/>
 					))}
 				</section>

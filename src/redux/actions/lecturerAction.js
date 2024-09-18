@@ -1,4 +1,4 @@
-import dataJson from "../../../data.json"
+import { getLecturer } from "../../services/lecturer";
 export const FETCH_LECTURER_REQUEST = 'FETCH_LECTURER_REQUEST'
 export const FETCH_LECTURER_SUCCESS = 'FETCH_LECTURER_SUCCESS'
 export const FETCH_LECTURER_FAILURE = 'FETCH_LECTURER_FAILURE'
@@ -22,7 +22,7 @@ export const fetchLecturers = () => {
 	return async (dispatch) => {
 		dispatch(fetchLecturersRequest());
 		try {
-			const data = await dataJson.dosen;
+			const data = await getLecturer();
             console.log(data);
 			dispatch(fetchLecturersSuccess(data));
 		} catch (error) {
