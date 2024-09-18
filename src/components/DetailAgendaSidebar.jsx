@@ -6,57 +6,74 @@ import FormSelect from '../elements/forms/FormSelect';
 import FormCheckbox from '../elements/forms/FormCheckbox';
 import FormInputCheckbox from '../elements/forms/FormInputCheckbox';
 import Button from '../elements/Button';
-import { useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
+import moment from 'moment';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchTypeAgenda } from '../redux/actions/typeAgendaAction';
+import { fetchDepartment } from '../redux/actions/departmentAction';
 
 const DetailAgendaSidebar = (props) => {
 	const { onClick, data, isShow = false } = props;
 	const [checkAll, setCheckAll] = useState(false);
 	const [checkboxStates, setCheckboxStates] = useState({});
-	let checkboxRefs = useRef([]);
+
+	const dispatch = useDispatch();
+	const typeAgenda = useSelector((state) => state.typeAgenda.typeAgenda);
+	const department = useSelector((state) => state.department.department);
+
+	useEffect(() => {
+		dispatch(fetchTypeAgenda());
+		dispatch(fetchDepartment());
+
+		// if (data && department) {
+		// 	const initialCheckboxStates = department.reduce((acc, dept) => {
+		// 		acc[dept.uuid] = data.departments.includes(dept.uuid);
+		// 		return acc;
+		// 	}, {});
+
+		// 	setCheckboxStates(initialCheckboxStates);
+		// }
+	}, [dispatch]);
 
 	const handleCheckAll = () => {
 		const newCheckAll = !checkAll;
 		setCheckAll(newCheckAll);
 
-		checkboxRefs.current.forEach((checkbox) => {
-			if (checkbox) {
-				checkbox.checked = newCheckAll;
-			}
-		});
+		const updatedCheckboxStates = department.reduce((acc, dept) => {
+			acc[dept.uuid] = newCheckAll;
+			return acc;
+		}, {});
 
-		const newCheckboxStates = checkboxRefs.current.reduce(
-			(acc, checkbox, index) => {
-				acc[index] = newCheckAll;
-				return acc;
-			},
-			{},
-		);
-
-		setCheckboxStates(newCheckboxStates);
+		setCheckboxStates(updatedCheckboxStates);
 	};
 
-	const handleCheckboxChange = (index) => {
+	const handleCheckboxChange = (uuid) => {
 		const updatedCheckboxStates = {
 			...checkboxStates,
-			[index]: !checkboxStates[index],
+			[uuid]: !checkboxStates[uuid],
 		};
+
 		setCheckboxStates(updatedCheckboxStates);
 
 		const allChecked = Object.values(updatedCheckboxStates).every(
 			(value) => value,
 		);
+
 		setCheckAll(allChecked);
 	};
 
-	const addRefs = (el, index) => {
-		if (el && !checkboxRefs.current.includes(el)) {
-			checkboxRefs.current[index] = el;
+	const handleCloseModal = (e) => {
+		if (e.target === e.currentTarget) {
+			onClick();
 		}
 	};
 
+	console.log(data);
+
 	return (
 		<div
-			className={`absolute top-0 left-0 w-full min-h-screen h-auto bg-light-secondary bg-opacity-10 flex justify-end z-20 inset-y-0 transform transition-transform duration-1000 ${
+			onClick={handleCloseModal}
+			className={`fixed top-0 left-0 w-full min-h-screen h-auto bg-light-secondary bg-opacity-10 flex justify-end z-20 inset-y-0 transform transition-transform duration-1000 ${
 				isShow ? 'translate-x-0' : 'translate-x-full'
 			}`}
 		>
@@ -82,37 +99,36 @@ const DetailAgendaSidebar = (props) => {
 						labelvariant="text-xs"
 						label="Dari"
 						type="datetime-local"
-						value={data.date}
+						value={moment(data.start).format('YYYY-MM-DDTHH:mm')}
 					/>
 					<FormInput
 						inputvariant="text-sm font-normal"
 						labelvariant="text-xs"
 						label="Sampai"
 						type="datetime-local"
-						value={data.date}
+						value={moment(data.finish).format('YYYY-MM-DDTHH:mm')}
 					/>
 					<FormInput
 						inputvariant="text-sm font-normal"
 						labelvariant="text-xs"
 						label="Tempat"
-						value={data.room}
+						value={data.location}
 					/>
-					<FormTextarea label="Deskripsi" />
+					<FormTextarea label="Deskripsi" value={data.description} />
 					<FormSelect label="Kategori">
 						<option value="" className="text-light-secondary">
 							Pilih jenis agenda
 						</option>
-						{['Agenda Internal', 'Agenda Eksternal'].map(
-							(item, index) => (
-								<option
-									value=""
-									className="text-secondary"
-									key={index}
-								>
-									{item}
-								</option>
-							),
-						)}
+						{typeAgenda.map((item, index) => (
+							<option
+								value={item.uuid}
+								className="text-secondary"
+								key={index}
+								selected={data.typeAgenda.uuid === item.uuid}
+							>
+								{item.name}
+							</option>
+						))}
 					</FormSelect>
 					<FormCheckbox label="Anggota">
 						<FormInputCheckbox
@@ -120,20 +136,15 @@ const DetailAgendaSidebar = (props) => {
 							onClick={handleCheckAll}
 							isSelected={checkAll}
 						/>
-						{[
-							'Teknik Informatika',
-							'Teknik Sipil',
-							'Teknik Mesin',
-							'Teknik Elektro',
-							'Teknik Lingkungan',
-							'Sistem Informasi',
-						].map((item, index) => (
+						{department.map((item, index) => (
 							<FormInputCheckbox
-								text={item}
-								isRef={(el) => addRefs(el, index)}
+								text={item.name}
+								value={item.uuid}
 								key={index}
-								onChange={() => handleCheckboxChange(index)}
-								isSelected={checkboxStates[index] || checkAll}
+								onChange={() => handleCheckboxChange(item.uuid)}
+								isSelected={data.departments.includes(
+									item.uuid,
+								)}
 							/>
 						))}
 					</FormCheckbox>
