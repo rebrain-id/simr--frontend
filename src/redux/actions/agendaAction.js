@@ -1,6 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import moment from 'moment';
-import dataJson from '../../../data.json';
 import {
 	fetchAgendaRequest,
 	fetchAgendaSuccess,
@@ -8,9 +7,11 @@ import {
 	fetchAgendaThisMonthSuccess,
 	fetchAgendaByDateSuccess,
 	fetchAgendaHistorySuccess,
+	fetchDetailAgendaSuccess,
+	closeDetailAgendaSuccess,
 	fetchAgendaFailure,
 } from '../slices/agendaSlice';
-import { getAgenda } from '../../services/agenda';
+import { getAgenda, getDetailAgenda } from '../../services/agenda';
 
 export const fetchAgenda = createAsyncThunk(
 	'agenda/fetchAgenda',
@@ -18,7 +19,9 @@ export const fetchAgenda = createAsyncThunk(
 		try {
 			dispatch(fetchAgendaRequest());
 
-			const data = convertAgendaData(dataJson.agenda);
+			const dataset = await getAgenda();
+
+			const data = convertAgendaData(dataset);
 
 			dispatch(fetchAgendaSuccess(data));
 		} catch (error) {
@@ -33,11 +36,10 @@ export const fetchAgendaToday = createAsyncThunk(
 		try {
 			dispatch(fetchAgendaRequest());
 
-			const dataset = getAgenda();
+			const dataset = await getAgenda();
 
-			console.log(dataset);
+			const data = convertAgendaData(dataset);
 
-			const data = convertAgendaData(dataJson.agenda);
 			const today = moment().format('DD');
 			const thisMonth = moment().format('MM');
 
@@ -58,7 +60,9 @@ export const fetchAgendaThisMonth = createAsyncThunk(
 	async ({ year, month }, { dispatch }) => {
 		try {
 			dispatch(fetchAgendaRequest());
-			const dataThisMonth = convertAgendaData(dataJson.agenda);
+			const dataset = await getAgenda();
+
+			const dataThisMonth = convertAgendaData(dataset);
 
 			const filteredAgenda = dataThisMonth.filter(
 				(item) =>
@@ -91,8 +95,9 @@ export const fetchAgendaByDate = createAsyncThunk(
 	async ({ year, month, date }, { dispatch }) => {
 		try {
 			dispatch(fetchAgendaRequest());
+			const dataset = await getAgenda();
 
-			const dataByDate = convertAgendaData(dataJson.agenda);
+			const dataByDate = convertAgendaData(dataset);
 
 			const filteredAgenda = dataByDate.filter(
 				(item) =>
@@ -114,7 +119,7 @@ export const fetchAgendaHistory = createAsyncThunk(
 		try {
 			dispatch(fetchAgendaRequest());
 
-			const data = dataJson.agenda;
+			const data = await getAgenda();
 			const today = moment();
 			const convertDateFrom = dateFrom ? moment(dateFrom) : moment(0);
 			const convertDateTo = dateTo ? moment(dateTo) : today;
@@ -193,6 +198,28 @@ export const fetchAgendaHistory = createAsyncThunk(
 		} catch (error) {
 			dispatch(fetchAgendaFailure(error.message));
 		}
+	},
+);
+
+export const fetchDetailAgenda = createAsyncThunk(
+	'agenda/fetchDetailAgenda',
+	async ({ uuid }, { dispatch }) => {
+		try {
+			dispatch(fetchAgendaRequest());
+
+			const data = await getDetailAgenda(uuid);
+
+			dispatch(fetchDetailAgendaSuccess(data));
+		} catch (error) {
+			dispatch(fetchAgendaFailure(error.message));
+		}
+	},
+);
+
+export const closeDetailAgenda = createAsyncThunk(
+	'agenda/closeDetailAgenda',
+	async (_, { dispatch }) => {
+		dispatch(closeDetailAgendaSuccess());
 	},
 );
 
