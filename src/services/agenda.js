@@ -9,7 +9,22 @@ export const getAgenda = async () => {
 		url: url,
 	})
 		.then((res) => {
-			return res.data;
+			return res.data.data;
+		})
+		.catch((err) => {
+			console.log(err);
+		});
+	return response;
+};
+
+export const getDetailAgenda = async (uuid) => {
+	const url = `${API_URL()}/detail-agendas/${uuid}`;
+	const response = await axios({
+		method: 'get',
+		url: url,
+	})
+		.then((res) => {
+			return res.data.data;
 		})
 		.catch((err) => {
 			console.log(err);
