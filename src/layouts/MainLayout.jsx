@@ -10,6 +10,7 @@ import LoadingScreen from '../elements/LoadingScreen';
 
 const MainLayout = () => {
 	const [showLoading, setShowLoading] = useState(false);
+	const [showSidebarDialogue, setShowSidebarDialogue] = useState(false);
 	const { detailAgenda, showSidebar, loading } = useSelector(
 		(state) => state.agenda,
 	);
@@ -22,8 +23,12 @@ const MainLayout = () => {
 	useEffect(() => {
 		if (showSidebar) {
 			document.body.style.overflow = 'hidden';
+			setShowSidebarDialogue(true);
 		} else {
 			document.body.style.overflow = '';
+			setTimeout(() => {
+				setShowSidebarDialogue(false);
+			}, 1000);
 		}
 	}, [showSidebar]);
 
@@ -42,11 +47,14 @@ const MainLayout = () => {
 			<Sidebar />
 
 			<aside className="w-full px-10">
-				{showSidebar && (
+				{showSidebarDialogue && (
 					<DetailAgendaSidebar
 						onClick={() => dispatch(closeDetailAgenda())}
 						data={detailAgenda}
 						isShow={true}
+						variant={
+							showSidebar ? 'translate-x-0' : 'translate-x-full'
+						}
 					/>
 				)}
 				<Header />

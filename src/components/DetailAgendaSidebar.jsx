@@ -14,7 +14,7 @@ import { fetchDepartment } from '../redux/actions/departmentAction';
 import { updateDetailAgenda } from '../redux/actions/agendaAction';
 
 const DetailAgendaSidebar = (props) => {
-	const { onClick, data, isShow = false } = props;
+	const { onClick, data, isShow = false, variant } = props;
 	const [checkAll, setCheckAll] = useState(false);
 	const [checkboxStates, setCheckboxStates] = useState({});
 
@@ -135,7 +135,9 @@ const DetailAgendaSidebar = (props) => {
 				isShow ? 'translate-x-0' : 'translate-x-full'
 			}`}
 		>
-			<div className="h-screen overflow-y-auto bg-light-white pb-5 drop-shadow-right">
+			<div
+				className={`h-screen overflow-y-auto bg-light-white pb-5 drop-shadow-right transition-all duration-1000 ${variant}`}
+			>
 				<section className="sticky top-0 py-5 px-8 bg-light-white flex justify-between items-center">
 					<h1 className="text-lg font-semibold">Detail Agenda</h1>
 					<FontAwesomeIcon
