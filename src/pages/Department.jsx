@@ -15,12 +15,12 @@ const Department = () => {
 	const datas = useSelector((state) => state.fetchDepartments.departments);
 
 	useEffect(() => {
-		const timeout = setTimeout(() => {
+		setPending(true);
+		setTimeout(() => {
 			dispatch(fetchDepartments());
-
 			setPending(false);
-		}, 500);
-		return () => clearTimeout(timeout);
+		}, 1500);
+		return () => clearTimeout();
 	}, [dispatch]);
 	return (
 		<>
@@ -40,10 +40,12 @@ const Department = () => {
 				</div>
 
 				<section className="mt-5 flex flex-col gap-3">
+					{pending && 'Loading...'}
 					{datas.map((item, index) => (
 						<ListDepartment
 							key={index}
 							data={item.name}
+							uuid={item.uuid}
 							name={item.name}
 						/>
 					))}

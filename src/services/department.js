@@ -19,7 +19,7 @@ export const getDepartment = async () => {
 };
 
 export const postDepartment = async (body) => {
-	const url = `${API_URL()}/v1/department`;
+	const url = `${API_URL()}/v1/department/`;
 
 	const response = await axios({
 		method: 'post',
@@ -35,4 +35,21 @@ export const postDepartment = async (body) => {
 		})
 	
 	return response
+}
+
+export const deleteDepartment = async (uuid) => {
+	const url = `${API_URL()}/v1/department/${uuid}`
+
+	const response = await axios({
+		method: 'delete',
+		url: url,
+		data: uuid,
+	})
+		.then((res) => {
+			return res.data
+		})
+		.catch((err) => {
+			console.log(err);
+			throw err
+		})
 }

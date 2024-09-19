@@ -12,6 +12,7 @@ export default configureStore({
 		department: departmentSlice,
 		fetchLecturers: lecturerReducer,
 		fetchDepartments: departmentReducer,
-		postDepartmentData: departmentReducer
+		postDepartmentData: departmentReducer,
+		deleteDepartmentData: departmentReducer
 	},
 });

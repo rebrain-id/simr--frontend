@@ -4,7 +4,10 @@ import {
     FETCH_DEPARTMENT_FAILURE,
     POST_DEPARTMENT_REQUEST,
     POST_DEPARTMENT_SUCCESS,
-    POST_DEPARTMENT_FAILURE
+    POST_DEPARTMENT_FAILURE,
+    DELETE_DEPARTMENT_REQUEST,
+    DELETE_DEPARTMENT_SUCCESS,
+    DELETE_DEPARTMENT_FAILURE
 } from '../actions/departmentAction'
 
 const initialState = {
@@ -19,7 +22,8 @@ const departmentReducer = (state = initialState, action) => {
         case FETCH_DEPARTMENT_REQUEST:
             return {
                 ...state,
-                loading: true
+                loading: true,
+                error: ''
 
             }
         case FETCH_DEPARTMENT_SUCCESS:
@@ -51,8 +55,28 @@ const departmentReducer = (state = initialState, action) => {
         case POST_DEPARTMENT_FAILURE:
             return {
                 ...state,
-                loadng: false,
-                data: null,
+                loading: false,
+                uuid: null,
+                error: action.payload
+            }
+        case DELETE_DEPARTMENT_REQUEST:
+            return {
+                ...state,
+                loading: true,
+                error: ''
+            }
+        case DELETE_DEPARTMENT_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                data: state.data.filter((department) => department.uuid !== action.payload),
+                error: ''
+            }
+        case DELETE_DEPARTMENT_FAILURE:
+            return {
+                ...state,
+                loading: false,
+                data: '',
                 error: action.payload
             }
         default:
