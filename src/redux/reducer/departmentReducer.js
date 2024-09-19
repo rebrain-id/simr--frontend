@@ -12,7 +12,7 @@ import {
 
 const initialState = {
     departments: [],
-    data: null,
+    department: '',
     loading: false,
     error: 'Program Studi not found'
 }
@@ -49,14 +49,14 @@ const departmentReducer = (state = initialState, action) => {
             return {
                 ...state,
                 loading: false,
-                data: action.payload,
+                department: action.payload,
                 error: ''
             }
         case POST_DEPARTMENT_FAILURE:
             return {
                 ...state,
                 loading: false,
-                uuid: null,
+                department: '',
                 error: action.payload
             }
         case DELETE_DEPARTMENT_REQUEST:
@@ -69,14 +69,14 @@ const departmentReducer = (state = initialState, action) => {
             return {
                 ...state,
                 loading: false,
-                data: state.data.filter((department) => department.uuid !== action.payload),
+                department: state.data.filter((department) => department.uuid !== action.payload),
                 error: ''
             }
         case DELETE_DEPARTMENT_FAILURE:
             return {
                 ...state,
                 loading: false,
-                data: '',
+                department: '',
                 error: action.payload
             }
         default:

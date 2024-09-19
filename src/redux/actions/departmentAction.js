@@ -28,9 +28,9 @@ export const postDepartmentRequest = () => ({
 	type: 'POST_DEPARTMENT_REQUEST'
 })
 
-export const postDepartmentSuccess = (data) => ({
+export const postDepartmentSuccess = (department) => ({
 	type: 'POST_DEPARTMENT_SUCCESS',
-	payload: data
+	payload: department
 })
 
 export const postDepartmentFailure = (error) => ({
@@ -65,11 +65,11 @@ export const fetchDepartments = () => {
 	};
 };
 
-export const postDepartmentData = (data) => {
+export const postDepartmentData = (department) => {
 	return async (dispatch) => {
 		dispatch(postDepartmentRequest());
 		try {
-			const response = await postDepartment(data);
+			const response = await postDepartment(department);
 			console.log(response);
 			dispatch(postDepartmentSuccess(response));
 		} catch (error) {
@@ -85,7 +85,7 @@ export const deleteDepartmentData = (uuid) => {
 			const response = await deleteDepartment(uuid);
 			console.log(response);
 			dispatch(deleteDepartmentSuccess(response));
-			dispatch(fetchDepartments());
+			dispatch
 		} catch (error) {
 			dispatch(deleteDepartmentFailure(error.message));
 		}
