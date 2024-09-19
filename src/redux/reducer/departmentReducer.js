@@ -36,7 +36,7 @@ const departmentReducer = (state = initialState, action) => {
         case FETCH_DEPARTMENT_FAILURE:
             return {
                 ...state,
-                loadng: false,
+                loading: false,
                 departments: [],
                 error: action.payload
             }
