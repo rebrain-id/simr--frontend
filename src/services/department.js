@@ -17,3 +17,22 @@ export const getDepartment = async () => {
 
 	return response;
 };
+
+export const postDepartment = async (body) => {
+	const url = `${API_URL()}/v1/department`;
+
+	const response = await axios({
+		method: 'post',
+		url: url,
+		data: body,
+	})
+		.then((res) => {
+			return res.data;
+		})
+		.catch((err) => {
+			console.log(err);
+			throw err
+		})
+	
+	return response
+}

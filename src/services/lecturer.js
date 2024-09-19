@@ -17,3 +17,21 @@ export const getLecturer = async () => {
 
 	return response;
 }
+
+export const postLecturer = async (body) => {
+	const url = `${API_URL()}/v1/lecturer`;
+
+	const response = await axios({
+		method: 'post',
+		url: url,
+		data: body,
+	})
+		.then((res) => {
+			return res.data;
+		})
+		.catch((err) => {
+			console.log(err);
+		})
+	
+	return response
+}
