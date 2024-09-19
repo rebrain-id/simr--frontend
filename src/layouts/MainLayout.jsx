@@ -4,11 +4,15 @@ import Header from '../components/Header';
 import Footer from '../elements/Footer';
 import DetailAgendaSidebar from '../components/DetailAgendaSidebar';
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { closeDetailAgenda } from '../redux/actions/agendaAction';
+import LoadingScreen from '../elements/LoadingScreen';
 
 const MainLayout = () => {
-	const { detailAgenda, showSidebar } = useSelector((state) => state.agenda);
+	const [showLoading, setShowLoading] = useState(false);
+	const { detailAgenda, showSidebar, loading } = useSelector(
+		(state) => state.agenda,
+	);
 	const dispatch = useDispatch();
 
 	useEffect(() => {
@@ -22,6 +26,16 @@ const MainLayout = () => {
 			document.body.style.overflow = '';
 		}
 	}, [showSidebar]);
+
+	useEffect(() => {
+		if (loading) {
+			setShowLoading(true);
+		} else {
+			setTimeout(() => {
+				setShowLoading(false);
+			}, 5000);
+		}
+	}, [loading]);
 
 	return (
 		<main className="min-h-screen h-auto w-full flex p-2 bg-light-gray">
@@ -39,6 +53,8 @@ const MainLayout = () => {
 				<Outlet />
 				<Footer />
 			</aside>
+
+			{showLoading && <LoadingScreen loading={loading} />}
 		</main>
 	);
 };
