@@ -4,32 +4,67 @@ import { API_URL } from './config';
 export const getAgenda = async () => {
 	const url = `${API_URL()}/detail-agendas?username=informatika`;
 
-	const response = await axios({
-		method: 'get',
-		url: url,
-	})
-		.then((res) => {
-			return res.data.data;
-		})
-		.catch((err) => {
-			console.log(err);
+	try {
+		const response = await axios({
+			method: 'get',
+			url: url,
 		});
-	return response;
+
+		return response.data.data;
+	} catch (error) {
+		console.log(error);
+		throw error;
+	}
 };
 
 export const getDetailAgenda = async (uuid) => {
 	const url = `${API_URL()}/detail-agendas/${uuid}`;
-	const response = await axios({
-		method: 'get',
-		url: url,
-	})
-		.then((res) => {
-			return res.data.data;
-		})
-		.catch((err) => {
-			console.log(err);
+
+	try {
+		const response = await axios({
+			method: 'get',
+			url: url,
 		});
-	return response;
+
+		return response.data.data;
+	} catch (error) {
+		console.log(error);
+		throw error;
+	}
+};
+
+export const createDataAgenda = async (data) => {
+	const url = `${API_URL()}/detail-agendas`;
+
+	try {
+		const response = await axios({
+			method: 'post',
+			url: url,
+			data: data,
+		});
+
+		return response.data;
+	} catch (error) {
+		console.log(error);
+		throw error;
+	}
+};
+
+export const checkAgenda = async (data) => {
+	const url = `${API_URL()}/agendas/check`;
+
+	try {
+		const response = await axios({
+			method: 'post',
+			url: url,
+			data: data,
+		});
+
+		return response.data.data;
+	} catch (error) {
+		console.log(error);
+		throw error;
+	}
 };
 
 export const updateAgenda = async (uuid, data) => {

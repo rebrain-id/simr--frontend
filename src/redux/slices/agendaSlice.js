@@ -23,6 +23,14 @@ const agendaSlice = createSlice({
 			state.loading = false;
 			state.agenda = action.payload;
 		},
+		createAgendaSuccess(state, action) {
+			state.loading = false;
+			state.agenda = action.payload;
+		},
+		checkMemberAgendaSuccess(state, action) {
+			state.loading = false;
+			state.agenda = action.payload;
+		},
 		fetchAgendaTodaySuccess(state, action) {
 			state.loading = false;
 			state.agendaToday = action.payload;
@@ -62,6 +70,8 @@ const agendaSlice = createSlice({
 export const {
 	fetchAgendaRequest,
 	fetchAgendaSuccess,
+	createAgendaSuccess,
+	checkMemberAgendaSuccess,
 	fetchAgendaTodaySuccess,
 	fetchAgendaThisMonthSuccess,
 	fetchAgendaByDateSuccess,

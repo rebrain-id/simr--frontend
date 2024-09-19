@@ -13,6 +13,8 @@ import {
 	updateDetailAgendaSuccess,
 } from '../slices/agendaSlice';
 import {
+	checkAgenda,
+	createDataAgenda,
 	getAgenda,
 	getDetailAgenda,
 	updateAgenda,
@@ -29,6 +31,46 @@ export const fetchAgenda = createAsyncThunk(
 			const data = convertAgendaData(dataset);
 
 			dispatch(fetchAgendaSuccess(data));
+		} catch (error) {
+			dispatch(fetchAgendaFailure(error));
+		}
+	},
+);
+
+export const createAgenda = createAsyncThunk(
+	'agenda/createAgenda',
+
+	async ({ data }, { dispatch }) => {
+		try {
+			dispatch(fetchAgendaRequest());
+
+			const response = await createDataAgenda(data);
+
+			return response;
+		} catch (error) {
+			dispatch(fetchAgendaFailure(error));
+		}
+	},
+);
+
+export const checkMemberAgenda = createAsyncThunk(
+	'agenda/checkMemberAgenda',
+
+	async ({ departmentsUuid, start, finish }, { dispatch }) => {
+		try {
+			dispatch(fetchAgendaRequest());
+
+			const data = {
+				departmentsUuid: departmentsUuid,
+				start: start,
+				finish: finish,
+			};
+
+			const response = await checkAgenda(data);
+
+			console.log(response);
+
+			return response;
 		} catch (error) {
 			dispatch(fetchAgendaFailure(error));
 		}

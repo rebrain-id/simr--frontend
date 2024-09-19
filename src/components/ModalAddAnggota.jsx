@@ -3,55 +3,81 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import FormCheckbox from '../elements/forms/FormCheckbox';
 import FormInputCheckbox from '../elements/forms/FormInputCheckbox';
 import Button from '../elements/Button';
-import { useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchDepartment } from '../redux/actions/departmentAction';
+import { checkMemberAgenda } from '../redux/actions/agendaAction';
 
-const ModalAddAnggota = ({ onClick }) => {
-	const [checkAll, setCheckAll] = useState(false);
-	const [checkboxStates, setCheckboxStates] = useState({});
-	let checkboxRefs = useRef([]);
+const ModalAddAnggota = (props) => {
+	const { onClick, dateFrom, dateTo } = props;
+	const dispatch = useDispatch();
+	const departments = useSelector((state) => state.department.department);
+
+	useEffect(() => {
+		dispatch(fetchDepartment());
+	}, [dispatch]);
+
+	const [selectedDepartments, setSelectedDepartments] = useState([]);
+
+	useEffect(() => {
+		if (departments.lenght) {
+			setSelectedDepartments([]);
+		}
+	}, [departments]);
 
 	const handleCheckAll = () => {
-		const newCheckAll = !checkAll;
-		setCheckAll(newCheckAll);
-
-		checkboxRefs.current.forEach((checkbox) => {
-			if (checkbox) {
-				checkbox.checked = newCheckAll;
-			}
-		});
-
-		const newCheckboxStates = checkboxRefs.current.reduce(
-			(acc, checkbox, index) => {
-				acc[index] = newCheckAll;
-				return acc;
-			},
-			{},
-		);
-
-		setCheckboxStates(newCheckboxStates);
-	};
-
-	const handleCheckboxChange = (index) => {
-		const updatedCheckboxStates = {
-			...checkboxStates,
-			[index]: !checkboxStates[index],
-		};
-		setCheckboxStates(updatedCheckboxStates);
-
-		const allChecked = Object.values(updatedCheckboxStates).every(
-			(value) => value,
-		);
-		setCheckAll(allChecked);
-	};
-
-	const addRefs = (el, index) => {
-		if (el && !checkboxRefs.current.includes(el)) {
-			checkboxRefs.current[index] = el;
+		if (selectedDepartments.length === departments.length) {
+			setSelectedDepartments([]);
+		} else {
+			setSelectedDepartments(departments.map((item) => item.uuid));
 		}
 	};
 
+	const handleCheckboxChange = (uuid) => {
+		if (selectedDepartments.includes(uuid)) {
+			setSelectedDepartments(
+				selectedDepartments.filter((item) => item !== uuid),
+			);
+		} else {
+			setSelectedDepartments([...selectedDepartments, uuid]);
+		}
+	};
+
+	const isAllSelected = selectedDepartments.length === departments.length;
+
 	const handleCloseModal = (e) => {
 		if (e.target === e.currentTarget) {
+			onClick();
+		}
+	};
+
+	const handleCheckMemberAgenda = () => {
+		if (selectedDepartments.length) {
+			dispatch(
+				checkMemberAgenda({
+					departmentsUuid: selectedDepartments,
+					start: dateFrom,
+					finish: dateTo,
+				}),
+			);
+		}
+	};
+
+	const handleSaveMember = () => {
+		if (!sessionStorage.getItem('member')) {
+			sessionStorage.setItem(
+				'member',
+				JSON.stringify(selectedDepartments),
+			);
+
+			onClick();
+		} else {
+			sessionStorage.removeItem('member');
+			sessionStorage.setItem(
+				'member',
+				JSON.stringify(selectedDepartments),
+			);
+
 			onClick();
 		}
 	};
@@ -76,32 +102,28 @@ const ModalAddAnggota = ({ onClick }) => {
 						<FormInputCheckbox
 							text="Pilih Semua"
 							onClick={handleCheckAll}
-							isSelected={checkAll}
+							isSelected={isAllSelected}
 						/>
-						{[
-							'Teknik Informatika',
-							'Teknik Sipil',
-							'Teknik Mesin',
-							'Teknik Elektro',
-							'Teknik Lingkungan',
-							'Sistem Informasi',
-						].map((item, index) => (
+						{departments.map((item, index) => (
 							<FormInputCheckbox
-								text={item}
-								isRef={(el) => addRefs(el, index)}
+								text={item.name}
 								key={index}
-								onChange={() => handleCheckboxChange(index)}
-								isSelected={checkboxStates[index] || checkAll}
+								onChange={() => handleCheckboxChange(item.uuid)}
+								isSelected={selectedDepartments.includes(
+									item.uuid,
+								)}
 							/>
 						))}
 					</FormCheckbox>
 
 					<div className="flex justify-end items-center gap-2 mt-3">
 						<Button
+							onClick={handleCheckMemberAgenda}
 							text="Cek Agenda"
 							variant="bg-light-primary bg-opacity-30 text-light-primary text-sm hover:bg-opacity-50"
 						/>
 						<Button
+							onClick={handleSaveMember}
 							text="Simpan Anggota"
 							variant="bg-light-primary bg-opacity-90 text-light-white text-sm hover:bg-opacity-100"
 						/>
