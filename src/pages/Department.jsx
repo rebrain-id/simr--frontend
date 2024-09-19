@@ -11,14 +11,14 @@ const Department = () => {
 	const [openModal, setOpenModal] = useState(false);
 	const handleModal = () => setOpenModal(!openModal);
 	const dispatch = useDispatch();
-	const [pending, setPending] = useState(true);
+	const [loading, setLoading] = useState(true);
 	const datas = useSelector((state) => state.fetchDepartments.departments);
 
 	useEffect(() => {
-		setPending(true);
+		setLoading(true);
 		setTimeout(() => {
 			dispatch(fetchDepartments());
-			setPending(false);
+			setLoading(false);
 		}, 1500);
 		return () => clearTimeout();
 	}, [dispatch]);
@@ -40,7 +40,7 @@ const Department = () => {
 				</div>
 
 				<section className="mt-5 flex flex-col gap-3">
-					{pending && 'Loading...'}
+					{loading && 'Loading...'}
 					{datas.map((item, index) => (
 						<ListDepartment
 							key={index}
