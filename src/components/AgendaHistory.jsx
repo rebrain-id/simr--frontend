@@ -57,7 +57,7 @@ const AgendaHistory = () => {
 
 			{openFilter && <FilterDropdown typeAgenda={getType} />}
 
-			{agendaHistory.lenght > 0 ? (
+			{agendaHistory.lenght !== 0 ? (
 				<div className="mt-5 flex flex-col gap-3">
 					{agendaHistory.map((item, itemIndex) => (
 						<ListAgenda

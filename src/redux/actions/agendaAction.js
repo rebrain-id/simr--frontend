@@ -176,14 +176,13 @@ export const fetchAgendaHistory = createAsyncThunk(
 
 				if (dateFrom && dateTo) {
 					if (type && type == 'all') {
-						return (
-							finishedDate.isBetween(
-								convertDateFrom,
-								convertDateTo,
-								null,
-								'[)',
-							) && item.isDone === true
+						return finishedDate.isBetween(
+							convertDateFrom,
+							convertDateTo,
+							null,
+							'[)',
 						);
+						// && item.isDone === true
 					} else if (type) {
 						return (
 							finishedDate.isBetween(
@@ -191,9 +190,8 @@ export const fetchAgendaHistory = createAsyncThunk(
 								convertDateTo,
 								null,
 								'[)',
-							) &&
-							item.typeAgenda.name == `Rapat ${type}` &&
-							item.isDone === true
+							) && item.typeAgenda.name == `Rapat ${type}`
+							// && item.isDone === true
 						);
 					} else {
 						return (
@@ -202,36 +200,33 @@ export const fetchAgendaHistory = createAsyncThunk(
 								convertDateTo,
 								null,
 								'[)',
-							) &&
-							item.typeAgenda.name == `Rapat Internal` &&
-							item.isDone === true
+							) && item.typeAgenda.name == `Rapat Internal`
+							// && item.isDone === true
 						);
 					}
 				} else {
 					if (type && type == 'all') {
-						return (
-							finishedDate.isBefore(convertDateTo) &&
-							item.isDone === true
-						);
+						return finishedDate.isBefore(convertDateTo);
+						// && item.isDone === true
 					} else if (type) {
 						return (
 							finishedDate.isBefore(convertDateTo) &&
-							item.typeAgenda.name == `Rapat ${type}` &&
-							item.isDone === true
+							item.typeAgenda.name == `Rapat ${type}`
+							// && item.isDone === true
 						);
 					} else {
 						return (
 							finishedDate.isBefore(convertDateTo) &&
-							item.typeAgenda.name == `Rapat Internal` &&
-							item.isDone === true
+							item.typeAgenda.name == `Rapat Internal`
+							// && item.isDone === true
 						);
 					}
 				}
 			});
 
 			const sortedAgenda = filteredAgenda.sort((a, b) => {
-				const dateA = moment(a.finish);
-				const dateB = moment(b.finish);
+				const dateA = moment.utc(a.finish);
+				const dateB = moment.utc(b.finish);
 				if (asc) {
 					return dateA - dateB;
 				} else {
@@ -287,8 +282,8 @@ export const updateDetailAgenda = createAsyncThunk(
 
 const convertAgendaData = (data) => {
 	return data.map((item) => {
-		const startTime = moment(item.start);
-		const finishTime = moment(item.finish);
+		const startTime = moment.utc(item.start);
+		const finishTime = moment.utc(item.finish);
 
 		return {
 			...item,
