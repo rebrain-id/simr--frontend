@@ -52,4 +52,6 @@ export const deleteDepartment = async (uuid) => {
 			console.log(err);
 			throw err
 		})
+
+	return response
 }
