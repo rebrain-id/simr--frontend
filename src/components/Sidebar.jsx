@@ -7,31 +7,54 @@ import {
 import logo from '../assets/images/logo.png';
 import NavLink from '../elements/NavLink';
 import { useLocation } from 'react-router-dom';
+import { useState } from 'react';
 
 const Sidebar = () => {
 	const { pathname } = useLocation();
 	const isActive = (path) => pathname.includes(path);
+	const [sidebarFull, setSidebarFull] = useState(true);
+
+	const handleSizeSidebar = () => {
+		setSidebarFull(!sidebarFull);
+	};
+
 	return (
-		<nav className="h-auto w-80 bg-light-white rounded-lg px-3 pt-6 drop-shadow-right-bottom">
-			<header className="flex justify-between items-center mb-28">
+		<nav
+			className={`h-auto w-80 bg-light-white rounded-lg px-3 pt-6 drop-shadow-right-bottom ${sidebarFull ? 'w-80' : 'w-24'} transition-all `}
+		>
+			<header
+				className={`flex justify-between items-center mb-28 ${sidebarFull ? '' : 'flex-col justify-center gap-3'}`}
+			>
 				<div className="flex gap-3">
 					<div className="mx-auto my-auto">
 						<img src={logo} alt="" className="w-12 h-auto" />
 					</div>
 
-					<div className="my-auto">
-						<h1 className="text-2xl font-montserrat font-extrabold tracking-widest leading-6">
-							SIM - R
-						</h1>
-						<h2 className="text-xs font-bold tracking-wider">
-							FAKULTAS TEKNIK
-						</h2>
-					</div>
+					{sidebarFull && (
+						<div className="my-auto">
+							<h1 className="text-2xl font-montserrat font-extrabold tracking-widest leading-6">
+								SIM - R
+							</h1>
+							<h2 className="text-xs font-bold tracking-wider">
+								FAKULTAS TEKNIK
+							</h2>
+						</div>
+					)}
+				</div>
+
+				<div
+					onClick={handleSizeSidebar}
+					className="w-6 h-6 rounded-full border border-primary flex items-center justify-center cursor-pointer"
+				>
+					<div
+						className={`w-4 h-4 rounded-full transition-all hover:bg-light-primary ${sidebarFull ? '' : 'bg-light-primary'}`}
+					></div>
 				</div>
 			</header>
 
 			<menu className="flex flex-col gap-2">
 				<NavLink
+					isVisible={sidebarFull}
 					icon={faTableColumns}
 					title="Dashboard"
 					to="/"
@@ -40,6 +63,7 @@ const Sidebar = () => {
 					}
 				/>
 				<NavLink
+					isVisible={sidebarFull}
 					icon={faCalendarAlt}
 					title="Agenda"
 					to="/agenda?menu=calendar"
@@ -48,6 +72,7 @@ const Sidebar = () => {
 					}
 				/>
 				<NavLink
+					isVisible={sidebarFull}
 					icon={faSitemap}
 					title="Program Studi"
 					to="/prodi"
@@ -56,6 +81,7 @@ const Sidebar = () => {
 					}
 				/>
 				<NavLink
+					isVisible={sidebarFull}
 					icon={faUserAlt}
 					title="Dosen"
 					to="/dosen"
