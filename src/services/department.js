@@ -39,7 +39,7 @@ export const postDepartment = async (body) => {
 
 export const updateDepartment = async (uuid, body) => {
 	const url = `${API_URL()}/v1/department/${uuid}`;
-	console.log(uuid);
+	
 	const response = await axios({
 		method: 'patch',
 		url: url,
