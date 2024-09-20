@@ -7,12 +7,20 @@ import {
 import logo from '../assets/images/logo.png';
 import NavLink from '../elements/NavLink';
 import { useLocation } from 'react-router-dom';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const Sidebar = () => {
 	const { pathname } = useLocation();
 	const isActive = (path) => pathname.includes(path);
-	const [sidebarFull, setSidebarFull] = useState(true);
+
+	const [sidebarFull, setSidebarFull] = useState(() => {
+		const savedSize = localStorage.getItem('size');
+		return savedSize ? JSON.parse(savedSize) : true;
+	});
+
+	useEffect(() => {
+		localStorage.setItem('size', JSON.stringify(sidebarFull));
+	}, [sidebarFull]);
 
 	const handleSizeSidebar = () => {
 		setSidebarFull(!sidebarFull);
