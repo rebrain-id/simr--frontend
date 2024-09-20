@@ -37,6 +37,25 @@ export const postDepartment = async (body) => {
 	return response
 }
 
+export const updateDepartment = async (uuid, body) => {
+	const url = `${API_URL()}/v1/department/${uuid}`;
+	console.log(uuid);
+	const response = await axios({
+		method: 'patch',
+		url: url,
+		data: body,
+	})
+		.then((res) => {
+			return res.data
+		})
+		.catch((err) => {
+			console.log(err);
+			throw err
+		})
+
+	return response
+}
+
 export const deleteDepartment = async (uuid) => {
 	const url = `${API_URL()}/v1/department/${uuid}`
 

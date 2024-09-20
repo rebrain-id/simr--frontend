@@ -3,6 +3,7 @@ import Button from '../elements/Button';
 import FormInput from '../elements/forms/FormInput';
 import { useDispatch, useSelector } from 'react-redux';
 import {
+	updateDepartmentData,
 	deleteDepartmentData,
 	fetchDepartments,
 } from '../redux/actions/departmentAction';
@@ -11,6 +12,8 @@ import { useFormik } from 'formik';
 const EditDepartmentDropdown = (props) => {
 	const { uuid, name, username, password, close } = props;
 	const [isDeleting, setIsDeleting] = useState(false);
+	const [isUpdating, setIsUpdating] = useState(false);
+	const [actionType, setActionType] = useState('');
 	const { loading, error } = useSelector(
 		(state) => state.deleteDepartmentData,
 	);
@@ -21,24 +24,39 @@ const EditDepartmentDropdown = (props) => {
 	}, [dispatch]);
 
 	const formik = useFormik({
+		enableReinitialize: true,
 		initialValues: {
 			uuid: uuid,
-			name: name,
-			username: username,
-			password: password,
+			name: name || '',
 		},
 		onSubmit: async (values, { resetForm }) => {
-			setIsDeleting(true);
-			setTimeout(() => {
-				setIsDeleting(false);
-				dispatch(deleteDepartmentData(values.uuid));
-				resetForm();
-			}, 1500);
+			if (actionType === 'update') {
+				setIsUpdating(true);
+				const timeout = setTimeout(() => {
+					setIsUpdating(false);
+					dispatch(
+						updateDepartmentData(values.uuid, {
+							name: values.name,
+						}),
+					);
+				}, 1500);
+				return () => clearTimeout(timeout);
+			} else if (actionType === 'delete') {
+				setIsDeleting(true);
+				const timeout = setTimeout(() => {
+					setIsDeleting(false);
+					dispatch(deleteDepartmentData(values.uuid));
+					resetForm();
+				}, 1500);
+				return () => clearTimeout(timeout);
+			}
 		},
 	});
 
 	const handleFormInput = (e) => {
-		formik.setFieldValue(e.target.name, e.target.value);
+		const { value } = e.target;
+
+		formik.setFieldValue('name', value);
 	};
 
 	return (
@@ -46,6 +64,7 @@ const EditDepartmentDropdown = (props) => {
 			<div className="px-5 bg-white shadow-md rounded pb-4">
 				<form onSubmit={formik.handleSubmit}>
 					<div className="w-full flex items-center">
+						<p>{formik.values.name}</p>
 						<FormInput
 							name={name}
 							type="text"
@@ -85,32 +104,37 @@ const EditDepartmentDropdown = (props) => {
 						/>
 					</div> */}
 					<div className="flex items-center gap-8">
-						<Button
-							text="Update"
-							variant="bg-light-primary text-white rounded text-sm hover:bg-primary transition ease-in 3s"
-						/>
+						{isUpdating ? (
+							<Button
+								type="submit"
+								text="Updating..."
+								variant="bg-light-primary text-white rounded text-sm pointer-events-none"
+							/>
+						) : (
+							<Button
+								text="Update"
+								variant="bg-light-primary text-white rounded text-sm hover:bg-primary transition ease-in 3s"
+								onClick={() => setActionType('update')}
+							/>
+						)}
+
 						<Button
 							text="Batal"
 							variant="bg-light-primary/25 text-primary rounded text-sm hover:bg-light-secondary hover:text-white transition ease-in 3s"
 							onClick={close}
 						/>
-						{/* {loading && (
-							<Button
-								text="Loading..."
-								variant="bg-light-primary/25 text-primary rounded text-sm transition ease-in 3s pointer-events-none"
-							/>
-						)} */}
 						{isDeleting ? (
 							<Button
 								type="submit"
 								text="Deleting..."
-								variant="bg-light-danger text-white rounded text-sm transition ease-in 3s pointer-events-none"
+								variant="bg-light-danger text-white rounded text-sm pointer-events-none"
 							/>
 						) : (
 							<Button
 								type="submit"
 								text="Delete"
 								variant="bg-light-danger text-white rounded text-sm hover:bg-danger hover:text-white transition ease-in 3s"
+								onClick={() => setActionType('delete')}
 							/>
 						)}
 					</div>

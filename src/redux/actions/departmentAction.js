@@ -1,10 +1,13 @@
-import { getDepartment, postDepartment, deleteDepartment } from "../../services/department"
+import { getDepartment, postDepartment, updateDepartment, deleteDepartment } from "../../services/department"
 export const FETCH_DEPARTMENT_REQUEST = 'FETCH_DEPARTMENT_REQUEST'
 export const FETCH_DEPARTMENT_SUCCESS = 'FETCH_DEPARTMENT_SUCCESS'
 export const FETCH_DEPARTMENT_FAILURE = 'FETCH_DEPARTMENT_FAILURE'
 export const POST_DEPARTMENT_REQUEST = 'POST_DEPARTMENT_REQUEST'
 export const POST_DEPARTMENT_SUCCESS = 'POST_DEPARTMENT_SUCCESS'
 export const POST_DEPARTMENT_FAILURE = 'POST_DEPARTMENT_FAILURE'
+export const UPDATE_DEPARTMENT_REQUEST = 'UPDATE_DEPARTMENT_REQUEST'
+export const UPDATE_DEPARTMENT_SUCCESS = 'UPDATE_DEPARTMENT_SUCCESS'
+export const UPDATE_DEPARTMENT_FAILURE = 'UPDATE_DEPARTMENT_FAILURE'
 export const DELETE_DEPARTMENT_REQUEST = 'DELETE_DEPARTMENT_REQUEST'
 export const DELETE_DEPARTMENT_SUCCESS = 'DELETE_DEPARTMENT_SUCCESS'
 export const DELETE_DEPARTMENT_FAILURE = 'DELETE_DEPARTMENT_FAILURE'
@@ -38,13 +41,27 @@ export const postDepartmentFailure = (error) => ({
 	payload: error
 })
 
+export const updateDepartmentRequest = () => ({
+	type: 'UPDATE_DEPARTMENT_REQUEST'
+})
+
+export const updateDepartmentSuccess = (department) => ({
+	type: 'UPDATE_DEPARTMENT_SUCCESS',
+	payload: department
+})
+
+export const updateDepartmentFailure = (error) => ({
+	type: 'UPDATE_DEPARTMENT_FAILURE',
+	payload: error
+})
+
 export const deleteDepartmentRequest = () => ({
 	type: 'DELETE_DEPARTMENT_REQUEST'
 })
 
-export const deleteDepartmentSuccess = (uuid) => ({
+export const deleteDepartmentSuccess = (department) => ({
 	type: 'DELETE_DEPARTMENT_SUCCESS',
-	payload: uuid
+	payload: department
 })
 
 export const deleteDepartmentFailure = (error) => ({
@@ -78,11 +95,24 @@ export const postDepartmentData = (department) => {
 	};
 }
 
-export const deleteDepartmentData = (uuid) => {
+export const updateDepartmentData = (uuid, department) => {
+	return async (dispatch) => {
+		dispatch(updateDepartmentRequest());
+		try {
+			const response = await updateDepartment(uuid, department);
+			console.log(response);
+			dispatch(updateDepartmentSuccess(response));
+		} catch (error) {
+			dispatch(updateDepartmentFailure(error.message));
+		}
+	}
+}
+
+export const deleteDepartmentData = (department) => {
 	return async (dispatch) => {
 		dispatch(deleteDepartmentRequest());
 		try {
-			const response = await deleteDepartment(uuid);
+			const response = await deleteDepartment(department);
 			console.log(response);
 			dispatch(deleteDepartmentSuccess(response));
 			dispatch
