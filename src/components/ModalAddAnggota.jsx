@@ -18,9 +18,11 @@ const ModalAddAnggota = (props) => {
 	}, [dispatch]);
 
 	const [selectedDepartments, setSelectedDepartments] = useState([]);
+	const [departmentWithConflict, setDepartmentWithConflict] = useState([]);
+	const [checkConflict, setCheckConflict] = useState(false);
 
 	useEffect(() => {
-		if (departments.lenght) {
+		if (departments.length) {
 			setSelectedDepartments([]);
 		}
 	}, [departments]);
@@ -51,20 +53,43 @@ const ModalAddAnggota = (props) => {
 		}
 	};
 
-	const handleCheckMemberAgenda = () => {
+	const handleCheckMemberAgenda = async () => {
 		if (selectedDepartments.length) {
-			dispatch(
+			const response = await dispatch(
 				checkMemberAgenda({
 					departmentsUuid: selectedDepartments,
 					start: dateFrom,
 					finish: dateTo,
 				}),
 			);
+
+			if (response && response.payload.statusCode === 200) {
+				const conflictData = response.payload.data;
+				setCheckConflict(true);
+
+				const updateDepartments = departments.map((dept) => {
+					const conflictDepartment = conflictData.filter(
+						(conflict) => conflict.department.uuid === dept.uuid,
+					);
+
+					return {
+						...dept,
+						conflict:
+							conflictDepartment.length > 0
+								? conflictDepartment
+								: [],
+					};
+				});
+
+				setDepartmentWithConflict(updateDepartments);
+			}
 		}
 	};
 
+	const member = JSON.parse(sessionStorage.getItem('member')) || '';
+
 	const handleSaveMember = () => {
-		if (!sessionStorage.getItem('member')) {
+		if (!member) {
 			sessionStorage.setItem(
 				'member',
 				JSON.stringify(selectedDepartments),
@@ -104,16 +129,36 @@ const ModalAddAnggota = (props) => {
 							onClick={handleCheckAll}
 							isSelected={isAllSelected}
 						/>
-						{departments.map((item, index) => (
-							<FormInputCheckbox
-								text={item.name}
-								key={index}
-								onChange={() => handleCheckboxChange(item.uuid)}
-								isSelected={selectedDepartments.includes(
-									item.uuid,
-								)}
-							/>
-						))}
+						{departmentWithConflict.length > 0
+							? departmentWithConflict.map((item, index) => (
+									<FormInputCheckbox
+										text={item.name}
+										key={index}
+										onChange={() =>
+											handleCheckboxChange(item.uuid)
+										}
+										isSelected={selectedDepartments.includes(
+											item.uuid,
+										)}
+										data={
+											item.conflict.length > 0
+												? item.conflict
+												: null
+										}
+									/>
+								))
+							: departments.map((item, index) => (
+									<FormInputCheckbox
+										text={item.name}
+										key={index}
+										onChange={() =>
+											handleCheckboxChange(item.uuid)
+										}
+										isSelected={selectedDepartments.includes(
+											item.uuid,
+										)}
+									/>
+								))}
 					</FormCheckbox>
 
 					<div className="flex justify-end items-center gap-2 mt-3">
@@ -125,7 +170,8 @@ const ModalAddAnggota = (props) => {
 						<Button
 							onClick={handleSaveMember}
 							text="Simpan Anggota"
-							variant="bg-light-primary bg-opacity-90 text-light-white text-sm hover:bg-opacity-100"
+							variant={`bg-opacity-90 ${!checkConflict ? 'bg-light-gray text-light-white cursor-not-allowed' : 'bg-light-primary  text-light-white text-sm hover:bg-opacity-100'}`}
+							disabled={!checkConflict}
 						/>
 					</div>
 				</div>
