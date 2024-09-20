@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 const FormInput = (props) => {
 	const {
 		label,
@@ -12,6 +14,17 @@ const FormInput = (props) => {
 		onChange,
 		name,
 	} = props;
+	const [placeholderInput, setPlaceholderInput] = useState(placeholder);
+
+	const handleBlur = () => {
+		if (!value) {
+			setPlaceholderInput(placeholder);
+		}
+	};
+
+	const handleFocus = () => {
+		setPlaceholderInput('');
+	};
 
 	return (
 		<div className={variant ? variant : 'w-80'}>
@@ -26,7 +39,9 @@ const FormInput = (props) => {
 				}
 				{...(type === 'file' ? { accept: fileAccept } : {})}
 				value={value}
-				placeholder={placeholder}
+				placeholder={placeholderInput}
+				onFocus={handleFocus}
+				onBlur={handleBlur}
 				onChange={onChange}
 			/>
 
