@@ -64,7 +64,6 @@ const EditDepartmentDropdown = (props) => {
 			<div className="px-5 bg-white shadow-md rounded pb-4">
 				<form onSubmit={formik.handleSubmit}>
 					<div className="w-full flex items-center">
-						<p>{formik.values.name}</p>
 						<FormInput
 							name={name}
 							type="text"
@@ -109,11 +108,13 @@ const EditDepartmentDropdown = (props) => {
 								type="submit"
 								text="Updating..."
 								variant="bg-light-primary text-white rounded text-sm pointer-events-none"
+								isDisabled={true}
 							/>
 						) : (
 							<Button
 								text="Update"
 								variant="bg-light-primary text-white rounded text-sm hover:bg-primary transition ease-in 3s"
+								isDisabled={false}
 								onClick={() => setActionType('update')}
 							/>
 						)}
@@ -128,12 +129,14 @@ const EditDepartmentDropdown = (props) => {
 								type="submit"
 								text="Deleting..."
 								variant="bg-light-danger text-white rounded text-sm pointer-events-none"
+								isDisabled={true}
 							/>
 						) : (
 							<Button
 								type="submit"
 								text="Delete"
 								variant="bg-light-danger text-white rounded text-sm hover:bg-danger hover:text-white transition ease-in 3s"
+								isDisabled={false}
 								onClick={() => setActionType('delete')}
 							/>
 						)}
