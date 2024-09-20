@@ -1,12 +1,19 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const Button = (props) => {
-	const { icon, text, variant, iconVariant, onClick } = props;
+	const {
+		icon,
+		text,
+		variant,
+		iconVariant,
+		onClick,
+		disabled = false,
+	} = props;
 
 	return (
-		<div
+		<button
 			className={`px-2 py-2 rounded cursor-pointer ${variant && variant}`}
-			onClick={onClick}
+			onClick={disabled ? null : onClick}
 		>
 			{icon && (
 				<FontAwesomeIcon
@@ -15,7 +22,7 @@ const Button = (props) => {
 				/>
 			)}
 			{text}
-		</div>
+		</button>
 	);
 };
 
