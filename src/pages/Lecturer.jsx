@@ -12,7 +12,7 @@ const Lecturer = () => {
 	const handleModal = () => setOpenModal(!openModal);
 	const dispatch = useDispatch();
 	const [pending, setPending] = useState(true);
-	const datas = useSelector((state) => state.fetchLecturers.lecturers);
+	const lecturers = useSelector((state) => state.fetchLecturers.lecturers);
 
 	const getDosenId = (id) => {
 		console.log(id);
@@ -41,13 +41,15 @@ const Lecturer = () => {
 				</div>
 
 				<section className="mt-5 flex flex-col gap-3">
-					{datas.map((item, index) => (
+					{lecturers.map((item, index) => (
 						<ListLecturer
 							key={index}
+							uuid={item.uuid}
 							data={item.name}
 							name={item.name}
 							email={item.email}
-							no={item.phoneNumber}
+							phoneNumber={item.phoneNumber}
+							department={item.department.name}
 						/>
 					))}
 				</section>
