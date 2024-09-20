@@ -52,9 +52,7 @@ const Sidebar = () => {
 					title="Program Studi"
 					to="/prodi"
 					variant={
-						isActive === '/department'
-							? 'bg-light-primary text-white'
-							: ''
+						isActive('/prodi') ? 'bg-light-primary text-white' : ''
 					}
 				/>
 				<NavLink
