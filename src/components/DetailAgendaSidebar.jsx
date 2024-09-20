@@ -161,9 +161,9 @@ const DetailAgendaSidebar = (props) => {
 						labelvariant="text-xs"
 						label="Dari"
 						type="datetime-local"
-						value={moment(inputValue.start).format(
-							'YYYY-MM-DDTHH:mm',
-						)}
+						value={moment
+							.utc(inputValue.start)
+							.format('YYYY-MM-DDTHH:mm')}
 						name="start"
 						onChange={handleInputValue}
 					/>
@@ -172,9 +172,9 @@ const DetailAgendaSidebar = (props) => {
 						labelvariant="text-xs"
 						label="Sampai"
 						type="datetime-local"
-						value={moment(inputValue.finish).format(
-							'YYYY-MM-DDTHH:mm',
-						)}
+						value={moment
+							.utc(inputValue.finish)
+							.format('YYYY-MM-DDTHH:mm')}
 						name="finish"
 						onChange={handleInputValue}
 					/>
