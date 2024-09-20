@@ -31,7 +31,44 @@ export const postLecturer = async (body) => {
 		})
 		.catch((err) => {
 			console.log(err);
+			throw err
 		})
 	
+	return response
+}
+
+export const updateLecturer = async (uuid, body) => {
+	const url = `${API_URL()}/v1/lecturer/${uuid}`;
+	
+	const response = await axios({
+		method: 'patch',
+		url: url,
+		data: body,
+	})
+		.then((res) => {
+			return res.data;
+		})
+		.catch((err) => {
+			console.log(err);
+		})
+	
+	return response
+}
+
+export const deleteLecturer = async (uuid) => {
+	const url = `${API_URL()}/v1/lecturer/${uuid}`;
+
+	const response = await axios({
+		method: 'delete',
+		url: url,
+		data: uuid,
+	})
+		.then((res) => {
+			return res.data;
+		})
+		.catch((err) => {
+			console.log(err);
+		})
+
 	return response
 }
