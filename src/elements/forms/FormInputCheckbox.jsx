@@ -1,5 +1,6 @@
 import { faExclamation } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import moment from 'moment';
 import { useState } from 'react';
 
 const FormInputCheckbox = (props) => {
@@ -70,10 +71,14 @@ const FormInputCheckbox = (props) => {
 							<div className="absolute left-1 -top-1 w-0 h-0 border-l-[6px] border-l-transparent border-r-[6px] border-r-transparent border-b-[6px] border-b-light-white"></div>
 
 							<p className="font-medium text-xs mb-3">
-								Rapat Pembahasan Anggaran Tahun Ajaran 2025/2026
+								{data && data[0].detailAgenda.titleAgenda}
 							</p>
 
-							<p>Jadwal : 14:00 - 15:00 WIB</p>
+							<p>
+								Jadwal :{' '}
+								{moment.utc(data[0].start).format('HH:mm')} -{' '}
+								{moment.utc(data[0].finish).format('HH:mm')} WIB
+							</p>
 						</div>
 					)}
 				</div>
