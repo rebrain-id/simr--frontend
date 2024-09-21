@@ -23,6 +23,7 @@ const EditLecturerDropdown = (props) => {
 		close,
 	} = props;
 	const [isDeleting, setIsDeleting] = useState(false);
+	const [isUpdating, setIsUpdating] = useState(false);
 	const [actionType, setActionType] = useState('');
 	const dispatch = useDispatch();
 	const departments = useSelector(
@@ -31,7 +32,7 @@ const EditLecturerDropdown = (props) => {
 
 	useEffect(() => {
 		dispatch(fetchDepartments());
-		dispatch(fetchLecturers());
+		// dispatch(fetchLecturers());
 	}, [dispatch]);
 
 	const formik = useFormik({
@@ -50,7 +51,7 @@ const EditLecturerDropdown = (props) => {
 				const timeout = setTimeout(() => {
 					setIsUpdating(false);
 					dispatch(
-						updateDepartmentData(values.uuid, {
+						updateLecturerData(values.uuid, {
 							name: values.name,
 							email: values.email,
 							phoneNumber: values.phoneNumber,
@@ -71,20 +72,22 @@ const EditLecturerDropdown = (props) => {
 		},
 	});
 
-	const handleFormInput = (e) => {
-		const { value } = e.target;
+	const handleChange = (e) => {
+		const { name, value } = e.target;
 
-		formik.setFieldValue('name', value);
-		formik.setFieldValue('email', value);
-		formik.setFieldValue('phoneNumber', value);
-		formik.setFieldValue('departmentUuid', value);
+		formik.setFieldValue(name, value);
 	};
 	return (
 		<>
 			<div className="px-5 bg-white shadow-md rounded pb-4">
 				<form onSubmit={formik.handleSubmit}>
+					<p>{formik.values.name}</p>
+					<p>{formik.values.email}</p>
+					<p>{formik.values.phoneNumber}</p>
+					<p>{formik.values.departmentUuid}</p>
 					<div className="w-full flex items-center w">
 						<Input
+							type="text"
 							name="name"
 							variant="flex items-center text-sm w-full gap-10 py-2"
 							label="Nama Dosen"
@@ -92,11 +95,12 @@ const EditLecturerDropdown = (props) => {
 							labelvariant="w-1/6"
 							inputvariant="w-5/6"
 							value={formik.values.name}
-							onChange={handleFormInput}
+							onChange={handleChange}
 						/>
 					</div>
 					<div className="w-full flex items-center">
 						<Input
+							type="email"
 							name="email"
 							label="E-mail"
 							placeholder="example@mail.com"
@@ -104,11 +108,12 @@ const EditLecturerDropdown = (props) => {
 							inputvariant="w-5/6"
 							variant="flex items-center text-sm w-full gap-10 py-2"
 							value={formik.values.email}
-							onChange={handleFormInput}
+							onChange={handleChange}
 						/>
 					</div>
 					<div className="w-full flex items-center">
 						<Input
+							type="number"
 							name="phoneNumber"
 							labelvariant="w-1/6"
 							inputvariant="w-5/6"
@@ -116,22 +121,21 @@ const EditLecturerDropdown = (props) => {
 							label="No. Whatsapp"
 							placeholder="08*********"
 							value={formik.values.phoneNumber}
-							onChange={handleFormInput}
+							onChange={handleChange}
 						/>
 					</div>
 					<div className="w-full flex items-center">
 						<Select
-							variant="flex flex-col"
+							variant="flex items-center text-sm w-full gap-10 py-2"
 							name="departmentUuid"
-							label="No. Whatsapp"
-							note="Wajib diisi"
-							labelVariant="text-md py-2"
-							selectVariant="text-md"
+							label="Program Studi"
+							labelVariant="w-1/5"
+							selectVariant="w-5/6"
 							placeholder="082********"
-							onChange={handleFormInput}
+							onChange={handleChange}
 							value={formik.values.departmentUuid}
 						>
-							<option value="" disabled>
+							<option value={departmentUuid} disabled>
 								{department}
 							</option>
 							{departments.map((item, index) => (
@@ -142,10 +146,20 @@ const EditLecturerDropdown = (props) => {
 						</Select>
 					</div>
 					<div className="flex items-center gap-8">
-						<Button
-							text="Update"
-							variant="bg-light-primary text-white rounded text-sm hover:bg-primary transition ease-in 3s"
-						/>
+						{isUpdating ? (
+							<Button
+								text="Updating..."
+								variant="bg-light-primary text-white rounded text-sm"
+								isDisabled={true}
+							/>
+						) : (
+							<Button
+								type="submit"
+								text="Update"
+								variant="bg-light-primary text-white rounded text-sm hover:bg-primary transition ease-in 3s"
+								onClick={() => setActionType('update')}
+							/>
+						)}
 						<Button
 							text="Batal"
 							variant="bg-light-primary/25 text-primary rounded text-sm hover:bg-danger hover:text-white transition ease-in 3s"

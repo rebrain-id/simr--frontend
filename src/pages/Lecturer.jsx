@@ -50,6 +50,7 @@ const Lecturer = () => {
 							email={item.email}
 							phoneNumber={item.phoneNumber}
 							department={item.department.name}
+							departmentUuid={item.department.uuid}
 						/>
 					))}
 				</section>

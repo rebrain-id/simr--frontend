@@ -13,9 +13,7 @@ const FormSelect = (props) => {
 
 	return (
 		<div className={variant ? variant : 'w-80'}>
-			<label className={`text-xs font-medium ${labelVariant}`}>
-				{label}
-			</label>
+			<label className={`font-medium ${labelVariant}`}>{label}</label>
 			<select
 				name={name}
 				className={`w-full border border-light-secondary rounded py-1 px-3 ${selectVariant}`}
