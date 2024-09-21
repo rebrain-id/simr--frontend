@@ -81,10 +81,6 @@ const EditLecturerDropdown = (props) => {
 		<>
 			<div className="px-5 bg-white shadow-md rounded pb-4">
 				<form onSubmit={formik.handleSubmit}>
-					<p>{formik.values.name}</p>
-					<p>{formik.values.email}</p>
-					<p>{formik.values.phoneNumber}</p>
-					<p>{formik.values.departmentUuid}</p>
 					<div className="w-full flex items-center w">
 						<Input
 							type="text"
