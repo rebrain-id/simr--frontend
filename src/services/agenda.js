@@ -3,7 +3,7 @@ import { API_URL } from './config';
 import moment from 'moment';
 
 export const getAgenda = async () => {
-	const url = `${API_URL()}/detail-agendas?username=informatika`;
+	const url = `${API_URL()}/v1/detail-agendas?username=informatika`;
 
 	try {
 		const response = await axios({
@@ -19,7 +19,7 @@ export const getAgenda = async () => {
 };
 
 export const getDetailAgenda = async (uuid) => {
-	const url = `${API_URL()}/detail-agendas/${uuid}`;
+	const url = `${API_URL()}/v1/detail-agendas/${uuid}`;
 
 	try {
 		const response = await axios({
@@ -35,7 +35,7 @@ export const getDetailAgenda = async (uuid) => {
 };
 
 export const createDataAgenda = async (data) => {
-	const url = `${API_URL()}/detail-agendas`;
+	const url = `${API_URL()}/v1/detail-agendas`;
 
 	try {
 		const response = await axios({
@@ -52,7 +52,7 @@ export const createDataAgenda = async (data) => {
 };
 
 export const checkAgenda = async (data) => {
-	const url = `${API_URL()}/agendas/check`;
+	const url = `${API_URL()}/v1/agendas/check`;
 
 	try {
 		const response = await axios({
@@ -69,7 +69,7 @@ export const checkAgenda = async (data) => {
 };
 
 export const updateAgenda = async (uuid, data) => {
-	const url = `${API_URL()}/detail-agendas/${uuid}`;
+	const url = `${API_URL()}/v1/detail-agendas/${uuid}`;
 
 	const form = new FormData();
 
@@ -104,7 +104,7 @@ export const updateAgenda = async (uuid, data) => {
 	})
 		.then((res) => {
 			console.log(res);
-			return res.data.data;
+			return res.data;
 		})
 		.catch((err) => {
 			console.error(err);
