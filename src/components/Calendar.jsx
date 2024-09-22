@@ -26,6 +26,7 @@ const Calendar = () => {
 	const dispatch = useDispatch();
 
 	const agenda = useSelector((state) => state.agenda.agendaThisMonth);
+	const isUpdated = useSelector((state) => state.agenda.isUpdated);
 
 	useEffect(() => {
 		setInputMonth(optionValue.month);
@@ -36,7 +37,7 @@ const Calendar = () => {
 				month: optionValue.month,
 			}),
 		);
-	}, [optionValue, dispatch]);
+	}, [optionValue, dispatch, isUpdated]);
 
 	const handleOptionValue = (event) => {
 		const { name, value } = event.target;

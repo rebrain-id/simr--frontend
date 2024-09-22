@@ -10,20 +10,27 @@ import { useEffect, useState } from 'react';
 import moment from 'moment';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchTypeAgenda } from '../redux/actions/typeAgendaAction';
-import { fetchDepartment } from '../redux/actions/departmentAction';
+import {
+	closeDetailAgenda,
+	deleteDetailAgenda,
+	updateDetailAgenda,
+} from '../redux/actions/agendaAction';
+import { fetchDepartments } from '../redux/actions/departmentAction';
 
 const DetailAgendaSidebar = (props) => {
-	const { onClick, data, isShow = false } = props;
+	const { onClick, data, isShow = false, variant } = props;
 	const [checkAll, setCheckAll] = useState(false);
 	const [checkboxStates, setCheckboxStates] = useState({});
 
 	const dispatch = useDispatch();
 	const typeAgenda = useSelector((state) => state.typeAgenda.typeAgenda);
-	const department = useSelector((state) => state.department.department);
+	const department = useSelector(
+		(state) => state.fetchDepartments.departments,
+	);
 
 	useEffect(() => {
 		dispatch(fetchTypeAgenda());
-		dispatch(fetchDepartment());
+		dispatch(fetchDepartments());
 
 		// if (data && department) {
 		// 	const initialCheckboxStates = department.reduce((acc, dept) => {
@@ -35,6 +42,34 @@ const DetailAgendaSidebar = (props) => {
 		// }
 	}, [dispatch]);
 
+	useEffect(() => {
+		if (data && department.length) {
+			const initialCheckboxStates = department.reduce((acc, dept) => {
+				const isDepartmentSelected = data.departments.some(
+					(selectedDept) => selectedDept.uuid === dept.uuid,
+				);
+				acc[dept.uuid] = isDepartmentSelected;
+				return acc;
+			}, {});
+
+			setCheckboxStates(initialCheckboxStates);
+
+			const selectedDepartments = Object.keys(
+				initialCheckboxStates,
+			).filter((key) => initialCheckboxStates[key]);
+
+			setInputValue((prev) => ({
+				...prev,
+				department: selectedDepartments,
+			}));
+
+			const allChecked = Object.values(initialCheckboxStates).every(
+				(value) => value,
+			);
+			setCheckAll(allChecked);
+		}
+	}, [data, department]);
+
 	const handleCheckAll = () => {
 		const newCheckAll = !checkAll;
 		setCheckAll(newCheckAll);
@@ -45,6 +80,15 @@ const DetailAgendaSidebar = (props) => {
 		}, {});
 
 		setCheckboxStates(updatedCheckboxStates);
+
+		const selectedDepartments = newCheckAll
+			? department.map((dept) => dept.uuid)
+			: [];
+
+		setInputValue((prev) => ({
+			...prev,
+			department: selectedDepartments,
+		}));
 	};
 
 	const handleCheckboxChange = (uuid) => {
@@ -55,10 +99,18 @@ const DetailAgendaSidebar = (props) => {
 
 		setCheckboxStates(updatedCheckboxStates);
 
+		const selectedDepartments = Object.keys(updatedCheckboxStates).filter(
+			(key) => updatedCheckboxStates[key],
+		);
+
+		setInputValue((prev) => ({
+			...prev,
+			department: selectedDepartments,
+		}));
+
 		const allChecked = Object.values(updatedCheckboxStates).every(
 			(value) => value,
 		);
-
 		setCheckAll(allChecked);
 	};
 
@@ -68,7 +120,62 @@ const DetailAgendaSidebar = (props) => {
 		}
 	};
 
-	console.log(data);
+	const [inputValue, setInputValue] = useState({
+		uuid: data ? data.uuid : '',
+		title: data ? data.title : '',
+		start: data ? data.start : '',
+		finish: data ? data.finish : '',
+		typeAgenda: data ? data.typeAgenda.uuid : '',
+		description: data ? data.description : '',
+		location: data ? data.location : '',
+		attendees: data ? data.absent : '',
+		notulens: data ? data.notulen : '',
+		department: [],
+	});
+
+	const handleInputValue = (e) => {
+		const { name, type, value, checked, files } = e.target;
+
+		if (type === 'file') {
+			setInputValue((prev) => ({
+				...prev,
+				[name]: files[0],
+			}));
+		} else {
+			setInputValue((prev) => ({
+				...prev,
+				[name]: type === 'checkbox' ? checked : value,
+			}));
+		}
+	};
+
+	const handleSubmit = async () => {
+		try {
+			const response = await dispatch(
+				updateDetailAgenda({ data: inputValue }),
+			);
+
+			if (response && response.payload.statusCode === 200) {
+				dispatch(closeDetailAgenda());
+			}
+		} catch (error) {
+			console.log(error);
+		}
+	};
+
+	const handleDelete = async () => {
+		try {
+			const response = await dispatch(
+				deleteDetailAgenda({ uuid: inputValue.uuid }),
+			);
+
+			if (response && response.payload.statusCode === 200) {
+				dispatch(closeDetailAgenda());
+			}
+		} catch (error) {
+			console.log(error);
+		}
+	};
 
 	return (
 		<div
@@ -77,8 +184,10 @@ const DetailAgendaSidebar = (props) => {
 				isShow ? 'translate-x-0' : 'translate-x-full'
 			}`}
 		>
-			<div className="h-screen overflow-y-auto bg-light-white pb-5 drop-shadow-right">
-				<section className="sticky top-0 py-5 px-8 bg-light-white flex justify-between items-center">
+			<div
+				className={`h-screen overflow-y-auto bg-light-white pb-5 drop-shadow-right transition-all duration-1000 ${variant}`}
+			>
+				<section className="sticky top-0 py-5 px-8 bg-light-white flex justify-between items-center border-b">
 					<h1 className="text-lg font-semibold">Detail Agenda</h1>
 					<FontAwesomeIcon
 						icon={faXmark}
@@ -89,42 +198,73 @@ const DetailAgendaSidebar = (props) => {
 
 				<section className="flex flex-col px-8 gap-3 mt-5">
 					<FormInput
+						variant="w-full flex flex-col gap-1"
 						inputvariant="text-sm font-normal"
 						labelvariant="text-xs"
 						label="Agenda"
-						value={data.title}
+						value={inputValue.title}
+						name="title"
+						onChange={handleInputValue}
 					/>
 					<FormInput
+						variant="w-full flex flex-col gap-1"
 						inputvariant="text-sm font-normal"
 						labelvariant="text-xs"
 						label="Dari"
 						type="datetime-local"
-						value={moment(data.start).format('YYYY-MM-DDTHH:mm')}
+						value={moment
+							.utc(inputValue.start)
+							.format('YYYY-MM-DDTHH:mm')}
+						name="start"
+						onChange={handleInputValue}
 					/>
 					<FormInput
+						variant="w-full flex flex-col gap-1"
 						inputvariant="text-sm font-normal"
 						labelvariant="text-xs"
 						label="Sampai"
 						type="datetime-local"
-						value={moment(data.finish).format('YYYY-MM-DDTHH:mm')}
+						value={moment
+							.utc(inputValue.finish)
+							.format('YYYY-MM-DDTHH:mm')}
+						name="finish"
+						onChange={handleInputValue}
 					/>
 					<FormInput
+						variant="w-full flex flex-col gap-1"
 						inputvariant="text-sm font-normal"
 						labelvariant="text-xs"
 						label="Tempat"
-						value={data.location}
+						value={inputValue.location}
+						name="location"
+						onChange={handleInputValue}
 					/>
-					<FormTextarea label="Deskripsi" value={data.description} />
-					<FormSelect label="Kategori">
-						<option value="" className="text-light-secondary">
+					<FormTextarea
+						label="Deskripsi"
+						value={inputValue.description}
+						name="description"
+						onChange={handleInputValue}
+					/>
+					<FormSelect
+						label="Kategori"
+						value={inputValue.typeAgenda}
+						name="typeAgenda"
+						onChange={handleInputValue}
+						labelVariant="text-xs"
+						selectVariant="text-sm"
+					>
+						<option
+							value=""
+							className="text-light-secondary text-sm"
+						>
 							Pilih jenis agenda
 						</option>
 						{typeAgenda.map((item, index) => (
 							<option
 								value={item.uuid}
-								className="text-secondary"
+								className="text-secondary text-sm"
 								key={index}
-								selected={data.typeAgenda.uuid === item.uuid}
+								selected={inputValue.typeAgenda === item.uuid}
 							>
 								{item.name}
 							</option>
@@ -141,35 +281,47 @@ const DetailAgendaSidebar = (props) => {
 								text={item.name}
 								value={item.uuid}
 								key={index}
-								onChange={() => handleCheckboxChange(item.uuid)}
-								isSelected={data.departments.includes(
-									item.uuid,
-								)}
+								onChange={() => {
+									handleCheckboxChange(item.uuid);
+									handleInputValue();
+								}}
+								isSelected={checkboxStates[item.uuid] || false}
 							/>
 						))}
 					</FormCheckbox>
 					<FormInput
+						variant="w-full flex flex-col gap-1"
 						inputvariant="text-sm font-normal"
 						labelvariant="text-xs"
 						label="Notulensi"
 						type="file"
 						note="Pastikan file memiliki format .pdf, .doc, atau .docx"
 						fileAccept=".pdf, .doc, .docx"
+						name="notulens"
+						onChange={handleInputValue}
 					/>
 					<FormInput
+						variant="w-full flex flex-col gap-1"
 						inputvariant="text-sm font-normal"
 						labelvariant="text-xs"
 						label="Absensi"
 						type="file"
 						note="Pastikan file memiliki format .jpg, .jpeg, atau .png"
 						fileAccept=".jpg, .jpeg, .png"
+						name="attendees"
+						onChange={handleInputValue}
 					/>
 
 					<div className="mt-5 flex items-center justify-between">
 						<div className="flex items-center gap-2">
 							<Button
 								text="Update"
-								variant="bg-light-primary bg-opacity-90 text-light-white text-sm hover:bg-opacity-100"
+								variant={`${data && data.isDone === true ? 'bg-light-secondary cursor-not-allowed' : 'bg-light-primary'} bg-opacity-90 text-light-white text-sm hover:bg-opacity-100`}
+								onClick={
+									data && data.isDone !== true
+										? handleSubmit
+										: () => {}
+								}
 							/>
 							<Button
 								onClick={onClick}
@@ -179,6 +331,7 @@ const DetailAgendaSidebar = (props) => {
 						</div>
 						<Button
 							text="Hapus"
+							onClick={handleDelete}
 							variant="bg-light-danger bg-opacity-80 text-light-white text-sm hover:bg-opacity-100"
 						/>
 					</div>

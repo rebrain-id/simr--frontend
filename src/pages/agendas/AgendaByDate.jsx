@@ -9,12 +9,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchAgendaByDate } from '../../redux/actions/agendaAction';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import ListAgenda from '../../elements/ListAgenda';
+import moment from 'moment';
 
 const AgendaByDate = () => {
 	const [searchParam] = useSearchParams();
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
-	const agendaByDate = useSelector((state) => state.agenda.agendaByDate);
+	let agendaByDate = useSelector((state) => state.agenda.agendaByDate);
+	let isUpdated = useSelector((state) => state.agenda.isUpdated);
 
 	const getYear = searchParam.get('year');
 	const getMonth = searchParam.get('month');
@@ -32,7 +34,7 @@ const AgendaByDate = () => {
 				date: getDate,
 			}),
 		);
-	}, [dispatch, getYear, getMonth, getDate]);
+	}, [dispatch, getYear, getMonth, getDate, isUpdated]);
 
 	const monthList = [
 		'Januari',
@@ -78,6 +80,12 @@ const AgendaByDate = () => {
 			);
 		}
 	};
+
+	agendaByDate = [...agendaByDate].sort((a, b) => {
+		const timeA = moment(a.time.start, 'HH:mm');
+		const timeB = moment(b.time.start, 'HH:mm');
+		return timeA - timeB;
+	});
 
 	return (
 		<div className="bg-white px-10 py-5 rounded drop-shadow-bottom mt-5">

@@ -1,5 +1,5 @@
 const FormTextarea = (props) => {
-	const { label, note, variant, rows = 5, value } = props;
+	const { label, note, variant, rows = 5, value, name, onChange } = props;
 
 	return (
 		<div className={variant ? variant : 'w-80'}>
@@ -8,6 +8,8 @@ const FormTextarea = (props) => {
 				className="w-full border border-light-secondary text-sm rounded pt-1 pb-3 px-3 resize-none"
 				rows={rows}
 				value={value}
+				name={name}
+				onChange={onChange}
 			></textarea>
 
 			{note && (
