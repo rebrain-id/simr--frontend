@@ -14,10 +14,6 @@ const Lecturer = () => {
 	const [loading, setIsLoading] = useState(true);
 	const lecturers = useSelector((state) => state.fetchLecturers.lecturer);
 
-	const getDosenId = (id) => {
-		console.log(id);
-	};
-
 	useEffect(() => {
 		setIsLoading(true);
 		const timeout = setTimeout(() => {
