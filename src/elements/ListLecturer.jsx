@@ -6,17 +6,15 @@ const ListLecturer = (props) => {
 	const { uuid, name, email, phoneNumber, department, departmentUuid, data } =
 		props;
 	const dispatch = useDispatch();
-	const [openDropdown, setOpenDropdown] = useState(false);
-	const handleOpen = () => setOpenDropdown(!openDropdown);
+	const [isVisible, setIsVisible] = useState(false);
+	const handleOpen = () => setIsVisible(!isVisible);
 
-	const handleClick = () => {
-		// dispatch(setSelectedAgenda(data));
-	};
+	const handleDropdown = () => {};
 	return (
 		<>
 			<div
 				className={`px-5 py-3 border rounded flex items-center cursor-pointer border-light-primary hover:bg-light-primary hover:text-white transition ease-in 3s ${
-					openDropdown && 'bg-light-primary text-white'
+					isVisible && 'bg-light-primary text-white'
 				}`}
 				onClick={handleOpen}
 			>
@@ -24,15 +22,16 @@ const ListLecturer = (props) => {
 					<h3 className="text-sm font-medium">{data}</h3>
 				</div>
 			</div>
-			{openDropdown && (
+			{isVisible && (
 				<EditDropdown
+					isVisible="px-5 bg-white shadow-md rounded pb-4 h-full"
 					uuid={uuid}
 					name={name}
 					email={email}
 					phoneNumber={phoneNumber}
 					department={department}
 					departmentUuid={departmentUuid}
-					close={() => setOpenDropdown(false)}
+					close={() => setIsVisible(false)}
 				/>
 			)}
 		</>
