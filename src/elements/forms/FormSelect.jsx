@@ -1,14 +1,24 @@
 const FormSelect = (props) => {
-	const { label, note, variant, children, value, name, onChange } = props;
+	const {
+		name,
+		label,
+		note,
+		variant,
+		selectVariant,
+		labelVariant,
+		onChange,
+		value,
+		children,
+	} = props;
 
 	return (
 		<div className={variant ? variant : 'w-80'}>
-			<label className="text-xs font-medium">{label}</label>
+			<label className={`font-medium ${labelVariant}`}>{label}</label>
 			<select
-				className="w-full border border-light-secondary text-sm rounded py-1 px-3"
-				value={value}
 				name={name}
+				className={`w-full border border-light-secondary rounded py-1 px-3 ${selectVariant}`}
 				onChange={onChange}
+				value={value}
 			>
 				{children}
 			</select>

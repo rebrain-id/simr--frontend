@@ -1,31 +1,27 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import Button from '../elements/Button';
-import ListProdi from '../elements/listProdi/';
-import CreateModal from '../components/CreateProdiModal';
-import { useState } from 'react';
+import ListDepartment from '../elements/ListDepartment';
+import CreateModal from '../components/CreateDepartmentModal';
+import { useEffect, useState } from 'react';
+import { fetchDepartments } from '../redux/actions/departmentAction';
+import { useDispatch, useSelector } from 'react-redux';
 
-const data = [
-	{
-		nama: 'Sistem Informasi',
-		username: 'sisteminformasi',
-		password: 'sisteminformasi',
-	},
-	{
-		nama: 'Teknik Informatika',
-		username: 'teknikinformatika',
-		password: 'teknikinformatika',
-	},
-	{
-		nama: 'Teknik Elektro',
-		username: 'teknikelektro',
-		password: 'teknikelektro',
-	},
-];
-
-const ProgramStudiPage = () => {
+const Department = () => {
 	const [openModal, setOpenModal] = useState(false);
 	const handleModal = () => setOpenModal(!openModal);
+	const dispatch = useDispatch();
+	const [loading, setLoading] = useState(true);
+	const datas = useSelector((state) => state.fetchDepartments.departments);
+
+	useEffect(() => {
+		setLoading(true);
+		setTimeout(() => {
+			dispatch(fetchDepartments());
+			setLoading(false);
+		}, 1500);
+		return () => clearTimeout();
+	}, [dispatch]);
 	return (
 		<>
 			<main className="bg-white px-10 py-5 rounded drop-shadow-bottom mt-5">
@@ -44,8 +40,14 @@ const ProgramStudiPage = () => {
 				</div>
 
 				<section className="mt-5 flex flex-col gap-3">
-					{data.map((item, index) => (
-						<ListProdi key={index} data={item} nama={item.nama} />
+					{loading && 'Loading...'}
+					{datas.map((item, index) => (
+						<ListDepartment
+							key={index}
+							data={item.name}
+							uuid={item.uuid}
+							name={item.name}
+						/>
 					))}
 				</section>
 			</main>
@@ -54,4 +56,4 @@ const ProgramStudiPage = () => {
 	);
 };
 
-export default ProgramStudiPage;
+export default Department;
