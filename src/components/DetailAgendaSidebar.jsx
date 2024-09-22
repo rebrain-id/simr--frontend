@@ -27,8 +27,6 @@ const DetailAgendaSidebar = (props) => {
 		(state) => state.fetchDepartments.departments,
 	);
 
-	console.log(data);
-
 	useEffect(() => {
 		dispatch(fetchTypeAgenda());
 		dispatch(fetchDepartments());
@@ -150,8 +148,6 @@ const DetailAgendaSidebar = (props) => {
 		}
 	};
 
-	console.log(inputValue);
-
 	const handleSubmit = async () => {
 		try {
 			const response = await dispatch(
@@ -176,7 +172,7 @@ const DetailAgendaSidebar = (props) => {
 			<div
 				className={`h-screen overflow-y-auto bg-light-white pb-5 drop-shadow-right transition-all duration-1000 ${variant}`}
 			>
-				<section className="sticky top-0 py-5 px-8 bg-light-white flex justify-between items-center">
+				<section className="sticky top-0 py-5 px-8 bg-light-white flex justify-between items-center border-b">
 					<h1 className="text-lg font-semibold">Detail Agenda</h1>
 					<FontAwesomeIcon
 						icon={faXmark}
@@ -187,6 +183,7 @@ const DetailAgendaSidebar = (props) => {
 
 				<section className="flex flex-col px-8 gap-3 mt-5">
 					<FormInput
+						variant="w-full flex flex-col gap-1"
 						inputvariant="text-sm font-normal"
 						labelvariant="text-xs"
 						label="Agenda"
@@ -195,6 +192,7 @@ const DetailAgendaSidebar = (props) => {
 						onChange={handleInputValue}
 					/>
 					<FormInput
+						variant="w-full flex flex-col gap-1"
 						inputvariant="text-sm font-normal"
 						labelvariant="text-xs"
 						label="Dari"
@@ -206,6 +204,7 @@ const DetailAgendaSidebar = (props) => {
 						onChange={handleInputValue}
 					/>
 					<FormInput
+						variant="w-full flex flex-col gap-1"
 						inputvariant="text-sm font-normal"
 						labelvariant="text-xs"
 						label="Sampai"
@@ -217,6 +216,7 @@ const DetailAgendaSidebar = (props) => {
 						onChange={handleInputValue}
 					/>
 					<FormInput
+						variant="w-full flex flex-col gap-1"
 						inputvariant="text-sm font-normal"
 						labelvariant="text-xs"
 						label="Tempat"
@@ -235,14 +235,19 @@ const DetailAgendaSidebar = (props) => {
 						value={inputValue.typeAgenda}
 						name="typeAgenda"
 						onChange={handleInputValue}
+						labelVariant="text-xs"
+						selectVariant="text-sm"
 					>
-						<option value="" className="text-light-secondary">
+						<option
+							value=""
+							className="text-light-secondary text-sm"
+						>
 							Pilih jenis agenda
 						</option>
 						{typeAgenda.map((item, index) => (
 							<option
 								value={item.uuid}
-								className="text-secondary"
+								className="text-secondary text-sm"
 								key={index}
 								selected={inputValue.typeAgenda === item.uuid}
 							>
@@ -270,6 +275,7 @@ const DetailAgendaSidebar = (props) => {
 						))}
 					</FormCheckbox>
 					<FormInput
+						variant="w-full flex flex-col gap-1"
 						inputvariant="text-sm font-normal"
 						labelvariant="text-xs"
 						label="Notulensi"
@@ -280,6 +286,7 @@ const DetailAgendaSidebar = (props) => {
 						onChange={handleInputValue}
 					/>
 					<FormInput
+						variant="w-full flex flex-col gap-1"
 						inputvariant="text-sm font-normal"
 						labelvariant="text-xs"
 						label="Absensi"
