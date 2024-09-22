@@ -10,19 +10,24 @@ import { useEffect, useState } from 'react';
 import moment from 'moment';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchTypeAgenda } from '../redux/actions/typeAgendaAction';
-import { updateDetailAgenda } from '../redux/actions/agendaAction';
-import { useNavigate } from 'react-router-dom';
+import {
+	closeDetailAgenda,
+	updateDetailAgenda,
+} from '../redux/actions/agendaAction';
 import { fetchDepartments } from '../redux/actions/departmentAction';
 
 const DetailAgendaSidebar = (props) => {
 	const { onClick, data, isShow = false, variant } = props;
 	const [checkAll, setCheckAll] = useState(false);
 	const [checkboxStates, setCheckboxStates] = useState({});
-	const navigation = useNavigate();
 
 	const dispatch = useDispatch();
 	const typeAgenda = useSelector((state) => state.typeAgenda.typeAgenda);
-	const department = useSelector((state) => state.department.department);
+	const department = useSelector(
+		(state) => state.fetchDepartments.departments,
+	);
+
+	console.log(data);
 
 	useEffect(() => {
 		dispatch(fetchTypeAgenda());
@@ -145,15 +150,21 @@ const DetailAgendaSidebar = (props) => {
 		}
 	};
 
-	const handleSubmit = () => {
-		const response = updateDetailAgenda({ data: inputValue });
+	console.log(inputValue);
 
-		if (response && response.payload.statusCode === 200) {
-			navigation(-1);
+	const handleSubmit = async () => {
+		try {
+			const response = await dispatch(
+				updateDetailAgenda({ data: inputValue }),
+			);
+
+			if (response && response.payload.statusCode === 200) {
+				dispatch(closeDetailAgenda());
+			}
+		} catch (error) {
+			console.log(error);
 		}
 	};
-
-	console.log(data);
 
 	return (
 		<div

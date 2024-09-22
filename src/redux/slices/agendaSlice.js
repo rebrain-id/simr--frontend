@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { updateDetailAgenda } from '../actions/agendaAction';
 
 const initialState = {
 	agenda: [],
@@ -9,6 +10,7 @@ const initialState = {
 	detailAgenda: [],
 	showSidebar: false,
 	loading: false,
+	isUpdated: false,
 	error: null,
 };
 
@@ -64,6 +66,20 @@ const agendaSlice = createSlice({
 			state.loading = false;
 			state.error = action.payload;
 		},
+	},
+	extraReducers: (builder) => {
+		builder.addCase(updateDetailAgenda.pending, (state) => {
+			state.loading = true;
+			state.error = null;
+		});
+		builder.addCase(updateDetailAgenda.fulfilled, (state) => {
+			state.loading = false;
+			state.isUpdated = true;
+		});
+		builder.addCase(updateDetailAgenda.rejected, (state, action) => {
+			state.loading = false;
+			state.error = action.error.message;
+		});
 	},
 });
 

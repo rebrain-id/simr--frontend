@@ -10,7 +10,6 @@ import {
 	fetchDetailAgendaSuccess,
 	closeDetailAgendaSuccess,
 	fetchAgendaFailure,
-	updateDetailAgendaSuccess,
 } from '../slices/agendaSlice';
 import {
 	checkAgenda,
@@ -281,14 +280,16 @@ export const closeDetailAgenda = createAsyncThunk(
 export const updateDetailAgenda = createAsyncThunk(
 	'agenda/updateDetailAgenda',
 
-	async ({ data }, { dispatch }) => {
+	async ({ data }, { dispatch, rejectWithValue }) => {
 		try {
-			dispatch(fetchAgendaRequest());
-
 			const response = await updateAgenda(data.uuid, data);
-			dispatch(updateDetailAgendaSuccess(response));
+
+			return response;
 		} catch (error) {
+			console.log(error);
 			dispatch(fetchAgendaFailure(error.message));
+
+			return rejectWithValue(error.message);
 		}
 	},
 );

@@ -16,6 +16,7 @@ const AgendaByDate = () => {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 	let agendaByDate = useSelector((state) => state.agenda.agendaByDate);
+	let isUpdated = useSelector((state) => state.agenda.isUpdated);
 
 	const getYear = searchParam.get('year');
 	const getMonth = searchParam.get('month');
@@ -33,7 +34,7 @@ const AgendaByDate = () => {
 				date: getDate,
 			}),
 		);
-	}, [dispatch, getYear, getMonth, getDate]);
+	}, [dispatch, getYear, getMonth, getDate, isUpdated]);
 
 	const monthList = [
 		'Januari',
