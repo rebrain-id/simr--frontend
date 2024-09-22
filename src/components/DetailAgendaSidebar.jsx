@@ -169,7 +169,9 @@ const DetailAgendaSidebar = (props) => {
 				deleteDetailAgenda({ uuid: inputValue.uuid }),
 			);
 
-			console.log(response);
+			if (response && response.payload.statusCode === 200) {
+				dispatch(closeDetailAgenda());
+			}
 		} catch (error) {
 			console.log(error);
 		}

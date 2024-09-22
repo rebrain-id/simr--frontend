@@ -1,5 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { updateDetailAgenda } from '../actions/agendaAction';
+import {
+	createAgenda,
+	deleteDetailAgenda,
+	updateDetailAgenda,
+} from '../actions/agendaAction';
 
 const initialState = {
 	agenda: [],
@@ -11,6 +15,7 @@ const initialState = {
 	showSidebar: false,
 	loading: false,
 	isUpdated: false,
+	message: [],
 	error: null,
 };
 
@@ -68,18 +73,40 @@ const agendaSlice = createSlice({
 		},
 	},
 	extraReducers: (builder) => {
-		builder.addCase(updateDetailAgenda.pending, (state) => {
-			state.loading = true;
-			state.error = null;
-		});
-		builder.addCase(updateDetailAgenda.fulfilled, (state) => {
-			state.loading = false;
-			state.isUpdated = true;
-		});
-		builder.addCase(updateDetailAgenda.rejected, (state, action) => {
-			state.loading = false;
-			state.error = action.error.message;
-		});
+		builder
+			.addCase(createAgenda.fulfilled, (state, action) => {
+				state.loading = false;
+				state.agenda.push(action.payload.data);
+				state.message = action.payload.message;
+			})
+			.addCase(createAgenda.rejected, (state, action) => {
+				state.loading = false;
+				state.error = action.payload;
+			})
+			.addCase(updateDetailAgenda.pending, (state) => {
+				state.loading = true;
+				state.error = null;
+			})
+			.addCase(updateDetailAgenda.fulfilled, (state) => {
+				state.loading = false;
+				state.isUpdated = true;
+			})
+			.addCase(updateDetailAgenda.rejected, (state, action) => {
+				state.loading = false;
+				state.error = action.error.message;
+			})
+			.addCase(deleteDetailAgenda.pending, (state) => {
+				state.loading = true;
+				state.error = null;
+			})
+			.addCase(deleteDetailAgenda.fulfilled, (state) => {
+				state.loading = false;
+				state.isUpdated = true;
+			})
+			.addCase(deleteDetailAgenda.rejected, (state, action) => {
+				state.loading = false;
+				state.error = action.error.message;
+			});
 	},
 });
 

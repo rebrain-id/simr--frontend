@@ -47,7 +47,11 @@ export const createAgenda = createAsyncThunk(
 
 			const response = await createDataAgenda(data);
 
-			return response;
+			return {
+				data: response,
+				status: 'success',
+				message: 'Berhasil membuat agenda baru',
+			};
 		} catch (error) {
 			dispatch(fetchAgendaFailure(error));
 		}

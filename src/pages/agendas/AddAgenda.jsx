@@ -56,6 +56,8 @@ const AddAgenda = () => {
 		visible: false,
 	});
 
+	console.log(inputValue);
+
 	const handleSubmitData = async () => {
 		try {
 			const departmentFromStorage = JSON.parse(
@@ -85,19 +87,19 @@ const AddAgenda = () => {
 
 				const response = await dispatch(createAgenda({ data: data }));
 
-				if (response && response.payload.statusCode === 201) {
+				if (response && response.payload.data.statusCode === 201) {
 					sessionStorage.removeItem('member');
 
-					navigation('/agenda?menu=calendar');
+					navigation(-1);
 				}
+			} else {
+				setShowAlert({
+					status: 'error',
+					message:
+						'Harap isi semua kolom terlebih dahulu sebelum menyimpan data',
+					visible: true,
+				});
 			}
-
-			setShowAlert({
-				status: 'error',
-				message:
-					'Harap isi semua kolom terlebih dahulu sebelum menyimpan data',
-				visible: true,
-			});
 		} catch (error) {
 			console.log(error);
 		}
@@ -135,7 +137,7 @@ const AddAgenda = () => {
 
 				<section className="flex flex-col gap-3 mt-5 w-full">
 					<FormInput
-						variant="w-full"
+						variant="w-full flex flex-col gap-1"
 						inputvariant="text-sm font-normal"
 						labelvariant="text-xs"
 						label="Agenda"
@@ -144,7 +146,7 @@ const AddAgenda = () => {
 					/>
 					<div className="flex gap-5">
 						<FormInput
-							variant="w-full"
+							variant="w-full flex flex-col gap-1"
 							inputvariant="text-sm font-normal"
 							labelvariant="text-xs"
 							label="Dari"
@@ -154,7 +156,7 @@ const AddAgenda = () => {
 							placeholder="Dari"
 						/>
 						<FormInput
-							variant="w-full"
+							variant="w-full flex flex-col gap-1"
 							inputvariant="text-sm font-normal"
 							labelvariant="text-xs"
 							label="Sampai"
@@ -166,7 +168,7 @@ const AddAgenda = () => {
 					<div className="flex gap-5 w-full">
 						<div className="flex flex-col gap-3 w-1/2">
 							<FormInput
-								variant="w-full"
+								variant="w-full flex flex-col gap-1"
 								inputvariant="text-sm font-normal"
 								labelvariant="text-xs"
 								label="Tempat"
@@ -175,8 +177,9 @@ const AddAgenda = () => {
 							/>
 							<FormSelect
 								label="Kategori"
-								variant="w-full"
+								variant="w-full flex flex-col gap-1 text-sm"
 								name="typeAgenda"
+								labelVariant="text-xs"
 								onChange={handleInputValue}
 							>
 								<option
