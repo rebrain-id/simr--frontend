@@ -11,7 +11,7 @@ const AgendaHistory = () => {
 	const [openFilter, setOpenFilter] = useState(false);
 	const [searchParam] = useSearchParams();
 	const dispatch = useDispatch();
-	const agendaHistory = useSelector((state) => state.agenda.agendaHistory);
+	const { agendaHistory, isUpdated } = useSelector((state) => state.agenda);
 
 	const getDateFrom = searchParam.get('from') || null;
 	const getDateTo = searchParam.get('to') || null;
@@ -25,7 +25,7 @@ const AgendaHistory = () => {
 				type: getType,
 			}),
 		);
-	}, [dispatch, getDateFrom, getDateTo, getType]);
+	}, [dispatch, getDateFrom, getDateTo, getType, isUpdated]);
 
 	const monthList = [
 		'Januari',

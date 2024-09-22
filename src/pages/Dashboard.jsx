@@ -23,9 +23,11 @@ const Dashboard = () => {
 	];
 
 	const dispatch = useDispatch();
+	const isUpdated = useSelector((state) => state.agenda.isUpdated);
+
 	useEffect(() => {
 		dispatch(fetchAgendaToday());
-	}, [dispatch]);
+	}, [dispatch, isUpdated]);
 
 	const agenda = useSelector((state) => state.agenda.agendaToday);
 	const agendaInternal = agenda.filter(
