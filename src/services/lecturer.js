@@ -1,10 +1,10 @@
 import axios from 'axios';
 import { API_URL } from './config';
 
-export const getDepartment = async () => {
-	const url = `${API_URL()}/v1/department`;
+export const getLecturer = async () => {
+	const url = `${API_URL()}/v1/lecturer`;
 
-	const response = await axios({
+    const response = await axios({
 		method: 'get',
 		url: url,
 	})
@@ -16,10 +16,10 @@ export const getDepartment = async () => {
 		});
 
 	return response;
-};
+}
 
-export const postDepartment = async (body) => {
-	const url = `${API_URL()}/v1/department/`;
+export const postLecturer = async (body) => {
+	const url = `${API_URL()}/v1/lecturer`;
 
 	const response = await axios({
 		method: 'post',
@@ -37,8 +37,8 @@ export const postDepartment = async (body) => {
 	return response
 }
 
-export const updateDepartment = async (uuid, body) => {
-	const url = `${API_URL()}/v1/department/${uuid}`;
+export const updateLecturer = async (uuid, body) => {
+	const url = `${API_URL()}/v1/lecturer/${uuid}`;
 	
 	const response = await axios({
 		method: 'patch',
@@ -46,18 +46,17 @@ export const updateDepartment = async (uuid, body) => {
 		data: body,
 	})
 		.then((res) => {
-			return res.data
+			return res.data;
 		})
 		.catch((err) => {
 			console.log(err);
-			throw err
 		})
-
+	
 	return response
 }
 
-export const deleteDepartment = async (uuid) => {
-	const url = `${API_URL()}/v1/department/${uuid}`
+export const deleteLecturer = async (uuid) => {
+	const url = `${API_URL()}/v1/lecturer/${uuid}`;
 
 	const response = await axios({
 		method: 'delete',
@@ -65,11 +64,10 @@ export const deleteDepartment = async (uuid) => {
 		data: uuid,
 	})
 		.then((res) => {
-			return res.data
+			return res.data;
 		})
 		.catch((err) => {
 			console.log(err);
-			throw err
 		})
 
 	return response

@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import EditDropdown from '../components/EditDosenDropdown';
+import EditDropdown from '../components/EditLecturerDropdown';
 
-const ListDosen = (props) => {
-	const { nama, data } = props;
+const ListLecturer = (props) => {
+	const { uuid, name, email, phoneNumber, department, departmentUuid, data } =
+		props;
 	const dispatch = useDispatch();
 	const [openDropdown, setOpenDropdown] = useState(false);
 	const handleOpen = () => setOpenDropdown(!openDropdown);
@@ -20,12 +21,17 @@ const ListDosen = (props) => {
 				onClick={handleOpen}
 			>
 				<div className="pe-3 w-1/2">
-					<h3 className="text-sm font-medium">{nama}</h3>
+					<h3 className="text-sm font-medium">{data}</h3>
 				</div>
 			</div>
 			{openDropdown && (
 				<EditDropdown
-					data={data}
+					uuid={uuid}
+					name={name}
+					email={email}
+					phoneNumber={phoneNumber}
+					department={department}
+					departmentUuid={departmentUuid}
 					close={() => setOpenDropdown(false)}
 				/>
 			)}
@@ -33,4 +39,4 @@ const ListDosen = (props) => {
 	);
 };
 
-export default ListDosen;
+export default ListLecturer;

@@ -3,7 +3,7 @@ import logo from '../assets/images/logo.png';
 const LoadingScreen = ({ loading }) => {
 	return (
 		<div
-			className={`fixed w-full h-screen left-0 top-0 bg-light-gray flex items-center justify-center z-[100] transition-all duration-1000 ${loading ? 'translate-y-0' : '-translate-y-full'}`}
+			className={`fixed w-full h-screen left-0 top-0 bg-light-white flex items-center justify-center z-[100] transition-all duration-1000 ${loading ? 'translate-y-0' : '-translate-y-full'}`}
 		>
 			<div className="flex gap-3 bg-light-white py-5 px-10 rounded-lg drop-shadow border border-light-primary">
 				<div className="mx-auto my-auto">

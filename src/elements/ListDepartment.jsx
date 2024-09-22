@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import EditDropdown from '../components/EditProdiDropdown';
+import EditDropdown from '../components/EditDepartmentDropdown';
 
-const ListProdi = (props) => {
-	const { nama, data } = props;
+const ListDepartment = (props) => {
+	const { uuid, name, username, password, data } = props;
 	const dispatch = useDispatch();
 	const [openDropdown, setOpenDropdown] = useState(false);
 	const handleOpen = () => setOpenDropdown(!openDropdown);
@@ -20,12 +20,15 @@ const ListProdi = (props) => {
 				onClick={handleOpen}
 			>
 				<div className="pe-3 w-1/2">
-					<h3 className="text-sm font-medium">{nama}</h3>
+					<h3 className="text-sm font-medium">{data}</h3>
 				</div>
 			</div>
 			{openDropdown && (
 				<EditDropdown
-					data={data}
+					uuid={uuid}
+					name={name}
+					username={username}
+					password={password}
 					close={() => setOpenDropdown(false)}
 				/>
 			)}
@@ -33,4 +36,4 @@ const ListProdi = (props) => {
 	);
 };
 
-export default ListProdi;
+export default ListDepartment;

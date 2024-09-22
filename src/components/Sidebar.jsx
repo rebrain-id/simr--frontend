@@ -7,12 +7,20 @@ import {
 import logo from '../assets/images/logo.png';
 import NavLink from '../elements/NavLink';
 import { useLocation } from 'react-router-dom';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const Sidebar = () => {
 	const { pathname } = useLocation();
 	const isActive = (path) => pathname.includes(path);
-	const [sidebarFull, setSidebarFull] = useState(true);
+
+	const [sidebarFull, setSidebarFull] = useState(() => {
+		const savedSize = localStorage.getItem('size');
+		return savedSize ? JSON.parse(savedSize) : true;
+	});
+
+	useEffect(() => {
+		localStorage.setItem('size', JSON.stringify(sidebarFull));
+	}, [sidebarFull]);
 
 	const handleSizeSidebar = () => {
 		setSidebarFull(!sidebarFull);
@@ -20,7 +28,7 @@ const Sidebar = () => {
 
 	return (
 		<nav
-			className={`h-auto w-80 bg-light-white rounded-lg px-3 pt-6 drop-shadow-right-bottom ${sidebarFull ? 'w-80' : 'w-24'} transition-all `}
+			className={`h-auto bg-light-white rounded-lg px-3 pt-6 drop-shadow-right-bottom ${sidebarFull ? 'w-80' : 'w-24'} transition-all `}
 		>
 			<header
 				className={`flex justify-between items-center mb-28 ${sidebarFull ? '' : 'flex-col justify-center gap-3'}`}

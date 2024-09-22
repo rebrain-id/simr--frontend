@@ -9,6 +9,7 @@ import { fetchTypeAgenda } from '../../redux/actions/typeAgendaAction';
 import { createAgenda } from '../../redux/actions/agendaAction';
 import moment from 'moment';
 import { useNavigate } from 'react-router-dom';
+import Alert from '../../elements/Alert';
 
 const AddAgenda = () => {
 	const username = 'informatika';
@@ -49,36 +50,79 @@ const AddAgenda = () => {
 		}
 	});
 
+	const [showAlert, setShowAlert] = useState({
+		status: '',
+		message: '',
+		visible: false,
+	});
+
+	console.log(inputValue);
+
 	const handleSubmitData = async () => {
 		try {
 			const departmentFromStorage = JSON.parse(
 				sessionStorage.getItem('member'),
 			);
 
-			const data = {
-				title: inputValue.title,
-				description: inputValue.description,
-				start: moment(inputValue.from).format('YYYY-MM-DD HH:mm:ss'),
-				finish: moment(inputValue.to).format('YYYY-MM-DD HH:mm:ss'),
-				typeAgendaUuid: inputValue.typeAgenda,
-				location: inputValue.location,
-				departmentsUuid: departmentFromStorage,
-				username: username,
-			};
+			if (
+				inputValue.title &&
+				inputValue.description &&
+				inputValue.from &&
+				inputValue.to &&
+				inputValue.typeAgenda &&
+				departmentFromStorage
+			) {
+				const data = {
+					title: inputValue.title,
+					description: inputValue.description,
+					start: moment(inputValue.from).format(
+						'YYYY-MM-DD HH:mm:ss',
+					),
+					finish: moment(inputValue.to).format('YYYY-MM-DD HH:mm:ss'),
+					typeAgendaUuid: inputValue.typeAgenda,
+					location: inputValue.location,
+					departmentsUuid: departmentFromStorage,
+					username: username,
+				};
 
-			const response = await dispatch(createAgenda({ data: data }));
-			console.log(response);
+				const response = await dispatch(createAgenda({ data: data }));
 
-			if (response && response.payload.statusCode === 201) {
-				navigation('/agenda?menu=calendar');
+				if (response && response.payload.data.statusCode === 201) {
+					sessionStorage.removeItem('member');
+
+					navigation(-1);
+				}
+			} else {
+				setShowAlert({
+					status: 'error',
+					message:
+						'Harap isi semua kolom terlebih dahulu sebelum menyimpan data',
+					visible: true,
+				});
 			}
 		} catch (error) {
 			console.log(error);
 		}
 	};
 
+	const handleClose = () => {
+		setShowAlert({
+			status: '',
+			message: '',
+			visible: false,
+		});
+	};
+
 	return (
 		<>
+			{showAlert.visible && (
+				<Alert
+					status={showAlert.status}
+					message={showAlert.message}
+					onClick={handleClose}
+				/>
+			)}
+
 			{openModal && (
 				<ModalAddAnggota
 					onClick={handleOpenModal}
@@ -93,26 +137,26 @@ const AddAgenda = () => {
 
 				<section className="flex flex-col gap-3 mt-5 w-full">
 					<FormInput
-						variant="w-full"
+						variant="w-full flex flex-col gap-1"
 						inputvariant="text-sm font-normal"
 						labelvariant="text-xs"
 						label="Agenda"
-						placeholder="Judul agenda"
 						name="title"
 						onChange={handleInputValue}
 					/>
 					<div className="flex gap-5">
 						<FormInput
-							variant="w-full"
+							variant="w-full flex flex-col gap-1"
 							inputvariant="text-sm font-normal"
 							labelvariant="text-xs"
 							label="Dari"
 							type="datetime-local"
 							name="from"
 							onChange={handleInputValue}
+							placeholder="Dari"
 						/>
 						<FormInput
-							variant="w-full"
+							variant="w-full flex flex-col gap-1"
 							inputvariant="text-sm font-normal"
 							labelvariant="text-xs"
 							label="Sampai"
@@ -124,7 +168,7 @@ const AddAgenda = () => {
 					<div className="flex gap-5 w-full">
 						<div className="flex flex-col gap-3 w-1/2">
 							<FormInput
-								variant="w-full"
+								variant="w-full flex flex-col gap-1"
 								inputvariant="text-sm font-normal"
 								labelvariant="text-xs"
 								label="Tempat"
@@ -133,8 +177,9 @@ const AddAgenda = () => {
 							/>
 							<FormSelect
 								label="Kategori"
-								variant="w-full"
+								variant="w-full flex flex-col gap-1 text-sm"
 								name="typeAgenda"
+								labelVariant="text-xs"
 								onChange={handleInputValue}
 							>
 								<option
@@ -173,9 +218,10 @@ const AddAgenda = () => {
 							<Button
 								onClick={handleSubmitData}
 								text="Simpan"
-								variant="bg-light-primary bg-opacity-90 text-light-white text-sm hover:bg-opacity-100"
+								variant={`bg-light-primary bg-opacity-90 text-light-white text-sm hover:bg-opacity-100`}
 							/>
 							<Button
+								onClick={() => navigation(-1)}
 								text="Batal"
 								variant="bg-light-primary bg-opacity-30 text-light-primary text-sm hover:bg-opacity-50"
 							/>
