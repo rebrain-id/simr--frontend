@@ -5,16 +5,18 @@ import FormInputCheckbox from '../elements/forms/FormInputCheckbox';
 import Button from '../elements/Button';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchDepartmentsSuccess } from '../redux/actions/departmentAction';
+import { fetchDepartments } from '../redux/actions/departmentAction';
 import { checkMemberAgenda } from '../redux/actions/agendaAction';
 
 const ModalAddAnggota = (props) => {
 	const { onClick, dateFrom, dateTo } = props;
 	const dispatch = useDispatch();
-	const departments = useSelector((state) => state.department.department);
+	const departments = useSelector(
+		(state) => state.fetchDepartments.departments,
+	);
 
 	useEffect(() => {
-		dispatch(fetchDepartmentsSuccess());
+		dispatch(fetchDepartments());
 	}, [dispatch]);
 
 	const [selectedDepartments, setSelectedDepartments] = useState([]);
