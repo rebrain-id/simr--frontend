@@ -3,7 +3,8 @@ import { useDispatch } from 'react-redux';
 import EditDropdown from '../components/EditLecturerDropdown';
 
 const ListLecturer = (props) => {
-	const { uuid, name, email, phoneNumber, department, data } = props;
+	const { uuid, name, email, phoneNumber, department, departmentUuid, data } =
+		props;
 	const dispatch = useDispatch();
 	const [openDropdown, setOpenDropdown] = useState(false);
 	const handleOpen = () => setOpenDropdown(!openDropdown);
@@ -30,6 +31,7 @@ const ListLecturer = (props) => {
 					email={email}
 					phoneNumber={phoneNumber}
 					department={department}
+					departmentUuid={departmentUuid}
 					close={() => setOpenDropdown(false)}
 				/>
 			)}
