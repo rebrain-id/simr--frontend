@@ -12,6 +12,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchTypeAgenda } from '../redux/actions/typeAgendaAction';
 import {
 	closeDetailAgenda,
+	deleteDetailAgenda,
 	updateDetailAgenda,
 } from '../redux/actions/agendaAction';
 import { fetchDepartments } from '../redux/actions/departmentAction';
@@ -157,6 +158,18 @@ const DetailAgendaSidebar = (props) => {
 			if (response && response.payload.statusCode === 200) {
 				dispatch(closeDetailAgenda());
 			}
+		} catch (error) {
+			console.log(error);
+		}
+	};
+
+	const handleDelete = async () => {
+		try {
+			const response = await dispatch(
+				deleteDetailAgenda({ uuid: inputValue.uuid }),
+			);
+
+			console.log(response);
 		} catch (error) {
 			console.log(error);
 		}
@@ -316,6 +329,7 @@ const DetailAgendaSidebar = (props) => {
 						</div>
 						<Button
 							text="Hapus"
+							onClick={handleDelete}
 							variant="bg-light-danger bg-opacity-80 text-light-white text-sm hover:bg-opacity-100"
 						/>
 					</div>

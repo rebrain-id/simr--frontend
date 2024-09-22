@@ -111,3 +111,18 @@ export const updateAgenda = async (uuid, data) => {
 		});
 	return response;
 };
+
+export const deleteAgenda = async (uuid) => {
+	const url = `${API_URL()}/v1/detail-agendas/${uuid}`;
+
+	try {
+		const response = await axios({
+			method: 'delete',
+			url: url,
+		});
+		return response.data;
+	} catch (error) {
+		console.log(error);
+		throw error;
+	}
+};

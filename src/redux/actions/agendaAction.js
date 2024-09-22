@@ -14,6 +14,7 @@ import {
 import {
 	checkAgenda,
 	createDataAgenda,
+	deleteAgenda,
 	getAgenda,
 	getDetailAgenda,
 	updateAgenda,
@@ -287,6 +288,22 @@ export const updateDetailAgenda = createAsyncThunk(
 			return response;
 		} catch (error) {
 			console.log(error);
+			dispatch(fetchAgendaFailure(error.message));
+
+			return rejectWithValue(error.message);
+		}
+	},
+);
+
+export const deleteDetailAgenda = createAsyncThunk(
+	'agenda/deleteDetailAgenda',
+
+	async ({ uuid }, { dispatch, rejectWithValue }) => {
+		try {
+			const response = await deleteAgenda(uuid);
+
+			return response;
+		} catch (error) {
 			dispatch(fetchAgendaFailure(error.message));
 
 			return rejectWithValue(error.message);
