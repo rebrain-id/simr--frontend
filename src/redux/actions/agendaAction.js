@@ -11,7 +11,14 @@ import {
 	closeDetailAgendaSuccess,
 	fetchAgendaFailure,
 } from '../slices/agendaSlice';
-import { getAgenda, getDetailAgenda } from '../../services/agenda';
+import {
+	checkAgenda,
+	createDataAgenda,
+	getAgenda,
+	getDetailAgenda,
+	updateAgenda,
+} from '../../services/agenda';
+import { getTypeAgenda } from '../../services/typeAgenda';
 
 export const fetchAgenda = createAsyncThunk(
 	'agenda/fetchAgenda',
@@ -21,11 +28,48 @@ export const fetchAgenda = createAsyncThunk(
 
 			const dataset = await getAgenda();
 
-			const data = convertAgendaData(dataset);
+			const data = await convertAgendaData(dataset);
 
 			dispatch(fetchAgendaSuccess(data));
 		} catch (error) {
 			dispatch(fetchAgendaFailure(error));
+		}
+	},
+);
+
+export const createAgenda = createAsyncThunk(
+	'agenda/createAgenda',
+
+	async ({ data }, { dispatch }) => {
+		try {
+			dispatch(fetchAgendaRequest());
+
+			const response = await createDataAgenda(data);
+
+			return response;
+		} catch (error) {
+			dispatch(fetchAgendaFailure(error));
+		}
+	},
+);
+
+export const checkMemberAgenda = createAsyncThunk(
+	'agenda/checkMemberAgenda',
+
+	async ({ departmentsUuid, start, finish }, { rejectWithValue }) => {
+		try {
+			const data = {
+				departmentsUuid: departmentsUuid,
+				start: moment(start).format('YYYY-MM-DD HH:mm:ss'),
+				finish: moment(finish).format('YYYY-MM-DD HH:mm:ss'),
+			};
+
+			const response = await checkAgenda(data);
+
+			return response;
+		} catch (error) {
+			console.log(error);
+			rejectWithValue(error);
 		}
 	},
 );
@@ -38,7 +82,7 @@ export const fetchAgendaToday = createAsyncThunk(
 
 			const dataset = await getAgenda();
 
-			const data = convertAgendaData(dataset);
+			const data = await convertAgendaData(dataset);
 
 			const today = moment().format('DD');
 			const thisMonth = moment().format('MM');
@@ -62,7 +106,7 @@ export const fetchAgendaThisMonth = createAsyncThunk(
 			dispatch(fetchAgendaRequest());
 			const dataset = await getAgenda();
 
-			const dataThisMonth = convertAgendaData(dataset);
+			const dataThisMonth = await convertAgendaData(dataset);
 
 			const filteredAgenda = dataThisMonth.filter(
 				(item) =>
@@ -97,7 +141,7 @@ export const fetchAgendaByDate = createAsyncThunk(
 			dispatch(fetchAgendaRequest());
 			const dataset = await getAgenda();
 
-			const dataByDate = convertAgendaData(dataset);
+			const dataByDate = await convertAgendaData(dataset);
 
 			const filteredAgenda = dataByDate.filter(
 				(item) =>
@@ -119,24 +163,36 @@ export const fetchAgendaHistory = createAsyncThunk(
 		try {
 			dispatch(fetchAgendaRequest());
 
-			const data = await getAgenda();
+			let data = await getAgenda();
+			const typeAgenda = await getTypeAgenda();
 			const today = moment();
 			const convertDateFrom = dateFrom ? moment(dateFrom) : moment(0);
 			const convertDateTo = dateTo ? moment(dateTo) : today;
+
+			data = data.map((item) => {
+				return {
+					...item,
+					typeAgenda: {
+						uuid: item.typeAgenda.uuid,
+						name: typeAgenda.find(
+							(type) => type.uuid == item.typeAgenda.uuid,
+						).name,
+					},
+				};
+			});
 
 			const filteredAgenda = data.filter((item) => {
 				const finishedDate = moment(item.finish);
 
 				if (dateFrom && dateTo) {
 					if (type && type == 'all') {
-						return (
-							finishedDate.isBetween(
-								convertDateFrom,
-								convertDateTo,
-								null,
-								'[)',
-							) && item.isDone === true
+						return finishedDate.isBetween(
+							convertDateFrom,
+							convertDateTo,
+							null,
+							'[)',
 						);
+						// && item.isDone === true
 					} else if (type) {
 						return (
 							finishedDate.isBetween(
@@ -144,9 +200,8 @@ export const fetchAgendaHistory = createAsyncThunk(
 								convertDateTo,
 								null,
 								'[)',
-							) &&
-							item.typeAgenda.name == `Rapat ${type}` &&
-							item.isDone === true
+							) && item.typeAgenda.name == `Rapat ${type}`
+							// && item.isDone === true
 						);
 					} else {
 						return (
@@ -155,36 +210,33 @@ export const fetchAgendaHistory = createAsyncThunk(
 								convertDateTo,
 								null,
 								'[)',
-							) &&
-							item.typeAgenda.name == `Rapat Internal` &&
-							item.isDone === true
+							) && item.typeAgenda.name == `Rapat Internal`
+							// && item.isDone === true
 						);
 					}
 				} else {
 					if (type && type == 'all') {
-						return (
-							finishedDate.isBefore(convertDateTo) &&
-							item.isDone === true
-						);
+						return finishedDate.isBefore(convertDateTo);
+						// && item.isDone === true
 					} else if (type) {
 						return (
 							finishedDate.isBefore(convertDateTo) &&
-							item.typeAgenda.name == `Rapat ${type}` &&
-							item.isDone === true
+							item.typeAgenda.name == `Rapat ${type}`
+							// && item.isDone === true
 						);
 					} else {
 						return (
 							finishedDate.isBefore(convertDateTo) &&
-							item.typeAgenda.name == `Rapat Internal` &&
-							item.isDone === true
+							item.typeAgenda.name == `Rapat Internal`
+							// && item.isDone === true
 						);
 					}
 				}
 			});
 
 			const sortedAgenda = filteredAgenda.sort((a, b) => {
-				const dateA = moment(a.finish);
-				const dateB = moment(b.finish);
+				const dateA = moment.utc(a.finish);
+				const dateB = moment.utc(b.finish);
 				if (asc) {
 					return dateA - dateB;
 				} else {
@@ -193,7 +245,9 @@ export const fetchAgendaHistory = createAsyncThunk(
 			});
 
 			dispatch(
-				fetchAgendaHistorySuccess(convertAgendaData(sortedAgenda)),
+				fetchAgendaHistorySuccess(
+					await convertAgendaData(sortedAgenda),
+				),
 			);
 		} catch (error) {
 			dispatch(fetchAgendaFailure(error.message));
@@ -223,13 +277,38 @@ export const closeDetailAgenda = createAsyncThunk(
 	},
 );
 
-const convertAgendaData = (data) => {
+export const updateDetailAgenda = createAsyncThunk(
+	'agenda/updateDetailAgenda',
+
+	async ({ data }, { dispatch, rejectWithValue }) => {
+		try {
+			const response = await updateAgenda(data.uuid, data);
+
+			return response;
+		} catch (error) {
+			console.log(error);
+			dispatch(fetchAgendaFailure(error.message));
+
+			return rejectWithValue(error.message);
+		}
+	},
+);
+
+const convertAgendaData = async (data) => {
+	const typeAgendaData = await getTypeAgenda();
+
 	return data.map((item) => {
-		const startTime = moment(item.start);
-		const finishTime = moment(item.finish);
+		const startTime = moment.utc(item.start);
+		const finishTime = moment.utc(item.finish);
 
 		return {
 			...item,
+			typeAgenda: {
+				uuid: item.typeAgenda.uuid,
+				name: typeAgendaData.find(
+					(type) => type.uuid == item.typeAgenda.uuid,
+				).name,
+			},
 			time: {
 				start: startTime.format('HH:mm'),
 				finish: finishTime.format('HH:mm'),
