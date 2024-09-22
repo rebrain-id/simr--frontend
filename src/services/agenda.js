@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { API_URL } from './config';
+import moment from 'moment';
 
 export const getAgenda = async () => {
 	const url = `${API_URL()}/detail-agendas?username=informatika`;
@@ -74,15 +75,20 @@ export const updateAgenda = async (uuid, data) => {
 
 	form.append('title', data.title);
 	form.append('description', data.description);
-	form.append('start', data.start);
-	form.append('finish', data.finish);
+	form.append('start', moment.utc(data.start).format('YYYY-MM-DD HH:mm:ss'));
+	form.append(
+		'finish',
+		moment.utc(data.finish).format('YYYY-MM-DD HH:mm:ss'),
+	);
 	form.append('location', data.location);
-	form.append('typeAgendaUuid', data.typeAgenda);
-	if (Array.isArray(data.department)) {
-		data.department.forEach((deptUuid) => {
-			form.append('departmentsUuid[]', deptUuid);
-		});
-	}
+	form.append('absent', data.attendees);
+	form.append('notulen', data.notulens);
+	// form.append('typeAgendaUuid', data.typeAgenda);
+	// if (Array.isArray(data.department)) {
+	// 	data.department.forEach((deptUuid) => {
+	// 		form.append('departmentsUuid[]', deptUuid);
+	// 	});
+	// }
 
 	form.forEach((value, key) => {
 		console.log(`${key}: ${value}`);
@@ -92,6 +98,9 @@ export const updateAgenda = async (uuid, data) => {
 		method: 'patch',
 		url: url,
 		data: form,
+		headers: {
+			'Content-Type': 'multipart/form-data',
+		},
 	})
 		.then((res) => {
 			console.log(res);

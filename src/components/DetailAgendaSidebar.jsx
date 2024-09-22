@@ -12,11 +12,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchTypeAgenda } from '../redux/actions/typeAgendaAction';
 import { fetchDepartment } from '../redux/actions/departmentAction';
 import { updateDetailAgenda } from '../redux/actions/agendaAction';
+import { useNavigate } from 'react-router-dom';
 
 const DetailAgendaSidebar = (props) => {
 	const { onClick, data, isShow = false, variant } = props;
 	const [checkAll, setCheckAll] = useState(false);
 	const [checkboxStates, setCheckboxStates] = useState({});
+	const navigation = useNavigate();
 
 	const dispatch = useDispatch();
 	const typeAgenda = useSelector((state) => state.typeAgenda.typeAgenda);
@@ -113,20 +115,36 @@ const DetailAgendaSidebar = (props) => {
 		typeAgenda: data ? data.typeAgenda.uuid : '',
 		description: data ? data.description : '',
 		location: data ? data.location : '',
+		attendees: data ? data.absent : '',
+		notulens: data ? data.notulen : '',
 		department: [],
 	});
 
 	const handleInputValue = (e) => {
-		const { name, type, value, checked } = e.target;
-		setInputValue((prev) => ({
-			...prev,
-			[name]: type === 'checkbox' ? checked : value,
-		}));
+		const { name, type, value, checked, files } = e.target;
+
+		if (type === 'file') {
+			setInputValue((prev) => ({
+				...prev,
+				[name]: files[0],
+			}));
+		} else {
+			setInputValue((prev) => ({
+				...prev,
+				[name]: type === 'checkbox' ? checked : value,
+			}));
+		}
 	};
 
 	const handleSubmit = () => {
-		dispatch(updateDetailAgenda({ data: inputValue }));
+		const response = updateDetailAgenda({ data: inputValue });
+
+		if (response && response.payload.statusCode === 200) {
+			navigation(-1);
+		}
 	};
+
+	console.log(data);
 
 	return (
 		<div
@@ -238,6 +256,8 @@ const DetailAgendaSidebar = (props) => {
 						type="file"
 						note="Pastikan file memiliki format .pdf, .doc, atau .docx"
 						fileAccept=".pdf, .doc, .docx"
+						name="notulens"
+						onChange={handleInputValue}
 					/>
 					<FormInput
 						inputvariant="text-sm font-normal"
@@ -246,14 +266,20 @@ const DetailAgendaSidebar = (props) => {
 						type="file"
 						note="Pastikan file memiliki format .jpg, .jpeg, atau .png"
 						fileAccept=".jpg, .jpeg, .png"
+						name="attendees"
+						onChange={handleInputValue}
 					/>
 
 					<div className="mt-5 flex items-center justify-between">
 						<div className="flex items-center gap-2">
 							<Button
 								text="Update"
-								variant="bg-light-primary bg-opacity-90 text-light-white text-sm hover:bg-opacity-100"
-								onClick={handleSubmit}
+								variant={`${data && data.isDone === true ? 'bg-light-secondary cursor-not-allowed' : 'bg-light-primary'} bg-opacity-90 text-light-white text-sm hover:bg-opacity-100`}
+								onClick={
+									data && data.isDone !== true
+										? handleSubmit
+										: () => {}
+								}
 							/>
 							<Button
 								onClick={onClick}
