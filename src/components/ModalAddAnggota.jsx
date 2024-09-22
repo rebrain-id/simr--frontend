@@ -5,7 +5,7 @@ import FormInputCheckbox from '../elements/forms/FormInputCheckbox';
 import Button from '../elements/Button';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchDepartment } from '../redux/actions/departmentAction';
+import { fetchDepartmentsSuccess } from '../redux/actions/departmentAction';
 import { checkMemberAgenda } from '../redux/actions/agendaAction';
 
 const ModalAddAnggota = (props) => {
@@ -14,7 +14,7 @@ const ModalAddAnggota = (props) => {
 	const departments = useSelector((state) => state.department.department);
 
 	useEffect(() => {
-		dispatch(fetchDepartment());
+		dispatch(fetchDepartmentsSuccess());
 	}, [dispatch]);
 
 	const [selectedDepartments, setSelectedDepartments] = useState([]);
