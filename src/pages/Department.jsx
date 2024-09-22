@@ -12,7 +12,9 @@ const Department = () => {
 	const handleModal = () => setOpenModal(!openModal);
 	const dispatch = useDispatch();
 	const [loading, setLoading] = useState(true);
-	const datas = useSelector((state) => state.fetchDepartments.departments);
+	const departments = useSelector(
+		(state) => state.fetchDepartments.department,
+	);
 
 	useEffect(() => {
 		setLoading(true);
@@ -42,7 +44,7 @@ const Department = () => {
 				<section className="mt-5 flex flex-col gap-3">
 					{loading
 						? 'Loading...'
-						: datas.map((item, index) => (
+						: departments.map((item, index) => (
 								<ListDepartment
 									key={index}
 									data={item.name}

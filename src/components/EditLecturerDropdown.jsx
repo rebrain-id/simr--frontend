@@ -27,7 +27,7 @@ const EditLecturerDropdown = (props) => {
 	const [actionType, setActionType] = useState('');
 	const dispatch = useDispatch();
 	const departments = useSelector(
-		(state) => state.fetchDepartments.departments,
+		(state) => state.fetchDepartments.department,
 	);
 
 	useEffect(() => {

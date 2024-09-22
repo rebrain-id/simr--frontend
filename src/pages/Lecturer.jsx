@@ -12,7 +12,7 @@ const Lecturer = () => {
 	const handleModal = () => setOpenModal(!openModal);
 	const dispatch = useDispatch();
 	const [loading, setIsLoading] = useState(true);
-	const lecturers = useSelector((state) => state.fetchLecturers.lecturers);
+	const lecturers = useSelector((state) => state.fetchLecturers.lecturer);
 
 	const getDosenId = (id) => {
 		console.log(id);
