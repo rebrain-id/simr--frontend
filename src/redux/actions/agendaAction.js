@@ -306,7 +306,11 @@ export const deleteDetailAgenda = createAsyncThunk(
 		try {
 			const response = await deleteAgenda(uuid);
 
-			return response;
+			return {
+				data: response,
+				status: 'success',
+				message: 'Agenda berhasil dihapus',
+			};
 		} catch (error) {
 			dispatch(fetchAgendaFailure(error.message));
 

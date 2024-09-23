@@ -1,17 +1,12 @@
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
 import EditDropdown from '../components/EditLecturerDropdown';
 
 const ListLecturer = (props) => {
 	const { uuid, name, email, phoneNumber, department, departmentUuid, data } =
 		props;
-	const dispatch = useDispatch();
 	const [openDropdown, setOpenDropdown] = useState(false);
 	const handleOpen = () => setOpenDropdown(!openDropdown);
 
-	const handleClick = () => {
-		// dispatch(setSelectedAgenda(data));
-	};
 	return (
 		<>
 			<div

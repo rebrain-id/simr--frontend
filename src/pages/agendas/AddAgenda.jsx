@@ -56,8 +56,6 @@ const AddAgenda = () => {
 		visible: false,
 	});
 
-	console.log(inputValue);
-
 	const handleSubmitData = async () => {
 		try {
 			const departmentFromStorage = JSON.parse(

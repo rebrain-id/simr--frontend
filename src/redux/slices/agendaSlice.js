@@ -77,7 +77,7 @@ const agendaSlice = createSlice({
 			.addCase(createAgenda.fulfilled, (state, action) => {
 				state.loading = false;
 				state.agenda.push(action.payload.data);
-				state.message = action.payload.message;
+				state.message = action.payload;
 			})
 			.addCase(createAgenda.rejected, (state, action) => {
 				state.loading = false;
@@ -99,9 +99,10 @@ const agendaSlice = createSlice({
 				state.loading = true;
 				state.error = null;
 			})
-			.addCase(deleteDetailAgenda.fulfilled, (state) => {
+			.addCase(deleteDetailAgenda.fulfilled, (state, action) => {
 				state.loading = false;
 				state.isUpdated = true;
+				state.message = action.payload;
 			})
 			.addCase(deleteDetailAgenda.rejected, (state, action) => {
 				state.loading = false;
