@@ -345,7 +345,7 @@ const DetailAgendaSidebar = (props) => {
 									? handleDelete
 									: () => {}
 							}
-							variant="bg-light-danger bg-opacity-80 text-light-white text-sm hover:bg-opacity-100"
+							variant={`${data && data.isDone ? 'bg-light-secondary cursor-not-allowed bg-opacity-30 hover:bg-opacity-30' : 'bg-light-danger bg-opacity-90'} text-light-white text-sm hover:bg-opacity-100`}
 						/>
 					</div>
 				</section>

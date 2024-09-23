@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const Footer = () => {
 	return (
-		<footer className="relative bottom-0 mt-20">
+		<footer className="relative mt-20">
 			<p className="text-xs font-light text-light-secondary">
 				<FontAwesomeIcon icon={faCopyright} /> 2024, dibuat dengan{' '}
 				<FontAwesomeIcon icon={faHeart} className="text-danger" /> oleh{' '}
