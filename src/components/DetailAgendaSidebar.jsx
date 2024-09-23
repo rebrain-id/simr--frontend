@@ -16,6 +16,7 @@ import {
 	updateDetailAgenda,
 } from '../redux/actions/agendaAction';
 import { fetchDepartments } from '../redux/actions/departmentAction';
+import Toggel from '../elements/forms/Toggel';
 
 const DetailAgendaSidebar = (props) => {
 	const { onClick, data, isShow = false, variant } = props;
@@ -130,6 +131,7 @@ const DetailAgendaSidebar = (props) => {
 		location: data ? data.location : '',
 		attendees: data ? data.absent : '',
 		notulens: data ? data.notulen : '',
+		isDone: data ? data.isDone : false,
 		department: [],
 	});
 
@@ -148,6 +150,8 @@ const DetailAgendaSidebar = (props) => {
 			}));
 		}
 	};
+
+	console.log(data);
 
 	const handleSubmit = async () => {
 		try {
@@ -312,11 +316,18 @@ const DetailAgendaSidebar = (props) => {
 						onChange={handleInputValue}
 					/>
 
+					<Toggel
+						name={'isDone'}
+						label="Agenda Selesai"
+						onChange={handleInputValue}
+						isChecked={data?.isDone}
+					/>
+
 					<div className="mt-5 flex items-center justify-between">
 						<div className="flex items-center gap-2">
 							<Button
 								text="Update"
-								variant={`${data && data.isDone === true ? 'bg-light-secondary cursor-not-allowed' : 'bg-light-primary'} bg-opacity-90 text-light-white text-sm hover:bg-opacity-100`}
+								variant={`${data && data.isDone ? 'bg-light-secondary cursor-not-allowed bg-opacity-30 hover:bg-opacity-30' : 'bg-light-primary bg-opacity-90'} text-light-white text-sm hover:bg-opacity-100`}
 								onClick={
 									data && data.isDone !== true
 										? handleSubmit
@@ -331,7 +342,11 @@ const DetailAgendaSidebar = (props) => {
 						</div>
 						<Button
 							text="Hapus"
-							onClick={handleDelete}
+							onClick={
+								data && data.isDone !== true
+									? handleDelete
+									: () => {}
+							}
 							variant="bg-light-danger bg-opacity-80 text-light-white text-sm hover:bg-opacity-100"
 						/>
 					</div>

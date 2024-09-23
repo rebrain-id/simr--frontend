@@ -7,7 +7,7 @@ const Button = (props) => {
 	return (
 		<button
 			type={type}
-			className={`px-2 py-2 rounded cursor-pointer ${variant && variant}`}
+			className={` ${variant && variant} px-2 py-2 rounded cursor-pointer`}
 			onClick={onClick}
 			disabled={isDisabled}
 		>
