@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
 import EditDropdown from '../components/EditLecturerDropdown';
 
 const ListLecturer = (props) => {

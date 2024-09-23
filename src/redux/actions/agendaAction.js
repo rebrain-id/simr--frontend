@@ -191,13 +191,14 @@ export const fetchAgendaHistory = createAsyncThunk(
 
 				if (dateFrom && dateTo) {
 					if (type && type == 'all') {
-						return finishedDate.isBetween(
-							convertDateFrom,
-							convertDateTo,
-							null,
-							'[)',
+						return (
+							finishedDate.isBetween(
+								convertDateFrom,
+								convertDateTo,
+								null,
+								'[)',
+							) && item.isDone === true
 						);
-						// && item.isDone === true
 					} else if (type) {
 						return (
 							finishedDate.isBetween(
@@ -205,8 +206,9 @@ export const fetchAgendaHistory = createAsyncThunk(
 								convertDateTo,
 								null,
 								'[)',
-							) && item.typeAgenda.name == `Rapat ${type}`
-							// && item.isDone === true
+							) &&
+							item.typeAgenda.name == `Rapat ${type}` &&
+							item.isDone === true
 						);
 					} else {
 						return (
@@ -215,25 +217,28 @@ export const fetchAgendaHistory = createAsyncThunk(
 								convertDateTo,
 								null,
 								'[)',
-							) && item.typeAgenda.name == `Rapat Internal`
-							// && item.isDone === true
+							) &&
+							item.typeAgenda.name == `Rapat Internal` &&
+							item.isDone === true
 						);
 					}
 				} else {
 					if (type && type == 'all') {
-						return finishedDate.isBefore(convertDateTo);
-						// && item.isDone === true
+						return (
+							finishedDate.isBefore(convertDateTo) &&
+							item.isDone === true
+						);
 					} else if (type) {
 						return (
 							finishedDate.isBefore(convertDateTo) &&
-							item.typeAgenda.name == `Rapat ${type}`
-							// && item.isDone === true
+							item.typeAgenda.name == `Rapat ${type}` &&
+							item.isDone === true
 						);
 					} else {
 						return (
 							finishedDate.isBefore(convertDateTo) &&
-							item.typeAgenda.name == `Rapat Internal`
-							// && item.isDone === true
+							item.typeAgenda.name == `Rapat Internal` &&
+							item.isDone === true
 						);
 					}
 				}
@@ -306,7 +311,11 @@ export const deleteDetailAgenda = createAsyncThunk(
 		try {
 			const response = await deleteAgenda(uuid);
 
-			return response;
+			return {
+				data: response,
+				status: 'success',
+				message: 'Agenda berhasil dihapus',
+			};
 		} catch (error) {
 			dispatch(fetchAgendaFailure(error.message));
 

@@ -1,11 +1,11 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import Button from '../elements/Button';
-import ListLecturer from '../elements/listLecturer/';
 import CreateModal from '../components/CreateLecturerModal';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchLecturers } from '../redux/actions/lecturerAction';
+import ListLecturer from '../elements/ListLecturer';
 
 const Lecturer = () => {
 	const [openModal, setOpenModal] = useState(false);
@@ -22,6 +22,8 @@ const Lecturer = () => {
 		}, 1500);
 		return () => clearTimeout(timeout);
 	}, [dispatch]);
+	console.log(pending);
+
 	return (
 		<>
 			<main className="bg-white px-10 py-5 rounded drop-shadow-bottom mt-5">
