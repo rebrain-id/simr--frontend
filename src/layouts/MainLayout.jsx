@@ -40,7 +40,7 @@ const MainLayout = () => {
 		} else {
 			setTimeout(() => {
 				setShowLoading(false);
-			}, 5000);
+			}, 1000);
 		}
 	}, [loading]);
 
@@ -50,7 +50,7 @@ const MainLayout = () => {
 		} else {
 			setTimeout(() => {
 				setShowAlert(false);
-			}, 5000);
+			}, 1000);
 		}
 	}, [message]);
 
