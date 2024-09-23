@@ -7,11 +7,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { closeDetailAgenda } from '../redux/actions/agendaAction';
 import LoadingScreen from '../elements/LoadingScreen';
+import Alert from '../elements/Alert';
 
 const MainLayout = () => {
 	const [showLoading, setShowLoading] = useState(false);
 	const [showSidebarDialogue, setShowSidebarDialogue] = useState(false);
-	const { detailAgenda, showSidebar, loading } = useSelector(
+	const [showAlert, setShowAlert] = useState(false);
+	const { detailAgenda, showSidebar, loading, message } = useSelector(
 		(state) => state.agenda,
 	);
 	const dispatch = useDispatch();
@@ -42,8 +44,30 @@ const MainLayout = () => {
 		}
 	}, [loading]);
 
+	useEffect(() => {
+		if (message.status) {
+			setShowAlert(true);
+		} else {
+			setTimeout(() => {
+				setShowAlert(false);
+			}, 5000);
+		}
+	}, [message]);
+
+	const handleCloseAlert = () => {
+		setShowAlert(false);
+	};
+
 	return (
 		<main className="min-h-screen h-auto w-full flex p-2 bg-light-gray">
+			{showAlert && (
+				<Alert
+					status={message.status}
+					message={message.message}
+					onClick={handleCloseAlert}
+				/>
+			)}
+
 			<Sidebar />
 
 			<aside className="w-full px-10">

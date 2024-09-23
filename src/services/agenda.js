@@ -83,6 +83,7 @@ export const updateAgenda = async (uuid, data) => {
 	form.append('location', data.location);
 	form.append('absent', data.attendees);
 	form.append('notulen', data.notulens);
+	form.append('isDone', data.isDone);
 	// form.append('typeAgendaUuid', data.typeAgenda);
 	// if (Array.isArray(data.department)) {
 	// 	data.department.forEach((deptUuid) => {
