@@ -151,8 +151,6 @@ const DetailAgendaSidebar = (props) => {
 		}
 	};
 
-	console.log(data);
-
 	const handleSubmit = async () => {
 		try {
 			const response = await dispatch(
@@ -319,8 +317,8 @@ const DetailAgendaSidebar = (props) => {
 					<Toggel
 						name={'isDone'}
 						label="Agenda Selesai"
-						onChange={handleInputValue}
-						isChecked={data?.isDone}
+						onChange={!data?.isDone && handleInputValue}
+						isChecked={inputValue.isDone}
 					/>
 
 					<div className="mt-5 flex items-center justify-between">
