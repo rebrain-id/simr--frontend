@@ -30,12 +30,23 @@ const Dashboard = () => {
 	}, [dispatch, isUpdated]);
 
 	const agenda = useSelector((state) => state.agenda.agendaToday);
-	const agendaInternal = agenda.filter(
-		(item) => item.typeAgenda.name == 'Rapat Internal',
-	);
-	const agendaExternal = agenda.filter(
-		(item) => item.typeAgenda.name == 'Rapat Eksternal',
-	);
+	const agendaInternal = agenda.filter((item) => {
+		const agendaTimeStart = moment(item.start).subtract(7, 'hours');
+		const today = moment();
+
+		return (
+			item.typeAgenda.name == 'Rapat Internal' &&
+			agendaTimeStart.isSameOrAfter(today, 'minute')
+		);
+	});
+
+	const agendaExternal = agenda.filter((item) => {
+		const agendaTimeStart = moment(item.start).subtract(7, 'hours');
+		const today = moment();
+
+		item.typeAgenda.name == 'Rapat Eksternal' &&
+			agendaTimeStart.isSameOrAfter(today, 'minute');
+	});
 	const sortedAgenda = [...agenda].sort((a, b) => {
 		const timeA = moment(a.time.start, 'HH:mm');
 		const timeB = moment(b.time.start, 'HH:mm');
