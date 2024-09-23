@@ -14,10 +14,6 @@ const Lecturer = () => {
 	const [pending, setPending] = useState(true);
 	const lecturers = useSelector((state) => state.fetchLecturers.lecturers);
 
-	const getDosenId = (id) => {
-		console.log(id);
-	};
-
 	useEffect(() => {
 		const timeout = setTimeout(() => {
 			dispatch(fetchLecturers());
@@ -26,6 +22,8 @@ const Lecturer = () => {
 		}, 500);
 		return () => clearTimeout(timeout);
 	}, [dispatch]);
+	console.log(pending);
+
 	return (
 		<>
 			<main className="bg-white px-10 py-5 rounded drop-shadow-bottom mt-5">
