@@ -45,10 +45,10 @@ const MainLayout = () => {
 	useEffect(() => {
 		if (loading) {
 			setShowLoading(true);
-			// } else if (loadingLecturer) {
-			// 	setShowLoading(true);
-			// } else if (loadingDepartment) {
-			// 	setShowLoading(true);
+		} else if (loadingLecturer) {
+			setShowLoading(true);
+		} else if (loadingDepartment) {
+			setShowLoading(true);
 		} else {
 			const timeout = setTimeout(() => {
 				setShowLoading(false);
