@@ -37,7 +37,6 @@ export const fetchLecturers = () => {
 		dispatch(fetchLecturersRequest());
 		try {
 			const response = await getLecturer();
-			console.log(response);
 			dispatch(fetchLecturersSuccess(response));
 		} catch (error) {
 			dispatch(fetchLecturersFailure(error.message));
@@ -50,7 +49,6 @@ export const postLecturerData = (lecturer) => {
 		dispatch(fetchLecturersRequest())
 		try {
 			const response = await postLecturer(lecturer);
-			// console.log(response);
 			return response
 		} catch (error) {
 			dispatch(fetchLecturersFailure(error.message))
@@ -63,8 +61,7 @@ export const updateLecturerData = (uuid, lecturer) => {
 		dispatch(fetchLecturersRequest())
 		try {
 			const response = await updateLecturer(uuid, lecturer);
-			console.log(response);
-			dispatch(updateLecturersSuccess(response))
+			return response
 		} catch (error) {
 			dispatch(fetchLecturersFailure(error.message))
 		}
@@ -76,8 +73,7 @@ export const deleteLecturerData = (lecturer) => {
 		dispatch(fetchLecturersRequest())
 		try {
 			const response = await deleteLecturer(lecturer);
-			console.log(response);
-			dispatch(deleteLecturersSuccess(response))
+			return response
 		} catch (error) {
 			dispatch(fetchLecturersFailure(error.message))
 		}
