@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Button from '../elements/Button';
 import Input from '../elements/forms/FormInput';
 import Select from '../elements/forms/FormSelect';
@@ -8,7 +8,6 @@ import {
 	fetchLecturers,
 	postLecturerData,
 } from '../redux/actions/lecturerAction';
-import { fetchDepartments } from '../redux/actions/departmentAction';
 import Alert from '../elements/Alert';
 
 const CreateLecturerModal = (props) => {
@@ -17,12 +16,12 @@ const CreateLecturerModal = (props) => {
 	const departments = useSelector(
 		(state) => state.fetchDepartments.department,
 	);
-	// const { loading, error } = useSelector((state) => state.postLecturerData);
+	const [showAlert, setShowAlert] = useState({
+		status: '',
+		message: '',
+		visible: false,
+	});
 	const [isSubmit, setIsSubmit] = useState(false);
-
-	useEffect(() => {
-		dispatch(fetchDepartments());
-	}, [dispatch]);
 
 	const formik = useFormik({
 		initialValues: {
@@ -32,19 +31,27 @@ const CreateLecturerModal = (props) => {
 			departmentUuid: '',
 		},
 		onSubmit: async (values, { resetForm }) => {
+			setIsSubmit(true);
 			const response = await dispatch(postLecturerData(values));
-
-			console.log(response);
-
 			if (response && response.statusCode === 201) {
-				close();
+				setTimeout(() => {
+					resetForm();
+					setIsSubmit(false);
+					setShowAlert({
+						status: 'success',
+						message: 'Berhasil menambahkan dosen',
+						visible: true,
+					});
+				}, 500);
+				dispatch(fetchLecturers());
+			} else if (response && response.statusCode === 400) {
+				setIsSubmit(false);
+				setShowAlert({
+					status: 'danger',
+					message: 'Gagal menambahkan dosen',
+					visible: true,
+				});
 			}
-			// setIsSubmit(true);
-			// const timeout = setTimeout(() => {
-			// 	resetForm();
-			// 	setIsSubmit(false);
-			// }, 1500);
-			// return () => clearTimeout(timeout);
 		},
 	});
 
@@ -56,10 +63,19 @@ const CreateLecturerModal = (props) => {
 			<div
 				className={`bg-black/25 h-screen fixed top-0 left-0 right-0 bottom-0 z-10`}
 			>
-				<div className="absolute w-1/2 px-8 rounded-lg shadow-lg right-0 top-0 transform -translate-x-1/2 translate-y-1/4 z-10 bg-white">
+				<div className="absolute w-1/2 px-8 rounded-lg shadow-lg right-0 top-0 transform -translate-x-1/2 translate-y-1/4 bg-white">
 					<h2 className="text-2xl font-medium pb-8 py-2">
-						Tambah Data Dosen
+						Tambah Dosen
 					</h2>
+					{showAlert.visible && (
+						<Alert
+							status={showAlert.status}
+							message={showAlert.message}
+							onClick={() =>
+								setShowAlert({ ...showAlert, visible: false })
+							}
+						/>
+					)}
 					<form onSubmit={formik.handleSubmit}>
 						<Input
 							variant="flex flex-col"
@@ -118,7 +134,6 @@ const CreateLecturerModal = (props) => {
 							))}
 						</Select>
 						<div className="flex items-center justify-end gap-4 pb-10">
-							{/* {error && <Alert text={error} />} */}
 							{isSubmit ? (
 								<Button
 									type="submit"
@@ -127,12 +142,14 @@ const CreateLecturerModal = (props) => {
 									isDisabled={true}
 								/>
 							) : (
-								<Button
-									type="submit"
-									text="Simpan"
-									variant="bg-light-primary text-white rounded text-sm hover:bg-primary transition-all ease-in 3s"
-									isDisabled={false}
-								/>
+								<>
+									<Button
+										type="submit"
+										text="Simpan"
+										variant="bg-light-primary text-white rounded text-sm hover:bg-primary transition-all ease-in 3s"
+										isDisabled={false}
+									/>
+								</>
 							)}
 							<Button
 								text="Batal"

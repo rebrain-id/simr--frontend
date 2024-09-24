@@ -10,7 +10,7 @@ import {
 	deleteLecturerData,
 	updateLecturerData,
 } from '../redux/actions/lecturerAction';
-import { useEffect } from 'react';
+import Alert from '../elements/Alert';
 
 const EditLecturerDropdown = (props) => {
 	const {
@@ -26,15 +26,15 @@ const EditLecturerDropdown = (props) => {
 	const [isDeleting, setIsDeleting] = useState(false);
 	const [isUpdating, setIsUpdating] = useState(false);
 	const [actionType, setActionType] = useState('');
+	const [showAlert, setShowAlert] = useState({
+		status: '',
+		message: '',
+		visible: false,
+	});
 	const dispatch = useDispatch();
 	const departments = useSelector(
 		(state) => state.fetchDepartments.department,
 	);
-
-	useEffect(() => {
-		dispatch(fetchDepartments());
-		// dispatch(fetchLecturers());
-	}, [dispatch]);
 
 	const formik = useFormik({
 		enableReinitialize: true,
@@ -42,33 +42,66 @@ const EditLecturerDropdown = (props) => {
 			uuid: uuid,
 			name: name || '',
 			email: email || '',
-			phoneNumber: phoneNumber || 0,
+			phoneNumber: phoneNumber || '',
 			departmentUuid: departmentUuid || '',
 			department: department || '',
 		},
-		onSubmit: async (values, { resetForm }) => {
+		onSubmit: async (values) => {
 			if (actionType === 'update') {
 				setIsUpdating(true);
-				const timeout = setTimeout(() => {
-					setIsUpdating(false);
-					dispatch(
-						updateLecturerData(values.uuid, {
-							name: values.name,
-							email: values.email,
-							phoneNumber: values.phoneNumber,
-							departmentUuid: values.departmentUuid,
-						}),
-					);
-				}, 1500);
-				return () => clearTimeout(timeout);
+				const response = await dispatch(
+					updateLecturerData(values.uuid, {
+						name: values.name,
+						email: values.email,
+						phoneNumber: values.phoneNumber,
+						departmentUuid: values.departmentUuid,
+					}),
+				);
+				if (response && response.statusCode === 200) {
+					setTimeout(() => {
+						setIsUpdating(false);
+						setShowAlert({
+							status: 'success',
+							message: 'Berhasil mengupdate dosen',
+							visible: true,
+						});
+					}, 500);
+					dispatch(fetchLecturers());
+				} else if (response && response.statusCode === 400) {
+					setTimeout(() => {
+						setIsUpdating(false);
+						setShowAlert({
+							status: 'danger',
+							message: 'Gagal mengupdate dosen',
+							visible: true,
+						});
+					}, 500);
+				}
 			} else if (actionType === 'delete') {
 				setIsDeleting(true);
-				const timeout = setTimeout(() => {
-					setIsDeleting(false);
-					dispatch(deleteLecturerData(values.uuid));
-					resetForm();
-				}, 1500);
-				return () => clearTimeout(timeout);
+				const response = await dispatch(
+					deleteLecturerData(values.uuid),
+				);
+				if (response && response.statusCode === 200) {
+					setTimeout(() => {
+						setIsDeleting(false);
+						setShowAlert({
+							status: 'success',
+							message: 'Berhasil menghapus dosen',
+							visible: true,
+						});
+					}, 500);
+					dispatch(fetchLecturers());
+				} else if (response && response.statusCode === 400) {
+					setTimeout(() => {
+						setIsDeleting(false);
+						setShowAlert({
+							status: 'danger',
+							message: 'Gagal menghapus dosen',
+							visible: true,
+						});
+					}, 500);
+				}
 			}
 		},
 	});
@@ -79,11 +112,19 @@ const EditLecturerDropdown = (props) => {
 		formik.setFieldValue(name, value);
 	};
 
-	console.log(isVisible);
 	return (
 		<div
-			className={`transition-[height] duration-300 px-5 pb-4 bg-white shadow-md rounded ${isVisible ? 'h-full' : 'h-0 overflow-hidden'}`}
+			className={`transition-[height] duration-300 px-5 pb-5 bg-white shadow-md rounded ${isVisible ? 'h-full' : 'h-0 overflow-hidden'}`}
 		>
+			{showAlert.visible && (
+				<Alert
+					status={showAlert.status}
+					message={showAlert.message}
+					onClick={() =>
+						setShowAlert({ ...showAlert, visible: false })
+					}
+				/>
+			)}
 			<form onSubmit={formik.handleSubmit}>
 				<div className="w-full flex items-center">
 					<Input
@@ -179,7 +220,6 @@ const EditLecturerDropdown = (props) => {
 							type="submit"
 							text="Delete"
 							variant="bg-light-danger text-white rounded text-sm hover:bg-danger hover:text-white transition ease-in 3s"
-							isDisabled={false}
 							onClick={() => setActionType('delete')}
 						/>
 					)}

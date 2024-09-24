@@ -6,25 +6,24 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchLecturers } from '../redux/actions/lecturerAction';
 import ListLecturer from '../elements/ListLecturer';
+import { fetchDepartments } from '../redux/actions/departmentAction';
 
 const Lecturer = () => {
 	const [openModal, setOpenModal] = useState(false);
 	const handleModal = () => setOpenModal(!openModal);
 	const dispatch = useDispatch();
-	const [loading, setIsLoading] = useState(true);
 	const lecturers = useSelector((state) => state.fetchLecturers.lecturer);
 	const isUpdated = useSelector((state) => state.fetchLecturers.isUpdated);
 
 	useEffect(() => {
 		dispatch(fetchLecturers());
+		dispatch(fetchDepartments());
 	}, [dispatch, isUpdated]);
-
-	console.log(isUpdated);
 
 	return (
 		<>
-			<main className="bg-white px-10 py-5 rounded drop-shadow-bottom mt-5">
-				<div className="flex items-center justify-between">
+			<main className="bg-white px-10 pb-10 rounded drop-shadow-bottom mt-5">
+				<div className="flex items-center justify-between pb-7">
 					<h1 className="text-base font-semibold">Dosen</h1>
 					<div className="flex items-center bg-light-primary text-white rounded text-sm">
 						<FontAwesomeIcon
