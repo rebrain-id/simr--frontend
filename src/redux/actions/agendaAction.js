@@ -207,7 +207,7 @@ export const fetchAgendaHistory = createAsyncThunk(
 								null,
 								'[)',
 							) &&
-							item.typeAgenda.name == `Rapat ${type}` &&
+							item.typeAgenda.name == `${type}` &&
 							item.isDone === true
 						);
 					} else {
@@ -218,7 +218,7 @@ export const fetchAgendaHistory = createAsyncThunk(
 								null,
 								'[)',
 							) &&
-							item.typeAgenda.name == `Rapat Internal` &&
+							item.typeAgenda.name == typeAgenda[0].name &&
 							item.isDone === true
 						);
 					}
@@ -231,13 +231,13 @@ export const fetchAgendaHistory = createAsyncThunk(
 					} else if (type) {
 						return (
 							finishedDate.isBefore(convertDateTo) &&
-							item.typeAgenda.name == `Rapat ${type}` &&
+							item.typeAgenda.name == `${type}` &&
 							item.isDone === true
 						);
 					} else {
 						return (
 							finishedDate.isBefore(convertDateTo) &&
-							item.typeAgenda.name == `Rapat Internal` &&
+							item.typeAgenda.name == typeAgenda[0].name &&
 							item.isDone === true
 						);
 					}

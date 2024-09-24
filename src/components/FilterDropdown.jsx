@@ -7,16 +7,20 @@ import FormCheckbox from '../elements/forms/FormCheckbox';
 import FormInputCheckbox from '../elements/forms/FormInputCheckbox';
 
 const FilterDropdown = (props) => {
-	const { typeAgenda } = props;
+	let { typeAgenda, typeAgendas } = props;
 	const navigate = useNavigate();
+
+	typeAgenda = typeAgenda ? typeAgenda.split(',') : [];
 
 	const [inputValue, setInputValue] = useState({
 		from: '',
 		to: '',
 		type:
 			typeAgenda && typeAgenda == 'all'
-				? ['Internal', 'Eksternal']
-				: ['Internal'],
+				? typeAgendas.map((item) => item.name)
+				: typeAgenda.length > 1
+					? typeAgenda
+					: [typeAgendas[0].name],
 	});
 
 	const handleInputValue = (e) => {
@@ -38,46 +42,40 @@ const FilterDropdown = (props) => {
 	};
 
 	return (
-		<div className="p-3 bg-white rounded border drop-shadow w-2/5 absolute z-30">
+		<div className="p-3 bg-white rounded border drop-shadow w-1/8 absolute z-30">
 			<FormInput
-				inputvariant="text-sm font-normal mb-3"
-				labelvariant="text-xs"
-				variant="w-full"
+				inputvariant="text-sm font-normal mb-3 w-2/3 "
+				labelvariant="text-xs w-1/3"
+				variant="flex justify-center items-center w-80"
 				label="Dari"
 				type="date"
 				name="from"
 				onChange={handleInputValue}
 			/>
 			<FormInput
-				inputvariant="text-sm font-normal mb-3"
-				labelvariant="text-xs"
-				variant="w-full"
+				inputvariant="text-sm font-normal mb-3 w-2/3"
+				labelvariant="text-xs w-1/3"
+				variant="flex justify-center items-center w-80"
 				label="Sampai"
 				type="date"
 				name="to"
 				onChange={handleInputValue}
 			/>
 			<FormCheckbox>
-				<FormInputCheckbox
-					text={'Rapat Internal'}
-					variant={'px-0'}
-					checkboxVariant={'w-3 h-3'}
-					labelVariant={'text-sm font-normal -ms-1'}
-					value="Internal"
-					isSelected={inputValue.type.includes('Internal')}
-					onChange={handleInputValue}
-					name="type"
-				/>
-				<FormInputCheckbox
-					text={'Rapat Eksternal'}
-					variant={'px-0'}
-					checkboxVariant={'w-3 h-3'}
-					labelVariant={'text-sm font-normal -ms-1'}
-					value="Eksternal"
-					isSelected={inputValue.type.includes('Eksternal')}
-					onChange={handleInputValue}
-					name="type"
-				/>
+				{typeAgendas &&
+					typeAgendas.map((item, index) => (
+						<FormInputCheckbox
+							key={index}
+							text={item.name}
+							variant={'px-0'}
+							checkboxVariant={'w-3 h-3'}
+							labelVariant={'text-sm font-normal -ms-1'}
+							value={item.name}
+							isSelected={inputValue.type.includes(item.name)}
+							onChange={handleInputValue}
+							name="type"
+						/>
+					))}
 			</FormCheckbox>
 
 			<div className="flex justify-end">
@@ -85,11 +83,11 @@ const FilterDropdown = (props) => {
 					icon={faFilter}
 					text="Filter"
 					variant={`rounded-md bg-light-primary bg-opacity-90 text-white font-medium text-sm hover:bg-opacity-100`}
-					onClick={() =>
+					onClick={() => {
 						navigate(
-							`/agenda?menu=history&from=${inputValue.from}&to=${inputValue.to}&type=${inputValue.type.length > 1 ? 'all' : inputValue.type[0]}`,
-						)
-					}
+							`/agenda?menu=history&from=${inputValue.from}&to=${inputValue.to}&type=${inputValue.type.length === typeAgendas.length ? 'all' : inputValue.type}`,
+						);
+					}}
 				/>
 			</div>
 		</div>

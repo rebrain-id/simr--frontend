@@ -6,12 +6,18 @@ import { fetchAgendaHistory } from '../redux/actions/agendaAction';
 import ListAgenda from '../elements/ListAgenda';
 import FilterDropdown from './FilterDropdown';
 import { useSearchParams } from 'react-router-dom';
+import { fetchTypeAgenda } from '../redux/actions/typeAgendaAction';
 
 const AgendaHistory = () => {
 	const [openFilter, setOpenFilter] = useState(false);
 	const [searchParam] = useSearchParams();
 	const dispatch = useDispatch();
 	const { agendaHistory, isUpdated } = useSelector((state) => state.agenda);
+	const typeAgendas = useSelector((state) => state.typeAgenda.typeAgenda);
+
+	useEffect(() => {
+		dispatch(fetchTypeAgenda());
+	}, [dispatch]);
 
 	const getDateFrom = searchParam.get('from') || null;
 	const getDateTo = searchParam.get('to') || null;
@@ -55,7 +61,13 @@ const AgendaHistory = () => {
 				onClick={handleOpenFilter}
 			/>
 
-			{openFilter && <FilterDropdown typeAgenda={getType} />}
+			{openFilter && (
+				<FilterDropdown
+					typeAgenda={getType}
+					typeAgendas={typeAgendas}
+					onClick={openFilter}
+				/>
+			)}
 
 			{agendaHistory.lenght !== 0 ? (
 				<div className="mt-5 flex flex-col gap-3">
