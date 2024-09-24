@@ -17,12 +17,12 @@ const Department = () => {
 	);
 
 	useEffect(() => {
-		setLoading(true);
-		setTimeout(() => {
-			dispatch(fetchDepartments());
-			setLoading(false);
-		}, 1500);
-		return () => clearTimeout();
+		dispatch(fetchDepartments());
+		// setLoading(true);
+		// setTimeout(() => {
+		// 	setLoading(false);
+		// }, 1500);
+		// return () => clearTimeout();
 	}, [dispatch]);
 	return (
 		<>
@@ -42,16 +42,20 @@ const Department = () => {
 				</div>
 
 				<section className="mt-5 flex flex-col gap-3">
-					{loading
-						? 'Loading...'
-						: departments.map((item, index) => (
-								<ListDepartment
-									key={index}
-									data={item.name}
-									uuid={item.uuid}
-									name={item.name}
-								/>
-							))}
+					{departments ? (
+						departments.map((item, index) => (
+							<ListDepartment
+								key={index}
+								data={item.name}
+								uuid={item.uuid}
+								name={item.name}
+							/>
+						))
+					) : (
+						<p className="text-center text-sm text-light-secondary">
+							Tidak ada data program studi
+						</p>
+					)}
 				</section>
 			</main>
 			{openModal && <CreateModal close={() => setOpenModal(false)} />}
