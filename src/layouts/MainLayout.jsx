@@ -10,6 +10,12 @@ import LoadingScreen from '../elements/LoadingScreen';
 import Alert from '../elements/Alert';
 
 const MainLayout = () => {
+	const username = sessionStorage.getItem('user') || null;
+
+	if (!username) {
+		sessionStorage.setItem('user', 'informatika');
+	}
+
 	const [showLoading, setShowLoading] = useState(false);
 	const [showSidebarDialogue, setShowSidebarDialogue] = useState(false);
 	const [showAlert, setShowAlert] = useState(false);

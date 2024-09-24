@@ -12,7 +12,7 @@ import { useNavigate } from 'react-router-dom';
 import Alert from '../../elements/Alert';
 
 const AddAgenda = () => {
-	const username = 'isun';
+	const username = sessionStorage.getItem('user');
 	const navigation = useNavigate();
 	const dispatch = useDispatch();
 	const typeAgenda = useSelector((state) => state.typeAgenda.typeAgenda);

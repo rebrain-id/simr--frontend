@@ -3,7 +3,8 @@ import { API_URL } from './config';
 import moment from 'moment';
 
 export const getAgenda = async () => {
-	const url = `${API_URL()}/v1/detail-agendas?username=informatika`;
+	const username = sessionStorage.getItem('user');
+	const url = `${API_URL()}/v1/detail-agendas?username=${username}`;
 
 	try {
 		const response = await axios({
