@@ -12,7 +12,7 @@ import { useNavigate } from 'react-router-dom';
 import Alert from '../../elements/Alert';
 
 const AddAgenda = () => {
-	const username = 'informatika';
+	const username = 'isun';
 	const navigation = useNavigate();
 	const dispatch = useDispatch();
 	const typeAgenda = useSelector((state) => state.typeAgenda.typeAgenda);
@@ -88,7 +88,9 @@ const AddAgenda = () => {
 				if (response && response.payload.data.statusCode === 201) {
 					sessionStorage.removeItem('member');
 
-					navigation(-1);
+					navigation(
+						`/agenda/date?date=${moment(inputValue.from).format('DD')}&month=${moment(inputValue.from).format('MM')}&year=${moment(inputValue.from).format('YYYY')}`,
+					);
 				}
 			} else {
 				setShowAlert({
