@@ -41,7 +41,6 @@ const MainLayout = () => {
 		}
 	}, [showSidebar]);
 
-	// console.log(loadingLecturer);
 	useEffect(() => {
 		if (loading) {
 			setShowLoading(true);
