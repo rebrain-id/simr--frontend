@@ -11,15 +11,15 @@ const Lecturer = () => {
 	const [openModal, setOpenModal] = useState(false);
 	const handleModal = () => setOpenModal(!openModal);
 	const dispatch = useDispatch();
-	const [pending, setPending] = useState(true);
-	const lecturers = useSelector((state) => state.fetchLecturers.lecturers);
+	const [loading, setIsLoading] = useState(true);
+	const lecturers = useSelector((state) => state.fetchLecturers.lecturer);
 
 	useEffect(() => {
+		setIsLoading(true);
 		const timeout = setTimeout(() => {
 			dispatch(fetchLecturers());
-
-			setPending(false);
-		}, 500);
+			setIsLoading(false);
+		}, 1500);
 		return () => clearTimeout(timeout);
 	}, [dispatch]);
 	console.log(pending);
@@ -39,18 +39,19 @@ const Lecturer = () => {
 				</div>
 
 				<section className="mt-5 flex flex-col gap-3">
-					{lecturers.map((item, index) => (
-						<ListLecturer
-							key={index}
-							uuid={item.uuid}
-							data={item.name}
-							name={item.name}
-							email={item.email}
-							phoneNumber={item.phoneNumber}
-							department={item.department.name}
-							departmentUuid={item.department.uuid}
-						/>
-					))}
+					{loading
+						? 'Loading...'
+						: lecturers.map((item, index) => (
+								<ListLecturer
+									key={index}
+									uuid={item.uuid}
+									data={item.name}
+									name={item.name}
+									email={item.email}
+									phoneNumber={item.phoneNumber}
+									department={item.department.name}
+								/>
+							))}
 				</section>
 			</main>
 			{openModal && <CreateModal close={() => setOpenModal(false)} />}
