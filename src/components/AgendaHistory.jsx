@@ -9,6 +9,8 @@ import { useSearchParams } from 'react-router-dom';
 import { fetchTypeAgenda } from '../redux/actions/typeAgendaAction';
 
 const AgendaHistory = () => {
+	const username = sessionStorage.getItem('user');
+
 	const [openFilter, setOpenFilter] = useState(false);
 	const [searchParam] = useSearchParams();
 	const dispatch = useDispatch();
@@ -79,9 +81,7 @@ const AgendaHistory = () => {
 							date={`${item.date.start} ${monthList[Number(item.month.start) - 1]} ${item.year.start}`}
 							time={`${item.time.start} - ${item.time.finish} WIB`}
 							isOwner={
-								item.typeAgenda.name === 'Rapat Internal'
-									? true
-									: false
+								item.author.username == username ? true : false
 							}
 							room={item.location}
 						/>

@@ -13,6 +13,8 @@ import { useSearchParams } from 'react-router-dom';
 import AgendaHistory from './AgendaHistory';
 
 const Calendar = () => {
+	const username = sessionStorage.getItem('user');
+
 	const [searchParam] = useSearchParams();
 	const menu = searchParam.get('menu');
 	const getYear = new Date().getFullYear();
@@ -174,11 +176,13 @@ const Calendar = () => {
 							thisYear={getYear}
 							thisMonth={getMonth}
 							agendas={agenda}
+							username={username}
 						/>
 					) : menu === 'list' ? (
 						<CalendarList
 							month={optionValue.month}
 							agendaThisMonth={agenda}
+							username={username}
 						/>
 					) : null}
 				</>

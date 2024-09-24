@@ -39,7 +39,15 @@ const AddAgenda = () => {
 	};
 
 	const handleOpenModal = () => {
-		setOpenModal(!openModal);
+		if (moment(inputValue.from).isAfter(moment(inputValue.to))) {
+			setShowAlert({
+				status: 'error',
+				message: 'Terdapat kesalahan dalam memasukkan hari atau jam',
+				visible: true,
+			});
+		} else {
+			setOpenModal(!openModal);
+		}
 	};
 
 	useEffect(() => {
@@ -64,7 +72,6 @@ const AddAgenda = () => {
 
 			if (
 				inputValue.title &&
-				inputValue.description &&
 				inputValue.from &&
 				inputValue.to &&
 				inputValue.typeAgenda &&

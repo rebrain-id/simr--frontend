@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 
 const CalendarGrid = (props) => {
-	const { year, month, thisYear, thisMonth, agendas } = props;
+	const { year, month, thisYear, thisMonth, agendas, username } = props;
 
 	const today = new Date().getDate();
 
@@ -92,9 +92,9 @@ const CalendarGrid = (props) => {
 											.map((dataItem, dataIndex) => (
 												<div
 													className={`truncate text-xs p-2 bg-opacity-50 rounded mb-1 ${
-														dataItem.typeAgenda
-															.name ===
-														'Rapat Internal'
+														dataItem.author
+															.username ==
+														username
 															? 'bg-light-primary text-dark-primary'
 															: 'bg-light-warning text-dark-warning'
 													}`}

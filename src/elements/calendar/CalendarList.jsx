@@ -1,7 +1,7 @@
 import ListAgenda from '../ListAgenda';
 
 const CalendarList = (props) => {
-	const { month, agendaThisMonth } = props;
+	const { month, agendaThisMonth, username } = props;
 
 	const monthList = [
 		'Januari',
@@ -47,8 +47,7 @@ const CalendarList = (props) => {
 										title={item.title}
 										time={`${item.time.start} - ${item.time.finish} WIB`}
 										isOwner={
-											item.typeAgenda.name ===
-											'Rapat Internal'
+											item.author.username === username
 												? true
 												: false
 										}

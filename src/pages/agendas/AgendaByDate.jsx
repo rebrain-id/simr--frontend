@@ -12,6 +12,8 @@ import ListAgenda from '../../elements/ListAgenda';
 import moment from 'moment';
 
 const AgendaByDate = () => {
+	const username = sessionStorage.getItem('user');
+
 	const [searchParam] = useSearchParams();
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
@@ -117,9 +119,7 @@ const AgendaByDate = () => {
 							title={item.title}
 							time={`${item.time.start} - ${item.time.finish} WIB`}
 							isOwner={
-								item.typeAgenda.name === 'Rapat Internal'
-									? true
-									: false
+								item.author.username == username ? true : false
 							}
 							room={item.location}
 						/>

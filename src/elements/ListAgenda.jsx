@@ -2,6 +2,7 @@ import {
 	faCalendarAlt,
 	faClockFour,
 	faDoorClosed,
+	faUserAlt,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useDispatch } from 'react-redux';
@@ -20,12 +21,12 @@ const ListAgenda = (props) => {
 			className={`px-5 py-3 border rounded flex items-center cursor-pointer ${isOwner ? 'border-light-primary' : 'border-light-warning'}`}
 			onClick={handleClick}
 		>
-			<div className={`pe-3 ${date ? 'w-1/2' : 'w-2/3'}`}>
+			<div className={`pe-3 ${date ? 'w-1/3' : 'w-1/2'}`}>
 				<h3 className="text-sm font-medium">{title}</h3>
 			</div>
 
 			<div
-				className={`flex items-center gap-5 ${date ? 'w-1/2' : 'w-1/3'}`}
+				className={`flex items-center gap-5 ${date ? 'w-2/3' : 'w-1/2'}`}
 			>
 				<div className="w-3/6 flex items-center gap-2">
 					<FontAwesomeIcon
@@ -61,6 +62,19 @@ const ListAgenda = (props) => {
 						}
 					/>
 					<p className="text-xs font-medium">{room}</p>
+				</div>
+				<div className="w-1/3 flex items-center gap-2">
+					<FontAwesomeIcon
+						icon={faUserAlt}
+						className={
+							isOwner
+								? 'text-light-primary'
+								: 'text-light-warning'
+						}
+					/>
+					<p className="text-xs font-medium capitalize">
+						{data.author.username}
+					</p>
 				</div>
 			</div>
 		</div>
