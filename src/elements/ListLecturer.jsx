@@ -4,11 +4,9 @@ import EditDropdown from '../components/EditLecturerDropdown';
 const ListLecturer = (props) => {
 	const { uuid, name, email, phoneNumber, department, departmentUuid, data } =
 		props;
-	const dispatch = useDispatch();
 	const [isVisible, setIsVisible] = useState(false);
 	const handleOpen = () => setIsVisible(!isVisible);
 
-	const handleDropdown = () => {};
 	return (
 		<>
 			<div
