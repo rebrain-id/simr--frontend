@@ -99,3 +99,5 @@ npm install
 -   formik (form)
 -   moment (convert time)
 -   axios (fetching API)
+-   pdfjs-dist
+-   react-pdf-viewer
