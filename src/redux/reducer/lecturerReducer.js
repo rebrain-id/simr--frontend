@@ -11,7 +11,7 @@ const initialState = {
     lecturer: [],
     loading: false,
     error: 'Dosen not found',
-    isUpdated: true
+    isUpdated: true,
 }
 
 const lecturerReducer = (state = initialState, action) => {
@@ -35,7 +35,7 @@ const lecturerReducer = (state = initialState, action) => {
                 loading: false,
                 lecturer: action.payload,
                 error: '',
-                isUpdated: true
+                isUpdated: true,
             }
         case UPDATE_LECTURER_SUCCESS:
             return {
