@@ -78,114 +78,114 @@ const EditLecturerDropdown = (props) => {
 
 		formik.setFieldValue(name, value);
 	};
+
+	console.log(isVisible);
 	return (
-		<>
-			{isVisible && (
-				<div
-					className={`${isVisible ? isVisible : 'h-0'} transition-all`}
-				>
-					<form onSubmit={formik.handleSubmit}>
-						<div className="w-full flex items-center w">
-							<Input
-								type="text"
-								name="name"
-								variant="flex items-center text-sm w-full gap-10 py-2"
-								label="Nama Dosen"
-								placeholder="Nama Dosen"
-								labelvariant="w-1/6"
-								inputvariant="w-5/6"
-								value={formik.values.name}
-								onChange={handleChange}
-							/>
-						</div>
-						<div className="w-full flex items-center">
-							<Input
-								type="email"
-								name="email"
-								label="E-mail"
-								placeholder="example@mail.com"
-								labelvariant="w-1/6"
-								inputvariant="w-5/6"
-								variant="flex items-center text-sm w-full gap-10 py-2"
-								value={formik.values.email}
-								onChange={handleChange}
-							/>
-						</div>
-						<div className="w-full flex items-center">
-							<Input
-								type="number"
-								name="phoneNumber"
-								labelvariant="w-1/6"
-								inputvariant="w-5/6"
-								variant="flex items-center text-sm w-full gap-10 py-2"
-								label="No. Whatsapp"
-								placeholder="08*********"
-								value={formik.values.phoneNumber}
-								onChange={handleChange}
-							/>
-						</div>
-						<div className="w-full flex items-center">
-							<Select
-								variant="flex items-center text-sm w-full gap-10 py-2"
-								name="departmentUuid"
-								label="Program Studi"
-								labelVariant="w-1/5"
-								selectVariant="w-5/6"
-								placeholder="082********"
-								onChange={handleChange}
-								value={formik.values.departmentUuid}
-							>
-								<option value={departmentUuid} disabled>
-									{department}
-								</option>
-								{departments.map((item, index) => (
-									<option value={item.uuid} key={index}>
-										{item.name}
-									</option>
-								))}
-							</Select>
-						</div>
-						<div className="flex items-center gap-8">
-							{isUpdating ? (
-								<Button
-									text="Updating..."
-									variant="bg-light-primary text-white rounded text-sm"
-									isDisabled={true}
-								/>
-							) : (
-								<Button
-									type="submit"
-									text="Update"
-									variant="bg-light-primary text-white rounded text-sm hover:bg-primary transition ease-in 3s"
-									onClick={() => setActionType('update')}
-								/>
-							)}
-							<Button
-								text="Batal"
-								variant="bg-light-primary/25 text-primary rounded text-sm hover:bg-danger hover:text-white transition ease-in 3s"
-								onClick={close}
-							/>
-							{isDeleting ? (
-								<Button
-									type="submit"
-									text="Deleting..."
-									variant="bg-light-danger text-white rounded text-sm pointer-events-none"
-									isDisabled={true}
-								/>
-							) : (
-								<Button
-									type="submit"
-									text="Delete"
-									variant="bg-light-danger text-white rounded text-sm hover:bg-danger hover:text-white transition ease-in 3s"
-									isDisabled={false}
-									onClick={() => setActionType('delete')}
-								/>
-							)}
-						</div>
-					</form>
+		<div
+			className={`transition-[height] duration-300 px-5 pb-4 bg-white shadow-md rounded ${isVisible ? 'h-full' : 'h-0 overflow-hidden'}`}
+		>
+			<form onSubmit={formik.handleSubmit}>
+				<div className="w-full flex items-center">
+					<Input
+						type="text"
+						name="name"
+						variant="flex items-center text-sm w-full gap-10 py-2"
+						label="Nama Dosen"
+						placeholder="Nama Dosen"
+						labelvariant="w-1/6"
+						inputvariant="w-5/6"
+						value={formik.values.name}
+						onChange={handleChange}
+					/>
 				</div>
-			)}
-		</>
+				<div className="w-full flex items-center">
+					<Input
+						type="email"
+						name="email"
+						label="E-mail"
+						placeholder="example@mail.com"
+						labelvariant="w-1/6"
+						inputvariant="w-5/6"
+						variant="flex items-center text-sm w-full gap-10 py-2"
+						value={formik.values.email}
+						onChange={handleChange}
+					/>
+				</div>
+				<div className="w-full flex items-center">
+					<Input
+						type="number"
+						name="phoneNumber"
+						labelvariant="w-1/6"
+						inputvariant="w-5/6"
+						variant="flex items-center text-sm w-full gap-10 py-2"
+						label="No. Whatsapp"
+						placeholder="08*********"
+						value={formik.values.phoneNumber}
+						onChange={handleChange}
+					/>
+				</div>
+				<div className="w-full flex items-center">
+					<Select
+						variant="flex items-center text-sm w-full gap-10 py-2"
+						name="departmentUuid"
+						label="Program Studi"
+						labelVariant="w-1/5"
+						selectVariant="w-5/6"
+						placeholder="082********"
+						onChange={handleChange}
+						value={formik.values.departmentUuid}
+					>
+						<option value={departmentUuid} disabled>
+							{department}
+						</option>
+						{departments.map((item, index) => (
+							<option value={item.uuid} key={index}>
+								{item.name}
+							</option>
+						))}
+					</Select>
+				</div>
+				<div className="flex items-center justify-between gap-8">
+					<div className="flex items-center gap-8">
+						{isUpdating ? (
+							<Button
+								text="Updating..."
+								variant="bg-light-primary text-white rounded text-sm"
+								isDisabled={true}
+							/>
+						) : (
+							<Button
+								type="submit"
+								text="Update"
+								variant="bg-light-primary text-white rounded text-sm hover:bg-primary transition ease-in 3s"
+								onClick={() => setActionType('update')}
+							/>
+						)}
+						<Button
+							text="Batal"
+							variant="bg-light-primary/25 text-primary rounded text-sm hover:bg-danger hover:text-white transition ease-in 3s"
+							onClick={close}
+						/>
+					</div>
+					{isDeleting ? (
+						<Button
+							type="submit"
+							text="Deleting..."
+							variant="bg-light-danger text-white rounded text-sm pointer-events-none"
+							isDisabled={true}
+						/>
+					) : (
+						<Button
+							type="submit"
+							text="Delete"
+							variant="bg-light-danger text-white rounded text-sm hover:bg-danger hover:text-white transition ease-in 3s"
+							isDisabled={false}
+							onClick={() => setActionType('delete')}
+						/>
+					)}
+				</div>
+			</form>
+		</div>
 	);
 };
 

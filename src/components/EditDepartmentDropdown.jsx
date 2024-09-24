@@ -102,28 +102,28 @@ const EditDepartmentDropdown = (props) => {
 							onChange={handleForm}
 						/>
 					</div> */}
-					<div className="flex items-center gap-8">
-						{isUpdating ? (
+					<div className="flex items-center justify-between gap-8">
+						<div className="flex items-center gap-8">
+							{isUpdating ? (
+								<Button
+									text="Updating..."
+									variant="bg-light-primary text-white rounded text-sm"
+									isDisabled={true}
+								/>
+							) : (
+								<Button
+									type="submit"
+									text="Update"
+									variant="bg-light-primary text-white rounded text-sm hover:bg-primary transition ease-in 3s"
+									onClick={() => setActionType('update')}
+								/>
+							)}
 							<Button
-								type="submit"
-								text="Updating..."
-								variant="bg-light-primary text-white rounded text-sm pointer-events-none"
-								isDisabled={true}
+								text="Batal"
+								variant="bg-light-primary/25 text-primary rounded text-sm hover:bg-danger hover:text-white transition ease-in 3s"
+								onClick={close}
 							/>
-						) : (
-							<Button
-								text="Update"
-								variant="bg-light-primary text-white rounded text-sm hover:bg-primary transition ease-in 3s"
-								isDisabled={false}
-								onClick={() => setActionType('update')}
-							/>
-						)}
-
-						<Button
-							text="Batal"
-							variant="bg-light-primary/25 text-primary rounded text-sm hover:bg-light-secondary hover:text-white transition ease-in 3s"
-							onClick={close}
-						/>
+						</div>
 						{isDeleting ? (
 							<Button
 								type="submit"
