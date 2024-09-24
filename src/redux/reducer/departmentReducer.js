@@ -1,3 +1,4 @@
+import { act } from 'react'
 import {
     FETCH_DEPARTMENT_REQUEST,
     FETCH_DEPARTMENT_SUCCESS,
@@ -10,7 +11,8 @@ import {
 const initialState = {
     department: [],
     loading: false,
-    error: 'Program Studi not found'
+    error: 'Program Studi not found',
+    isUpdated: true,
 }
 
 const departmentReducer = (state = initialState, action) => {
@@ -34,13 +36,14 @@ const departmentReducer = (state = initialState, action) => {
                 ...state,
                 loading: false,
                 department: action.payload,
-                error: ''
+                error: '',
+                isUpdated: true
             }
         case UPDATE_DEPARTMENT_SUCCESS:
             return {
                 ...state,
                 loading: false,
-                department: state.department.map((department) => department.uuid === action.payload.uuid ? action.payload : department),
+                department: action.payload,
                 error: ''
             }
         case DELETE_DEPARTMENT_SUCCESS:

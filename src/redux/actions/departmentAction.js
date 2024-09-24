@@ -41,9 +41,8 @@ export const fetchDepartments = () => {
 	return async (dispatch) => {
 		dispatch(fetchDepartmentsRequest());
 		try {
-			const data = await getDepartment();
-            console.log(data);
-			dispatch(fetchDepartmentsSuccess(data));
+			const response = await getDepartment();
+			dispatch(fetchDepartmentsSuccess(response));
 		} catch (error) {
 			dispatch(fetchDepartmentsFailure(error.message));
 		}
@@ -55,8 +54,7 @@ export const postDepartmentData = (department) => {
 		dispatch(fetchDepartmentsRequest());
 		try {
 			const response = await postDepartment(department);
-			console.log(response);
-			dispatch(postDepartmentsSuccess(response));
+			return response
 		} catch (error) {
 			dispatch(fetchDepartmentsFailure(error.message));
 		}
@@ -68,8 +66,7 @@ export const updateDepartmentData = (uuid, department) => {
 		dispatch(fetchDepartmentsRequest());
 		try {
 			const response = await updateDepartment(uuid, department);
-			console.log(response);
-			dispatch(updateDepartmentsSuccess(response));
+			return response
 		} catch (error) {
 			dispatch(fetchDepartmentsFailure(error.message));
 		}
@@ -81,9 +78,7 @@ export const deleteDepartmentData = (department) => {
 		dispatch(fetchDepartmentsRequest());
 		try {
 			const response = await deleteDepartment(department);
-			console.log(response);
-			dispatch(deleteDepartmentsSuccess(response));
-			dispatch
+			return response
 		} catch (error) {
 			dispatch(fetchDepartmentsFailure(error.message));
 		}

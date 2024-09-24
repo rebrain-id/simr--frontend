@@ -11,23 +11,19 @@ const Department = () => {
 	const [openModal, setOpenModal] = useState(false);
 	const handleModal = () => setOpenModal(!openModal);
 	const dispatch = useDispatch();
-	const [loading, setLoading] = useState(true);
 	const departments = useSelector(
 		(state) => state.fetchDepartments.department,
 	);
+	const isUpdated = useSelector((state) => state.fetchDepartments.isUpdated);
 
 	useEffect(() => {
-		setLoading(true);
-		setTimeout(() => {
-			dispatch(fetchDepartments());
-			setLoading(false);
-		}, 1500);
-		return () => clearTimeout();
-	}, [dispatch]);
+		dispatch(fetchDepartments());
+	}, [dispatch, isUpdated]);
+
 	return (
 		<>
-			<main className="bg-white px-10 py-5 rounded drop-shadow-bottom mt-5">
-				<div className="flex items-center justify-between">
+			<main className="bg-white px-10 pb-10 rounded drop-shadow-bottom mt-5">
+				<div className="flex items-center justify-between pb-7">
 					<h1 className="text-base font-semibold">Program Studi</h1>
 					<div className="flex items-center bg-light-primary text-white rounded text-sm">
 						<FontAwesomeIcon
@@ -42,16 +38,20 @@ const Department = () => {
 				</div>
 
 				<section className="mt-5 flex flex-col gap-3">
-					{loading
-						? 'Loading...'
-						: departments.map((item, index) => (
-								<ListDepartment
-									key={index}
-									data={item.name}
-									uuid={item.uuid}
-									name={item.name}
-								/>
-							))}
+					{departments ? (
+						departments.map((item, index) => (
+							<ListDepartment
+								key={index}
+								data={item.name}
+								uuid={item.uuid}
+								name={item.name}
+							/>
+						))
+					) : (
+						<p className="text-center text-sm text-light-secondary">
+							Tidak ada data program studi
+						</p>
+					)}
 				</section>
 			</main>
 			{openModal && <CreateModal close={() => setOpenModal(false)} />}

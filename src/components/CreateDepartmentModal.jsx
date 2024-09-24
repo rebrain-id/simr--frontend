@@ -2,14 +2,22 @@ import { useState } from 'react';
 import Button from '../elements/Button';
 import Input from '../elements/forms/FormInput';
 import { useFormik } from 'formik';
-import { postDepartmentData } from '../redux/actions/departmentAction';
-import { useDispatch, useSelector } from 'react-redux';
+import {
+	fetchDepartments,
+	postDepartmentData,
+} from '../redux/actions/departmentAction';
+import { useDispatch } from 'react-redux';
+import Alert from '../elements/Alert';
 
 const CreateDepartmentModal = (props) => {
 	const { close } = props;
 	const dispatch = useDispatch();
-	const { loading, error } = useSelector((state) => state.postDepartmentData);
 	const [isSubmit, setIsSubmit] = useState(false);
+	const [showAlert, setShowAlert] = useState({
+		status: '',
+		message: '',
+		visible: false,
+	});
 
 	const formik = useFormik({
 		initialValues: {
@@ -17,11 +25,26 @@ const CreateDepartmentModal = (props) => {
 		},
 		onSubmit: async (values, { resetForm }) => {
 			setIsSubmit(true);
-			setTimeout(() => {
-				dispatch(postDepartmentData(values));
-				resetForm();
+			const response = await dispatch(postDepartmentData(values));
+			if (response && response.statusCode === 201) {
+				setTimeout(() => {
+					resetForm();
+					setIsSubmit(false);
+					setShowAlert({
+						status: 'success',
+						message: 'Berhasil menambahkan program studi',
+						visible: true,
+					});
+				}, 500);
+				dispatch(fetchDepartments());
+			} else if (response && response.statusCode === 400) {
 				setIsSubmit(false);
-			}, 1500);
+				setShowAlert({
+					status: 'danger',
+					message: 'Gagal menambahkan program studi',
+					visible: true,
+				});
+			}
 		},
 	});
 
@@ -32,12 +55,21 @@ const CreateDepartmentModal = (props) => {
 	return (
 		<>
 			<div
-				className={`bg-black/25 w-full h-screen fixed top-0 left-0 z-10`}
+				className={`bg-black/25 w-full h-screen fixed top-0 left-0 right-0 bottom-0 z-10`}
 			>
 				<div className="absolute w-1/2 px-8 rounded-lg shadow-lg right-0 top-0 transform -translate-x-1/2 translate-y-1/4 bg-white">
-					<h2 className="text-2xl font-medium pb-8 pt-4">
-						Tambah Data Program Studi
+					<h2 className="text-2xl font-medium pb-8 py-2">
+						Tambah Program Studi
 					</h2>
+					{showAlert.visible && (
+						<Alert
+							status={showAlert.status}
+							message={showAlert.message}
+							onClick={() =>
+								setShowAlert({ ...showAlert, visible: false })
+							}
+						/>
+					)}
 					<form onSubmit={formik.handleSubmit}>
 						<Input
 							variant="flex flex-col"
