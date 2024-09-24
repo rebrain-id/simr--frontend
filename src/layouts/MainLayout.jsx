@@ -16,6 +16,13 @@ const MainLayout = () => {
 	const { detailAgenda, showSidebar, loading, message } = useSelector(
 		(state) => state.agenda,
 	);
+	const loadingLecturer = useSelector(
+		(state) => state.fetchLecturers.loading,
+	);
+	const loadingDepartment = useSelector(
+		(state) => state.fetchDepartments.loading,
+	);
+	const [dataIsFetched, setDataIsFetched] = useState(false);
 	const dispatch = useDispatch();
 
 	useEffect(() => {
@@ -34,15 +41,21 @@ const MainLayout = () => {
 		}
 	}, [showSidebar]);
 
+	// console.log(loadingLecturer);
 	useEffect(() => {
 		if (loading) {
 			setShowLoading(true);
+			// } else if (loadingLecturer) {
+			// 	setShowLoading(true);
+			// } else if (loadingDepartment) {
+			// 	setShowLoading(true);
 		} else {
-			setTimeout(() => {
+			const timeout = setTimeout(() => {
 				setShowLoading(false);
 			}, 1000);
+			return () => clearTimeout(timeout);
 		}
-	}, [loading]);
+	}, [loading, loadingLecturer, loadingDepartment]);
 
 	useEffect(() => {
 		if (message.status) {
@@ -86,7 +99,11 @@ const MainLayout = () => {
 				<Footer />
 			</aside>
 
-			{showLoading && <LoadingScreen loading={loading} />}
+			{showLoading && (
+				<LoadingScreen
+					loading={loading || loadingLecturer || loadingDepartment}
+				/>
+			)}
 		</main>
 	);
 };
