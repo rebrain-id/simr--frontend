@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import FormInput from '../elements/forms/FormInput';
-import { faXmark } from '@fortawesome/free-solid-svg-icons';
+import { faLink, faXmark } from '@fortawesome/free-solid-svg-icons';
 import FormTextarea from '../elements/forms/FormTextarea';
 import FormSelect from '../elements/forms/FormSelect';
 import FormCheckbox from '../elements/forms/FormCheckbox';
@@ -17,6 +17,7 @@ import {
 } from '../redux/actions/agendaAction';
 import { fetchDepartments } from '../redux/actions/departmentAction';
 import Toggel from '../elements/forms/Toggel';
+import { API_URL } from '../services/config';
 
 const DetailAgendaSidebar = (props) => {
 	const { onClick, data, isShow = false, variant } = props;
@@ -179,6 +180,8 @@ const DetailAgendaSidebar = (props) => {
 		}
 	};
 
+	console.log(data);
+
 	return (
 		<div
 			onClick={handleCloseModal}
@@ -291,28 +294,57 @@ const DetailAgendaSidebar = (props) => {
 							/>
 						))}
 					</FormCheckbox>
-					<FormInput
-						variant="w-full flex flex-col gap-1"
-						inputvariant="text-sm font-normal"
-						labelvariant="text-xs"
-						label="Notulensi"
-						type="file"
-						note="Pastikan file memiliki format .pdf, .doc, atau .docx"
-						fileAccept=".pdf, .doc, .docx"
-						name="notulens"
-						onChange={handleInputValue}
-					/>
-					<FormInput
-						variant="w-full flex flex-col gap-1"
-						inputvariant="text-sm font-normal"
-						labelvariant="text-xs"
-						label="Absensi"
-						type="file"
-						note="Pastikan file memiliki format .jpg, .jpeg, atau .png"
-						fileAccept=".jpg, .jpeg, .png"
-						name="attendees"
-						onChange={handleInputValue}
-					/>
+
+					{data?.notulen ? (
+						<div className="w-80">
+							<h1 className="text-xs font-medium">Notulensi</h1>
+							<a
+								href={`${API_URL()}/${data.notulen}`}
+								className="text-xs font-medium text-light-primary underline"
+							>
+								<FontAwesomeIcon
+									icon={faLink}
+									className="mr-2"
+								/>
+								Link Notulensi Agenda
+							</a>
+						</div>
+					) : (
+						<FormInput
+							variant="w-full flex flex-col gap-1"
+							inputvariant="text-sm font-normal"
+							labelvariant="text-xs"
+							label="Notulensi"
+							type="file"
+							note="Pastikan file memiliki format .pdf, .doc, atau .docx"
+							fileAccept=".pdf, .doc, .docx"
+							name="notulens"
+							onChange={handleInputValue}
+						/>
+					)}
+
+					{data?.absent ? (
+						<div className="w-80">
+							<h1 className="text-xs font-medium">Absensi</h1>
+							<img
+								src={`${API_URL()}/${data.absent}`}
+								alt=""
+								className="mt-1"
+							/>
+						</div>
+					) : (
+						<FormInput
+							variant="w-full flex flex-col gap-1"
+							inputvariant="text-sm font-normal"
+							labelvariant="text-xs"
+							label="Absensi"
+							type="file"
+							note="Pastikan file memiliki format .jpg, .jpeg, atau .png"
+							fileAccept=".jpg, .jpeg, .png"
+							name="attendees"
+							onChange={handleInputValue}
+						/>
+					)}
 
 					<Toggel
 						name={'isDone'}
