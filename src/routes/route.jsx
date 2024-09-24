@@ -6,6 +6,7 @@ import Department from '../pages/Department';
 import Lecturer from '../pages/Lecturer';
 import AgendaByDate from '../pages/agendas/AgendaByDate';
 import AddAgenda from '../pages/agendas/AddAgenda';
+import PdfViewer from '../pages/PdfViewer';
 
 export const router = createBrowserRouter([
 	{
@@ -43,6 +44,10 @@ export const router = createBrowserRouter([
 			{
 				path: 'dosen',
 				element: <Lecturer />,
+			},
+			{
+				path: 'pdf',
+				element: <PdfViewer />,
 			},
 		],
 	},
