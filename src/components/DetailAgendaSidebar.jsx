@@ -27,7 +27,7 @@ const DetailAgendaSidebar = (props) => {
 	const dispatch = useDispatch();
 	const typeAgenda = useSelector((state) => state.typeAgenda.typeAgenda);
 	const department = useSelector(
-		(state) => state.fetchDepartments.departments,
+		(state) => state.fetchDepartments.department,
 	);
 
 	useEffect(() => {
@@ -179,8 +179,6 @@ const DetailAgendaSidebar = (props) => {
 			console.log(error);
 		}
 	};
-
-	console.log(data);
 
 	return (
 		<div
