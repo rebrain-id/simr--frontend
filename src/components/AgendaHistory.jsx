@@ -71,7 +71,7 @@ const AgendaHistory = () => {
 				/>
 			)}
 
-			{agendaHistory.lenght !== 0 ? (
+			{agendaHistory.lenght > 0 ? (
 				<div className="mt-5 flex flex-col gap-3">
 					{agendaHistory.map((item, itemIndex) => (
 						<ListAgenda
@@ -88,8 +88,8 @@ const AgendaHistory = () => {
 					))}
 				</div>
 			) : (
-				<p className="text-center text-xs text-light-secondary">
-					Tidak ada riwayat
+				<p className="text-center text-xs text-light-secondary mt-5">
+					Tidak ada riwayat agenda
 				</p>
 			)}
 		</div>
