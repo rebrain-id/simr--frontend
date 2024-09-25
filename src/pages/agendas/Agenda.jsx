@@ -5,13 +5,14 @@ import { Link } from 'react-router-dom';
 
 const Agenda = () => {
 	return (
-		<div className="bg-white px-10 py-5 rounded drop-shadow-bottom mt-5">
-			<Calendar />
-
-			<div className="w-full flex justify-end sticky bottom-10 z-10">
+		<>
+			<div className="bg-white px-10 py-5 rounded drop-shadow-bottom mt-5">
+				<Calendar />
+			</div>
+			<div className="fixed right-12 bottom-10 z-10">
 				<Link
 					to={'/agenda/new'}
-					className="mt-10 flex justify-center items-center w-16 h-16 rounded-full bg-light-primary bg-opacity-80 hover:bg-opacity-100 cursor-pointer"
+					className="flex justify-center items-center w-16 h-16 rounded-full bg-light-primary bg-opacity-80 hover:bg-opacity-100 cursor-pointer"
 				>
 					<FontAwesomeIcon
 						icon={faPlus}
@@ -19,7 +20,7 @@ const Agenda = () => {
 					/>
 				</Link>
 			</div>
-		</div>
+		</>
 	);
 };
 
