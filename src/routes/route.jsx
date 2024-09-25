@@ -1,5 +1,6 @@
 import { createBrowserRouter } from 'react-router-dom';
 import MainLayout from '../layouts/MainLayout';
+import Login from '../pages/Login';
 import Dashboard from '../pages/Dashboard';
 import Agenda from '../pages/agendas/Agenda';
 import Department from '../pages/Department';
@@ -50,5 +51,9 @@ export const router = createBrowserRouter([
 				element: <PdfViewer />,
 			},
 		],
+	},
+	{
+		path: '/login',
+		element: <Login />,
 	},
 ]);

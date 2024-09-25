@@ -10,7 +10,8 @@ import {
 const initialState = {
     lecturer: [],
     loading: false,
-    error: 'Dosen not found'
+    error: 'Dosen not found',
+    isUpdated: true,
 }
 
 const lecturerReducer = (state = initialState, action) => {
@@ -33,13 +34,14 @@ const lecturerReducer = (state = initialState, action) => {
                 ...state,
                 loading: false,
                 lecturer: action.payload,
-                error: ''
+                error: '',
+                isUpdated: true,
             }
         case UPDATE_LECTURER_SUCCESS:
             return {
                 ...state,
                 loading: false,
-                lecturer: state.lecturer.map((lecturer) => lecturer.uuid === action.payload.uuid ? action.payload : lecturer),
+                lecturer: action.payload,
                 error: ''
             }
         case DELETE_LECTURER_SUCCESS:
