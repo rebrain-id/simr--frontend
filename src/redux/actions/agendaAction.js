@@ -174,6 +174,8 @@ export const fetchAgendaHistory = createAsyncThunk(
 			const convertDateFrom = dateFrom ? moment(dateFrom) : moment(0);
 			const convertDateTo = dateTo ? moment(dateTo) : today;
 
+			let splitedType = type.split(',');
+
 			data = data.map((item) => {
 				return {
 					...item,
@@ -207,7 +209,7 @@ export const fetchAgendaHistory = createAsyncThunk(
 								null,
 								'[)',
 							) &&
-							item.typeAgenda.name == `${type}` &&
+							splitedType.includes(item.typeAgenda.name) &&
 							item.isDone === true
 						);
 					} else {
@@ -231,7 +233,7 @@ export const fetchAgendaHistory = createAsyncThunk(
 					} else if (type) {
 						return (
 							finishedDate.isBefore(convertDateTo) &&
-							item.typeAgenda.name == `${type}` &&
+							splitedType.includes(item.typeAgenda.name) &&
 							item.isDone === true
 						);
 					} else {
