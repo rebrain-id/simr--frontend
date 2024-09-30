@@ -25,7 +25,7 @@ const Login = () => {
 	return (
 		<>
 			<div className="h-screen bg-light-secondary/30">
-				<div className="pb-2 fixed bottom-0 right-0 transform ">
+				{/* <div className="pb-2 fixed bottom-0 right-0 transform ">
 					<div className="">
 						<img
 							className="block w-[350px]"
@@ -33,19 +33,12 @@ const Login = () => {
 							alt="logo-btm"
 						/>
 					</div>
-				</div>
+				</div> */}
 				<div className="xl:w-1/2 l:w-1/2 md:w-1/3 sm:w-1/3 fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white drop-shadow-bottom">
 					<div className="w-full grid grid-cols-2 mx-auto">
 						<div className="w-full py-6 bg-white drop-shadow-md rounded-l hover:drop-shadow-right hover:bg-light-secondary/25 transition-all ease-in duration-300 overflow-hidden">
-							<p className="text-center font-bold text-3xl">
-								SIM-R
-							</p>
-							<p className="pb-6 text-center text-light-secondary text-md">
-								Agenda Management Information System
-							</p>
-
 							<p className="text-center font-semibold text-2xl">
-								Login
+								Selamat Datang
 							</p>
 							<form onSubmit={formik.handleSubmit}>
 								<FormInput
