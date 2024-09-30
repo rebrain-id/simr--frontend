@@ -31,7 +31,7 @@ const FormInputCheckbox = (props) => {
 		<div
 			className={`w-full text-sm py-1 flex items-center justify-between ${variant || 'px-3'}`}
 		>
-			<div className="flex items-center gap-3">
+			<div className="flex items-center gap-1">
 				<input
 					type="checkbox"
 					className={`h-4 w-4 cursor-pointer ${checkboxVariant}`}
