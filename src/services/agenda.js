@@ -10,9 +10,12 @@ export const getAgenda = async () => {
 		const response = await axios({
 			method: 'get',
 			url: url,
+			headers: {
+				Authorization:
+					'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImJhYmF5byIsInN1YiI6MTMsInJvbGUiOiJQUk9ESSIsImlhdCI6MTcyNzQ1NTc2OSwiZXhwIjoxNzMwMDQ3NzY5fQ.ccKgWQy1XWTtyZAxsZ9PtFEelns6YkqcWgySc1nMSzg',
+			},
 		});
 
-		console.log(response.data.data);
 		return response.data.data;
 	} catch (error) {
 		console.log(error);
@@ -27,6 +30,10 @@ export const getDetailAgenda = async (uuid) => {
 		const response = await axios({
 			method: 'get',
 			url: url,
+			headers: {
+				Authorization:
+					'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImJhYmF5byIsInN1YiI6MTMsInJvbGUiOiJQUk9ESSIsImlhdCI6MTcyNzQ1NTc2OSwiZXhwIjoxNzMwMDQ3NzY5fQ.ccKgWQy1XWTtyZAxsZ9PtFEelns6YkqcWgySc1nMSzg',
+			},
 		});
 
 		return response.data.data;
@@ -44,6 +51,10 @@ export const createDataAgenda = async (data) => {
 			method: 'post',
 			url: url,
 			data: data,
+			headers: {
+				Authorization:
+					'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImJhYmF5byIsInN1YiI6MTMsInJvbGUiOiJQUk9ESSIsImlhdCI6MTcyNzQ1NTc2OSwiZXhwIjoxNzMwMDQ3NzY5fQ.ccKgWQy1XWTtyZAxsZ9PtFEelns6YkqcWgySc1nMSzg',
+			},
 		});
 
 		return response.data;
@@ -61,6 +72,10 @@ export const checkAgenda = async (data) => {
 			method: 'post',
 			url: url,
 			data: data,
+			headers: {
+				Authorization:
+					'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImJhYmF5byIsInN1YiI6MTMsInJvbGUiOiJQUk9ESSIsImlhdCI6MTcyNzQ1NTc2OSwiZXhwIjoxNzMwMDQ3NzY5fQ.ccKgWQy1XWTtyZAxsZ9PtFEelns6YkqcWgySc1nMSzg',
+			},
 		});
 
 		return response.data;
@@ -103,6 +118,8 @@ export const updateAgenda = async (uuid, data) => {
 		data: form,
 		headers: {
 			'Content-Type': 'multipart/form-data',
+			Authorization:
+				'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImJhYmF5byIsInN1YiI6MTMsInJvbGUiOiJQUk9ESSIsImlhdCI6MTcyNzQ1NTc2OSwiZXhwIjoxNzMwMDQ3NzY5fQ.ccKgWQy1XWTtyZAxsZ9PtFEelns6YkqcWgySc1nMSzg',
 		},
 	})
 		.then((res) => {

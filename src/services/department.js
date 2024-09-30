@@ -7,6 +7,10 @@ export const getDepartment = async () => {
 	const response = await axios({
 		method: 'get',
 		url: url,
+		headers: {
+			Authorization:
+				'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImJhYmF5byIsInN1YiI6MTMsInJvbGUiOiJQUk9ESSIsImlhdCI6MTcyNzQ1NTc2OSwiZXhwIjoxNzMwMDQ3NzY5fQ.ccKgWQy1XWTtyZAxsZ9PtFEelns6YkqcWgySc1nMSzg',
+		},
 	})
 		.then((res) => {
 			return res.data.data;
@@ -31,33 +35,33 @@ export const postDepartment = async (body) => {
 		})
 		.catch((err) => {
 			console.log(err);
-			throw err
-		})
-	
-	return response
-}
+			throw err;
+		});
+
+	return response;
+};
 
 export const updateDepartment = async (uuid, body) => {
 	const url = `${API_URL()}/v1/department/${uuid}`;
-	
+
 	const response = await axios({
 		method: 'patch',
 		url: url,
 		data: body,
 	})
 		.then((res) => {
-			return res.data
+			return res.data;
 		})
 		.catch((err) => {
 			console.log(err);
-			throw err
-		})
+			throw err;
+		});
 
-	return response
-}
+	return response;
+};
 
 export const deleteDepartment = async (uuid) => {
-	const url = `${API_URL()}/v1/department/${uuid}`
+	const url = `${API_URL()}/v1/department/${uuid}`;
 
 	const response = await axios({
 		method: 'delete',
@@ -65,12 +69,12 @@ export const deleteDepartment = async (uuid) => {
 		data: uuid,
 	})
 		.then((res) => {
-			return res.data
+			return res.data;
 		})
 		.catch((err) => {
 			console.log(err);
-			throw err
-		})
+			throw err;
+		});
 
-	return response
-}
+	return response;
+};
