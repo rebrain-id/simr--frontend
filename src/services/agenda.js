@@ -2,17 +2,22 @@ import axios from 'axios';
 import { API_URL } from './config';
 import moment from 'moment';
 
+const access_token = localStorage.getItem('access_token')
+	? localStorage.getItem('access_token')
+	: sessionStorage.getItem('access_token');
+
 export const getAgenda = async () => {
 	const username = sessionStorage.getItem('user');
 	const url = `${API_URL()}/v1/detail-agendas?username=${username}`;
+
+	console.log(access_token);
 
 	try {
 		const response = await axios({
 			method: 'get',
 			url: url,
 			headers: {
-				Authorization:
-					'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImJhYmF5byIsInN1YiI6MTMsInJvbGUiOiJQUk9ESSIsImlhdCI6MTcyNzQ1NTc2OSwiZXhwIjoxNzMwMDQ3NzY5fQ.ccKgWQy1XWTtyZAxsZ9PtFEelns6YkqcWgySc1nMSzg',
+				Authorization: `Bearer ${access_token}`,
 			},
 		});
 
@@ -31,8 +36,7 @@ export const getDetailAgenda = async (uuid) => {
 			method: 'get',
 			url: url,
 			headers: {
-				Authorization:
-					'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImJhYmF5byIsInN1YiI6MTMsInJvbGUiOiJQUk9ESSIsImlhdCI6MTcyNzQ1NTc2OSwiZXhwIjoxNzMwMDQ3NzY5fQ.ccKgWQy1XWTtyZAxsZ9PtFEelns6YkqcWgySc1nMSzg',
+				Authorization: `Bearer ${access_token}`,
 			},
 		});
 
@@ -52,8 +56,7 @@ export const createDataAgenda = async (data) => {
 			url: url,
 			data: data,
 			headers: {
-				Authorization:
-					'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImJhYmF5byIsInN1YiI6MTMsInJvbGUiOiJQUk9ESSIsImlhdCI6MTcyNzQ1NTc2OSwiZXhwIjoxNzMwMDQ3NzY5fQ.ccKgWQy1XWTtyZAxsZ9PtFEelns6YkqcWgySc1nMSzg',
+				Authorization: `Bearer ${access_token}`,
 			},
 		});
 
@@ -73,8 +76,7 @@ export const checkAgenda = async (data) => {
 			url: url,
 			data: data,
 			headers: {
-				Authorization:
-					'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImJhYmF5byIsInN1YiI6MTMsInJvbGUiOiJQUk9ESSIsImlhdCI6MTcyNzQ1NTc2OSwiZXhwIjoxNzMwMDQ3NzY5fQ.ccKgWQy1XWTtyZAxsZ9PtFEelns6YkqcWgySc1nMSzg',
+				Authorization: `Bearer ${access_token}`,
 			},
 		});
 
@@ -118,8 +120,7 @@ export const updateAgenda = async (uuid, data) => {
 		data: form,
 		headers: {
 			'Content-Type': 'multipart/form-data',
-			Authorization:
-				'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImJhYmF5byIsInN1YiI6MTMsInJvbGUiOiJQUk9ESSIsImlhdCI6MTcyNzQ1NTc2OSwiZXhwIjoxNzMwMDQ3NzY5fQ.ccKgWQy1XWTtyZAxsZ9PtFEelns6YkqcWgySc1nMSzg',
+			Authorization: `Bearer ${access_token}`,
 		},
 	})
 		.then((res) => {
@@ -139,6 +140,9 @@ export const deleteAgenda = async (uuid) => {
 		const response = await axios({
 			method: 'delete',
 			url: url,
+			headers: {
+				Authorization: `Bearer ${access_token}`,
+			},
 		});
 		return response.data;
 	} catch (error) {
