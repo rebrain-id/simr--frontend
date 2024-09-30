@@ -1,103 +1,124 @@
 import Button from '../../elements/Button';
 import FormInput from '../../elements/forms/FormInput';
 import Logo2 from '../../assets/images/logo2.png';
-import Logo3 from '../../assets/images/logo3.jpg';
-import Loading from '../../elements/Loading';
-import { useState } from 'react';
 import { useFormik } from 'formik';
+import FormInputCheckbox from '../../elements/forms/FormInputCheckbox';
+import { useDispatch, useSelector } from 'react-redux';
+import { postLogin } from '../../redux/actions/authAction';
+import { useNavigate } from 'react-router-dom';
+import * as Yup from 'yup';
 
 const Login = () => {
-	const [isSubmit, setIsSubmit] = useState(false);
+	const loading = useSelector((state) => state.auth.loading);
+	const dispatch = useDispatch();
+	const navigate = useNavigate();
 	const formik = useFormik({
 		initialValues: {
 			username: '',
 			password: '',
+			rememberme: false,
 		},
-		onSubmit: (values) => {
-			setIsSubmit(true);
-			setTimeout(() => {
-				setIsSubmit(false);
-				console.log(values);
-			}, 500);
+
+		validationSchema: Yup.object().shape({
+			username: Yup.string().required('username harus diisi'),
+			password: Yup.string().required('password harus diisi'),
+		}),
+
+		onSubmit: async (values) => {
+			const response = await dispatch(postLogin(values));
+
+			if (response.statusCode === 200) {
+				navigate('/');
+			}
 		},
 	});
 
 	return (
 		<>
-			<div className="h-screen bg-light-secondary/30">
-				{/* <div className="pb-2 fixed bottom-0 right-0 transform ">
-					<div className="">
-						<img
-							className="block w-[350px]"
-							src={Logo2}
-							alt="logo-btm"
-						/>
-					</div>
-				</div> */}
-				<div className="xl:w-1/2 l:w-1/2 md:w-1/3 sm:w-1/3 fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white drop-shadow-bottom">
-					<div className="w-full grid grid-cols-2 mx-auto">
-						<div className="w-full py-6 bg-white drop-shadow-md rounded-l hover:drop-shadow-right hover:bg-light-secondary/25 transition-all ease-in duration-300 overflow-hidden">
-							<p className="text-center font-semibold text-2xl">
+			<div className="h-screen bg-light-gray p-8">
+				<main className="bg-light-white rounded-lg p-5 w-full h-full relative">
+					<img src={Logo2} alt="" className="h-10 absolute top-5" />
+
+					<div className="flex justify-center w-full h-full pt-10">
+						<div className="w-1/3">
+							<h1 className="font-montserrat text-3xl font-semibold">
 								Selamat Datang
-							</p>
-							<form onSubmit={formik.handleSubmit}>
-								<FormInput
-									type="text"
-									name="username"
-									label="Username"
-									labelvariant="pb-2"
-									variant="flex flex-col w-[250px] mx-auto py-6"
-									placeholder="Username"
-								/>
-								<FormInput
-									type="password"
-									name="password"
-									label="Password"
-									labelvariant="pb-2"
-									variant="flex flex-col w-[250px] mx-auto pb-6"
-									placeholder="*********"
-								/>
-								{isSubmit ? (
-									<div className="text-center pt-6">
-										<Button
-											type="submit"
-											text={
-												<>
-													<div className="flex items-center gap-2">
-														<span>Login</span>
-														<Loading />
-													</div>
-												</>
-											}
-											variant="text-white px-5 bg-light-secondary/45"
-											isDisabled={true}
+							</h1>
+
+							<div className="mt-10">
+								<p className="text-xs font-light">
+									Silahkan masukkan username dan password anda
+									untuk mendapatkan akses penuh dari sistem
+									ini
+								</p>
+
+								<form
+									onSubmit={formik.handleSubmit}
+									className="mt-5 flex flex-col gap-5"
+								>
+									<div>
+										<FormInput
+											type="text"
+											name="username"
+											label="Username"
+											labelvariant="pb-1 text-xs"
+											inputvariant="w-full text-sm"
+											variant="flex flex-col mx-auto w-full"
+											value={formik.values.username}
+											onChange={formik.handleChange}
 										/>
+										{formik.touched.username &&
+											formik.errors.username && (
+												<div className="text-xs text-danger font-light">
+													{formik.errors.username}
+												</div>
+											)}
 									</div>
-								) : (
-									<div className="text-center pt-6">
-										<Button
-											type="submit"
-											text="Login"
-											variant="text-white px-5 bg-light-primary hover:bg-primary transition ease-in-out duration-500"
+									<div>
+										<FormInput
+											isPassword={true}
+											name="password"
+											label="Password"
+											labelvariant="pb-1 text-xs"
+											inputvariant="w-full text-sm"
+											variant="flex flex-col mx-auto w-full"
+											values={formik.values.password}
+											onChange={formik.handleChange}
 										/>
+										{formik.touched.password &&
+											formik.errors.password && (
+												<div className="text-xs text-danger font-light">
+													{formik.errors.password}
+												</div>
+											)}
 									</div>
-								)}
-							</form>
+
+									<FormInputCheckbox
+										text="Ingat Saya"
+										variant={'px-0'}
+										name="rememberme"
+										value={true}
+										inputVariant={'h-2 w-2'}
+										labelVariant={'text-xs font-medium'}
+										onChange={formik.handleChange}
+									/>
+
+									<Button
+										type="submit"
+										text={
+											!loading ? 'Login' : 'Harap Tunggu'
+										}
+										variant={
+											!loading
+												? 'bg-light-primary/90 text-light-white text-sm hover:bg-light-primary/100'
+												: 'bg-light-secondary/30 text-black text-sm'
+										}
+									/>
+								</form>
+							</div>
 						</div>
-						<div
-							className="w-full py-6 drop-shadow-bottom rounded-r bg-primary/50"
-							style={{
-								backgroundImage: `url(${Logo3})`,
-								backgroundColor: 'rgb(0, 0, 0, 0.2)',
-								backgroundSize: 'cover',
-								backgroundPosition: 'center',
-								backgroundRepeat: 'no-repeat',
-								position: 'relative',
-								overflow: 'hidden',
-							}}
-						></div>
 					</div>
-				</div>
+				</main>
 			</div>
 		</>
 	);
