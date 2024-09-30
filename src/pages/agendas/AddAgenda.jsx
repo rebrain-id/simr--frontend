@@ -10,41 +10,46 @@ import { createAgenda } from '../../redux/actions/agendaAction';
 import moment from 'moment';
 import { useNavigate } from 'react-router-dom';
 import Alert from '../../elements/Alert';
+import { ErrorMessage, Form, Formik } from 'formik';
+import * as Yup from 'yup';
+import { fetchDepartments } from '../../redux/actions/departmentAction';
 
 const AddAgenda = () => {
 	const username = sessionStorage.getItem('user');
 	const navigation = useNavigate();
 	const dispatch = useDispatch();
 	const typeAgenda = useSelector((state) => state.typeAgenda.typeAgenda);
+	const departments = useSelector(
+		(state) => state.fetchDepartments.department,
+	);
 
 	useEffect(() => {
 		dispatch(fetchTypeAgenda());
+		dispatch(fetchDepartments());
 	}, [dispatch]);
 
 	const [openModal, setOpenModal] = useState(false);
-	const [inputValue, setInputValue] = useState({
-		title: '',
-		from: '',
-		to: '',
-		location: '',
-		typeAgenda: '',
-		description: '',
-	});
+	const [date, setDate] = useState({ from: '', to: '' });
 
-	const handleInputValue = (e) => {
-		setInputValue({
-			...inputValue,
-			[e.target.name]: e.target.value,
-		});
+	const handleChangeDate = (e) => {
+		const { name, value } = e.target;
+		setDate((prev) => ({
+			...prev,
+			[name]: value,
+		}));
 	};
 
-	const handleOpenModal = () => {
-		if (moment(inputValue.from).isAfter(moment(inputValue.to))) {
+	const handleOpenModal = (event, values) => {
+		event.preventDefault();
+		if (moment(values.from).isAfter(moment(values.to))) {
 			setShowAlert({
 				status: 'error',
 				message: 'Terdapat kesalahan dalam memasukkan hari atau jam',
 				visible: true,
 			});
+			setTimeout(() => {
+				setShowAlert({ status: '', message: '', visible: false });
+			}, 3000); // Auto-hide alert after 3 seconds
 		} else {
 			setOpenModal(!openModal);
 		}
@@ -56,7 +61,7 @@ const AddAgenda = () => {
 		} else {
 			document.body.style.overflow = '';
 		}
-	});
+	}, [openModal]);
 
 	const [showAlert, setShowAlert] = useState({
 		status: '',
@@ -64,60 +69,66 @@ const AddAgenda = () => {
 		visible: false,
 	});
 
-	const handleSubmitData = async () => {
+	const handleSubmitData = async (values, { setSubmitting }) => {
 		try {
 			const departmentFromStorage = JSON.parse(
 				sessionStorage.getItem('member'),
 			);
+			const data = {
+				title: values.title,
+				description: values.description,
+				start: moment(values.from).format('YYYY-MM-DD HH:mm:ss'),
+				finish: moment(values.to).format('YYYY-MM-DD HH:mm:ss'),
+				typeAgendaUuid: values.typeAgenda,
+				location: values.location,
+				departmentsUuid: departmentFromStorage,
+				username: username,
+			};
 
-			if (
-				inputValue.title &&
-				inputValue.from &&
-				inputValue.to &&
-				inputValue.typeAgenda &&
-				departmentFromStorage
-			) {
-				const data = {
-					title: inputValue.title,
-					description: inputValue.description,
-					start: moment(inputValue.from).format(
-						'YYYY-MM-DD HH:mm:ss',
-					),
-					finish: moment(inputValue.to).format('YYYY-MM-DD HH:mm:ss'),
-					typeAgendaUuid: inputValue.typeAgenda,
-					location: inputValue.location,
-					departmentsUuid: departmentFromStorage,
-					username: username,
-				};
+			const response = await dispatch(createAgenda({ data }));
 
-				const response = await dispatch(createAgenda({ data: data }));
-
-				if (response && response.payload.data.statusCode === 201) {
-					sessionStorage.removeItem('member');
-
-					navigation(
-						`/agenda/date?date=${moment(inputValue.from).format('DD')}&month=${moment(inputValue.from).format('MM')}&year=${moment(inputValue.from).format('YYYY')}`,
-					);
-				}
+			if (response && response.payload.data.statusCode === 201) {
+				sessionStorage.removeItem('member');
+				navigation(
+					`/agenda/date?date=${moment(values.from).format('DD')}&month=${moment(values.from).format('MM')}&year=${moment(values.from).format('YYYY')}`,
+				);
 			} else {
 				setShowAlert({
 					status: 'error',
-					message:
-						'Harap isi semua kolom terlebih dahulu sebelum menyimpan data',
+					message: 'Gagal menyimpan data agenda',
 					visible: true,
 				});
 			}
 		} catch (error) {
-			console.log(error);
+			setShowAlert({
+				status: 'error',
+				message: 'Terjadi kesalahan saat menyimpan data',
+				visible: true,
+			});
+			console.error(error);
 		}
+		setSubmitting(false);
 	};
 
+	const validationSchema = Yup.object().shape({
+		title: Yup.string().required('Judul agenda tidak boleh kosong'),
+		from: Yup.string()
+			.required('Waktu mulai tidak boleh kosong')
+			.test(
+				'from-before-to',
+				'Waktu mulai harus sebelum waktu selesai',
+				function (value) {
+					const { to } = this.parent;
+					return moment(value).isBefore(moment(to));
+				},
+			),
+		to: Yup.string().required('Waktu selesai tidak boleh kosong'),
+		location: Yup.string().required('Tempat tidak boleh kosong'),
+		typeAgenda: Yup.string().required('Jenis agenda tidak boleh kosong'),
+	});
+
 	const handleClose = () => {
-		setShowAlert({
-			status: '',
-			message: '',
-			visible: false,
-		});
+		setShowAlert({ status: '', message: '', visible: false });
 	};
 
 	return (
@@ -132,109 +143,179 @@ const AddAgenda = () => {
 
 			{openModal && (
 				<ModalAddAnggota
-					onClick={handleOpenModal}
-					dateFrom={inputValue.from}
-					dateTo={inputValue.to}
+					onClick={() => setOpenModal(false)}
+					departments={departments}
+					dateFrom={date.from}
+					dateTo={date.to}
 				/>
 			)}
-			<div
-				className={`bg-white px-10 py-5 rounded drop-shadow-bottom mt-5`}
-			>
+
+			<div className="bg-white px-10 py-5 rounded drop-shadow-bottom mt-5">
 				<h1 className="text-lg font-semibold mb-5">Tambah Agenda</h1>
 
-				<section className="flex flex-col gap-3 mt-5 w-full">
-					<FormInput
-						variant="w-full flex flex-col gap-1"
-						inputvariant="text-sm font-normal"
-						labelvariant="text-xs"
-						label="Agenda"
-						name="title"
-						onChange={handleInputValue}
-					/>
-					<div className="flex gap-5">
-						<FormInput
-							variant="w-full flex flex-col gap-1"
-							inputvariant="text-sm font-normal"
-							labelvariant="text-xs"
-							label="Dari"
-							type="datetime-local"
-							name="from"
-							onChange={handleInputValue}
-							placeholder="Dari"
-						/>
-						<FormInput
-							variant="w-full flex flex-col gap-1"
-							inputvariant="text-sm font-normal"
-							labelvariant="text-xs"
-							label="Sampai"
-							type="datetime-local"
-							name="to"
-							onChange={handleInputValue}
-						/>
-					</div>
-					<div className="flex gap-5 w-full">
-						<div className="flex flex-col gap-3 w-1/2">
-							<FormInput
-								variant="w-full flex flex-col gap-1"
-								inputvariant="text-sm font-normal"
-								labelvariant="text-xs"
-								label="Tempat"
-								name="location"
-								onChange={handleInputValue}
-							/>
-							<FormSelect
-								label="Kategori"
-								variant="w-full flex flex-col gap-1 text-sm"
-								name="typeAgenda"
-								labelVariant="text-xs"
-								onChange={handleInputValue}
-							>
-								<option
-									value=""
-									className="text-light-secondary"
-								>
-									Pilih jenis agenda
-								</option>
-								{typeAgenda.map((item, index) => (
-									<option
-										value={item.uuid}
-										className="text-secondary"
-										key={index}
-									>
-										{item.name}
-									</option>
-								))}
-							</FormSelect>
-						</div>
-						<FormTextarea
-							label="Deskripsi"
-							variant="w-1/2"
-							rows={4}
-							name="description"
-							onChange={handleInputValue}
-						/>
-					</div>
+				<Formik
+					initialValues={{
+						title: '',
+						from: '',
+						to: '',
+						location: '',
+						typeAgenda: '',
+						description: '',
+					}}
+					validationSchema={validationSchema}
+					onSubmit={handleSubmitData}
+				>
+					{({ values, handleChange, handleSubmit, isSubmitting }) => (
+						<Form
+							onSubmit={handleSubmit}
+							className="flex flex-col gap-3 mt-5 w-full"
+						>
+							<div>
+								<FormInput
+									variant="w-full flex flex-col gap-1"
+									inputvariant="text-sm font-normal"
+									labelvariant="text-xs"
+									label="Agenda"
+									name="title"
+									onChange={handleChange}
+									value={values.title}
+								/>
+								<ErrorMessage
+									name="title"
+									component="div"
+									className="text-xs text-danger font-light"
+								/>
+							</div>
+							<div className="flex gap-5">
+								<div className="w-full">
+									<FormInput
+										variant="w-full flex flex-col gap-1"
+										inputvariant="text-sm font-normal"
+										labelvariant="text-xs"
+										label="Dari"
+										type="datetime-local"
+										name="from"
+										onChange={(e) => {
+											handleChange(e);
+											handleChangeDate(e);
+										}}
+										value={values.from}
+									/>
+									<ErrorMessage
+										name="from"
+										component="div"
+										className="text-xs text-danger font-light"
+									/>
+								</div>
+								<div className="w-full">
+									<FormInput
+										variant="w-full flex flex-col gap-1"
+										inputvariant="text-sm font-normal"
+										labelvariant="text-xs"
+										label="Sampai"
+										type="datetime-local"
+										name="to"
+										onChange={(e) => {
+											handleChange(e);
+											handleChangeDate(e);
+										}}
+										value={values.to}
+									/>
+									<ErrorMessage
+										name="to"
+										component="div"
+										className="text-xs text-danger font-light"
+									/>
+								</div>
+							</div>
+							<div className="flex gap-5 w-full">
+								<div className="flex flex-col gap-3 w-1/2">
+									<div>
+										<FormInput
+											variant="w-full flex flex-col gap-1"
+											inputvariant="text-sm font-normal"
+											labelvariant="text-xs"
+											label="Tempat"
+											name="location"
+											onChange={handleChange}
+											value={values.location}
+										/>
+										<ErrorMessage
+											name="location"
+											component="div"
+											className="text-xs text-danger font-light"
+										/>
+									</div>
 
-					<div className="mt-5 flex items-center justify-between">
-						<Button
-							onClick={handleOpenModal}
-							text="Tambah Anggota"
-							variant="bg-light-primary bg-opacity-80 text-light-white text-sm hover:bg-opacity-100"
-						/>
-						<div className="flex items-center gap-2">
-							<Button
-								onClick={handleSubmitData}
-								text="Simpan"
-								variant={`bg-light-primary bg-opacity-90 text-light-white text-sm hover:bg-opacity-100`}
-							/>
-							<Button
-								onClick={() => navigation(-1)}
-								text="Batal"
-								variant="bg-light-primary bg-opacity-30 text-light-primary text-sm hover:bg-opacity-50"
-							/>
-						</div>
-					</div>
-				</section>
+									<div>
+										<FormSelect
+											label="Kategori"
+											variant="w-full flex flex-col gap-1 text-sm"
+											name="typeAgenda"
+											labelVariant="text-xs"
+											onChange={handleChange}
+											value={values.typeAgenda}
+										>
+											<option
+												value=""
+												className="text-light-secondary"
+											>
+												Pilih jenis agenda
+											</option>
+											{typeAgenda.map((item, index) => (
+												<option
+													value={item.uuid}
+													className="text-secondary"
+													key={index}
+												>
+													{item.name}
+												</option>
+											))}
+										</FormSelect>
+										<ErrorMessage
+											name="typeAgenda"
+											component="div"
+											className="text-xs text-danger font-light"
+										/>
+									</div>
+								</div>
+								<FormTextarea
+									label="Deskripsi"
+									variant="w-1/2"
+									rows={4}
+									name="description"
+									onChange={handleChange}
+									value={values.description}
+								/>
+							</div>
+
+							<div className="mt-5 flex items-center justify-between">
+								<Button
+									onClick={(event) =>
+										handleOpenModal(event, values)
+									}
+									type="button"
+									text="Tambah Anggota"
+									variant="bg-light-primary bg-opacity-80 text-light-white text-sm hover:bg-opacity-100"
+								/>
+								<div className="flex items-center gap-2">
+									<Button
+										type="submit"
+										text="Simpan"
+										variant="bg-light-primary bg-opacity-90 text-light-white text-sm hover:bg-opacity-100"
+										isDisabled={isSubmitting}
+									/>
+									<Button
+										type="button"
+										onClick={() => navigation(-1)}
+										text="Batal"
+										variant="bg-light-primary bg-opacity-30 text-light-primary text-sm hover:bg-opacity-50"
+									/>
+								</div>
+							</div>
+						</Form>
+					)}
+				</Formik>
 			</div>
 		</>
 	);
