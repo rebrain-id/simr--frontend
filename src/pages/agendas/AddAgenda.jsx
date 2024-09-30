@@ -173,7 +173,7 @@ const AddAgenda = () => {
 							<div>
 								<FormInput
 									variant="w-full flex flex-col gap-1"
-									inputvariant="text-sm font-normal"
+									inputvariant="text-sm font-normal w-full"
 									labelvariant="text-xs"
 									label="Agenda"
 									name="title"
@@ -190,7 +190,7 @@ const AddAgenda = () => {
 								<div className="w-full">
 									<FormInput
 										variant="w-full flex flex-col gap-1"
-										inputvariant="text-sm font-normal"
+										inputvariant="text-sm font-normal w-full"
 										labelvariant="text-xs"
 										label="Dari"
 										type="datetime-local"
@@ -210,7 +210,7 @@ const AddAgenda = () => {
 								<div className="w-full">
 									<FormInput
 										variant="w-full flex flex-col gap-1"
-										inputvariant="text-sm font-normal"
+										inputvariant="text-sm font-normal w-full"
 										labelvariant="text-xs"
 										label="Sampai"
 										type="datetime-local"
@@ -233,7 +233,7 @@ const AddAgenda = () => {
 									<div>
 										<FormInput
 											variant="w-full flex flex-col gap-1"
-											inputvariant="text-sm font-normal"
+											inputvariant="text-sm font-normal w-full"
 											labelvariant="text-xs"
 											label="Tempat"
 											name="location"
