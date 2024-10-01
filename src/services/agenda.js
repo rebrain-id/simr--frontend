@@ -1,16 +1,17 @@
 import axios from 'axios';
 import { API_URL } from './config';
 import moment from 'moment';
+import { jwtDecode } from 'jwt-decode';
 
 const access_token = localStorage.getItem('access_token')
 	? localStorage.getItem('access_token')
 	: sessionStorage.getItem('access_token');
 
-export const getAgenda = async () => {
-	const username = sessionStorage.getItem('user');
-	const url = `${API_URL()}/v1/detail-agendas?username=${username}`;
-
-	console.log(access_token);
+export const getAgenda = async (data) => {
+	const username = jwtDecode(access_token).username;
+	const url = !data.typeAgenda
+		? `${API_URL()}/v1/detail-agendas/filter?username=${username}&start=${data.start}&finish=${data.finish}`
+		: `${API_URL()}/v1/detail-agendas?username=${username}&start=${data.start}&finish=${data.finish}&type-agenda=${data.typeAgenda}&skip=${data.skip}&take=${data.take}`;
 
 	try {
 		const response = await axios({
@@ -22,6 +23,27 @@ export const getAgenda = async () => {
 		});
 
 		return response.data.data;
+	} catch (error) {
+		console.log(error);
+		throw error;
+	}
+};
+
+export const getHistoryAgenda = async (data) => {
+	const username = jwtDecode(access_token).username;
+
+	const url = `${API_URL()}/v1/detail-agendas/filter?username=${username}&start=${data.start}&finish=${data.finish}&skip=${data.skip}&take=${data.take}`;
+
+	try {
+		const response = await axios({
+			method: 'get',
+			url: url,
+			headers: {
+				Authorization: `Bearer ${access_token}`,
+			},
+		});
+
+		return response.data;
 	} catch (error) {
 		console.log(error);
 		throw error;

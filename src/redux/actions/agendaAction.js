@@ -17,9 +17,11 @@ import {
 	deleteAgenda,
 	getAgenda,
 	getDetailAgenda,
+	getHistoryAgenda,
 	updateAgenda,
 } from '../../services/agenda';
 import { getTypeAgenda } from '../../services/typeAgenda';
+import { jwtDecode } from 'jwt-decode';
 
 export const fetchAgenda = createAsyncThunk(
 	'agenda/fetchAgenda',
@@ -85,19 +87,25 @@ export const fetchAgendaToday = createAsyncThunk(
 		try {
 			dispatch(fetchAgendaRequest());
 
-			const dataset = await getAgenda();
+			const start = moment()
+				.startOf('day')
+				.format('YYYY-MM-DD HH:mm:ss')
+				.replace(/:/g, '%3A');
+			const finish = moment()
+				.endOf('day')
+				.format('YYYY-MM-DD HH:mm:ss')
+				.replace(/:/g, '%3A');
+
+			const dataGetAgenda = {
+				start: start,
+				finish: finish,
+			};
+
+			const dataset = await getAgenda(dataGetAgenda);
 
 			const data = await convertAgendaData(dataset);
 
-			const today = moment().format('DD');
-			const thisMonth = moment().format('MM');
-
-			const filteredAgenda = data.filter((item) => {
-				return (
-					item.date.start == today && item.month.start == thisMonth
-				);
-			});
-			dispatch(fetchAgendaTodaySuccess(filteredAgenda));
+			dispatch(fetchAgendaTodaySuccess(data));
 		} catch (error) {
 			dispatch(fetchAgendaFailure(error));
 		}
@@ -107,9 +115,23 @@ export const fetchAgendaToday = createAsyncThunk(
 export const fetchAgendaThisMonth = createAsyncThunk(
 	'agenda/fetchAgendaThisMonth',
 	async ({ year, month }, { dispatch }) => {
+		const start = moment(`${year}-${month + 1}`, 'YYYY-MM')
+			.startOf('month')
+			.format('YYYY-MM-DD HH:mm:ss')
+			.replace(/:/g, '%3A');
+
+		const finish = moment(`${year}-${month + 1}`, 'YYYY-MM')
+			.endOf('month')
+			.format('YYYY-MM-DD HH:mm:ss')
+			.replace(/:/g, '%3A');
+
+		const dataGetAgenda = {
+			start: start,
+			finish: finish,
+		};
+
 		try {
-			dispatch(fetchAgendaRequest());
-			const dataset = await getAgenda();
+			const dataset = await getAgenda(dataGetAgenda);
 
 			const dataThisMonth = await convertAgendaData(dataset);
 
@@ -142,20 +164,33 @@ export const fetchAgendaThisMonth = createAsyncThunk(
 export const fetchAgendaByDate = createAsyncThunk(
 	'agenda/fetchAgendaByDate',
 	async ({ year, month, date }, { dispatch }) => {
+		const start = moment(
+			`${year}-${String(month).padStart(2, '0')}-${String(date).padStart(2, '0')}`,
+			'YYYY-MM-DD',
+		)
+			.startOf('day')
+			.format('YYYY-MM-DD HH:mm:ss')
+			.replace(/:/g, '%3A');
+
+		const finish = moment(
+			`${year}-${String(month).padStart(2, '0')}-${String(date).padStart(2, '0')}`,
+			'YYYY-MM-DD',
+		)
+			.endOf('day')
+			.format('YYYY-MM-DD HH:mm:ss')
+			.replace(/:/g, '%3A');
+
+		const dataGetAgenda = {
+			start: start,
+			finish: finish,
+		};
+
 		try {
-			dispatch(fetchAgendaRequest());
-			const dataset = await getAgenda();
+			const dataset = await getAgenda(dataGetAgenda);
 
 			const dataByDate = await convertAgendaData(dataset);
 
-			const filteredAgenda = dataByDate.filter(
-				(item) =>
-					item.date.start == String(date).padStart(2, '0') &&
-					item.month.start == String(month).padStart(2, '0') &&
-					item.year.start == year,
-			);
-
-			dispatch(fetchAgendaByDateSuccess(filteredAgenda));
+			dispatch(fetchAgendaByDateSuccess(dataByDate));
 		} catch (error) {
 			dispatch(fetchAgendaFailure(error.message));
 		}
@@ -164,103 +199,29 @@ export const fetchAgendaByDate = createAsyncThunk(
 
 export const fetchAgendaHistory = createAsyncThunk(
 	'agenda/fetchAgendaHistory',
-	async ({ dateFrom, dateTo, type, asc = false }, { dispatch }) => {
+	async ({ dateFrom, dateTo, type, skip, take }, { dispatch }) => {
+		// dispatch(fetchAgendaRequest());
+		const typeAgenda = await getTypeAgenda();
+
+		const dataGetAgenda = {
+			start: dateFrom,
+			finish: dateTo,
+			typeAgenda: type ? type : typeAgenda[0].uuid,
+			skip: skip ? skip : 1,
+			take: take ? take : 10,
+		};
+
+		console.log(dataGetAgenda);
+
 		try {
-			dispatch(fetchAgendaRequest());
+			let data = await getHistoryAgenda(dataGetAgenda);
 
-			let data = await getAgenda();
-			const typeAgenda = await getTypeAgenda();
-			const today = moment();
-			const convertDateFrom = dateFrom ? moment(dateFrom) : moment(0);
-			const convertDateTo = dateTo ? moment(dateTo) : today;
+			data = {
+				...data,
+				data: await convertAgendaData(data.data),
+			};
 
-			let splitedType = type.split(',');
-
-			data = data.map((item) => {
-				return {
-					...item,
-					typeAgenda: {
-						uuid: item.typeAgenda.uuid,
-						name: typeAgenda.find(
-							(type) => type.uuid == item.typeAgenda.uuid,
-						).name,
-					},
-				};
-			});
-
-			const filteredAgenda = data.filter((item) => {
-				const finishedDate = moment(item.finish);
-
-				if (dateFrom && dateTo) {
-					if (type && type == 'all') {
-						return (
-							finishedDate.isBetween(
-								convertDateFrom,
-								convertDateTo,
-								null,
-								'[)',
-							) && item.isDone === true
-						);
-					} else if (type) {
-						return (
-							finishedDate.isBetween(
-								convertDateFrom,
-								convertDateTo,
-								null,
-								'[)',
-							) &&
-							splitedType.includes(item.typeAgenda.name) &&
-							item.isDone === true
-						);
-					} else {
-						return (
-							finishedDate.isBetween(
-								convertDateFrom,
-								convertDateTo,
-								null,
-								'[)',
-							) &&
-							item.typeAgenda.name == typeAgenda[0].name &&
-							item.isDone === true
-						);
-					}
-				} else {
-					if (type && type == 'all') {
-						return (
-							finishedDate.isBefore(convertDateTo) &&
-							item.isDone === true
-						);
-					} else if (type) {
-						return (
-							finishedDate.isBefore(convertDateTo) &&
-							splitedType.includes(item.typeAgenda.name) &&
-							item.isDone === true
-						);
-					} else {
-						return (
-							finishedDate.isBefore(convertDateTo) &&
-							item.typeAgenda.name == typeAgenda[0].name &&
-							item.isDone === true
-						);
-					}
-				}
-			});
-
-			const sortedAgenda = filteredAgenda.sort((a, b) => {
-				const dateA = moment.utc(a.finish);
-				const dateB = moment.utc(b.finish);
-				if (asc) {
-					return dateA - dateB;
-				} else {
-					return dateB - dateA;
-				}
-			});
-
-			dispatch(
-				fetchAgendaHistorySuccess(
-					await convertAgendaData(sortedAgenda),
-				),
-			);
+			dispatch(fetchAgendaHistorySuccess(data));
 		} catch (error) {
 			dispatch(fetchAgendaFailure(error.message));
 		}
@@ -328,6 +289,11 @@ export const deleteDetailAgenda = createAsyncThunk(
 
 const convertAgendaData = async (data) => {
 	const typeAgendaData = await getTypeAgenda();
+	const access_token = localStorage.getItem('access_token')
+		? localStorage.getItem('access_token')
+		: sessionStorage.getItem('access_token');
+
+	const username = jwtDecode(access_token).username;
 
 	return data.map((item) => {
 		const startTime = moment.utc(item.start);
@@ -357,6 +323,7 @@ const convertAgendaData = async (data) => {
 				start: startTime.format('YYYY'),
 				finish: finishTime.format('YYYY'),
 			},
+			isAuthor: item.author.username === username ? true : false,
 		};
 	});
 };
