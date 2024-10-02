@@ -38,6 +38,17 @@ export const refreshTokenRequest = async () => {
 			},
 		});
 
+		sessionStorage.setItem('access_token', response.data.data.access_token);
+		localStorage.setItem('refresh_token', response.data.data.refresh_token)
+			? localStorage.setItem(
+					'refresh_token',
+					response.data.data.refresh_token,
+				)
+			: sessionStorage.setItem(
+					'refresh_token',
+					response.data.data.refresh_token,
+				);
+
 		return response;
 	} catch (error) {
 		console.log(error);
