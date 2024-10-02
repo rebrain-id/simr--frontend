@@ -202,7 +202,7 @@ const DetailAgendaSidebar = (props) => {
 				<section className="flex flex-col px-8 gap-3 mt-5">
 					<FormInput
 						variant="w-full flex flex-col gap-1"
-						inputvariant="text-sm font-normal"
+						inputvariant="text-sm font-normal w-full"
 						labelvariant="text-xs"
 						label="Agenda"
 						value={inputValue.title}
@@ -211,7 +211,7 @@ const DetailAgendaSidebar = (props) => {
 					/>
 					<FormInput
 						variant="w-full flex flex-col gap-1"
-						inputvariant="text-sm font-normal"
+						inputvariant="text-sm font-normal w-full"
 						labelvariant="text-xs"
 						label="Dari"
 						type="datetime-local"
@@ -223,7 +223,7 @@ const DetailAgendaSidebar = (props) => {
 					/>
 					<FormInput
 						variant="w-full flex flex-col gap-1"
-						inputvariant="text-sm font-normal"
+						inputvariant="text-sm font-normal w-full"
 						labelvariant="text-xs"
 						label="Sampai"
 						type="datetime-local"
@@ -235,7 +235,7 @@ const DetailAgendaSidebar = (props) => {
 					/>
 					<FormInput
 						variant="w-full flex flex-col gap-1"
-						inputvariant="text-sm font-normal"
+						inputvariant="text-sm font-normal w-full"
 						labelvariant="text-xs"
 						label="Tempat"
 						value={inputValue.location}
@@ -310,7 +310,7 @@ const DetailAgendaSidebar = (props) => {
 					) : (
 						<FormInput
 							variant="w-full flex flex-col gap-1"
-							inputvariant="text-sm font-normal"
+							inputvariant="text-sm font-normal w-full"
 							labelvariant="text-xs"
 							label="Notulensi"
 							type="file"
@@ -333,7 +333,7 @@ const DetailAgendaSidebar = (props) => {
 					) : (
 						<FormInput
 							variant="w-full flex flex-col gap-1"
-							inputvariant="text-sm font-normal"
+							inputvariant="text-sm font-normal w-full"
 							labelvariant="text-xs"
 							label="Absensi"
 							type="file"
