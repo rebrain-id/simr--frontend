@@ -7,8 +7,6 @@ import { fetchAgendaToday } from '../redux/actions/agendaAction';
 import moment from 'moment';
 
 const Dashboard = () => {
-	const username = sessionStorage.getItem('user');
-
 	const monthList = [
 		'Januari',
 		'Februari',
@@ -36,18 +34,14 @@ const Dashboard = () => {
 		const agendaTimeStart = moment(item.start).subtract(7, 'hours');
 		const today = moment();
 
-		return (
-			item.author.username == username &&
-			agendaTimeStart.isSameOrAfter(today, 'minute')
-		);
+		return item.isAuthor && agendaTimeStart.isSameOrAfter(today, 'minute');
 	});
 
 	const agendaExternal = agenda.filter((item) => {
 		const agendaTimeStart = moment(item.start).subtract(7, 'hours');
 		const today = moment();
 
-		item.author.username != username &&
-			agendaTimeStart.isSameOrAfter(today, 'minute');
+		!item.isAuthor && agendaTimeStart.isSameOrAfter(today, 'minute');
 	});
 	const sortedAgenda = [...agenda].sort((a, b) => {
 		const timeA = moment(a.time.start, 'HH:mm');
@@ -122,11 +116,7 @@ const Dashboard = () => {
 								title={item.title}
 								date={`${item.date.start} ${monthList[item.month.start - 1]} ${item.year.start}`}
 								time={`${item.time.start} - ${item.time.finish} WIB`}
-								isOwner={
-									item.author.username == username
-										? true
-										: false
-								}
+								isOwner={item.isAuthor}
 								room={item.location}
 							/>
 						))

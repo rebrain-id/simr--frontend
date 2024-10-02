@@ -1,7 +1,7 @@
 import ListAgenda from '../ListAgenda';
 
 const CalendarList = (props) => {
-	const { month, agendaThisMonth, username } = props;
+	const { month, agendaThisMonth } = props;
 
 	const monthList = [
 		'Januari',
@@ -46,11 +46,7 @@ const CalendarList = (props) => {
 										data={item}
 										title={item.title}
 										time={`${item.time.start} - ${item.time.finish} WIB`}
-										isOwner={
-											item.author.username === username
-												? true
-												: false
-										}
+										isOwner={item.isAuthor}
 										room={item.location}
 									/>
 								))}

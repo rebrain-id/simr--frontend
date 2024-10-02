@@ -13,9 +13,14 @@ import Alert from '../../elements/Alert';
 import { ErrorMessage, Form, Formik } from 'formik';
 import * as Yup from 'yup';
 import { fetchDepartments } from '../../redux/actions/departmentAction';
+import { jwtDecode } from 'jwt-decode';
 
 const AddAgenda = () => {
-	const username = sessionStorage.getItem('user');
+	const access_token = localStorage.getItem('access_token')
+		? localStorage.getItem('access_token')
+		: sessionStorage.getItem('access_token');
+	const username = jwtDecode(access_token).username;
+
 	const navigation = useNavigate();
 	const dispatch = useDispatch();
 	const typeAgenda = useSelector((state) => state.typeAgenda.typeAgenda);
