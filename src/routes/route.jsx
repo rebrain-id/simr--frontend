@@ -7,6 +7,7 @@ import Department from '../pages/Department';
 import Lecturer from '../pages/Lecturer';
 import AgendaByDate from '../pages/agendas/AgendaByDate';
 import AddAgenda from '../pages/agendas/AddAgenda';
+import NotFound from '../pages/errors/404';
 
 export const router = createBrowserRouter([
 	{
@@ -50,5 +51,9 @@ export const router = createBrowserRouter([
 	{
 		path: '/login',
 		element: <Login />,
+	},
+	{
+		path: '*',
+		element: <NotFound />,
 	},
 ]);
