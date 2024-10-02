@@ -42,7 +42,6 @@ export const fetchAgenda = createAsyncThunk(
 
 export const createAgenda = createAsyncThunk(
 	'agenda/createAgenda',
-
 	async ({ data }, { dispatch }) => {
 		try {
 			dispatch(fetchAgendaRequest());
@@ -62,8 +61,7 @@ export const createAgenda = createAsyncThunk(
 
 export const checkMemberAgenda = createAsyncThunk(
 	'agenda/checkMemberAgenda',
-
-	async ({ departmentsUuid, start, finish }, { rejectWithValue }) => {
+	async ({ departmentsUuid, start, finish }, { dispatch }) => {
 		try {
 			const data = {
 				departmentsUuid: departmentsUuid,
@@ -76,7 +74,7 @@ export const checkMemberAgenda = createAsyncThunk(
 			return response;
 		} catch (error) {
 			console.log(error);
-			rejectWithValue(error);
+			dispatch(fetchAgendaFailure(error));
 		}
 	},
 );

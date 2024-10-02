@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import {
+	checkMemberAgenda,
 	createAgenda,
 	deleteDetailAgenda,
 	updateDetailAgenda,
@@ -74,6 +75,16 @@ const agendaSlice = createSlice({
 	},
 	extraReducers: (builder) => {
 		builder
+			.addCase(checkMemberAgenda.fulfilled, (state, action) => {
+				state.loading = false;
+				state.agenda.push(action.payload.data);
+				state.message = action.payload;
+			})
+			.addCase(checkMemberAgenda.rejected, (state, action) => {
+				state.loading = false;
+				state.error =
+					action.payload || 'terjadi kesalahan tidak terduga';
+			})
 			.addCase(createAgenda.fulfilled, (state, action) => {
 				state.loading = false;
 				state.agenda.push(action.payload.data);

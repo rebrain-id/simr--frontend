@@ -125,12 +125,12 @@ export const updateAgenda = async (uuid, data) => {
 	form.append('absent', data.attendees);
 	form.append('notulen', data.notulens);
 	form.append('isDone', data.isDone);
-	// form.append('typeAgendaUuid', data.typeAgenda);
-	// if (Array.isArray(data.department)) {
-	// 	data.department.forEach((deptUuid) => {
-	// 		form.append('departmentsUuid[]', deptUuid);
-	// 	});
-	// }
+	form.append('typeAgendaUuid', data.typeAgenda);
+	if (Array.isArray(data.department)) {
+		data.department.forEach((deptUuid) => {
+			form.append('departmentsUuid[]', deptUuid);
+		});
+	}
 
 	form.forEach((value, key) => {
 		console.log(`${key}: ${value}`);
