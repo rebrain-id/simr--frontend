@@ -6,12 +6,10 @@ import Button from '../elements/Button';
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { checkMemberAgenda } from '../redux/actions/agendaAction';
-import moment from 'moment';
 
 const ModalAddAnggota = (props) => {
 	const { onClick, dateFrom, dateTo, departments } = props;
 	const dispatch = useDispatch();
-	console.log(departments);
 
 	const [selectedDepartments, setSelectedDepartments] = useState([]);
 	const [departmentWithConflict, setDepartmentWithConflict] = useState([]);
@@ -50,42 +48,33 @@ const ModalAddAnggota = (props) => {
 	};
 
 	const handleCheckMemberAgenda = async () => {
-		if (selectedDepartments.length) {
-			try {
-				const response = await dispatch(
-					checkMemberAgenda({
-						departmentsUuid: selectedDepartments,
-						start: moment(dateFrom).format('YYYY-MM-DD HH:mm:ss'),
-						finish: moment(dateTo).format('YYYY-MM-DD HH:mm:ss'),
-					}),
+		const response = await dispatch(
+			checkMemberAgenda({
+				departmentsUuid: selectedDepartments,
+				start: dateFrom,
+				finish: dateTo,
+			}),
+		);
+
+		console.log(response);
+
+		if (response && response.payload.statusCode === 200) {
+			const conflictData = response.payload.data;
+			setCheckConflict(true);
+
+			const updateDepartments = departments.map((dept) => {
+				const conflictDepartment = conflictData.filter(
+					(conflict) => conflict.department.uuid === dept.uuid,
 				);
 
-				if (response && response.payload.statusCode === 200) {
-					const conflictData = response.payload.data;
-					setCheckConflict(true);
+				return {
+					...dept,
+					conflict:
+						conflictDepartment.length > 0 ? conflictDepartment : [],
+				};
+			});
 
-					const updateDepartments = departments.map((dept) => {
-						const conflictDepartment = conflictData.filter(
-							(conflict) =>
-								conflict.department.uuid === dept.uuid,
-						);
-
-						return {
-							...dept,
-							conflict:
-								conflictDepartment.length > 0
-									? conflictDepartment
-									: [],
-						};
-					});
-
-					setDepartmentWithConflict(updateDepartments);
-				} else {
-					console.error('Failed to check agenda:', response);
-				}
-			} catch (error) {
-				console.error('Error checking agenda:', error);
-			}
+			setDepartmentWithConflict(updateDepartments);
 		}
 	};
 
@@ -110,7 +99,8 @@ const ModalAddAnggota = (props) => {
 		}
 	};
 
-	console.log(dateFrom, dateTo, selectedDepartments);
+	console.log(selectedDepartments);
+	console.log(departmentWithConflict);
 
 	return (
 		<div
@@ -127,7 +117,7 @@ const ModalAddAnggota = (props) => {
 					/>
 				</div>
 
-				<div>
+				<form>
 					<FormCheckbox variant="w-full">
 						<FormInputCheckbox
 							text="Pilih Semua"
@@ -180,7 +170,7 @@ const ModalAddAnggota = (props) => {
 							disabled={!checkConflict}
 						/>
 					</div>
-				</div>
+				</form>
 			</div>
 		</div>
 	);
