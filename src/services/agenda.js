@@ -9,9 +9,7 @@ const access_token = localStorage.getItem('access_token')
 
 export const getAgenda = async (data) => {
 	const username = jwtDecode(access_token).username;
-	const url = !data.typeAgenda
-		? `${API_URL()}/v1/detail-agendas/filter?username=${username}&start=${data.start}&finish=${data.finish}`
-		: `${API_URL()}/v1/detail-agendas?username=${username}&start=${data.start}&finish=${data.finish}&type-agenda=${data.typeAgenda}&skip=${data.skip}&take=${data.take}`;
+	const url = `${API_URL()}/v1/detail-agendas/filter?username=${username}&start=${data.start}&finish=${data.finish}`;
 
 	try {
 		const response = await axios({
