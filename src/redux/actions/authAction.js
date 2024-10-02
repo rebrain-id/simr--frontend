@@ -35,19 +35,11 @@ export const postLogin = (data) => {
 			const response = await loginRequest(requestData);
 
 			if (data.rememberme) {
-				sessionStorage.setItem(
-					'access_token',
-					response.data.access_token,
-				);
 				localStorage.setItem(
 					'refresh_token',
 					response.data.refresh_token,
 				);
 			} else {
-				sessionStorage.setItem(
-					'access_token',
-					response.data.access_token,
-				);
 				sessionStorage.setItem(
 					'refresh_token',
 					response.data.refresh_token,

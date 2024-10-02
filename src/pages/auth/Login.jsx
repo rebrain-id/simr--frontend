@@ -5,13 +5,11 @@ import { useFormik } from 'formik';
 import FormInputCheckbox from '../../elements/forms/FormInputCheckbox';
 import { useDispatch, useSelector } from 'react-redux';
 import { postLogin } from '../../redux/actions/authAction';
-import { useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
 
 const Login = () => {
 	const loading = useSelector((state) => state.auth.loading);
 	const dispatch = useDispatch();
-	const navigate = useNavigate();
 	const formik = useFormik({
 		initialValues: {
 			username: '',
@@ -28,7 +26,7 @@ const Login = () => {
 			const response = await dispatch(postLogin(values));
 
 			if (response.statusCode === 200) {
-				navigate('/');
+				window.location.href = '/';
 			}
 		},
 	});

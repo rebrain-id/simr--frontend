@@ -11,7 +11,34 @@ export const loginRequest = async (data) => {
 			data: data,
 		});
 
+		sessionStorage.setItem('access_token', response.data.data.access_token);
+
 		return response.data;
+	} catch (error) {
+		console.log(error);
+	}
+};
+
+export const refreshTokenRequest = async () => {
+	const url = `${API_URL()}/v1/auth/get-access`;
+	const refreshToken =
+		localStorage.getItem('refresh_token') ||
+		sessionStorage.getItem('refresh_token');
+	const accessToken = sessionStorage.getItem('access_token');
+
+	try {
+		const response = await axios({
+			method: 'post',
+			url: url,
+			body: {
+				refreshToken: refreshToken,
+			},
+			headers: {
+				Authorization: `Bearer ${accessToken}`,
+			},
+		});
+
+		return response;
 	} catch (error) {
 		console.log(error);
 	}
