@@ -18,6 +18,24 @@ export const getLecturer = async () => {
 	return response;
 }
 
+export const getLecturerByDepartment = async (department) => {
+	const url = `${API_URL()}/v1/lecturer?name${department}`;
+
+	const response = await axios({
+		method: 'get',
+		url: url
+	})
+		.then((res) => {
+			return res.data.data
+		})
+		.catch((err) => {
+			console.log(err);
+			throw err;
+		})
+
+	return response
+}
+
 export const postLecturer = async (body) => {
 	const url = `${API_URL()}/v1/lecturer`;
 
