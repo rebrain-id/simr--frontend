@@ -10,7 +10,7 @@ const Alert = (props) => {
 
 	return (
 		<div
-			className={`fixed max-w-md top-10 right-10 z-[120] border ${status === 'success' ? 'bg-[#cfffb5] border-success' : 'bg-[#ffadad] border-danger'} px-5 py-2 rounded text-sm font-normal flex items-center gap-5`}
+			className={`fixed max-w-md top-10 right-10 z-[120] ${status === 'success' ? 'bg-[#e9ffdd] border-success' : 'bg-[#fff7f7]  text-danger'} px-5 py-2 rounded text-xs flex items-center gap-5`}
 		>
 			<div className="flex items-center gap-3">
 				{status === 'success' ? (
@@ -31,7 +31,7 @@ const Alert = (props) => {
 				className="cursor-pointer flex items-center justify-center"
 				onClick={onClick}
 			>
-				<FontAwesomeIcon icon={faXmark} className="h-4 w-4 " />
+				<FontAwesomeIcon icon={faXmark} className="h-4 w-4" />
 			</div>
 		</div>
 	);

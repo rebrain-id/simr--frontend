@@ -5,22 +5,20 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import FormCheckbox from '../elements/forms/FormCheckbox';
 import FormInputCheckbox from '../elements/forms/FormInputCheckbox';
+import moment from 'moment';
 
 const FilterDropdown = (props) => {
-	let { typeAgenda, typeAgendas } = props;
+	let { typeAgenda, typeAgendas, dateFrom, dateTo } = props;
 	const navigate = useNavigate();
 
 	typeAgenda = typeAgenda ? typeAgenda.split(',') : [];
 
 	const [inputValue, setInputValue] = useState({
-		from: '',
-		to: '',
-		type:
-			typeAgenda && typeAgenda == 'all'
-				? typeAgendas.map((item) => item.name)
-				: typeAgenda.length > 1
-					? typeAgenda
-					: [typeAgendas[0].name],
+		from: dateFrom ? moment(dateFrom).format('YYYY-MM-DD') : '2020-01-01',
+		to: dateTo
+			? moment(dateTo).format('YYYY-MM-DD')
+			: moment().format('YYYY-MM-DD'),
+		type: typeAgenda.length === 0 ? typeAgendas[0].uuid : typeAgenda,
 	});
 
 	const handleInputValue = (e) => {
@@ -44,22 +42,24 @@ const FilterDropdown = (props) => {
 	return (
 		<div className="p-3 bg-white rounded border drop-shadow w-1/8 absolute z-30">
 			<FormInput
-				inputvariant="text-sm font-normal mb-3 w-2/3 "
+				inputvariant="text-sm font-normal mb-3 w-full"
 				labelvariant="text-xs w-1/3"
 				variant="flex justify-center items-center w-80"
 				label="Dari"
 				type="date"
 				name="from"
 				onChange={handleInputValue}
+				value={inputValue.from}
 			/>
 			<FormInput
-				inputvariant="text-sm font-normal mb-3 w-2/3"
+				inputvariant="text-sm font-normal mb-3 w-full"
 				labelvariant="text-xs w-1/3"
 				variant="flex justify-center items-center w-80"
 				label="Sampai"
 				type="date"
 				name="to"
 				onChange={handleInputValue}
+				value={inputValue.to}
 			/>
 			<FormCheckbox>
 				{typeAgendas &&
@@ -69,10 +69,10 @@ const FilterDropdown = (props) => {
 							text={item.name}
 							variant={'px-0'}
 							checkboxVariant={'w-3 h-3'}
-							labelVariant={'text-sm font-normal -ms-1'}
-							value={item.name}
-							isSelected={inputValue.type.includes(item.name)}
+							labelVariant={'text-sm font-normal ms-1'}
+							value={item.uuid}
 							onChange={handleInputValue}
+							isSelected={inputValue.type.includes(item.uuid)}
 							name="type"
 						/>
 					))}

@@ -1,7 +1,7 @@
 import { Outlet } from 'react-router-dom';
 import Sidebar from '../components/Sidebar';
 import Header from '../components/Header';
-import Footer from '../elements/Footer';
+// import Footer from '../elements/Footer';
 import DetailAgendaSidebar from '../components/DetailAgendaSidebar';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
@@ -10,12 +10,6 @@ import LoadingScreen from '../elements/LoadingScreen';
 import Alert from '../elements/Alert';
 
 const MainLayout = () => {
-	const username = sessionStorage.getItem('user') || null;
-
-	if (!username) {
-		sessionStorage.setItem('user', 'informatika');
-	}
-
 	const [showLoading, setShowLoading] = useState(false);
 	const [showSidebarDialogue, setShowSidebarDialogue] = useState(false);
 	const [showAlert, setShowAlert] = useState(false);
@@ -28,7 +22,6 @@ const MainLayout = () => {
 	const loadingDepartment = useSelector(
 		(state) => state.fetchDepartments.loading,
 	);
-	const [dataIsFetched, setDataIsFetched] = useState(false);
 	const dispatch = useDispatch();
 
 	useEffect(() => {
@@ -88,7 +81,7 @@ const MainLayout = () => {
 
 			<Sidebar />
 
-			<aside className="w-full px-10">
+			<aside className="w-full px-10 pb-20">
 				{showSidebarDialogue && (
 					<DetailAgendaSidebar
 						onClick={() => dispatch(closeDetailAgenda())}
@@ -101,7 +94,7 @@ const MainLayout = () => {
 				)}
 				<Header />
 				<Outlet />
-				<Footer />
+				{/* <Footer /> */}
 			</aside>
 
 			{showLoading && (
