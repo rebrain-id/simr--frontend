@@ -21,11 +21,11 @@ const AgendaHistory = () => {
 		dispatch(fetchTypeAgenda());
 	}, [dispatch]);
 
-	const getDateFrom = searchParam.get('from') || null;
-	const getDateTo = searchParam.get('to') || null;
+	const getDateFrom = searchParam.get('from') || 'null';
+	const getDateTo = searchParam.get('to') || 'null';
 	const getType = searchParam.get('type') || null;
-	const getSkip = searchParam.get('skip') || 1;
-	const getTake = 2;
+	const getSkip = searchParam.get('skip') || 0;
+	const getTake = 3;
 
 	console.log(typeof getDateFrom);
 

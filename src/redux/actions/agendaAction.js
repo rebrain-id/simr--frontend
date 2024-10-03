@@ -205,7 +205,7 @@ export const fetchAgendaHistory = createAsyncThunk(
 			start: dateFrom,
 			finish: dateTo,
 			typeAgenda: type ? type : typeAgenda[0].uuid,
-			skip: skip ? skip : 1,
+			skip: !skip || skip === 1 ? 0 : (skip - 1) * take,
 			take: take ? take : 10,
 		};
 

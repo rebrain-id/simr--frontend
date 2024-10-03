@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 const Pagination = ({ page = 1, link, totalData = 10, itemPerPage = 10 }) => {
 	const navigate = useNavigate();
 	const totalPage = Math.ceil(totalData / itemPerPage);
-	const [currentPage, setCurrentPage] = useState(Number(page));
+	const [currentPage, setCurrentPage] = useState(1);
 
 	const nextPage = () => {
 		if (currentPage < totalPage) {
