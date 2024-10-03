@@ -8,6 +8,7 @@ import Lecturer from '../pages/Lecturer';
 import AgendaByDate from '../pages/agendas/AgendaByDate';
 import AddAgenda from '../pages/agendas/AddAgenda';
 import NotFound from '../pages/errors/404';
+import ChangePassword from '../pages/auth/ChangePassword';
 
 export const router = createBrowserRouter([
 	{
@@ -45,6 +46,10 @@ export const router = createBrowserRouter([
 			{
 				path: 'dosen',
 				element: <Lecturer />,
+			},
+			{
+				path: 'change-password',
+				element: <ChangePassword />,
 			},
 		],
 	},

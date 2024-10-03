@@ -19,6 +19,31 @@ export const loginRequest = async (data) => {
 	}
 };
 
+export const updateUserRequest = (username, data) => {
+	const access_token = sessionStorage.getItem('access_token');
+	const url = `${API_URL()}/v1/user/${username}`;
+
+	const dataUser = {
+		username: username,
+		oldPassword: data.oldPassword,
+		newPassword: data.newPassword,
+	};
+
+	try {
+		const response = axios({
+			method: 'patch',
+			url: url,
+			data: dataUser,
+			headers: {
+				Authorization: `Bearer ${access_token}`,
+			},
+		});
+		return response;
+	} catch (error) {
+		console.log(error);
+	}
+};
+
 export const refreshTokenRequest = async () => {
 	const url = `${API_URL()}/v1/auth/get-access`;
 	const refreshToken =

@@ -1,8 +1,13 @@
 import { jwtDecode } from 'jwt-decode';
-import { loginRequest, logoutRequest } from '../../services/auth';
+import {
+	loginRequest,
+	logoutRequest,
+	updateUserRequest,
+} from '../../services/auth';
 
 export const FETCH_AUTH_REQUEST = 'FETCH_AUTH_REQUEST';
 export const FETCH_LOGIN_SUCCESS = 'FETCH_LOGIN_SUCCESS';
+export const FETCH_UPDATE_SUCCESS = 'FETCH_UPDATE_SUCCESS';
 export const FETCH_LOGOUT_SUCCESS = 'FETCH_LOGOUT_SUCCESS';
 export const FETCH_AUTH_FAILURE = 'FETCH_AUTH_FAILURE';
 
@@ -12,6 +17,10 @@ export const fetchAuthRequest = () => ({
 
 export const fetchLoginSuccess = () => ({
 	type: FETCH_LOGIN_SUCCESS,
+});
+
+export const fetchUpdateUserSuccess = () => ({
+	type: FETCH_UPDATE_SUCCESS,
 });
 
 export const fetchLogoutSuccess = () => ({
@@ -45,6 +54,23 @@ export const postLogin = (data) => {
 					response.data.refresh_token,
 				);
 			}
+
+			return response;
+		} catch (error) {
+			console.log(error);
+		}
+	};
+};
+
+export const updateUser = (data) => {
+	const access_token = sessionStorage.getItem('access_token');
+	const username = jwtDecode(access_token).username;
+
+	return async (dispatch) => {
+		dispatch(fetchAuthRequest());
+
+		try {
+			const response = await updateUserRequest(username, data);
 
 			return response;
 		} catch (error) {

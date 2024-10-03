@@ -2,8 +2,15 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
 
 const NavLink = (props) => {
-	const { icon, title, to, variant, textVariant, iconVariant, isVisible } =
-		props;
+	const {
+		icon,
+		title,
+		to,
+		variant,
+		textVariant,
+		iconVariant,
+		isVisible = true,
+	} = props;
 
 	return (
 		<Link
