@@ -13,8 +13,6 @@ import { useSearchParams } from 'react-router-dom';
 import AgendaHistory from './AgendaHistory';
 
 const Calendar = () => {
-	const username = sessionStorage.getItem('user');
-
 	const [searchParam] = useSearchParams();
 	const menu = searchParam.get('menu');
 	const getYear = new Date().getFullYear();
@@ -27,8 +25,10 @@ const Calendar = () => {
 	const [inputYear, setInputYear] = useState(getYear);
 	const dispatch = useDispatch();
 
-	const agenda = useSelector((state) => state.agenda.agendaThisMonth);
-	const isUpdated = useSelector((state) => state.agenda.isUpdated);
+	const { agendaThisMonth, isUpdated, loading } = useSelector(
+		(state) => state.agenda,
+	);
+	const agenda = agendaThisMonth;
 
 	useEffect(() => {
 		setInputMonth(optionValue.month);
@@ -169,20 +169,23 @@ const Calendar = () => {
 						</div>
 					</div>
 
-					{menu === 'calendar' ? (
+					{loading ? (
+						<p className="text-center text-xs text-light-secondary mt-5">
+							Sedang memuat data riwayat agenda
+						</p>
+					) : menu === 'calendar' ? (
 						<CalendarGrid
 							month={optionValue.month}
 							year={optionValue.year}
 							thisYear={getYear}
 							thisMonth={getMonth}
 							agendas={agenda}
-							username={username}
 						/>
 					) : menu === 'list' ? (
 						<CalendarList
 							month={optionValue.month}
 							agendaThisMonth={agenda}
-							username={username}
+							isLoading={loading}
 						/>
 					) : null}
 				</>

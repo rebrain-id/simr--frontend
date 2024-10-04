@@ -15,8 +15,9 @@ const AgendaByDate = () => {
 	const [searchParam] = useSearchParams();
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
-	let agendaByDate = useSelector((state) => state.agenda.agendaByDate);
-	let isUpdated = useSelector((state) => state.agenda.isUpdated);
+	let { agendaByDate, isUpdated, loading } = useSelector(
+		(state) => state.agenda,
+	);
 
 	const getYear = searchParam.get('year');
 	const getMonth = searchParam.get('month');
@@ -110,7 +111,11 @@ const AgendaByDate = () => {
 				</div>
 
 				<div className="w-full flex flex-col gap-3">
-					{agendaByDate && agendaByDate.length > 0 ? (
+					{loading ? (
+						<p className="text-center text-xs text-light-secondary mt-5">
+							Sedang memuat data riwayat agenda
+						</p>
+					) : agendaByDate && agendaByDate.length > 0 ? (
 						agendaByDate.map((item, itemIndex) => (
 							<ListAgenda
 								key={itemIndex}

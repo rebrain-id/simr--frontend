@@ -113,6 +113,8 @@ export const fetchAgendaToday = createAsyncThunk(
 export const fetchAgendaThisMonth = createAsyncThunk(
 	'agenda/fetchAgendaThisMonth',
 	async ({ year, month }, { dispatch }) => {
+		dispatch(fetchAgendaRequest());
+
 		const start = moment(`${year}-${month + 1}`, 'YYYY-MM')
 			.startOf('month')
 			.format('YYYY-MM-DD HH:mm:ss')
