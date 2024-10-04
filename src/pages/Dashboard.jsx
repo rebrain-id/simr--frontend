@@ -51,22 +51,30 @@ const Dashboard = () => {
 		return timeA - timeB;
 	});
 
-	const [showLoading, setShowLoading] = useState(false);
+	const [showLoading, setShowLoading] = useState(true);
+	const [initialLoading, setInitialLoading] = useState(true);
 
 	useEffect(() => {
-		if (loading) {
-			setShowLoading(true);
-		} else {
+		if (!loading) {
 			const timeout = setTimeout(() => {
 				setShowLoading(false);
 			}, 1000);
+			setInitialLoading(false);
 			return () => clearTimeout(timeout);
+		} else {
+			setShowLoading(true);
 		}
 	}, [loading]);
 
 	return (
 		<>
-			{showLoading && <LoadingScreen loading={loading} />}
+			{showLoading && (
+				<LoadingScreen
+					loading={loading}
+					showLoading={showLoading}
+					initialLoad={initialLoading}
+				/>
+			)}
 
 			<header className="bg-white px-10 py-5 rounded drop-shadow-bottom">
 				<h1 className="text-base font-semibold">Informasi Singkat</h1>
