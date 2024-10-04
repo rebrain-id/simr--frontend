@@ -198,7 +198,7 @@ export const fetchAgendaByDate = createAsyncThunk(
 export const fetchAgendaHistory = createAsyncThunk(
 	'agenda/fetchAgendaHistory',
 	async ({ dateFrom, dateTo, type, skip, take }, { dispatch }) => {
-		// dispatch(fetchAgendaRequest());
+		dispatch(fetchAgendaRequest());
 		const typeAgenda = await getTypeAgenda();
 
 		const dataGetAgenda = {
@@ -208,8 +208,6 @@ export const fetchAgendaHistory = createAsyncThunk(
 			skip: !skip || skip === 1 ? 0 : (skip - 1) * take,
 			take: take ? take : 10,
 		};
-
-		console.log(dataGetAgenda);
 
 		try {
 			let data = await getHistoryAgenda(dataGetAgenda);

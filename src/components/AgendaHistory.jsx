@@ -14,7 +14,9 @@ const AgendaHistory = () => {
 	const [openFilter, setOpenFilter] = useState(false);
 	const [searchParam] = useSearchParams();
 	const dispatch = useDispatch();
-	let { agendaHistory, isUpdated } = useSelector((state) => state.agenda);
+	let { agendaHistory, isUpdated, loading } = useSelector(
+		(state) => state.agenda,
+	);
 	const typeAgendas = useSelector((state) => state.typeAgenda.typeAgenda);
 
 	useEffect(() => {
@@ -26,8 +28,6 @@ const AgendaHistory = () => {
 	const getType = searchParam.get('type') || null;
 	const getSkip = searchParam.get('skip') || 0;
 	const getTake = 3;
-
-	console.log(typeof getDateFrom);
 
 	useEffect(() => {
 		dispatch(
@@ -109,11 +109,11 @@ const AgendaHistory = () => {
 				/>
 			)}
 
-			{!agendaHistory?.data?.length ? (
+			{loading ? (
 				<p className="text-center text-xs text-light-secondary mt-5">
-					Tidak ada riwayat agenda
+					Sedang memuat data riwayat agenda
 				</p>
-			) : (
+			) : agendaHistory.data?.length ? (
 				<div className="mt-5 flex flex-col gap-3">
 					{sortedAgendaHistory.map((item, itemIndex) => (
 						<ListAgenda
@@ -127,6 +127,10 @@ const AgendaHistory = () => {
 						/>
 					))}
 				</div>
+			) : (
+				<p className="text-center text-xs text-light-secondary mt-5">
+					Tidak ada riwayat agenda
+				</p>
 			)}
 		</div>
 	);
