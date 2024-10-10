@@ -1,12 +1,18 @@
 import axios from 'axios';
 import { API_URL } from './config';
 
+const access_token = sessionStorage.getItem('access_token')
+
 export const getLecturer = async () => {
 	const url = `${API_URL()}/v1/lecturer`;
 
     const response = await axios({
 		method: 'get',
 		url: url,
+		headers: {
+			Authorization:
+				`Bearer ${access_token}`,
+		}
 	})
 		.then((res) => {
 			return res.data.data;
@@ -23,7 +29,11 @@ export const getLecturerByDepartment = async (department) => {
 
 	const response = await axios({
 		method: 'get',
-		url: url
+		url: url,
+		headers: {
+			Authorization:
+				`Bearer ${access_token}`,
+		}
 	})
 		.then((res) => {
 			return res.data.data
@@ -43,6 +53,10 @@ export const postLecturer = async (body) => {
 		method: 'post',
 		url: url,
 		data: body,
+		headers: {
+			Authorization:
+				`Bearer ${access_token}`,
+		}
 	})
 		.then((res) => {
 			return res.data;
@@ -62,6 +76,10 @@ export const updateLecturer = async (uuid, body) => {
 		method: 'patch',
 		url: url,
 		data: body,
+		headers: {
+			Authorization:
+				`Bearer ${access_token}`,
+		}
 	})
 		.then((res) => {
 			return res.data;
@@ -80,6 +98,10 @@ export const deleteLecturer = async (uuid) => {
 		method: 'delete',
 		url: url,
 		data: uuid,
+		headers: {
+			Authorization:
+				`Bearer ${access_token}`,
+		}
 	})
 		.then((res) => {
 			return res.data;
