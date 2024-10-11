@@ -61,17 +61,29 @@ export const createAgenda = createAsyncThunk(
 
 export const checkMemberAgenda = createAsyncThunk(
 	'agenda/checkMemberAgenda',
-	async ({ departmentsUuid, start, finish }, { dispatch }) => {
+	async ({ departmentsUuid, start, finish, type, uuid }, { dispatch }) => {
 		try {
-			const data = {
-				departmentsUuid: departmentsUuid,
-				start: moment(start).format('YYYY-MM-DD HH:mm:ss'),
-				finish: moment(finish).format('YYYY-MM-DD HH:mm:ss'),
-			};
+			const data =
+				type === 'add'
+					? {
+							departmentsUuid: departmentsUuid,
+							start: moment(start).format('YYYY-MM-DD HH:mm:ss'),
+							finish: moment(finish).format(
+								'YYYY-MM-DD HH:mm:ss',
+							),
+						}
+					: {
+							departmentsUuid: departmentsUuid,
+							start: moment(start).format('YYYY-MM-DD HH:mm:ss'),
+							finish: moment(finish).format(
+								'YYYY-MM-DD HH:mm:ss',
+							),
+							detailAgendaUuid: uuid,
+						};
 
-			const response = await checkAgenda(data);
+			const response = await checkAgenda(data, type, uuid);
 
-			return response;
+			return response.data;
 		} catch (error) {
 			console.log(error);
 			dispatch(fetchAgendaFailure(error));
@@ -253,6 +265,10 @@ export const updateDetailAgenda = createAsyncThunk(
 
 	async ({ data }, { dispatch, rejectWithValue }) => {
 		try {
+			if (data.isDone === false) {
+				delete data.isDone;
+			}
+
 			const response = await updateAgenda(data.uuid, data);
 
 			return response;

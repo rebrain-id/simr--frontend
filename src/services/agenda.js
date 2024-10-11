@@ -10,7 +10,7 @@ const access_token = localStorage.getItem('access_token')
 
 export const getAgenda = async (data) => {
 	const username = jwtDecode(access_token).username;
-	const url = `${API_URL()}/v1/detail-agendas/filter?username=${username}&start=${data.start}&finish=${data.finish}`;
+	const url = `${API_URL()}/v1/detail-agendas?username=${username}&start=${data.start}&finish=${data.finish}`;
 
 	try {
 		const response = await axios({
@@ -49,7 +49,7 @@ export const getAgenda = async (data) => {
 export const getHistoryAgenda = async (data) => {
 	const username = jwtDecode(access_token).username;
 
-	const url = `${API_URL()}/v1/detail-agendas/filter?username=${username}&start=${data.start}&finish=${data.finish}&skip=${data.skip}&take=${data.take}`;
+	const url = `${API_URL()}/v1/detail-agendas?username=${username}&start=${data.start}&finish=${data.finish}&skip=${data.skip}&take=${data.take}`;
 
 	try {
 		const response = await axios({
@@ -161,8 +161,11 @@ export const createDataAgenda = async (data) => {
 	}
 };
 
-export const checkAgenda = async (data) => {
-	const url = `${API_URL()}/v1/agendas/check`;
+export const checkAgenda = async (data, type) => {
+	const url =
+		type === 'add'
+			? `${API_URL()}/v1/agendas/check`
+			: `${API_URL()}/v1/agendas/check-update`;
 
 	try {
 		const response = await axios({
@@ -174,7 +177,7 @@ export const checkAgenda = async (data) => {
 			},
 		});
 
-		return response.data;
+		return response;
 	} catch (error) {
 		if (error.response && error.response.status === 401) {
 			try {

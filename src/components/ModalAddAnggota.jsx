@@ -3,23 +3,26 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import FormCheckbox from '../elements/forms/FormCheckbox';
 import FormInputCheckbox from '../elements/forms/FormInputCheckbox';
 import Button from '../elements/Button';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { checkMemberAgenda } from '../redux/actions/agendaAction';
 
 const ModalAddAnggota = (props) => {
-	const { onClick, dateFrom, dateTo, departments } = props;
+	const {
+		type = 'add',
+		onClick,
+		dateFrom,
+		dateTo,
+		departments,
+		selectedMember = [],
+		uuid = '',
+	} = props;
 	const dispatch = useDispatch();
 
-	const [selectedDepartments, setSelectedDepartments] = useState([]);
+	const [selectedDepartments, setSelectedDepartments] =
+		useState(selectedMember);
 	const [departmentWithConflict, setDepartmentWithConflict] = useState([]);
 	const [checkConflict, setCheckConflict] = useState(false);
-
-	useEffect(() => {
-		if (departments.length) {
-			setSelectedDepartments([]);
-		}
-	}, [departments]);
 
 	const handleCheckAll = () => {
 		if (selectedDepartments.length === departments.length) {
@@ -53,10 +56,10 @@ const ModalAddAnggota = (props) => {
 				departmentsUuid: selectedDepartments,
 				start: dateFrom,
 				finish: dateTo,
+				type: type,
+				uuid: uuid,
 			}),
 		);
-
-		console.log(response);
 
 		if (response && response.payload.statusCode === 200) {
 			const conflictData = response.payload.data;
@@ -78,34 +81,15 @@ const ModalAddAnggota = (props) => {
 		}
 	};
 
-	const member = JSON.parse(sessionStorage.getItem('member')) || '';
-
 	const handleSaveMember = () => {
-		if (!member) {
-			sessionStorage.setItem(
-				'member',
-				JSON.stringify(selectedDepartments),
-			);
-
-			onClick();
-		} else {
-			sessionStorage.removeItem('member');
-			sessionStorage.setItem(
-				'member',
-				JSON.stringify(selectedDepartments),
-			);
-
-			onClick();
-		}
+		sessionStorage.setItem('member', JSON.stringify(selectedDepartments));
+		onClick();
 	};
-
-	console.log(selectedDepartments);
-	console.log(departmentWithConflict);
 
 	return (
 		<div
 			onClick={handleCloseModal}
-			className="fixed top-0 left-0 w-full min-h-screen h-full z-20 bg-light-secondary bg-opacity-10 flex items-center justify-center"
+			className="fixed top-0 left-0 w-full min-h-screen h-full z-30 bg-light-secondary bg-opacity-10 flex items-center justify-center"
 		>
 			<div className="bg-light-white p-5 rounded w-1/2 shadow-md">
 				<div className="w-full flex items-center justify-between mb-5">
@@ -121,7 +105,7 @@ const ModalAddAnggota = (props) => {
 					<FormCheckbox variant="w-full">
 						<FormInputCheckbox
 							text="Pilih Semua"
-							onClick={handleCheckAll}
+							onChange={handleCheckAll}
 							isSelected={isAllSelected}
 						/>
 						{departmentWithConflict.length > 0
@@ -166,7 +150,7 @@ const ModalAddAnggota = (props) => {
 						<Button
 							onClick={handleSaveMember}
 							text="Simpan Anggota"
-							variant={`bg-opacity-90 ${!checkConflict ? 'bg-light-gray text-light-white cursor-not-allowed' : 'bg-light-primary  text-light-white text-sm hover:bg-opacity-100'}`}
+							variant={`bg-opacity-90 ${!checkConflict ? 'bg-light-gray text-light-white cursor-not-allowed' : 'bg-light-primary text-light-white text-sm hover:bg-opacity-100'}`}
 							disabled={!checkConflict}
 						/>
 					</div>
