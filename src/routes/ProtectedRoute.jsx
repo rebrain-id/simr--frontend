@@ -3,8 +3,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const ProtectedRoute = ({ authorized, children }) => {
-	const access_token = sessionStorage.getItem('access_token');
-	const role = jwtDecode(access_token).role;
+	const access_token = sessionStorage.getItem('access_token') || null;
 	const [isAuthorized, setIsAuthorized] = useState(false);
 
 	const navigate = useNavigate();
@@ -16,6 +15,7 @@ const ProtectedRoute = ({ authorized, children }) => {
 			return;
 		}
 
+		const role = jwtDecode(access_token).role;
 		try {
 			if (!authorized.includes(role)) {
 				setIsAuthorized(false);
@@ -26,7 +26,7 @@ const ProtectedRoute = ({ authorized, children }) => {
 			console.log(error);
 			navigate('/login');
 		}
-	}, [access_token, authorized, navigate, role]);
+	}, [access_token, authorized, navigate]);
 
 	if (isAuthorized === false) {
 		navigate(-1);
