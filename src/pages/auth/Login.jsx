@@ -59,7 +59,7 @@ const Login = () => {
 											type="text"
 											name="username"
 											label="Username"
-											labelvariant="pb-1 text-xs"
+											labelvariant="text-xs"
 											inputvariant="w-full text-sm"
 											variant="flex flex-col mx-auto w-full"
 											value={formik.values.username}
