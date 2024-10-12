@@ -23,7 +23,8 @@ export const fetchUpdateUserSuccess = () => ({
 	type: FETCH_UPDATE_SUCCESS,
 });
 
-export const fetchLogoutSuccess = () => ({
+export const fetchLogoutSuccess = (response) => ({
+	password: response,
 	type: FETCH_LOGOUT_SUCCESS,
 });
 
@@ -80,20 +81,17 @@ export const updateUser = (data) => {
 };
 
 export const postLogout = () => {
-	return async (dispatch) => {
-		dispatch(fetchAuthRequest());
+	return async () => {
+		// dispatch(fetchAuthRequest());
 
 		const access_token = localStorage.getItem('access_token')
 			? localStorage.getItem('access_token')
 			: sessionStorage.getItem('access_token');
 
 		const decodeToken = jwtDecode(access_token);
-		console.log(decodeToken.username);
 
 		try {
 			const response = await logoutRequest(decodeToken.username);
-
-			console.log(response);
 
 			if (response && response.statusCode == 200) {
 				localStorage.removeItem('access_token');
