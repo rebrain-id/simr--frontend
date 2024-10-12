@@ -42,7 +42,6 @@ export const fetchAgenda = createAsyncThunk(
 
 export const createAgenda = createAsyncThunk(
 	'agenda/createAgenda',
-
 	async ({ data }, { dispatch }) => {
 		try {
 			dispatch(fetchAgendaRequest());
@@ -62,21 +61,32 @@ export const createAgenda = createAsyncThunk(
 
 export const checkMemberAgenda = createAsyncThunk(
 	'agenda/checkMemberAgenda',
-
-	async ({ departmentsUuid, start, finish }, { rejectWithValue }) => {
+	async ({ departmentsUuid, start, finish, type, uuid }, { dispatch }) => {
 		try {
-			const data = {
-				departmentsUuid: departmentsUuid,
-				start: moment(start).format('YYYY-MM-DD HH:mm:ss'),
-				finish: moment(finish).format('YYYY-MM-DD HH:mm:ss'),
-			};
+			const data =
+				type === 'add'
+					? {
+							departmentsUuid: departmentsUuid,
+							start: moment(start).format('YYYY-MM-DD HH:mm:ss'),
+							finish: moment(finish).format(
+								'YYYY-MM-DD HH:mm:ss',
+							),
+						}
+					: {
+							departmentsUuid: departmentsUuid,
+							start: moment(start).format('YYYY-MM-DD HH:mm:ss'),
+							finish: moment(finish).format(
+								'YYYY-MM-DD HH:mm:ss',
+							),
+							detailAgendaUuid: uuid,
+						};
 
-			const response = await checkAgenda(data);
+			const response = await checkAgenda(data, type, uuid);
 
-			return response;
+			return response.data;
 		} catch (error) {
 			console.log(error);
-			rejectWithValue(error);
+			dispatch(fetchAgendaFailure(error));
 		}
 	},
 );
@@ -115,6 +125,8 @@ export const fetchAgendaToday = createAsyncThunk(
 export const fetchAgendaThisMonth = createAsyncThunk(
 	'agenda/fetchAgendaThisMonth',
 	async ({ year, month }, { dispatch }) => {
+		dispatch(fetchAgendaRequest());
+
 		const start = moment(`${year}-${month + 1}`, 'YYYY-MM')
 			.startOf('month')
 			.format('YYYY-MM-DD HH:mm:ss')
@@ -200,18 +212,16 @@ export const fetchAgendaByDate = createAsyncThunk(
 export const fetchAgendaHistory = createAsyncThunk(
 	'agenda/fetchAgendaHistory',
 	async ({ dateFrom, dateTo, type, skip, take }, { dispatch }) => {
-		// dispatch(fetchAgendaRequest());
+		dispatch(fetchAgendaRequest());
 		const typeAgenda = await getTypeAgenda();
 
 		const dataGetAgenda = {
 			start: dateFrom,
 			finish: dateTo,
 			typeAgenda: type ? type : typeAgenda[0].uuid,
-			skip: skip ? skip : 1,
+			skip: !skip || skip === 1 ? 0 : (skip - 1) * take,
 			take: take ? take : 10,
 		};
-
-		console.log(dataGetAgenda);
 
 		try {
 			let data = await getHistoryAgenda(dataGetAgenda);
@@ -255,6 +265,10 @@ export const updateDetailAgenda = createAsyncThunk(
 
 	async ({ data }, { dispatch, rejectWithValue }) => {
 		try {
+			if (data.isDone === false) {
+				delete data.isDone;
+			}
+
 			const response = await updateAgenda(data.uuid, data);
 
 			return response;

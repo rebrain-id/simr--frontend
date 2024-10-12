@@ -7,6 +7,9 @@ import Department from '../pages/Department';
 import Lecturer from '../pages/Lecturer';
 import AgendaByDate from '../pages/agendas/AgendaByDate';
 import AddAgenda from '../pages/agendas/AddAgenda';
+import NotFound from '../pages/errors/404';
+import ChangePassword from '../pages/auth/ChangePassword';
+import ProtectedRoute from './ProtectedRoute';
 
 export const router = createBrowserRouter([
 	{
@@ -15,40 +18,84 @@ export const router = createBrowserRouter([
 		children: [
 			{
 				index: true,
-				element: <Dashboard />,
+				element: (
+					<ProtectedRoute authorized={['PRODI', 'FAKULTAS']}>
+						<Dashboard />
+					</ProtectedRoute>
+				),
 			},
 			{
 				path: 'agenda',
-				element: <Agenda />,
+				element: (
+					<ProtectedRoute authorized={['PRODI', 'FAKULTAS']}>
+						<Agenda />
+					</ProtectedRoute>
+				),
 			},
 			{
 				path: 'agenda/date',
-				element: <AgendaByDate />,
+				element: (
+					<ProtectedRoute authorized={['PRODI', 'FAKULTAS']}>
+						<AgendaByDate />
+					</ProtectedRoute>
+				),
 			},
 			{
 				path: 'agenda/new',
-				element: <AddAgenda />,
+				element: (
+					<ProtectedRoute authorized={['PRODI', 'FAKULTAS']}>
+						<AddAgenda />
+					</ProtectedRoute>
+				),
 			},
 			{
 				path: 'agenda/date',
-				element: <AgendaByDate />,
+				element: (
+					<ProtectedRoute authorized={['PRODI', 'FAKULTAS']}>
+						<AgendaByDate />,
+					</ProtectedRoute>
+				),
 			},
 			{
 				path: 'agenda/new',
-				element: <AddAgenda />,
+				element: (
+					<ProtectedRoute authorized={['PRODI', 'FAKULTAS']}>
+						<AddAgenda />
+					</ProtectedRoute>
+				),
 			},
 			{
 				path: 'prodi',
-				element: <Department />,
+				element: (
+					<ProtectedRoute authorized={['PRODI', 'FAKULTAS']}>
+						<Department />
+					</ProtectedRoute>
+				),
 			},
 			{
 				path: 'dosen',
-				element: <Lecturer />,
+				element: (
+					<ProtectedRoute authorized={['PRODI', 'FAKULTAS']}>
+						<Lecturer />
+					</ProtectedRoute>
+				),
+			},
+			{
+				path: 'change-password',
+				element: (
+					<ProtectedRoute authorized={['PRODI', 'FAKULTAS']}>
+						<ChangePassword />
+					</ProtectedRoute>
+				),
 			},
 		],
 	},
 	{
 		path: '/login',
 		element: <Login />,
+	},
+	{
+		path: '*',
+		element: <NotFound />,
 	},
 ]);

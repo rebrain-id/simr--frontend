@@ -1,7 +1,7 @@
 import ListAgenda from '../ListAgenda';
 
 const CalendarList = (props) => {
-	const { month, agendaThisMonth, username } = props;
+	const { month, agendaThisMonth, isLoading } = props;
 
 	const monthList = [
 		'Januari',
@@ -24,7 +24,11 @@ const CalendarList = (props) => {
 
 	return (
 		<div className="w-full">
-			{agendaThisMonth && agendaThisMonth.length > 0 ? (
+			{isLoading ? (
+				<p className="text-center text-xs text-light-secondary mt-5">
+					Sedang memuat data riwayat agenda
+				</p>
+			) : agendaThisMonth && agendaThisMonth.length > 0 ? (
 				[...agendaThisMonth]
 					.sort((a, b) => {
 						return a.date - b.date;
@@ -46,11 +50,7 @@ const CalendarList = (props) => {
 										data={item}
 										title={item.title}
 										time={`${item.time.start} - ${item.time.finish} WIB`}
-										isOwner={
-											item.author.username === username
-												? true
-												: false
-										}
+										isOwner={item.isAuthor}
 										room={item.location}
 									/>
 								))}

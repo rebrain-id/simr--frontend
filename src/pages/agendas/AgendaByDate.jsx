@@ -12,13 +12,12 @@ import ListAgenda from '../../elements/ListAgenda';
 import moment from 'moment';
 
 const AgendaByDate = () => {
-	const username = sessionStorage.getItem('user');
-
 	const [searchParam] = useSearchParams();
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
-	let agendaByDate = useSelector((state) => state.agenda.agendaByDate);
-	let isUpdated = useSelector((state) => state.agenda.isUpdated);
+	let { agendaByDate, isUpdated, loading } = useSelector(
+		(state) => state.agenda,
+	);
 
 	const getYear = searchParam.get('year');
 	const getMonth = searchParam.get('month');
@@ -90,49 +89,52 @@ const AgendaByDate = () => {
 	});
 
 	return (
-		<div className="bg-white px-10 py-5 rounded drop-shadow-bottom mt-5">
-			<div className="flex items-center gap-3 text-secondary mb-5">
-				<button onClick={handleDecrement}>
-					<FontAwesomeIcon
-						icon={faChevronLeft}
-						className="cursor-pointer"
-					/>
-				</button>
-				<button onClick={handleIncrement}>
-					<FontAwesomeIcon
-						icon={faChevronRight}
-						className="cursor-pointer"
-					/>
-				</button>
+		<>
+			<div className="bg-white px-10 py-5 rounded drop-shadow-bottom mt-5">
+				<div className="flex items-center gap-3 text-secondary mb-5">
+					<button onClick={handleDecrement}>
+						<FontAwesomeIcon
+							icon={faChevronLeft}
+							className="cursor-pointer"
+						/>
+					</button>
+					<button onClick={handleIncrement}>
+						<FontAwesomeIcon
+							icon={faChevronRight}
+							className="cursor-pointer"
+						/>
+					</button>
 
-				<div className="flex justify-center items-center font-semibold text-xl gap-2">
-					{getDate} {monthList[getMonth - 1]} {getYear}
+					<div className="flex justify-center items-center font-semibold text-xl gap-2">
+						{getDate} {monthList[getMonth - 1]} {getYear}
+					</div>
+				</div>
+
+				<div className="w-full flex flex-col gap-3">
+					{loading ? (
+						<p className="text-center text-xs text-light-secondary mt-5">
+							Sedang memuat data riwayat agenda
+						</p>
+					) : agendaByDate && agendaByDate.length > 0 ? (
+						agendaByDate.map((item, itemIndex) => (
+							<ListAgenda
+								key={itemIndex}
+								data={item}
+								title={item.title}
+								time={`${item.time.start} - ${item.time.finish} WIB`}
+								isOwner={item.isAuthor}
+								room={item.location}
+							/>
+						))
+					) : (
+						<p className="text-center text-xs text-light-secondary">
+							Belum ada agenda untuk tanggal ini, tambahkan agenda
+							sekarang
+						</p>
+					)}
 				</div>
 			</div>
-
-			<div className="w-full flex flex-col gap-3">
-				{agendaByDate && agendaByDate.length > 0 ? (
-					agendaByDate.map((item, itemIndex) => (
-						<ListAgenda
-							key={itemIndex}
-							data={item}
-							title={item.title}
-							time={`${item.time.start} - ${item.time.finish} WIB`}
-							isOwner={
-								item.author.username == username ? true : false
-							}
-							room={item.location}
-						/>
-					))
-				) : (
-					<p className="text-center text-xs text-light-secondary">
-						Belum ada agenda untuk tanggal ini, tambahkan agenda
-						sekarang
-					</p>
-				)}
-			</div>
-
-			<div className="w-full flex justify-end sticky bottom-10 z-10">
+			<div className="fixed right-12 bottom-10 z-10">
 				<Link
 					to={'/agenda/new'}
 					className="mt-10 flex justify-center items-center w-16 h-16 rounded-full bg-light-primary bg-opacity-80 hover:bg-opacity-100 cursor-pointer"
@@ -143,7 +145,7 @@ const AgendaByDate = () => {
 					/>
 				</Link>
 			</div>
-		</div>
+		</>
 	);
 };
 

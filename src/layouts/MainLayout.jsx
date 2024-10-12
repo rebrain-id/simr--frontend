@@ -41,9 +41,7 @@ const MainLayout = () => {
 	}, [showSidebar]);
 
 	useEffect(() => {
-		if (loading) {
-			setShowLoading(true);
-		} else if (loadingLecturer) {
+		if (loadingLecturer) {
 			setShowLoading(true);
 		} else if (loadingDepartment) {
 			setShowLoading(true);

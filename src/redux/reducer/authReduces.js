@@ -3,6 +3,7 @@ import {
 	FETCH_AUTH_REQUEST,
 	FETCH_LOGIN_SUCCESS,
 	FETCH_LOGOUT_SUCCESS,
+	FETCH_UPDATE_SUCCESS,
 } from '../actions/authAction';
 
 const initialState = {
@@ -21,7 +22,12 @@ const authReducer = (state = initialState, action) => {
 		case FETCH_LOGIN_SUCCESS:
 			return {
 				...state,
-				isLogin: false,
+				isLogin: true,
+			};
+		case FETCH_UPDATE_SUCCESS:
+			return {
+				...state,
+				isLogin: true,
 			};
 		case FETCH_LOGOUT_SUCCESS:
 			return {
