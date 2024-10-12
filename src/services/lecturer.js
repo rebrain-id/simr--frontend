@@ -25,7 +25,7 @@ export const getLecturer = async () => {
 }
 
 export const getLecturerByDepartment = async (department) => {
-	const url = `${API_URL()}/v1/lecturer?name${department}`;
+	const url = `${API_URL()}/v1/lecturer`;
 
 	const response = await axios({
 		method: 'get',

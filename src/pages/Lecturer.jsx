@@ -4,7 +4,10 @@ import Button from '../elements/Button';
 import CreateModal from '../components/CreateLecturerModal';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchLecturers } from '../redux/actions/lecturerAction';
+import {
+	fetchLecturers,
+	fetchLecturersByDepartment,
+} from '../redux/actions/lecturerAction';
 import ListLecturer from '../elements/ListLecturer';
 import { fetchDepartments } from '../redux/actions/departmentAction';
 
@@ -12,11 +15,15 @@ const Lecturer = () => {
 	const [openModal, setOpenModal] = useState(false);
 	const handleModal = () => setOpenModal(!openModal);
 	const dispatch = useDispatch();
-	const lecturers = useSelector((state) => state.fetchLecturers.lecturer);
+	// const lecturers = useSelector((state) => state.fetchLecturers.lecturer);
+	const lecturersByDepartment = useSelector(
+		(state) => state.fetchLecturersByDepartment.department,
+	);
 	const isUpdated = useSelector((state) => state.fetchLecturers.isUpdated);
 
 	useEffect(() => {
-		dispatch(fetchLecturers());
+		dispatch(fetchLecturersByDepartment());
+		// dispatch(fetchLecturers());
 		dispatch(fetchDepartments());
 	}, [dispatch, isUpdated]);
 
@@ -35,16 +42,12 @@ const Lecturer = () => {
 				</div>
 
 				<section className="mt-5 flex flex-col gap-3">
-					{lecturers ? (
-						lecturers.map((item, index) => (
+					{lecturersByDepartment?.length > 0 ? (
+						lecturersByDepartment.map((item) => (
 							<ListLecturer
-								key={index}
-								uuid={item.uuid}
-								data={item.name}
-								name={item.name}
-								email={item.email}
-								phoneNumber={item.phoneNumber}
-								department={item.department.name}
+								key={item.uuid}
+								dep={item.department}
+								data={item.data}
 								departmentUuid={item.department.uuid}
 							/>
 						))

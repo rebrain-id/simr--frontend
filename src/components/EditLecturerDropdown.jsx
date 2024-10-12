@@ -21,7 +21,7 @@ const EditLecturerDropdown = (props) => {
 		department,
 		departmentUuid,
 		close,
-		isVisible,
+		isOpenEdit,
 	} = props;
 	const [isDeleting, setIsDeleting] = useState(false);
 	const [isUpdating, setIsUpdating] = useState(false);
@@ -114,7 +114,7 @@ const EditLecturerDropdown = (props) => {
 
 	return (
 		<div
-			className={`transition-[height] duration-300 px-5 pb-5 bg-white shadow-md rounded ${isVisible ? 'h-full' : 'h-0 overflow-hidden'}`}
+			className={`transition-[height] duration-300 px-10 pb-5 bg-white shadow-md rounded ${isOpenEdit ? 'h-full' : 'h-0 overflow-hidden'}`}
 		>
 			{showAlert.visible && (
 				<Alert
@@ -126,52 +126,52 @@ const EditLecturerDropdown = (props) => {
 				/>
 			)}
 			<form onSubmit={formik.handleSubmit}>
-				<div className="w-full flex items-center">
+				<div>
 					<Input
 						type="text"
 						name="name"
-						variant="flex items-center text-sm w-full gap-10 py-2"
+						variant="text-xs w-full py-2"
 						label="Nama Dosen"
 						placeholder="Nama Dosen"
-						labelvariant="w-1/6"
-						inputvariant="w-5/6"
+						labelvariant="w-1/6 text-xs"
+						inputvariant="w-full"
 						value={formik.values.name}
 						onChange={handleChange}
 					/>
 				</div>
-				<div className="w-full flex items-center">
+				<div className="pt-1">
 					<Input
 						type="email"
 						name="email"
+						variant="text-xs w-full"
 						label="E-mail"
 						placeholder="example@mail.com"
-						labelvariant="w-1/6"
-						inputvariant="w-5/6"
-						variant="flex items-center text-sm w-full gap-10 py-2"
+						labelvariant="w-1/6 text-xs"
+						inputvariant="w-full"
 						value={formik.values.email}
 						onChange={handleChange}
 					/>
 				</div>
-				<div className="w-full flex items-center">
+				<div className="pt-1">
 					<Input
 						type="number"
 						name="phoneNumber"
-						labelvariant="w-1/6"
-						inputvariant="w-5/6"
-						variant="flex items-center text-sm w-full gap-10 py-2"
+						variant="text-xs w-full py-2"
 						label="No. Whatsapp"
+						labelvariant="w-1/6"
+						inputvariant="w-full"
 						placeholder="08*********"
 						value={formik.values.phoneNumber}
 						onChange={handleChange}
 					/>
 				</div>
-				<div className="w-full flex items-center">
+				<div className="pb-2">
 					<Select
-						variant="flex items-center text-sm w-full gap-10 py-2"
+						variant="flex flex-col text-xs w-full pt-1 pb-2"
 						name="departmentUuid"
 						label="Program Studi"
-						labelVariant="w-1/5"
-						selectVariant="w-5/6"
+						labelVariant="w-1/5 text-sx"
+						selectVariant="w-full text-xs"
 						placeholder="082********"
 						onChange={handleChange}
 						value={formik.values.departmentUuid}
