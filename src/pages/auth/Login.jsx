@@ -3,12 +3,16 @@ import FormInput from '../../elements/forms/FormInput';
 import Logo2 from '../../assets/images/logo2.png';
 import { useFormik } from 'formik';
 import FormInputCheckbox from '../../elements/forms/FormInputCheckbox';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { postLogin } from '../../redux/actions/authAction';
 import * as Yup from 'yup';
+import { useState } from 'react';
+import ModalDanger from '../../elements/modal/ModalDanger';
 
 const Login = () => {
-	const loading = useSelector((state) => state.auth.loading);
+	const [loading, setLoading] = useState(false);
+	const [openModal, setOpenModal] = useState(false);
+
 	const dispatch = useDispatch();
 	const formik = useFormik({
 		initialValues: {
@@ -23,16 +27,32 @@ const Login = () => {
 		}),
 
 		onSubmit: async (values) => {
+			setLoading(true);
 			const response = await dispatch(postLogin(values));
 
-			if (response.statusCode === 200) {
+			if (response && response.statusCode === 200) {
 				window.location.href = '/';
+			} else {
+				setOpenModal(true);
+				setLoading(false);
 			}
 		},
 	});
 
+	const handleOpenModal = () => {
+		setOpenModal(!openModal);
+	};
+
 	return (
 		<>
+			{openModal && (
+				<ModalDanger
+					onClick={handleOpenModal}
+					message={
+						'Username atau password salah, silahkan coba lagi.'
+					}
+				/>
+			)}
 			<div className="h-screen bg-light-gray p-8">
 				<main className="bg-light-white rounded-lg p-5 w-full h-full relative">
 					<img src={Logo2} alt="" className="h-10 absolute top-5" />
