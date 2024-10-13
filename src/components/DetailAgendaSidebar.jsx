@@ -38,13 +38,14 @@ const DetailAgendaSidebar = (props) => {
 		dispatch(fetchDepartments());
 	}, [dispatch]);
 
+	const member = sessionStorage.getItem('member') || null;
+
 	const handleCloseModal = (e) => {
 		if (e.target === e.currentTarget) {
+			member && sessionStorage.removeItem('member');
 			onClick();
 		}
 	};
-
-	const member = sessionStorage.getItem('member') || [];
 
 	const [inputValue, setInputValue] = useState({
 		uuid: data ? data.uuid : '',
@@ -57,7 +58,7 @@ const DetailAgendaSidebar = (props) => {
 		attendees: data ? data.absent : '',
 		notulens: data ? data.notulen : '',
 		isDone: data ? data.isDone : false,
-		department: member,
+		department: member ? JSON.parse(member) : data?.departments,
 	});
 
 	const handleInputValue = (e) => {
@@ -83,6 +84,7 @@ const DetailAgendaSidebar = (props) => {
 			);
 
 			if (response && response.payload.statusCode === 200) {
+				member && sessionStorage.removeItem('member');
 				dispatch(closeDetailAgenda());
 			}
 		} catch (error) {
@@ -341,7 +343,11 @@ const DetailAgendaSidebar = (props) => {
 									}
 								/>
 								<Button
-									onClick={onClick}
+									onClick={() => {
+										member &&
+											sessionStorage.removeItem('member');
+										onClick();
+									}}
 									text="Batal"
 									variant="bg-light-primary bg-opacity-30 text-light-primary text-sm hover:bg-opacity-50"
 								/>

@@ -21,6 +21,8 @@ export const getAgenda = async (data) => {
 			},
 		});
 
+		// console.log(response);
+
 		return response.data.data;
 	} catch (error) {
 		if (error.response && error.response.status === 401) {
@@ -207,6 +209,8 @@ export const updateAgenda = async (uuid, data) => {
 	const url = `${API_URL()}/v1/detail-agendas/${uuid}`;
 	const form = new FormData();
 
+	console.log(data);
+
 	form.append('title', data.title);
 	form.append('description', data.description);
 	form.append('start', moment.utc(data.start).format('YYYY-MM-DD HH:mm:ss'));
@@ -217,12 +221,15 @@ export const updateAgenda = async (uuid, data) => {
 	form.append('location', data.location);
 	form.append('absent', data.attendees);
 	form.append('notulen', data.notulens);
-	form.append('isDone', data.isDone);
 	form.append('typeAgendaUuid', data.typeAgenda);
 	if (Array.isArray(data.department)) {
 		data.department.forEach((deptUuid) => {
 			form.append('departmentsUuid[]', deptUuid);
 		});
+	}
+
+	if (data.isDone) {
+		form.append('isDone', data.isDone);
 	}
 
 	// form.forEach((value, key) => {
@@ -240,7 +247,7 @@ export const updateAgenda = async (uuid, data) => {
 			},
 		})
 			.then((res) => {
-				console.log(res);
+				// console.log(res);
 				return res.data;
 			})
 			.catch((err) => {
