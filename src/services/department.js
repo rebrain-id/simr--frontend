@@ -1,6 +1,8 @@
 import axios from 'axios';
 import { API_URL } from './config';
 
+const access_token = sessionStorage.getItem('access_token')
+
 export const getDepartment = async () => {
 	const url = `${API_URL()}/v1/department`;
 
@@ -9,7 +11,7 @@ export const getDepartment = async () => {
 		url: url,
 		headers: {
 			Authorization:
-				'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImJhYmF5byIsInN1YiI6MTMsInJvbGUiOiJQUk9ESSIsImlhdCI6MTcyNzQ1NTc2OSwiZXhwIjoxNzMwMDQ3NzY5fQ.ccKgWQy1XWTtyZAxsZ9PtFEelns6YkqcWgySc1nMSzg',
+				`Bearer ${access_token}`,
 		},
 	})
 		.then((res) => {
@@ -29,6 +31,10 @@ export const postDepartment = async (body) => {
 		method: 'post',
 		url: url,
 		data: body,
+		headers: {
+			Authorization:
+				`Bearer ${access_token}`,
+		}
 	})
 		.then((res) => {
 			return res.data;
@@ -48,6 +54,10 @@ export const updateDepartment = async (uuid, body) => {
 		method: 'patch',
 		url: url,
 		data: body,
+		headers: {
+			Authorization:
+				`Bearer ${access_token}`,
+		}
 	})
 		.then((res) => {
 			return res.data;
@@ -67,6 +77,10 @@ export const deleteDepartment = async (uuid) => {
 		method: 'delete',
 		url: url,
 		data: uuid,
+		headers: {
+			Authorization:
+				`Bearer ${access_token}`,
+		}
 	})
 		.then((res) => {
 			return res.data;

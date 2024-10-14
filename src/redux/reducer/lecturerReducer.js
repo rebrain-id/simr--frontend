@@ -1,6 +1,7 @@
 import {
     FETCH_LECTURER_REQUEST,
     FETCH_LECTURER_SUCCESS,
+    FETCH_LECTURER_BY_DEPARTMENT_SUCCESS,
     FETCH_LECTURER_FAILURE,
     POST_LECTURER_SUCCESS,
     UPDATE_LECTURER_SUCCESS,
@@ -9,6 +10,7 @@ import {
 
 const initialState = {
     lecturer: [],
+    department: [],
     loading: false,
     error: 'Dosen not found',
     isUpdated: true,
@@ -27,6 +29,13 @@ const lecturerReducer = (state = initialState, action) => {
                 ...state,
                 loading: false,
                 lecturer: action.payload,
+                error: ''
+            }
+        case FETCH_LECTURER_BY_DEPARTMENT_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                department: action.payload,
                 error: ''
             }
         case POST_LECTURER_SUCCESS:

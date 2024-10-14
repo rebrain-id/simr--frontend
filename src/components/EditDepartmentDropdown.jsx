@@ -93,16 +93,16 @@ const EditDepartmentDropdown = (props) => {
 
 	return (
 		<>
+			{showAlert.visible && (
+				<Alert
+					status={showAlert.status}
+					message={showAlert.message}
+					onClick={() =>
+						setShowAlert({ ...showAlert, visible: false })
+					}
+				/>
+			)}
 			<div className="px-5 bg-white shadow-md rounded pb-4">
-				{showAlert.visible && (
-					<Alert
-						status={showAlert.status}
-						message={showAlert.message}
-						onClick={() =>
-							setShowAlert({ ...showAlert, visible: false })
-						}
-					/>
-				)}
 				<form onSubmit={formik.handleSubmit}>
 					<div className="w-full flex items-center">
 						<FormInput
