@@ -1,7 +1,6 @@
 import { getLecturer, getLecturerByDepartment, postLecturer, updateLecturer, deleteLecturer } from "../../services/lecturer";
 export const FETCH_LECTURER_REQUEST = 'FETCH_LECTURER_REQUEST'
 export const FETCH_LECTURER_SUCCESS = 'FETCH_LECTURER_SUCCESS'
-export const FETCH_LECTURER_BY_DEPARTMENT_SUCCESS = 'FETCH_LECTURER_BY_DEPARTMENT_SUCCESS'
 export const POST_LECTURER_SUCCESS = 'POST_LECTURER_SUCCESS'
 export const UPDATE_LECTURER_SUCCESS = 'UPDATE_LECTURER_SUCCESS'
 export const DELETE_LECTURER_SUCCESS = 'DELETE_LECTURER_SUCCESS'
@@ -43,44 +42,28 @@ export const fetchLecturers = () => {
 		dispatch(fetchLecturersRequest());
 		try {
 			const response = await getLecturer();
+
+			// const groupLecturerByDepartment = response.reduce((acc, item) => {
+			// 	const lecturerByDepartment = item.department.name
+			// 	const groupByDepartment = acc.find((group) => 
+			// 	group.department === lecturerByDepartment)
+
+			// 	if(groupByDepartment) {
+			// 		groupByDepartment.data.push(item)
+			// 	} else {
+			// 		acc.push({ department: lecturerByDepartment, data: [item]})
+			// 	}
+
+			// 	console.log("Grouped Data : " + acc)
+			// 	return acc
+			// }, [])
 			dispatch(fetchLecturersSuccess(response));
+			console.log(response)
 		} catch (error) {
 			dispatch(fetchLecturersFailure(error.message));
 		}
 	};
 };
-
-export const fetchLecturersByDepartment = () => {
-	return async (dispatch) => {
-		dispatch(fetchLecturersRequest());
-		try {
-			const response = await getLecturerByDepartment();
-			// console.log(response)
-			const groupLecturerByDepartment = response.reduce((acc, item) => {
-				const lecturerByDepartment = item.department.name
-				const groupByDepartment = acc.find((group) => 
-				group.department === lecturerByDepartment)
-
-				if(groupByDepartment) {
-					groupByDepartment.data.push(item)
-				} else {
-					acc.push({ department: lecturerByDepartment, data: [item]})
-				}
-
-				console.log(acc)
-				return acc
-			}, [])
-			console.log(groupLecturerByDepartment)
-			dispatch(fetchLecturersByDepartmentSuccess(groupLecturerByDepartment));
-
-			// dispatch(fetchLecturersByDepartmentSuccess(groupLecturerByDepartment));
-			// console.log('Lecturer By Dep = ' + groupLecturerByDepartment);
-			
-		} catch (error) {
-			dispatch(fetchLecturersFailure(error.message));
-		}
-	}
-}
 
 export const postLecturerData = (lecturer) => {
 	return async (dispatch) => {

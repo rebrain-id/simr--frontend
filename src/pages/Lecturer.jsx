@@ -4,10 +4,7 @@ import Button from '../elements/Button';
 import CreateModal from '../components/CreateLecturerModal';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-	fetchLecturers,
-	fetchLecturersByDepartment,
-} from '../redux/actions/lecturerAction';
+import { fetchLecturers } from '../redux/actions/lecturerAction';
 import ListLecturer from '../elements/ListLecturer';
 import { fetchDepartments } from '../redux/actions/departmentAction';
 
@@ -15,18 +12,17 @@ const Lecturer = () => {
 	const [openModal, setOpenModal] = useState(false);
 	const handleModal = () => setOpenModal(!openModal);
 	const dispatch = useDispatch();
-	// const lecturers = useSelector((state) => state.fetchLecturers.lecturer);
-	const lecturersByDepartment = useSelector(
-		(state) => state.fetchLecturersByDepartment.department,
-	);
+	const lecturers = useSelector((state) => state.fetchLecturers.lecturer);
 	const isUpdated = useSelector((state) => state.fetchLecturers.isUpdated);
 
+	console.log(lecturers);
+
 	useEffect(() => {
-		dispatch(fetchLecturersByDepartment());
-		// dispatch(fetchLecturers());
+		dispatch(fetchLecturers());
 		dispatch(fetchDepartments());
 	}, [dispatch, isUpdated]);
 
+	console.log('Lecturer data' + lecturers);
 	return (
 		<>
 			<main className="bg-white px-10 pb-10 rounded drop-shadow-bottom mt-5">
@@ -42,13 +38,18 @@ const Lecturer = () => {
 				</div>
 
 				<section className="mt-5 flex flex-col gap-3">
-					{lecturersByDepartment?.length > 0 ? (
-						lecturersByDepartment.map((item) => (
+					{lecturers ? (
+						lecturers.map((item, index) => (
 							<ListLecturer
-								key={item.uuid}
+								key={index}
 								dep={item.department}
-								data={item.data}
+								uuid={item.uuid}
+								name={item.name}
+								email={item.email}
+								phoneNumber={item.phoneNumber}
+								department={item.department}
 								departmentUuid={item.department.uuid}
+								// data={item.data}
 							/>
 						))
 					) : (
