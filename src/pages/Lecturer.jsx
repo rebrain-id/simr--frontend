@@ -12,17 +12,15 @@ const Lecturer = () => {
 	const [openModal, setOpenModal] = useState(false);
 	const handleModal = () => setOpenModal(!openModal);
 	const dispatch = useDispatch();
-	const lecturers = useSelector((state) => state.fetchLecturers.lecturer);
 	const isUpdated = useSelector((state) => state.fetchLecturers.isUpdated);
-
-	console.log(lecturers);
+	const lecturers = useSelector((state) => state.fetchLecturers.lecturer);
 
 	useEffect(() => {
 		dispatch(fetchLecturers());
 		dispatch(fetchDepartments());
 	}, [dispatch, isUpdated]);
 
-	console.log('Lecturer data' + lecturers);
+	console.log(lecturers);
 	return (
 		<>
 			<main className="bg-white px-10 pb-10 rounded drop-shadow-bottom mt-5">
@@ -39,17 +37,18 @@ const Lecturer = () => {
 
 				<section className="mt-5 flex flex-col gap-3">
 					{lecturers ? (
-						lecturers.map((item, index) => (
+						lecturers.map((item) => (
 							<ListLecturer
-								key={index}
+								key={item.uuid}
 								dep={item.department}
-								uuid={item.uuid}
-								name={item.name}
-								email={item.email}
-								phoneNumber={item.phoneNumber}
-								department={item.department}
-								departmentUuid={item.department.uuid}
-								// data={item.data}
+								data={item.data}
+								// uuid={item.uuid}
+								// name={item.name}
+								// email={item.email}
+								// phoneNumber={item.phoneNumber}
+								// department={item.department}
+								// departmentUuid={item.department.uuid}
+								lecturer={item.lecturer}
 							/>
 						))
 					) : (

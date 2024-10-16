@@ -3,17 +3,13 @@ import { API_URL } from './config';
 import { jwtDecode } from 'jwt-decode';
 
 const access_token = sessionStorage.getItem('access_token')
+const decodeToken =  access_token && jwtDecode(access_token)
 
 export const getLecturer = async () => {
-	const role = jwtDecode(access_token).role
-	const username = jwtDecode(access_token).username
-	console.log("Lecturer " + role);
-	console.log("Lecturer " + username);
+	const getAllLecturer = `${API_URL()}/v1/lecturer?username=${decodeToken.username}`;
+	const getLecturerByDepartment = `${API_URL()}/v1/lecturer?username=${decodeToken.username}&department=${decodeToken.username}`;
 
-	const getAllLecturer = `${API_URL()}/v1/lecturer`;
-	const getLecturerByDepartment = `${API_URL()}/v1/lecturer?department=${username}`;
-
-	const url = role === 'FAKULTAS' ? getAllLecturer : getLecturerByDepartment;
+	const url = decodeToken.role === 'FAKULTAS' ? getAllLecturer : getLecturerByDepartment;
 
 	try {
 		const response = await axios({
@@ -23,7 +19,6 @@ export const getLecturer = async () => {
 				Authorization: `Bearer ${access_token}`,
 			}
 		});
-		console.log(response.data.data);
 		return response.data.data;
 	} catch (err) {
 		console.log(err);

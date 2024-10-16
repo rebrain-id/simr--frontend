@@ -43,22 +43,21 @@ export const fetchLecturers = () => {
 		try {
 			const response = await getLecturer();
 
-			// const groupLecturerByDepartment = response.reduce((acc, item) => {
-			// 	const lecturerByDepartment = item.department.name
-			// 	const groupByDepartment = acc.find((group) => 
-			// 	group.department === lecturerByDepartment)
+			const groupLecturerByDepartment = response.reduce((acc, item) => {
+				const lecturerByDepartment = item.department.name
+				const groupByDepartment = acc.find((group) => 
+				group.department === lecturerByDepartment)
 
-			// 	if(groupByDepartment) {
-			// 		groupByDepartment.data.push(item)
-			// 	} else {
-			// 		acc.push({ department: lecturerByDepartment, data: [item]})
-			// 	}
+				if(groupByDepartment) {
+					groupByDepartment.lecturer.push(item)
+				} else {
+					acc.push({ department: lecturerByDepartment, lecturer: [item]})
+				}
 
-			// 	console.log("Grouped Data : " + acc)
-			// 	return acc
-			// }, [])
-			dispatch(fetchLecturersSuccess(response));
-			console.log(response)
+				return acc
+			}, [])
+
+			dispatch(fetchLecturersSuccess(groupLecturerByDepartment));
 		} catch (error) {
 			dispatch(fetchLecturersFailure(error.message));
 		}

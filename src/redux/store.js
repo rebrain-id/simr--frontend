@@ -12,7 +12,7 @@ export default configureStore({
 		typeAgenda: typeAgendaSlice,
 		department: departmentSlice,
 		fetchLecturers: lecturerReducer,
-		fetchLecturersByDepartment: lecturerReducer,
+		// fetchLecturersByDepartment: lecturerReducer,
 		postLecturerData: lecturerReducer,
 		updateLecturerData: lecturerReducer,
 		deleteLecturerData: lecturerReducer,
