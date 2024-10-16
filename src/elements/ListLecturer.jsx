@@ -22,7 +22,7 @@ const ListLecturer = (props) => {
 		<>
 			<div
 				k
-				className={`mx-5 px-5 py-3 border rounded flex items-center cursor-pointer border-light-primary hover:bg-light-primary hover:text-white transition ease-in 3s ${
+				className={`px-5 py-3 border rounded flex items-center cursor-pointer border-light-primary hover:bg-light-primary hover:text-white transition ease-in 3s ${
 					isOpenLecturer && 'bg-light-primary text-white'
 				}`}
 				onClick={handleOpenLecturer}
