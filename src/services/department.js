@@ -1,18 +1,17 @@
 import axios from 'axios';
 import { API_URL } from './config';
+import { jwtDecode } from 'jwt-decode';
 
-const access_token = sessionStorage.getItem('access_token')
+const access_token = sessionStorage.getItem('access_token');
+const decodeToken = jwtDecode(access_token);
 
 export const getDepartment = async () => {
-	const url = `${API_URL()}/v1/department`;
+	const url = `${API_URL()}/v1/department?username=${decodeToken.username}`;
 
 	const response = await axios({
 		method: 'get',
 		url: url,
-		headers: {
-			Authorization:
-				`Bearer ${access_token}`,
-		},
+		headers: { Authorization: `Bearer ${access_token}` },
 	})
 		.then((res) => {
 			return res.data.data;
@@ -31,10 +30,7 @@ export const postDepartment = async (body) => {
 		method: 'post',
 		url: url,
 		data: body,
-		headers: {
-			Authorization:
-				`Bearer ${access_token}`,
-		}
+		headers: { Authorization: `Bearer ${access_token}` },
 	})
 		.then((res) => {
 			return res.data;
@@ -54,10 +50,7 @@ export const updateDepartment = async (uuid, body) => {
 		method: 'patch',
 		url: url,
 		data: body,
-		headers: {
-			Authorization:
-				`Bearer ${access_token}`,
-		}
+		headers: { Authorization: `Bearer ${access_token}` },
 	})
 		.then((res) => {
 			return res.data;
@@ -77,10 +70,7 @@ export const deleteDepartment = async (uuid) => {
 		method: 'delete',
 		url: url,
 		data: uuid,
-		headers: {
-			Authorization:
-				`Bearer ${access_token}`,
-		}
+		headers: { Authorization: `Bearer ${access_token}` },
 	})
 		.then((res) => {
 			return res.data;

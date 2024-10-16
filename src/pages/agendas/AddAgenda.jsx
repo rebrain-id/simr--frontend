@@ -54,7 +54,7 @@ const AddAgenda = () => {
 			});
 			setTimeout(() => {
 				setShowAlert({ status: '', message: '', visible: false });
-			}, 3000); // Auto-hide alert after 3 seconds
+			}, 3000);
 		} else {
 			setOpenModal(!openModal);
 		}
