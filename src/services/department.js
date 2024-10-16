@@ -2,8 +2,8 @@ import axios from 'axios';
 import { API_URL } from './config';
 import { jwtDecode } from 'jwt-decode';
 
-const access_token = sessionStorage.getItem('access_token');
-const decodeToken = jwtDecode(access_token);
+const access_token = sessionStorage.getItem('access_token') || null;
+const decodeToken = access_token && jwtDecode(access_token);
 
 export const getDepartment = async () => {
 	const url = `${API_URL()}/v1/department?username=${decodeToken.username}`;
