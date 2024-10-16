@@ -17,11 +17,16 @@ import { fetchDepartments } from '../redux/actions/departmentAction';
 import Toggel from '../elements/forms/Toggel';
 import { API_URL } from '../services/config';
 import ModalAddAnggota from './ModalAddAnggota';
+import ModalWarning from '../elements/modal/ModalWarning';
+import ModalDanger from '../elements/modal/ModalDanger';
 
 const DetailAgendaSidebar = (props) => {
 	const { onClick, data, isShow = false, variant } = props;
 
 	const [showModal, setShowModal] = useState(false);
+	const [showModalWarning, setShowModalWarning] = useState(false);
+	const [showModalDanger, setShowModalDanger] = useState(false);
+
 	const dispatch = useDispatch();
 	const typeAgenda = useSelector((state) => state.typeAgenda.typeAgenda);
 	const department = useSelector(
@@ -33,13 +38,14 @@ const DetailAgendaSidebar = (props) => {
 		dispatch(fetchDepartments());
 	}, [dispatch]);
 
+	const member = sessionStorage.getItem('member') || null;
+
 	const handleCloseModal = (e) => {
 		if (e.target === e.currentTarget) {
+			member && sessionStorage.removeItem('member');
 			onClick();
 		}
 	};
-
-	const member = sessionStorage.getItem('member') || [];
 
 	const [inputValue, setInputValue] = useState({
 		uuid: data ? data.uuid : '',
@@ -52,7 +58,7 @@ const DetailAgendaSidebar = (props) => {
 		attendees: data ? data.absent : '',
 		notulens: data ? data.notulen : '',
 		isDone: data ? data.isDone : false,
-		department: member,
+		department: member ? JSON.parse(member) : data?.departments,
 	});
 
 	const handleInputValue = (e) => {
@@ -78,6 +84,7 @@ const DetailAgendaSidebar = (props) => {
 			);
 
 			if (response && response.payload.statusCode === 200) {
+				member && sessionStorage.removeItem('member');
 				dispatch(closeDetailAgenda());
 			}
 		} catch (error) {
@@ -87,12 +94,16 @@ const DetailAgendaSidebar = (props) => {
 
 	const handleDelete = async () => {
 		try {
+			setShowModalWarning(false);
+
 			const response = await dispatch(
 				deleteDetailAgenda({ uuid: inputValue.uuid }),
 			);
 
 			if (response && response.payload.data.statusCode === 200) {
 				dispatch(closeDetailAgenda());
+			} else {
+				setShowModalDanger(true);
 			}
 		} catch (error) {
 			console.log(error);
@@ -101,6 +112,14 @@ const DetailAgendaSidebar = (props) => {
 
 	const handleOpenModal = () => {
 		setShowModal(!showModal);
+	};
+
+	const handleOpenWarningModal = () => {
+		setShowModalWarning(!showModalWarning);
+	};
+
+	const handleOpenDangerModal = () => {
+		setShowModalDanger(!showModalDanger);
 	};
 
 	return (
@@ -118,6 +137,22 @@ const DetailAgendaSidebar = (props) => {
 					uuid={data?.uuid}
 				/>
 			)}
+
+			{showModalWarning && (
+				<ModalWarning
+					onClick={handleDelete}
+					onClose={handleOpenWarningModal}
+					message="Apakah anda yakin ingin menghapus agenda ini?"
+				/>
+			)}
+
+			{showModalDanger && (
+				<ModalDanger
+					onClick={handleOpenDangerModal}
+					message="Kesalahan dalam menghapus agenda, periksa kembali data anda"
+				/>
+			)}
+
 			<div
 				onClick={handleCloseModal}
 				className={`fixed top-0 left-0 w-full min-h-screen h-auto bg-light-secondary bg-opacity-10 flex justify-end z-20 inset-y-0 transform transition-transform duration-1000 ${
@@ -308,7 +343,11 @@ const DetailAgendaSidebar = (props) => {
 									}
 								/>
 								<Button
-									onClick={onClick}
+									onClick={() => {
+										member &&
+											sessionStorage.removeItem('member');
+										onClick();
+									}}
 									text="Batal"
 									variant="bg-light-primary bg-opacity-30 text-light-primary text-sm hover:bg-opacity-50"
 								/>
@@ -317,7 +356,7 @@ const DetailAgendaSidebar = (props) => {
 								text="Hapus"
 								onClick={
 									data && data.isDone !== true
-										? handleDelete
+										? handleOpenWarningModal
 										: () => {}
 								}
 								variant={`${data && data.isDone ? 'bg-light-secondary cursor-not-allowed bg-opacity-30 hover:bg-opacity-30' : 'bg-light-danger bg-opacity-90'} text-light-white text-sm hover:bg-opacity-100`}

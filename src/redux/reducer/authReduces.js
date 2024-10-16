@@ -8,6 +8,7 @@ import {
 
 const initialState = {
 	loading: false,
+	auth: [],
 	error: null,
 	isLogin: false,
 };
@@ -22,6 +23,7 @@ const authReducer = (state = initialState, action) => {
 		case FETCH_LOGIN_SUCCESS:
 			return {
 				...state,
+				loading: false,
 				isLogin: true,
 			};
 		case FETCH_UPDATE_SUCCESS:
@@ -32,6 +34,8 @@ const authReducer = (state = initialState, action) => {
 		case FETCH_LOGOUT_SUCCESS:
 			return {
 				...state,
+				auth: action.payload,
+				loading: false,
 				isLogin: false,
 			};
 		case FETCH_AUTH_FAILURE:
