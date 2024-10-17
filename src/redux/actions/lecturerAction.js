@@ -1,4 +1,4 @@
-import { getLecturer, getLecturerByDepartment, postLecturer, updateLecturer, deleteLecturer } from "../../services/lecturer";
+import { getLecturer, postLecturer, updateLecturer, deleteLecturer } from "../../services/lecturer";
 export const FETCH_LECTURER_REQUEST = 'FETCH_LECTURER_REQUEST'
 export const FETCH_LECTURER_SUCCESS = 'FETCH_LECTURER_SUCCESS'
 export const POST_LECTURER_SUCCESS = 'POST_LECTURER_SUCCESS'
@@ -14,18 +14,17 @@ export const fetchLecturersSuccess = (lecturer) => ({
     type: 'FETCH_LECTURER_SUCCESS',
     payload: lecturer
 })
-export const fetchLecturersByDepartmentSuccess = (department) => ({
-    type: 'FETCH_LECTURER_BY_DEPARTMENT_SUCCESS',
-    payload: department
-})
+
 export const postLecturersSuccess = (lecturer) => ({
     type: 'POST_LECTURER_SUCCESS',
     payload: lecturer
 })
+
 export const updateLecturersSuccess = (lecturer) => ({
     type: 'UPDATE_LECTURER_SUCCESS',
     payload: lecturer
 })
+
 export const deleteLecturersSuccess = (lecturer) => ({
     type: 'DELETE_LECTURER_SUCCESS',
     payload: lecturer
