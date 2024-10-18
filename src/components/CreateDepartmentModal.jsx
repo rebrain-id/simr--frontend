@@ -57,7 +57,7 @@ const CreateDepartmentModal = (props) => {
 			<div
 				className={`bg-black/25 w-full h-screen fixed top-0 left-0 right-0 bottom-0 z-10`}
 			>
-				<div className="absolute w-1/2 px-8 rounded-lg shadow-lg right-0 top-0 transform -translate-x-1/2 translate-y-1/4 bg-white">
+				<div className="absolute w-1/2 px-8 rounded-lg shadow-lg right-0 top-0 transform -translate-x-1/2 translate-y-1/2 bg-white">
 					<h2 className="text-2xl font-medium pb-8 py-2">
 						Tambah Program Studi
 					</h2>
@@ -78,7 +78,7 @@ const CreateDepartmentModal = (props) => {
 							label="Nama Program Studi"
 							note="Wajib diisi"
 							labelvariant="text-md pb-2"
-							inputvariant="text-md"
+							inputvariant="text-md w-full"
 							placeholder="Nama Program Studi"
 							onChange={handleFormInput}
 							value={formik.values.name}
