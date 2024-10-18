@@ -154,7 +154,7 @@ const EditLecturerDropdown = (props) => {
 				</div>
 				<div className="pt-1">
 					<Input
-						type="number"
+						type="text"
 						name="phoneNumber"
 						variant="text-xs w-full py-2"
 						label="No. Whatsapp"
@@ -172,7 +172,6 @@ const EditLecturerDropdown = (props) => {
 						label="Program Studi"
 						labelVariant="w-1/5 text-sx"
 						selectVariant="w-full text-xs"
-						placeholder="082********"
 						onChange={handleChange}
 						value={formik.values.departmentUuid}
 					>
