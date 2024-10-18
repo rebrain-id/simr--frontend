@@ -3,6 +3,7 @@ import {
 	checkMemberAgenda,
 	createAgenda,
 	deleteDetailAgenda,
+	updateDepartmentAgenda,
 	updateDetailAgenda,
 } from '../actions/agendaAction';
 
@@ -12,6 +13,7 @@ const initialState = {
 	agendaThisMonth: [],
 	agendaByDate: [],
 	agendaHistory: [],
+	updateMember: [],
 	detailAgenda: [],
 	showSidebar: false,
 	loading: false,
@@ -82,8 +84,7 @@ const agendaSlice = createSlice({
 			})
 			.addCase(checkMemberAgenda.rejected, (state, action) => {
 				state.loading = false;
-				state.error =
-					action.payload || 'terjadi kesalahan tidak terduga';
+				state.error = action.payload;
 			})
 			.addCase(createAgenda.fulfilled, (state, action) => {
 				state.loading = false;
@@ -103,6 +104,21 @@ const agendaSlice = createSlice({
 				state.isUpdated = true;
 			})
 			.addCase(updateDetailAgenda.rejected, (state, action) => {
+				state.loading = false;
+				state.error = action.error.message;
+			})
+			.addCase(updateDepartmentAgenda.fulfilled, (state, action) => {
+				state.loading = false;
+				state.agenda.push(action.payload.data);
+				state.isUpdated = true;
+
+				if (
+					state.detailAgenda.uuid === action.payload.detailAgendaUuid
+				) {
+					state.detailAgenda.members = action.payload.updatedMembers;
+				}
+			})
+			.addCase(updateDepartmentAgenda.rejected, (state, action) => {
 				state.loading = false;
 				state.error = action.error.message;
 			})

@@ -19,6 +19,7 @@ import {
 	getDetailAgenda,
 	getHistoryAgenda,
 	updateAgenda,
+	updateMemberAgenda,
 } from '../../services/agenda';
 import { getTypeAgenda } from '../../services/typeAgenda';
 import { jwtDecode } from 'jwt-decode';
@@ -270,6 +271,23 @@ export const updateDetailAgenda = createAsyncThunk(
 			}
 
 			const response = await updateAgenda(data.uuid, data);
+
+			return response;
+		} catch (error) {
+			console.log(error);
+			dispatch(fetchAgendaFailure(error.message));
+
+			return rejectWithValue(error.message);
+		}
+	},
+);
+
+export const updateDepartmentAgenda = createAsyncThunk(
+	'agenda/updateDepartmentAgenda',
+
+	async ({ data }, { dispatch, rejectWithValue }) => {
+		try {
+			const response = await updateMemberAgenda(data);
 
 			return response;
 		} catch (error) {
