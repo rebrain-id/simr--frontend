@@ -84,7 +84,7 @@ const CreateLecturerModal = (props) => {
 							label="Nama Dosen"
 							note="Wajib diisi"
 							labelvariant="text-md pb-2"
-							inputvariant="text-md"
+							inputvariant="text-md w-full"
 							placeholder="Nama Dosen"
 							onChange={handleFormInput}
 							value={formik.values.name}
@@ -96,19 +96,19 @@ const CreateLecturerModal = (props) => {
 							label="E-mail"
 							note="Wajib diisi"
 							labelvariant="text-md py-2"
-							inputvariant="text-md"
+							inputvariant="text-md w-full"
 							placeholder="example@mail.com"
 							onChange={handleFormInput}
 							value={formik.values.email}
 						/>
 						<Input
 							variant="flex flex-col "
-							type="number"
+							type="text"
 							name="phoneNumber"
 							label="No. Whatsapp"
 							note="Wajib diisi"
 							labelvariant="text-md py-2"
-							inputvariant="text-md"
+							inputvariant="text-md w-full"
 							placeholder="082********"
 							onChange={handleFormInput}
 							value={formik.values.phoneNumber}
@@ -116,7 +116,7 @@ const CreateLecturerModal = (props) => {
 						<Select
 							variant="flex flex-col"
 							name="departmentUuid"
-							label="No. Whatsapp"
+							label="Program Studi"
 							note="Wajib diisi"
 							labelVariant="text-md py-2"
 							selectVariant="text-md"
@@ -125,7 +125,7 @@ const CreateLecturerModal = (props) => {
 							value={formik.values.departmentUuid}
 						>
 							<option value="" disabled>
-								Pilih Fakultas
+								Pilih Program Studi
 							</option>
 							{departments.map((item, index) => (
 								<option value={item.uuid} key={index}>
