@@ -13,7 +13,7 @@ import {
 	deleteDetailAgenda,
 	updateDetailAgenda,
 } from '../redux/actions/agendaAction';
-import { fetchDepartments } from '../redux/actions/departmentAction';
+import { fetchDepartmentsOptions } from '../redux/actions/departmentAction';
 import Toggel from '../elements/forms/Toggel';
 import { API_URL } from '../services/config';
 import ModalAddAnggota from './ModalAddAnggota';
@@ -26,6 +26,7 @@ const DetailAgendaSidebar = (props) => {
 	const [showModal, setShowModal] = useState(false);
 	const [showModalWarning, setShowModalWarning] = useState(false);
 	const [showModalDanger, setShowModalDanger] = useState(false);
+	const [member, setMember] = useState([]);
 
 	const dispatch = useDispatch();
 	const typeAgenda = useSelector((state) => state.typeAgenda.typeAgenda);
@@ -35,15 +36,22 @@ const DetailAgendaSidebar = (props) => {
 
 	useEffect(() => {
 		dispatch(fetchTypeAgenda());
-		dispatch(fetchDepartments());
+		dispatch(fetchDepartmentsOptions());
 	}, [dispatch]);
 
-	const member = sessionStorage.getItem('member') || null;
+	useEffect(() => {
+		const storedMember = JSON.parse(sessionStorage.getItem('member'));
+		if (storedMember) {
+			setMember(storedMember);
+		}
+	}, []);
+
+	console.log(member);
 
 	const handleCloseModal = (e) => {
 		if (e.target === e.currentTarget) {
-			member && sessionStorage.removeItem('member');
 			onClick();
+			sessionStorage.removeItem('member');
 		}
 	};
 
@@ -58,12 +66,11 @@ const DetailAgendaSidebar = (props) => {
 		attendees: data ? data.absent : '',
 		notulens: data ? data.notulen : '',
 		isDone: data ? data.isDone : false,
-		department: member ? JSON.parse(member) : data?.departments,
+		department: member,
 	});
 
 	const handleInputValue = (e) => {
 		const { name, type, value, checked, files } = e.target;
-
 		if (type === 'file') {
 			setInputValue((prev) => ({
 				...prev,
@@ -84,8 +91,8 @@ const DetailAgendaSidebar = (props) => {
 			);
 
 			if (response && response.payload.statusCode === 200) {
-				member && sessionStorage.removeItem('member');
 				dispatch(closeDetailAgenda());
+				sessionStorage.removeItem('member');
 			}
 		} catch (error) {
 			console.log(error);
@@ -95,13 +102,13 @@ const DetailAgendaSidebar = (props) => {
 	const handleDelete = async () => {
 		try {
 			setShowModalWarning(false);
-
 			const response = await dispatch(
 				deleteDetailAgenda({ uuid: inputValue.uuid }),
 			);
 
 			if (response && response.payload.data.statusCode === 200) {
 				dispatch(closeDetailAgenda());
+				sessionStorage.removeItem('member');
 			} else {
 				setShowModalDanger(true);
 			}
@@ -252,19 +259,20 @@ const DetailAgendaSidebar = (props) => {
 							<p className="text-xs font-medium">Anggota</p>
 
 							<div className="grid grid-cols-2 gap-2 mt-2">
-								{data?.departments?.map((dept, index) => (
-									<p
-										className="text-xs bg-light-gray p-2 rounded text-center"
-										key={index}
-									>
-										{dept.name}
-									</p>
-								))}
+								{data?.departments &&
+									data?.departments.map((dept, index) => (
+										<p
+											className="text-xs bg-light-gray p-2 rounded text-center"
+											key={index}
+										>
+											{dept.name}
+										</p>
+									))}
 							</div>
 
 							<div className="mt-1 flex justify-end">
 								<Button
-									text="Tambah Anggota"
+									text="Update Anggota"
 									variant={`bg-light-primary bg-opacity-90 text-light-white text-xs hover:bg-opacity-100`}
 									onClick={handleOpenModal}
 								/>
@@ -330,38 +338,34 @@ const DetailAgendaSidebar = (props) => {
 							onChange={!data?.isDone && handleInputValue}
 							isChecked={inputValue.isDone}
 						/>
+					</section>
 
-						<div className="mt-5 flex items-center justify-between">
-							<div className="flex items-center gap-2">
-								<Button
-									text="Update"
-									variant={`${data && data.isDone ? 'bg-light-secondary cursor-not-allowed bg-opacity-30 hover:bg-opacity-30' : 'bg-light-primary bg-opacity-90'} text-light-white text-sm hover:bg-opacity-100`}
-									onClick={
-										data && data.isDone !== true
-											? handleSubmit
-											: () => {}
-									}
-								/>
-								<Button
-									onClick={() => {
-										member &&
-											sessionStorage.removeItem('member');
-										onClick();
-									}}
-									text="Batal"
-									variant="bg-light-primary bg-opacity-30 text-light-primary text-sm hover:bg-opacity-50"
-								/>
-							</div>
+					<section className="mt-5 flex items-center justify-between px-8">
+						<div className="flex items-center gap-2">
 							<Button
-								text="Hapus"
+								text="Update"
+								variant={`${data && data.isDone ? 'bg-light-secondary cursor-not-allowed bg-opacity-30 hover:bg-opacity-30' : 'bg-light-primary bg-opacity-90'} text-light-white text-sm hover:bg-opacity-100`}
 								onClick={
 									data && data.isDone !== true
-										? handleOpenWarningModal
+										? handleSubmit
 										: () => {}
 								}
-								variant={`${data && data.isDone ? 'bg-light-secondary cursor-not-allowed bg-opacity-30 hover:bg-opacity-30' : 'bg-light-danger bg-opacity-90'} text-light-white text-sm hover:bg-opacity-100`}
+							/>
+							<Button
+								onClick={handleCloseModal}
+								text="Batal"
+								variant="bg-light-primary bg-opacity-30 text-light-primary text-sm hover:bg-opacity-50"
 							/>
 						</div>
+						<Button
+							text="Hapus"
+							onClick={
+								data && data.isDone !== true
+									? handleOpenWarningModal
+									: () => {}
+							}
+							variant={`${data && data.isDone ? 'bg-light-secondary cursor-not-allowed bg-opacity-30 hover:bg-opacity-30' : 'bg-light-danger bg-opacity-90'} text-light-white text-sm hover:bg-opacity-100`}
+						/>
 					</section>
 				</div>
 			</div>

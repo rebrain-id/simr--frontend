@@ -222,11 +222,11 @@ export const updateAgenda = async (uuid, data) => {
 	form.append('absent', data.attendees);
 	form.append('notulen', data.notulens);
 	form.append('typeAgendaUuid', data.typeAgenda);
-	if (Array.isArray(data.department)) {
-		data.department.forEach((deptUuid) => {
-			form.append('departmentsUuid[]', deptUuid);
-		});
-	}
+	// if (Array.isArray(data.department)) {
+	// 	data.department.forEach((deptUuid) => {
+	// 		form.append('departmentsUuid[]', deptUuid);
+	// 	});
+	// }
 
 	if (data.isDone) {
 		form.append('isDone', data.isDone);
@@ -277,6 +277,42 @@ export const updateAgenda = async (uuid, data) => {
 		}
 		console.log(error);
 		throw error;
+	}
+};
+
+export const updateMemberAgenda = async (data) => {
+	const url = `${API_URL()}/v1/agendas/departments`;
+
+	try {
+		const response = await axios({
+			method: 'patch',
+			url: url,
+			data: data,
+			headers: {
+				Authorization: `Bearer ${access_token}`,
+			},
+		});
+		return response.data;
+	} catch (error) {
+		if (error.response && error.response.status === 401) {
+			try {
+				await refreshTokenRequest();
+
+				const response = await axios({
+					method: 'patch',
+					url: url,
+					data: data,
+					headers: {
+						Authorization: `Bearer ${access_token}`,
+					},
+				});
+
+				return response.data;
+			} catch (error) {
+				console.log(error);
+				throw error;
+			}
+		}
 	}
 };
 

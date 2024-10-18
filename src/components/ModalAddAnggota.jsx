@@ -5,7 +5,11 @@ import FormInputCheckbox from '../elements/forms/FormInputCheckbox';
 import Button from '../elements/Button';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { checkMemberAgenda } from '../redux/actions/agendaAction';
+import {
+	checkMemberAgenda,
+	fetchDetailAgenda,
+	updateDepartmentAgenda,
+} from '../redux/actions/agendaAction';
 
 const ModalAddAnggota = (props) => {
 	const {
@@ -86,6 +90,34 @@ const ModalAddAnggota = (props) => {
 		onClick();
 	};
 
+	const handleUpdateMember = async (e) => {
+		e.preventDefault();
+
+		const data = {
+			departmentsUuid: selectedDepartments,
+			detailAgendaUuid: uuid,
+		};
+
+		try {
+			const response = await dispatch(updateDepartmentAgenda({ data }));
+
+			console.log(response);
+
+			if (response && response.payload.statusCode === 200) {
+				dispatch(fetchDetailAgenda({ uuid }));
+				sessionStorage.setItem(
+					'member',
+					JSON.stringify(selectedDepartments),
+				);
+				onClick();
+			}
+		} catch (error) {
+			console.log(error);
+		}
+	};
+
+	console.log(type);
+
 	return (
 		<div
 			onClick={handleCloseModal}
@@ -93,7 +125,9 @@ const ModalAddAnggota = (props) => {
 		>
 			<div className="bg-light-white p-5 rounded w-1/2 shadow-md">
 				<div className="w-full flex items-center justify-between mb-5">
-					<h1 className="font-semibold">Tambah Anggota</h1>
+					<h1 className="font-semibold">
+						{type === 'add' ? 'Tambah Anggota' : 'Update Anggota'}
+					</h1>
 					<FontAwesomeIcon
 						icon={faXmark}
 						onClick={onClick}
@@ -148,8 +182,17 @@ const ModalAddAnggota = (props) => {
 							variant="bg-light-primary bg-opacity-30 text-light-primary text-sm hover:bg-opacity-50"
 						/>
 						<Button
-							onClick={handleSaveMember}
-							text="Simpan Anggota"
+							type="button"
+							onClick={
+								type === 'add'
+									? handleSaveMember
+									: handleUpdateMember
+							}
+							text={
+								type === 'add'
+									? 'Simpan Anggota'
+									: 'Update Anggota'
+							}
 							variant={`bg-opacity-90 ${!checkConflict ? 'bg-light-gray text-light-white cursor-not-allowed' : 'bg-light-primary text-light-white text-sm hover:bg-opacity-100'}`}
 							disabled={!checkConflict}
 						/>
