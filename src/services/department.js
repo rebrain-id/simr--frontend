@@ -23,6 +23,24 @@ export const getDepartment = async () => {
 	return response;
 };
 
+export const getDepartmentOption = async () => {
+	const url = `${API_URL()}/v1/department/options`;
+
+	const response = await axios({
+		method: 'get',
+		url: url,
+		headers: { Authorization: `Bearer ${access_token}` },
+	})
+		.then((res) => {
+			return res.data.data;
+		})
+		.catch((err) => {
+			console.log(err);
+		});
+
+	return response;
+};
+
 export const postDepartment = async (body) => {
 	const url = `${API_URL()}/v1/department/`;
 

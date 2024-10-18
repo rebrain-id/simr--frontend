@@ -5,6 +5,7 @@ import {
 	POST_DEPARTMENT_SUCCESS,
 	UPDATE_DEPARTMENT_SUCCESS,
 	DELETE_DEPARTMENT_SUCCESS,
+	FETCH_DEPARTMENT_OPTIONS_SUCCESS,
 } from '../actions/departmentAction';
 
 const initialState = {
@@ -23,6 +24,13 @@ const departmentReducer = (state = initialState, action) => {
 				error: '',
 			};
 		case FETCH_DEPARTMENT_SUCCESS:
+			return {
+				...state,
+				loading: false,
+				department: action.payload,
+				error: '',
+			};
+		case FETCH_DEPARTMENT_OPTIONS_SUCCESS:
 			return {
 				...state,
 				loading: false,

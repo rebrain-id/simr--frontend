@@ -12,7 +12,7 @@ import { useNavigate } from 'react-router-dom';
 import Alert from '../../elements/Alert';
 import { ErrorMessage, Form, Formik } from 'formik';
 import * as Yup from 'yup';
-import { fetchDepartments } from '../../redux/actions/departmentAction';
+import { fetchDepartmentsOptions } from '../../redux/actions/departmentAction';
 import { jwtDecode } from 'jwt-decode';
 
 const AddAgenda = () => {
@@ -30,7 +30,7 @@ const AddAgenda = () => {
 
 	useEffect(() => {
 		dispatch(fetchTypeAgenda());
-		dispatch(fetchDepartments());
+		dispatch(fetchDepartmentsOptions());
 	}, [dispatch]);
 
 	const [openModal, setOpenModal] = useState(false);
@@ -74,11 +74,12 @@ const AddAgenda = () => {
 		visible: false,
 	});
 
+	const departmentFromStorage = JSON.parse(sessionStorage.getItem('member'));
+
 	const handleSubmitData = async (values, { setSubmitting }) => {
 		try {
-			const departmentFromStorage = JSON.parse(
-				sessionStorage.getItem('member'),
-			);
+			const uniqueDepartments = [...new Set(departmentFromStorage)];
+
 			const data = {
 				title: values.title,
 				description: values.description,
@@ -86,7 +87,7 @@ const AddAgenda = () => {
 				finish: moment(values.to).format('YYYY-MM-DD HH:mm:ss'),
 				typeAgendaUuid: values.typeAgenda,
 				location: values.location,
-				departmentsUuid: departmentFromStorage,
+				departmentsUuid: uniqueDepartments,
 				username: username,
 			};
 
