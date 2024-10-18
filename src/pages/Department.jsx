@@ -22,9 +22,8 @@ const Department = () => {
 
 	return (
 		<>
-			{openModal && <CreateModal close={() => setOpenModal(false)} />}
 			<main className="bg-white px-10 pb-10 rounded drop-shadow-bottom mt-5">
-				<div className="flex items-center justify-between pb-7 pt-10">
+				<div className="flex items-center justify-between pb-7 pt-4">
 					<h1 className="text-base font-semibold">Program Studi</h1>
 					<div className="flex items-center bg-light-primary text-white rounded text-sm">
 						<FontAwesomeIcon
@@ -55,6 +54,7 @@ const Department = () => {
 					)}
 				</section>
 			</main>
+			{openModal && <CreateModal close={() => setOpenModal(false)} />}
 		</>
 	);
 };

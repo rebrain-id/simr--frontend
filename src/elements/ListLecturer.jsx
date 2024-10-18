@@ -10,18 +10,19 @@ const ListLecturer = (props) => {
 		department,
 		departmentUuid,
 		dep,
-		data,
+		lecturer,
 	} = props;
 	const [isOpenLecturer, setIsVisible] = useState(false);
 	const [isOpenEdit, setIsOpenEdit] = useState('');
 	const handleOpenLecturer = () => setIsVisible(!isOpenLecturer);
 	const handleOpenEdit = (uuid) => setIsOpenEdit(uuid);
-	const handleCloseEdit = () => setIsOpenEdit('');
+	const handleCloseEdit = () => setIsOpenEdit(null);
 
 	return (
 		<>
 			<div
-				className={`mx-5 px-5 py-3 border rounded flex items-center cursor-pointer border-light-primary hover:bg-light-primary hover:text-white transition ease-in 3s ${
+				k
+				className={`px-5 py-3 border rounded flex items-center cursor-pointer border-light-primary hover:bg-light-primary hover:text-white transition ease-in 3s ${
 					isOpenLecturer && 'bg-light-primary text-white'
 				}`}
 				onClick={handleOpenLecturer}
@@ -29,7 +30,7 @@ const ListLecturer = (props) => {
 				<h2 className="text-sm font-medium">{dep}</h2>
 			</div>
 			{isOpenLecturer &&
-				data?.map((item) => (
+				lecturer?.map((item) => (
 					<>
 						<div
 							key={item.uuid}
@@ -49,12 +50,13 @@ const ListLecturer = (props) => {
 						{isOpenEdit === item.uuid && (
 							<EditDropdown
 								isOpenEdit="px-5 bg-white shadow-md rounded pb-4 h-full"
-								uuid={uuid}
-								name={name}
-								email={email}
-								phoneNumber={phoneNumber}
-								department={department}
-								departmentUuid={departmentUuid}
+								key={item.uuid}
+								uuid={item.uuid}
+								name={item.name}
+								email={item.email}
+								phoneNumber={item.phoneNumber}
+								department={item.department.name}
+								departmentUuid={item.department.uuid}
 								close={() => handleCloseEdit(null)}
 							/>
 						)}
