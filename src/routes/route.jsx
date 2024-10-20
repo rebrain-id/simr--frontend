@@ -10,6 +10,7 @@ import AddAgenda from '../pages/agendas/AddAgenda';
 import NotFound from '../pages/errors/404';
 import ChangePassword from '../pages/auth/ChangePassword';
 import ProtectedRoute from './ProtectedRoute';
+import TypeAgenda from '../pages/typeAgenda';
 
 export const router = createBrowserRouter([
 	{
@@ -67,7 +68,7 @@ export const router = createBrowserRouter([
 			{
 				path: 'prodi',
 				element: (
-					<ProtectedRoute authorized={['PRODI', 'FAKULTAS']}>
+					<ProtectedRoute authorized={['FAKULTAS']}>
 						<Department />
 					</ProtectedRoute>
 				),
@@ -85,6 +86,14 @@ export const router = createBrowserRouter([
 				element: (
 					<ProtectedRoute authorized={['PRODI', 'FAKULTAS']}>
 						<ChangePassword />
+					</ProtectedRoute>
+				),
+			},
+			{
+				path: 'type-agenda',
+				element: (
+					<ProtectedRoute authorized={['FAKULTAS']}>
+						<TypeAgenda />
 					</ProtectedRoute>
 				),
 			},
