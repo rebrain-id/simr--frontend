@@ -209,8 +209,6 @@ export const updateAgenda = async (uuid, data) => {
 	const url = `${API_URL()}/v1/detail-agendas/${uuid}`;
 	const form = new FormData();
 
-	console.log(data);
-
 	form.append('title', data.title);
 	form.append('description', data.description);
 	form.append('start', moment.utc(data.start).format('YYYY-MM-DD HH:mm:ss'));
@@ -222,15 +220,15 @@ export const updateAgenda = async (uuid, data) => {
 	form.append('absent', data.attendees);
 	form.append('notulen', data.notulens);
 	form.append('typeAgendaUuid', data.typeAgenda);
+	if (data.isDone) {
+		form.append('isDone', data.isDone);
+	}
+
 	// if (Array.isArray(data.department)) {
 	// 	data.department.forEach((deptUuid) => {
 	// 		form.append('departmentsUuid[]', deptUuid);
 	// 	});
 	// }
-
-	if (data.isDone) {
-		form.append('isDone', data.isDone);
-	}
 
 	// form.forEach((value, key) => {
 	// 	console.log(`${key}: ${value}`);

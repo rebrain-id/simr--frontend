@@ -46,8 +46,6 @@ const DetailAgendaSidebar = (props) => {
 		}
 	}, []);
 
-	console.log(member);
-
 	const handleCloseModal = (e) => {
 		if (e.target === e.currentTarget) {
 			onClick();
@@ -89,6 +87,8 @@ const DetailAgendaSidebar = (props) => {
 			const response = await dispatch(
 				updateDetailAgenda({ data: inputValue }),
 			);
+
+			console.log(response);
 
 			if (response && response.payload.statusCode === 200) {
 				dispatch(closeDetailAgenda());
@@ -273,7 +273,7 @@ const DetailAgendaSidebar = (props) => {
 							<div className="mt-1 flex justify-end">
 								<Button
 									text="Update Anggota"
-									variant={`bg-light-primary bg-opacity-90 text-light-white text-xs hover:bg-opacity-100`}
+									variant={`${data && data.isDone ? 'bg-light-secondary cursor-not-allowed bg-opacity-30 hover:bg-opacity-30' : 'bg-light-primary bg-opacity-90'} text-light-white text-sm hover:bg-opacity-100`}
 									onClick={handleOpenModal}
 								/>
 							</div>

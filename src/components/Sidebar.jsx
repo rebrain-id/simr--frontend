@@ -8,10 +8,12 @@ import logo from '../assets/images/logo.png';
 import NavLink from '../elements/NavLink';
 import { useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import { jwtDecode } from 'jwt-decode';
 
 const Sidebar = () => {
 	const { pathname } = useLocation();
 	const isActive = (path) => pathname.includes(path);
+	const role = jwtDecode(sessionStorage.getItem('access_token')).role;
 
 	const [sidebarFull, setSidebarFull] = useState(() => {
 		const savedSize = localStorage.getItem('size');
@@ -79,15 +81,19 @@ const Sidebar = () => {
 						isActive('/agenda') ? 'bg-light-primary text-white' : ''
 					}
 				/>
-				<NavLink
-					isVisible={sidebarFull}
-					icon={faSitemap}
-					title="Program Studi"
-					to="/prodi"
-					variant={
-						isActive('/prodi') ? 'bg-light-primary text-white' : ''
-					}
-				/>
+				{role === 'FAKULTAS' && (
+					<NavLink
+						isVisible={sidebarFull}
+						icon={faSitemap}
+						title="Program Studi"
+						to="/prodi"
+						variant={
+							isActive('/prodi')
+								? 'bg-light-primary text-white'
+								: ''
+						}
+					/>
+				)}
 				<NavLink
 					isVisible={sidebarFull}
 					icon={faUserAlt}
