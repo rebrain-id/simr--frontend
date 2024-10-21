@@ -14,6 +14,14 @@ import TypeAgenda from '../pages/typeAgenda';
 
 export const router = createBrowserRouter([
 	{
+		path: '/login',
+		element: <Login />,
+	},
+	{
+		path: '*',
+		element: <NotFound />,
+	},
+	{
 		path: '/',
 		element: <MainLayout />,
 		children: [
@@ -38,22 +46,6 @@ export const router = createBrowserRouter([
 				element: (
 					<ProtectedRoute authorized={['PRODI', 'FAKULTAS']}>
 						<AgendaByDate />
-					</ProtectedRoute>
-				),
-			},
-			{
-				path: 'agenda/new',
-				element: (
-					<ProtectedRoute authorized={['PRODI', 'FAKULTAS']}>
-						<AddAgenda />
-					</ProtectedRoute>
-				),
-			},
-			{
-				path: 'agenda/date',
-				element: (
-					<ProtectedRoute authorized={['PRODI', 'FAKULTAS']}>
-						<AgendaByDate />,
 					</ProtectedRoute>
 				),
 			},
@@ -98,13 +90,5 @@ export const router = createBrowserRouter([
 				),
 			},
 		],
-	},
-	{
-		path: '/login',
-		element: <Login />,
-	},
-	{
-		path: '*',
-		element: <NotFound />,
 	},
 ]);

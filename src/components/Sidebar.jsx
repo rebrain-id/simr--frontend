@@ -13,7 +13,9 @@ import { jwtDecode } from 'jwt-decode';
 const Sidebar = () => {
 	const { pathname } = useLocation();
 	const isActive = (path) => pathname.includes(path);
-	const role = jwtDecode(sessionStorage.getItem('access_token')).role;
+	const role = sessionStorage.getItem('access_token')
+		? jwtDecode(sessionStorage.getItem('access_token')).role
+		: null;
 
 	const [sidebarFull, setSidebarFull] = useState(() => {
 		const savedSize = localStorage.getItem('size');
@@ -81,7 +83,7 @@ const Sidebar = () => {
 						isActive('/agenda') ? 'bg-light-primary text-white' : ''
 					}
 				/>
-				{role === 'FAKULTAS' && (
+				{role && role === 'FAKULTAS' && (
 					<NavLink
 						isVisible={sidebarFull}
 						icon={faSitemap}

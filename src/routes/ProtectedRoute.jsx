@@ -1,38 +1,49 @@
-import { jwtDecode } from 'jwt-decode';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import LoadingScreen from '../elements/LoadingScreen';
+import { jwtDecode } from 'jwt-decode';
 
 const ProtectedRoute = ({ authorized, children }) => {
-	const access_token = sessionStorage.getItem('access_token') || null;
-	const [isAuthorized, setIsAuthorized] = useState(false);
-
+	const [isAuthorized, setIsAuthorized] = useState(null);
+	const [loading, setLoading] = useState(true);
 	const navigate = useNavigate();
 
 	useEffect(() => {
-		if (!access_token) {
-			navigate('/login');
+		const token = sessionStorage.getItem('access_token') || null;
 
-			return;
-		}
+		if (token) {
+			try {
+				const decodedToken = jwtDecode(token);
+				const userRole = decodedToken.role;
 
-		const role = jwtDecode(access_token).role;
-		try {
-			if (!authorized.includes(role)) {
-				setIsAuthorized(false);
-			} else {
-				setIsAuthorized(true);
+				if (authorized.includes(userRole)) {
+					setIsAuthorized(true);
+				} else {
+					console.warn('Access denied: insufficient permissions');
+					navigate('/login');
+				}
+			} catch (error) {
+				console.error('Invalid token:', error);
+				navigate('/login');
 			}
-		} catch (error) {
-			console.log(error);
+		} else if (token === null) {
+			console.warn('No token found. Redirecting to login.');
 			navigate('/login');
 		}
-	}, [access_token, authorized, navigate]);
 
-	if (isAuthorized === false) {
-		navigate(-1);
+		setLoading(false);
+	}, [authorized, navigate]);
+
+	if (loading) {
+		return <LoadingScreen />;
 	}
 
-	return children;
+	// Menangani kasus isAuthorized yang null
+	if (isAuthorized === null) {
+		return null; // Atau bisa return <LoadingScreen /> jika diinginkan
+	}
+
+	return isAuthorized ? children : null; // Jika tidak diizinkan, jangan render apa pun
 };
 
 export default ProtectedRoute;
