@@ -8,6 +8,8 @@ import {
 } from '../redux/actions/departmentAction';
 import { useDispatch } from 'react-redux';
 import Alert from '../elements/Alert';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faXmark } from '@fortawesome/free-solid-svg-icons';
 
 const CreateDepartmentModal = (props) => {
 	const { close } = props;
@@ -52,15 +54,30 @@ const CreateDepartmentModal = (props) => {
 		formik.setFieldValue(e.target.name, e.target.value);
 	};
 
+	const handleClose = (e) => {
+		if (e.target === e.currentTarget) {
+			close();
+		}
+	};
+
 	return (
 		<>
 			<div
-				className={`bg-black/25 w-full h-screen fixed top-0 left-0 right-0 bottom-0 z-10`}
+				onClick={handleClose}
+				className={`w-full h-full absolute top-0 left-0 right-0 flex items-center justify-center z-30 bg-light-secondary/40`}
 			>
-				<div className="absolute w-1/2 px-8 rounded-lg shadow-lg right-0 top-0 transform -translate-x-1/2 translate-y-1/2 bg-white">
-					<h2 className="text-2xl font-medium pb-8 py-2">
-						Tambah Program Studi
-					</h2>
+				<div className="bg-light-white p-5 rounded w-1/2 shadow-md">
+					<section className="flex items-center justify-between mb-5">
+						<h2 className="text-md font-medium">
+							Tambah Program Studi
+						</h2>
+
+						<FontAwesomeIcon
+							icon={faXmark}
+							className="cursor-pointer"
+							onClick={close}
+						/>
+					</section>
 					{showAlert.visible && (
 						<Alert
 							status={showAlert.status}
@@ -70,38 +87,47 @@ const CreateDepartmentModal = (props) => {
 							}
 						/>
 					)}
-					<form onSubmit={formik.handleSubmit}>
+					<form
+						className="flex flex-col gap-3"
+						onSubmit={formik.handleSubmit}
+					>
 						<Input
 							variant="flex flex-col"
 							type="text"
 							name="name"
-							label="Nama Program Studi"
-							note="Wajib diisi"
-							labelvariant="text-md pb-2"
-							inputvariant="text-md w-full"
-							placeholder="Nama Program Studi"
+							label="Program Studi"
+							// note="Wajib diisi"
+							labelvariant="text-xs font-medium pb-2"
+							inputvariant="w-full"
+							// placeholder="Nama Program Studi"
 							onChange={handleFormInput}
 							value={formik.values.name}
 						/>
-						{/* <Input
+						<Input
 							variant="flex flex-col"
 							type="text"
+							name="username"
 							label="Username"
-							note="Wajib diisi"
-							labelvariant="text-md py-2"
-							inputvariant="text-md"
-							placeholder="Username"
+							// note="Wajib diisi"
+							labelvariant="text-xs font-medium pb-2"
+							inputvariant="w-full"
+							// placeholder="Username Program Studi"
+							onChange={handleFormInput}
+							value={formik.values.name}
 						/>
 						<Input
 							variant="flex flex-col"
-							type="password"
+							type="text"
+							name="password"
 							label="Password"
-							note="Wajib diisi"
-							labelvariant="text-md py-2"
-							inputvariant="text-md"
-							placeholder="*********"
-						/> */}
-						<div className="flex items-center justify-end gap-4 pb-10">
+							// note="Wajib diisi"
+							labelvariant="text-xs font-medium pb-1"
+							inputvariant="w-full"
+							isPassword
+							onChange={handleFormInput}
+							value={formik.values.name}
+						/>
+						<div className="flex items-center justify-end gap-4">
 							{isSubmit ? (
 								<Button
 									type="submit"

@@ -53,16 +53,16 @@ const FormInput = (props) => {
 					</label>
 
 					{isPassword && (
-						<button
+						<div
 							type="button"
 							onClick={handleShowPassword}
-							className="text-xs text-light-primary hover:text-primary"
+							className="text-xs text-light-primary hover:text-primary cursor-pointer"
 						>
 							<FontAwesomeIcon icon={faEye} className="me-1" />
 							{!showPassword
 								? 'Lihat Password'
 								: 'Sembunyikan Password'}
-						</button>
+						</div>
 					)}
 				</div>
 				<input
