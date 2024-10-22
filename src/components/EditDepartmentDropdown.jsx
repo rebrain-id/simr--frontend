@@ -102,7 +102,7 @@ const EditDepartmentDropdown = (props) => {
 					}
 				/>
 			)}
-			<div className="px-5 bg-white shadow-md rounded pb-4">
+			<div className="px-5 bg-white drop-shadow-bottom rounded pb-5">
 				<form onSubmit={formik.handleSubmit}>
 					<div className="w-full flex items-center">
 						<FormInput
@@ -111,14 +111,14 @@ const EditDepartmentDropdown = (props) => {
 							variant="flex items-center text-sm w-full gap-10 py-2"
 							label="Nama Program Studi"
 							placeholder="Nama Program Studi"
-							labelvariant="w-1/5"
-							inputvariant="w-5/6"
+							labelvariant="text-xs"
+							inputvariant="w-full mt-1"
 							value={formik.values.name}
 							onChange={handleFormInput}
 						/>
 					</div>
-					<div className="flex items-center justify-between gap-8">
-						<div className="flex items-center gap-8">
+					<div className="flex items-center justify-between gap-8 mt-3">
+						<div className="flex items-center gap-4">
 							{isUpdating ? (
 								<Button
 									text="Updating..."

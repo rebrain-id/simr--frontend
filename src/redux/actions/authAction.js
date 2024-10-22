@@ -2,10 +2,12 @@ import { jwtDecode } from 'jwt-decode';
 import {
 	loginRequest,
 	logoutRequest,
+	registerRequest,
 	updateUserRequest,
 } from '../../services/auth';
 
 export const FETCH_AUTH_REQUEST = 'FETCH_AUTH_REQUEST';
+export const FETCH_REGISTER_SUCCESS = 'FETCH_REGISTER_SUCCESS';
 export const FETCH_LOGIN_SUCCESS = 'FETCH_LOGIN_SUCCESS';
 export const FETCH_UPDATE_SUCCESS = 'FETCH_UPDATE_SUCCESS';
 export const FETCH_LOGOUT_SUCCESS = 'FETCH_LOGOUT_SUCCESS';
@@ -13,6 +15,11 @@ export const FETCH_AUTH_FAILURE = 'FETCH_AUTH_FAILURE';
 
 export const fetchAuthRequest = () => ({
 	type: FETCH_AUTH_REQUEST,
+});
+
+export const fetchRegisterSuccess = (response) => ({
+	payload: response,
+	type: FETCH_REGISTER_SUCCESS,
 });
 
 export const fetchLoginSuccess = () => ({
@@ -31,6 +38,22 @@ export const fetchLogoutSuccess = (response) => ({
 export const fetchAuthFailure = () => ({
 	type: FETCH_AUTH_FAILURE,
 });
+
+export const postRegister = (data) => {
+	return async (dispatch) => {
+		dispatch(fetchAuthRequest());
+
+		try {
+			const response = await registerRequest(data);
+
+			dispatch(fetchRegisterSuccess(response));
+
+			return response;
+		} catch (error) {
+			console.log(error);
+		}
+	};
+};
 
 export const postLogin = (data) => {
 	return async (dispatch) => {

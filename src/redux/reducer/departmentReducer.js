@@ -6,6 +6,7 @@ import {
 	UPDATE_DEPARTMENT_SUCCESS,
 	DELETE_DEPARTMENT_SUCCESS,
 	FETCH_DEPARTMENT_OPTIONS_SUCCESS,
+	MESSAGE,
 } from '../actions/departmentAction';
 
 const initialState = {
@@ -13,6 +14,7 @@ const initialState = {
 	loading: false,
 	error: 'Program Studi not found',
 	isUpdated: true,
+	message: '',
 };
 
 const departmentReducer = (state = initialState, action) => {
@@ -60,6 +62,11 @@ const departmentReducer = (state = initialState, action) => {
 					(department) => department.uuid !== action.payload,
 				),
 				error: '',
+			};
+		case MESSAGE:
+			return {
+				...state,
+				message: action.payload,
 			};
 		case FETCH_DEPARTMENT_FAILURE:
 			return {

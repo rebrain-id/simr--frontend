@@ -7,7 +7,6 @@ import {
 	postDepartmentData,
 } from '../redux/actions/departmentAction';
 import { useDispatch } from 'react-redux';
-import Alert from '../elements/Alert';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 
@@ -15,37 +14,23 @@ const CreateDepartmentModal = (props) => {
 	const { close } = props;
 	const dispatch = useDispatch();
 	const [isSubmit, setIsSubmit] = useState(false);
-	const [showAlert, setShowAlert] = useState({
-		status: '',
-		message: '',
-		visible: false,
-	});
 
 	const formik = useFormik({
 		initialValues: {
 			name: '',
+			username: '',
+			password: '',
 		},
-		onSubmit: async (values, { resetForm }) => {
+		onSubmit: async (values) => {
 			setIsSubmit(true);
 			const response = await dispatch(postDepartmentData(values));
+
 			if (response && response.statusCode === 201) {
-				setTimeout(() => {
-					resetForm();
-					setIsSubmit(false);
-					setShowAlert({
-						status: 'success',
-						message: 'Berhasil menambahkan program studi',
-						visible: true,
-					});
-				}, 500);
+				close();
 				dispatch(fetchDepartments());
-			} else if (response && response.statusCode === 400) {
+			} else {
 				setIsSubmit(false);
-				setShowAlert({
-					status: 'danger',
-					message: 'Gagal menambahkan program studi',
-					visible: true,
-				});
+				dispatch(fetchDepartments());
 			}
 		},
 	});
@@ -78,15 +63,6 @@ const CreateDepartmentModal = (props) => {
 							onClick={close}
 						/>
 					</section>
-					{showAlert.visible && (
-						<Alert
-							status={showAlert.status}
-							message={showAlert.message}
-							onClick={() =>
-								setShowAlert({ ...showAlert, visible: false })
-							}
-						/>
-					)}
 					<form
 						className="flex flex-col gap-3"
 						onSubmit={formik.handleSubmit}
@@ -113,7 +89,7 @@ const CreateDepartmentModal = (props) => {
 							inputvariant="w-full"
 							// placeholder="Username Program Studi"
 							onChange={handleFormInput}
-							value={formik.values.name}
+							value={formik.values.username}
 						/>
 						<Input
 							variant="flex flex-col"
@@ -125,7 +101,7 @@ const CreateDepartmentModal = (props) => {
 							inputvariant="w-full"
 							isPassword
 							onChange={handleFormInput}
-							value={formik.values.name}
+							value={formik.values.password}
 						/>
 						<div className="flex items-center justify-end gap-4">
 							{isSubmit ? (
