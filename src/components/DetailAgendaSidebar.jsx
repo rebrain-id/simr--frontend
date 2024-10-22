@@ -19,9 +19,13 @@ import { API_URL } from '../services/config';
 import ModalAddAnggota from './ModalAddAnggota';
 import ModalWarning from '../elements/modal/ModalWarning';
 import ModalDanger from '../elements/modal/ModalDanger';
+import { jwtDecode } from 'jwt-decode';
 
 const DetailAgendaSidebar = (props) => {
 	const { onClick, data, isShow = false, variant } = props;
+
+	const access_token = sessionStorage.getItem('access_token') || null;
+	const username = jwtDecode(access_token).username;
 
 	const [showModal, setShowModal] = useState(false);
 	const [showModalWarning, setShowModalWarning] = useState(false);
@@ -128,6 +132,8 @@ const DetailAgendaSidebar = (props) => {
 	const handleOpenDangerModal = () => {
 		setShowModalDanger(!showModalDanger);
 	};
+
+	console.log(data);
 
 	return (
 		<>
@@ -270,13 +276,15 @@ const DetailAgendaSidebar = (props) => {
 									))}
 							</div>
 
-							<div className="mt-1 flex justify-end">
-								<Button
-									text="Update Anggota"
-									variant={`${data && data.isDone ? 'bg-light-secondary cursor-not-allowed bg-opacity-30 hover:bg-opacity-30' : 'bg-light-primary bg-opacity-90'} text-light-white text-sm hover:bg-opacity-100`}
-									onClick={handleOpenModal}
-								/>
-							</div>
+							{username === data?.username && (
+								<div className="mt-1 flex justify-end">
+									<Button
+										text="Update Anggota"
+										variant={`${data && data.isDone ? 'bg-light-secondary cursor-not-allowed bg-opacity-30 hover:bg-opacity-30' : 'bg-light-primary bg-opacity-90'} text-light-white text-sm hover:bg-opacity-100`}
+										onClick={handleOpenModal}
+									/>
+								</div>
+							)}
 						</div>
 
 						{data?.notulen ? (
@@ -342,30 +350,35 @@ const DetailAgendaSidebar = (props) => {
 
 					<section className="mt-5 flex items-center justify-between px-8">
 						<div className="flex items-center gap-2">
-							<Button
-								text="Update"
-								variant={`${data && data.isDone ? 'bg-light-secondary cursor-not-allowed bg-opacity-30 hover:bg-opacity-30' : 'bg-light-primary bg-opacity-90'} text-light-white text-sm hover:bg-opacity-100`}
-								onClick={
-									data && data.isDone !== true
-										? handleSubmit
-										: () => {}
-								}
-							/>
+							{username === data?.author && (
+								<Button
+									text="Update"
+									variant={`${data && data.isDone ? 'bg-light-secondary cursor-not-allowed bg-opacity-30 hover:bg-opacity-30' : 'bg-light-primary bg-opacity-90'} text-light-white text-sm hover:bg-opacity-100`}
+									onClick={
+										data && data.isDone !== true
+											? handleSubmit
+											: () => {}
+									}
+								/>
+							)}
 							<Button
 								onClick={handleCloseModal}
 								text="Batal"
 								variant="bg-light-primary bg-opacity-30 text-light-primary text-sm hover:bg-opacity-50"
 							/>
 						</div>
-						<Button
-							text="Hapus"
-							onClick={
-								data && data.isDone !== true
-									? handleOpenWarningModal
-									: () => {}
-							}
-							variant={`${data && data.isDone ? 'bg-light-secondary cursor-not-allowed bg-opacity-30 hover:bg-opacity-30' : 'bg-light-danger bg-opacity-90'} text-light-white text-sm hover:bg-opacity-100`}
-						/>
+
+						{username === data?.author && (
+							<Button
+								text="Hapus"
+								onClick={
+									data && data.isDone !== true
+										? handleOpenWarningModal
+										: () => {}
+								}
+								variant={`${data && data.isDone ? 'bg-light-secondary cursor-not-allowed bg-opacity-30 hover:bg-opacity-30' : 'bg-light-danger bg-opacity-90'} text-light-white text-sm hover:bg-opacity-100`}
+							/>
+						)}
 					</section>
 				</div>
 			</div>
