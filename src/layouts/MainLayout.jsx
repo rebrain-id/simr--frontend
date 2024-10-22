@@ -56,10 +56,13 @@ const MainLayout = () => {
 	useEffect(() => {
 		if (message.status) {
 			setShowAlert(true);
+			setTimeout(() => {
+				setShowAlert(false);
+			}, 5000);
 		} else {
 			setTimeout(() => {
 				setShowAlert(false);
-			}, 1000);
+			}, 5000);
 		}
 	}, [message]);
 
