@@ -51,7 +51,7 @@ export const getAgenda = async (data) => {
 export const getHistoryAgenda = async (data) => {
 	const username = jwtDecode(access_token).username;
 
-	const url = `${API_URL()}/v1/detail-agendas?username=${username}&start=${data.start}&finish=${data.finish}&skip=${data.skip}&take=${data.take}`;
+	const url = `${API_URL()}/v1/detail-agendas?username=${username}&start=${data.start}&finish=${data.finish}&page=${data.skip}&limit=${data.take}&isDone=true`;
 
 	try {
 		const response = await axios({

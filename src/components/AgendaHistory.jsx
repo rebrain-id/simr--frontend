@@ -27,7 +27,7 @@ const AgendaHistory = () => {
 	const getDateTo = searchParam.get('to') || 'null';
 	const getType = searchParam.get('type') || null;
 	const getSkip = searchParam.get('skip') || 0;
-	const getTake = 3;
+	const getTake = 10;
 
 	useEffect(() => {
 		dispatch(

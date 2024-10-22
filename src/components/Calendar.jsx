@@ -162,7 +162,9 @@ const Calendar = () => {
 								text="Daftar"
 							/>
 							<ButtonMenu
-								link={'/agenda?menu=history'}
+								link={
+									'/agenda?menu=history&from=null&to=null&type=null&take=10&skip=1'
+								}
 								variant={`rounded-e-md border-y border-e ${menu === 'history' ? 'bg-light-primary text-white' : ''}`}
 								text="Riwayat"
 							/>
@@ -208,7 +210,9 @@ const Calendar = () => {
 								text="Daftar"
 							/>
 							<ButtonMenu
-								link={'/agenda?menu=history'}
+								link={
+									'/agenda?menu=history&from=null&to=null&type=null&take=10&skip=1'
+								}
 								variant={`rounded-e-md border-y border-e bg-light-primary text-white`}
 								text="Riwayat"
 							/>
