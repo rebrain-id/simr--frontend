@@ -14,6 +14,8 @@ export const POST_DEPARTMENT_SUCCESS = 'POST_DEPARTMENT_SUCCESS';
 export const UPDATE_DEPARTMENT_SUCCESS = 'UPDATE_DEPARTMENT_SUCCESS';
 export const DELETE_DEPARTMENT_SUCCESS = 'DELETE_DEPARTMENT_SUCCESS';
 export const MESSAGE = 'MESSAGE';
+export const OPEN_MODAL = 'OPEN_MODAL';
+export const CLOSE_MODAL = 'CLOSE_MODAL';
 export const FETCH_DEPARTMENT_FAILURE = 'FETCH_DEPARTMENT_FAILURE';
 
 export const fetchDepartmentsRequest = () => ({
@@ -48,6 +50,15 @@ export const deleteDepartmentsSuccess = (department) => ({
 export const fetchDepartmentsMessage = (message) => ({
 	type: 'MESSAGE',
 	payload: message,
+});
+
+export const fetchDepartmentsModal = (uuid) => ({
+	type: 'OPEN_MODAL',
+	payload: uuid,
+});
+
+export const fetchDepartmentsCloseModal = () => ({
+	type: 'CLOSE_MODAL',
 });
 
 export const fetchDepartmentsFailure = (error) => ({

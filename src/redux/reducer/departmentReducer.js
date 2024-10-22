@@ -7,6 +7,8 @@ import {
 	DELETE_DEPARTMENT_SUCCESS,
 	FETCH_DEPARTMENT_OPTIONS_SUCCESS,
 	MESSAGE,
+	OPEN_MODAL,
+	CLOSE_MODAL,
 } from '../actions/departmentAction';
 
 const initialState = {
@@ -14,6 +16,8 @@ const initialState = {
 	loading: false,
 	error: 'Program Studi not found',
 	isUpdated: true,
+	isOpenModal: false,
+	uuid: null,
 	message: '',
 };
 
@@ -67,6 +71,18 @@ const departmentReducer = (state = initialState, action) => {
 			return {
 				...state,
 				message: action.payload,
+			};
+		case OPEN_MODAL:
+			return {
+				...state,
+				isOpenModal: true,
+				uuid: action.payload,
+			};
+		case CLOSE_MODAL:
+			return {
+				...state,
+				isOpenModal: false,
+				uuid: null,
 			};
 		case FETCH_DEPARTMENT_FAILURE:
 			return {

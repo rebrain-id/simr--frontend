@@ -6,6 +6,7 @@ import {
 	updateDepartmentData,
 	deleteDepartmentData,
 	fetchDepartments,
+	fetchDepartmentsModal,
 } from '../redux/actions/departmentAction';
 import Alert from '../elements/Alert';
 import { useFormik } from 'formik';
@@ -16,11 +17,6 @@ const EditDepartmentDropdown = (props) => {
 	const [isDeleting, setIsDeleting] = useState(false);
 	const [isUpdating, setIsUpdating] = useState(false);
 	const [actionType, setActionType] = useState('');
-	const [showAlert, setShowAlert] = useState({
-		status: '',
-		message: '',
-		visible: false,
-	});
 
 	const formik = useFormik({
 		enableReinitialize: true,
@@ -37,50 +33,13 @@ const EditDepartmentDropdown = (props) => {
 					}),
 				);
 				if (response && response.statusCode === 200) {
-					setTimeout(() => {
-						setIsUpdating(false);
-						setShowAlert({
-							status: 'success',
-							message: 'Berhasil mengupdate program studi',
-							visible: true,
-						});
-					}, 500);
+					close();
 					dispatch(fetchDepartments());
 				} else if (response && response.statusCode === 400) {
-					setTimeout(() => {
-						setIsUpdating(false);
-						setShowAlert({
-							status: 'danger',
-							message: 'Gagal mengupdate program studi',
-							visible: true,
-						});
-					}, 500);
+					setIsUpdating(false);
 				}
 			} else if (actionType === 'delete') {
-				setIsDeleting(true);
-				const response = await dispatch(
-					deleteDepartmentData(values.uuid),
-				);
-				if (response && response.statusCode === 200) {
-					setTimeout(() => {
-						setIsDeleting(false);
-						setShowAlert({
-							status: 'success',
-							message: 'Berhasil menghapus program studi',
-							visible: true,
-						});
-					}, 500);
-					dispatch(fetchDepartments());
-				} else if (response && response.statusCode === 400) {
-					setTimeout(() => {
-						setIsDeleting(false);
-						setShowAlert({
-							status: 'danger',
-							message: 'Gagal menghapus program studi',
-							visible: true,
-						});
-					}, 500);
-				}
+				dispatch(fetchDepartmentsModal(values.uuid));
 			}
 		},
 	});
@@ -93,15 +52,6 @@ const EditDepartmentDropdown = (props) => {
 
 	return (
 		<>
-			{showAlert.visible && (
-				<Alert
-					status={showAlert.status}
-					message={showAlert.message}
-					onClick={() =>
-						setShowAlert({ ...showAlert, visible: false })
-					}
-				/>
-			)}
 			<div className="px-5 bg-white drop-shadow-bottom rounded pb-5">
 				<form onSubmit={formik.handleSubmit}>
 					<div className="w-full flex items-center">

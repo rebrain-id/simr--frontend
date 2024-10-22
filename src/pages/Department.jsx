@@ -4,9 +4,14 @@ import Button from '../elements/Button';
 import ListDepartment from '../elements/ListDepartment';
 import CreateModal from '../components/CreateDepartmentModal';
 import { useEffect, useState } from 'react';
-import { fetchDepartments } from '../redux/actions/departmentAction';
+import {
+	deleteDepartmentData,
+	fetchDepartments,
+	fetchDepartmentsCloseModal,
+} from '../redux/actions/departmentAction';
 import { useDispatch, useSelector } from 'react-redux';
 import Alert from '../elements/Alert';
+import ModalWarning from '../elements/modal/ModalWarning';
 
 const Department = () => {
 	const [openModal, setOpenModal] = useState(false);
@@ -18,7 +23,7 @@ const Department = () => {
 	const departments = useSelector(
 		(state) => state.fetchDepartments.department,
 	);
-	const { isUpdated, message, loading } = useSelector(
+	const { isUpdated, message, loading, isOpenModal, uuid } = useSelector(
 		(state) => state.fetchDepartments,
 	);
 
@@ -35,6 +40,15 @@ const Department = () => {
 		}
 	}, [message]);
 
+	const handleDeleteDepartment = async () => {
+		const response = await dispatch(deleteDepartmentData(uuid));
+		if (response && response.statusCode === 200) {
+			close();
+			dispatch(fetchDepartmentsCloseModal());
+			dispatch(fetchDepartments());
+		}
+	};
+
 	return (
 		<>
 			{openAlert && (
@@ -44,6 +58,16 @@ const Department = () => {
 					onClick={() => setOpenAlert(false)}
 				/>
 			)}
+
+			{isOpenModal && (
+				<ModalWarning
+					message="
+				Apakah anda yakin ingin menghapus program studi ini?"
+					onClick={handleDeleteDepartment}
+					onClose={() => dispatch(fetchDepartmentsCloseModal())}
+				/>
+			)}
+
 			<main className="bg-white px-10 pb-10 rounded drop-shadow-bottom mt-5">
 				<div className="flex items-center justify-between pt-4">
 					<h1 className="text-base font-semibold">Program Studi</h1>
