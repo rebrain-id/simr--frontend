@@ -8,6 +8,8 @@ const initialState = {
 	typeAgenda: [],
 	loading: false,
 	error: null,
+	uuid: null,
+	isOpen: false,
 	isUpdated: false,
 	message: [],
 };
@@ -35,8 +37,23 @@ const typeAgendaSlice = createSlice({
 			state.loading = false;
 			state.typeAgenda.push(action.payload.data);
 		},
+		deleteTypeAgendaSuccess(state, action) {
+			state.loading = false;
+			state.typeAgenda = state.typeAgenda.filter(
+				(typeAgenda) => typeAgenda.uuid !== action.payload,
+			);
+			state.isUpdated = true;
+		},
 		message(state, action) {
 			state.message = action.payload;
+		},
+		openModalDelete(state, action) {
+			state.uuid = action.payload;
+			state.isOpen = true;
+		},
+		closeModalDelete(state) {
+			state.isOpen = false;
+			state.uuid = null;
 		},
 		updateStatus(state) {
 			state.isUpdated = true;
@@ -65,6 +82,9 @@ export const {
 	fetchTypeAgendaFailure,
 	updateTypeAgendaSuccess,
 	createTypeAgendaSuccess,
+	deleteTypeAgendaSuccess,
+	openModalDelete,
+	closeModalDelete,
 	updateStatus,
 	resetUpdatedStatus,
 	message,

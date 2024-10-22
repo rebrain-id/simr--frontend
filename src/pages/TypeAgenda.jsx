@@ -3,17 +3,23 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Button from '../elements/Button';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
-import { fetchTypeAgenda } from '../redux/actions/typeAgendaAction';
+import {
+	deleteTypeAgenda,
+	fetchTypeAgenda,
+} from '../redux/actions/typeAgendaAction';
 import ListTypeAgenda from '../components/ListTypeAgenda';
-import { resetUpdatedStatus } from '../redux/slices/typeAgendaSlice';
+import {
+	closeModalDelete,
+	resetUpdatedStatus,
+} from '../redux/slices/typeAgendaSlice';
 import ModalAddTypeAgenda from '../components/ModalAddTypeAgenda';
 import Alert from '../elements/Alert';
+import ModalWarning from '../elements/modal/ModalWarning';
 
 const TypeAgenda = () => {
 	const dispatch = useDispatch();
-	const { typeAgenda, isUpdated, loading, message } = useSelector(
-		(state) => state.typeAgenda,
-	);
+	const { typeAgenda, isUpdated, loading, message, isOpen, uuid } =
+		useSelector((state) => state.typeAgenda);
 	const [showModal, setShowModal] = useState(false);
 	const [alert, setAlert] = useState(false);
 
@@ -32,12 +38,46 @@ const TypeAgenda = () => {
 	useEffect(() => {
 		if (message && message.status) {
 			setAlert(true);
+			setTimeout(() => {
+				setAlert(false);
+			}, 5000);
 		}
 	}, [message]);
+
+	const handleCloseModalDelete = () => {
+		dispatch(closeModalDelete());
+	};
+
+	const handleDelete = async () => {
+		try {
+			const response = await dispatch(deleteTypeAgenda({ uuid }));
+
+			if (response && response.payload.statusCode === 200) {
+				dispatch(closeModalDelete());
+			} else {
+				dispatch(
+					message({
+						status: 'error',
+						message: 'terdapat kesalahan dalam menghapus data',
+					}),
+				);
+			}
+		} catch (error) {
+			console.log(error);
+		}
+	};
 
 	return (
 		<>
 			{showModal && <ModalAddTypeAgenda onClick={handleModal} />}
+
+			{isOpen && (
+				<ModalWarning
+					message="Apakah anda yakin akan menghapus jenis agenda ini?"
+					onClose={handleCloseModalDelete}
+					onClick={handleDelete}
+				/>
+			)}
 
 			{alert && (
 				<Alert

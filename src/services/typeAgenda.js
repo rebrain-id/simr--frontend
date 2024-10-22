@@ -64,3 +64,25 @@ export const editTypeAgenda = async (uuid, body) => {
 
 	return response;
 };
+
+export const destroyTypeAgenda = async (uuid) => {
+	const url = `${API_URL()}/v1/type-agendas/${uuid}`;
+
+	const response = await axios({
+		method: 'delete',
+		url: url,
+		headers: {
+			Authorization: `Bearer ${access_token}`,
+		},
+	})
+		.then((res) => {
+			return res.data;
+		})
+		.catch((err) => {
+			console.log(err);
+
+			throw err;
+		});
+
+	return response;
+};

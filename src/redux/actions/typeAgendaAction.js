@@ -1,11 +1,13 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import {
+	destroyTypeAgenda,
 	editTypeAgenda,
 	getTypeAgenda,
 	postTypeAgenda,
 } from '../../services/typeAgenda';
 import {
 	createTypeAgendaSuccess,
+	deleteTypeAgendaSuccess,
 	fetchTypeAgendaFailure,
 	fetchTypeAgendaRequest,
 	fetchTypeAgendaSuccess,
@@ -82,6 +84,36 @@ export const updateTypeAgenda = createAsyncThunk(
 					}),
 				);
 			}
+		} catch (error) {
+			console.log(error);
+		}
+	},
+);
+
+export const deleteTypeAgenda = createAsyncThunk(
+	'typeAgenda/deleteTypeAgenda',
+	async ({ uuid }, { dispatch }) => {
+		try {
+			const response = await destroyTypeAgenda(uuid);
+
+			if (response && response.statusCode === 200) {
+				dispatch(deleteTypeAgendaSuccess(response));
+				dispatch(
+					message({
+						status: 'success',
+						message: 'data berhasil dihapus',
+					}),
+				);
+			} else {
+				dispatch(
+					message({
+						status: 'error',
+						message: 'terdapat kesalahan dalam menghapus data',
+					}),
+				);
+			}
+
+			return response;
 		} catch (error) {
 			console.log(error);
 		}
