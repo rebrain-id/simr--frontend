@@ -118,7 +118,7 @@ export const postDepartmentData = (department) => {
 							message: 'Berhasil menambahkan program studi',
 						}),
 					);
-				} else {
+				} else if (userResponse && userResponse.status === 400) {
 					const response = await deleteDepartment(
 						departmentResponse.data.uuid,
 					);
@@ -133,6 +133,13 @@ export const postDepartmentData = (department) => {
 					}
 				}
 				return userResponse;
+			} else {
+				dispatch(
+					fetchDepartmentsMessage({
+						status: 'error',
+						message: 'Gagal menambahkan program studi',
+					}),
+				);
 			}
 		} catch (error) {
 			dispatch(fetchDepartmentsFailure(error.message));

@@ -55,7 +55,7 @@ export const postDepartment = async (body) => {
 		})
 		.catch((err) => {
 			console.log(err);
-			throw err;
+			return err;
 		});
 
 	return response;
@@ -75,7 +75,7 @@ export const updateDepartment = async (uuid, body) => {
 		})
 		.catch((err) => {
 			console.log(err);
-			throw err;
+			return err;
 		});
 
 	return response;
@@ -95,7 +95,7 @@ export const deleteDepartment = async (uuid) => {
 		})
 		.catch((err) => {
 			console.log(err);
-			throw err;
+			return err;
 		});
 
 	return response;

@@ -12,6 +12,7 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import Alert from '../elements/Alert';
 import ModalWarning from '../elements/modal/ModalWarning';
+import ModalDanger from '../elements/modal/ModalDanger';
 
 const Department = () => {
 	const [openModal, setOpenModal] = useState(false);
@@ -32,11 +33,13 @@ const Department = () => {
 	}, [dispatch, isUpdated]);
 
 	useEffect(() => {
-		if (message && message.status) {
+		if (message && message.status === 'success') {
 			setOpenAlert(true);
 			setTimeout(() => {
 				setOpenAlert(false);
 			}, 5000);
+		} else if (message && message.status === 'error') {
+			setOpenAlert(true);
 		}
 	}, [message]);
 
@@ -51,9 +54,16 @@ const Department = () => {
 
 	return (
 		<>
-			{openAlert && (
+			{openAlert && message?.status === 'success' && (
 				<Alert
 					status={message.status}
+					message={message.message}
+					onClick={() => setOpenAlert(false)}
+				/>
+			)}
+
+			{openAlert && message?.status === 'error' && (
+				<ModalDanger
 					message={message.message}
 					onClick={() => setOpenAlert(false)}
 				/>

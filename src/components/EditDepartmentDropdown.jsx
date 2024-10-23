@@ -35,8 +35,9 @@ const EditDepartmentDropdown = (props) => {
 				if (response && response.statusCode === 200) {
 					close();
 					dispatch(fetchDepartments());
-				} else if (response && response.statusCode === 400) {
+				} else {
 					setIsUpdating(false);
+					dispatch(fetchDepartments());
 				}
 			} else if (actionType === 'delete') {
 				dispatch(fetchDepartmentsModal(values.uuid));

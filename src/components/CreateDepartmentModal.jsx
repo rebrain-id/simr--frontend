@@ -29,6 +29,7 @@ const CreateDepartmentModal = (props) => {
 				close();
 				dispatch(fetchDepartments());
 			} else {
+				close();
 				setIsSubmit(false);
 				dispatch(fetchDepartments());
 			}
