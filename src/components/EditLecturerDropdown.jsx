@@ -4,13 +4,11 @@ import Input from '../elements/forms/FormInput';
 import Select from '../elements/forms/FormSelect';
 import { useDispatch, useSelector } from 'react-redux';
 import { useFormik } from 'formik';
-import { fetchDepartments } from '../redux/actions/departmentAction';
 import {
 	fetchLecturers,
-	deleteLecturerData,
+	fetchOpenModal,
 	updateLecturerData,
 } from '../redux/actions/lecturerAction';
-import Alert from '../elements/Alert';
 
 const EditLecturerDropdown = (props) => {
 	const {
@@ -22,15 +20,11 @@ const EditLecturerDropdown = (props) => {
 		departmentUuid,
 		close,
 		isOpenEdit,
+		role,
 	} = props;
 	const [isDeleting, setIsDeleting] = useState(false);
 	const [isUpdating, setIsUpdating] = useState(false);
 	const [actionType, setActionType] = useState('');
-	const [showAlert, setShowAlert] = useState({
-		status: '',
-		message: '',
-		visible: false,
-	});
 	const dispatch = useDispatch();
 	const departments = useSelector(
 		(state) => state.fetchDepartments.department,
@@ -58,50 +52,14 @@ const EditLecturerDropdown = (props) => {
 					}),
 				);
 				if (response && response.statusCode === 200) {
-					setTimeout(() => {
-						setIsUpdating(false);
-						setShowAlert({
-							status: 'success',
-							message: 'Berhasil mengupdate dosen',
-							visible: true,
-						});
-					}, 500);
 					dispatch(fetchLecturers());
-				} else if (response && response.statusCode === 400) {
-					setTimeout(() => {
-						setIsUpdating(false);
-						setShowAlert({
-							status: 'danger',
-							message: 'Gagal mengupdate dosen',
-							visible: true,
-						});
-					}, 500);
+				} else {
+					setIsUpdating(false);
+					dispatch(fetchLecturers());
 				}
 			} else if (actionType === 'delete') {
 				setIsDeleting(true);
-				const response = await dispatch(
-					deleteLecturerData(values.uuid),
-				);
-				if (response && response.statusCode === 200) {
-					setTimeout(() => {
-						setIsDeleting(false);
-						setShowAlert({
-							status: 'success',
-							message: 'Berhasil menghapus dosen',
-							visible: true,
-						});
-					}, 500);
-					dispatch(fetchLecturers());
-				} else if (response && response.statusCode === 400) {
-					setTimeout(() => {
-						setIsDeleting(false);
-						setShowAlert({
-							status: 'danger',
-							message: 'Gagal menghapus dosen',
-							visible: true,
-						});
-					}, 500);
-				}
+				dispatch(fetchOpenModal(values.uuid));
 			}
 		},
 	});
@@ -114,27 +72,21 @@ const EditLecturerDropdown = (props) => {
 
 	return (
 		<div
-			className={`transition-[height] duration-300 px-10 pb-5 bg-white shadow-md rounded ${isOpenEdit ? 'h-full' : 'h-0 overflow-hidden'}`}
+			className={`transition-[height] duration-300 pb-5 bg-white drop-shadow-bottom rounded ${role === 'FAKULTAS' ? 'ms-8 px-5' : 'px-5'} ${isOpenEdit ? 'h-full' : 'h-0 overflow-hidden'}`}
 		>
-			{showAlert.visible && (
-				<Alert
-					status={showAlert.status}
-					message={showAlert.message}
-					onClick={() =>
-						setShowAlert({ ...showAlert, visible: false })
-					}
-				/>
-			)}
-			<form onSubmit={formik.handleSubmit}>
+			<form
+				onSubmit={formik.handleSubmit}
+				className="flex flex-col gap-3"
+			>
 				<div>
 					<Input
 						type="text"
 						name="name"
-						variant="text-xs w-full py-2"
+						variant="w-full"
 						label="Nama Dosen"
 						placeholder="Nama Dosen"
 						labelvariant="w-1/6 text-xs"
-						inputvariant="w-full"
+						inputvariant="w-full mt-1 text-sm"
 						value={formik.values.name}
 						onChange={handleChange}
 					/>
@@ -143,11 +95,11 @@ const EditLecturerDropdown = (props) => {
 					<Input
 						type="email"
 						name="email"
-						variant="text-xs w-full"
+						variant="w-full"
 						label="E-mail"
 						placeholder="example@mail.com"
 						labelvariant="w-1/6 text-xs"
-						inputvariant="w-full"
+						inputvariant="w-full mt-1 text-sm"
 						value={formik.values.email}
 						onChange={handleChange}
 					/>
@@ -156,37 +108,39 @@ const EditLecturerDropdown = (props) => {
 					<Input
 						type="text"
 						name="phoneNumber"
-						variant="text-xs w-full py-2"
+						variant="w-full py-2"
 						label="No. Whatsapp"
-						labelvariant="w-1/6"
-						inputvariant="w-full"
+						labelvariant="w-1/6 text-xs"
+						inputvariant="w-full mt-1 text-sm"
 						placeholder="08*********"
 						value={formik.values.phoneNumber}
 						onChange={handleChange}
 					/>
 				</div>
 				<div className="pb-2">
-					<Select
-						variant="flex flex-col text-xs w-full pt-1 pb-2"
-						name="departmentUuid"
-						label="Program Studi"
-						labelVariant="w-1/5 text-sx"
-						selectVariant="w-full text-xs"
-						onChange={handleChange}
-						value={formik.values.departmentUuid}
-					>
-						<option value={departmentUuid} disabled>
-							{department}
-						</option>
-						{departments.map((item, index) => (
-							<option value={item.uuid} key={index}>
-								{item.name}
+					{role === 'FAKULTAS' && (
+						<Select
+							variant="flex flex-col w-full pt-1 pb-2"
+							name="departmentUuid"
+							label="Program Studi"
+							labelVariant="w-1/5 text-xs"
+							selectVariant="w-full mt-1 text-sm"
+							onChange={handleChange}
+							value={formik.values.departmentUuid}
+						>
+							<option value={departmentUuid} disabled>
+								{department}
 							</option>
-						))}
-					</Select>
+							{departments.map((item, index) => (
+								<option value={item.uuid} key={index}>
+									{item.name}
+								</option>
+							))}
+						</Select>
+					)}
 				</div>
-				<div className="flex items-center justify-between gap-8">
-					<div className="flex items-center gap-8">
+				<div className="flex items-center justify-between">
+					<div className="flex items-center gap-5">
 						{isUpdating ? (
 							<Button
 								text="Updating..."

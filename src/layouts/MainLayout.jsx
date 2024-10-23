@@ -6,21 +6,13 @@ import DetailAgendaSidebar from '../components/DetailAgendaSidebar';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { closeDetailAgenda } from '../redux/actions/agendaAction';
-import LoadingScreen from '../elements/LoadingScreen';
 import Alert from '../elements/Alert';
 
 const MainLayout = () => {
-	const [showLoading, setShowLoading] = useState(false);
 	const [showSidebarDialogue, setShowSidebarDialogue] = useState(false);
 	const [showAlert, setShowAlert] = useState(false);
 	const { detailAgenda, showSidebar, message } = useSelector(
 		(state) => state.agenda,
-	);
-	const loadingLecturer = useSelector(
-		(state) => state.fetchLecturers.loading,
-	);
-	const loadingDepartment = useSelector(
-		(state) => state.fetchDepartments.loading,
 	);
 	const dispatch = useDispatch();
 
@@ -39,19 +31,6 @@ const MainLayout = () => {
 			}, 1000);
 		}
 	}, [showSidebar]);
-
-	useEffect(() => {
-		if (loadingLecturer) {
-			setShowLoading(true);
-		} else if (loadingDepartment) {
-			setShowLoading(true);
-		} else {
-			const timeout = setTimeout(() => {
-				setShowLoading(false);
-			}, 1000);
-			return () => clearTimeout(timeout);
-		}
-	}, [loadingLecturer, loadingDepartment]);
 
 	useEffect(() => {
 		if (message.status) {
@@ -97,8 +76,6 @@ const MainLayout = () => {
 				<Outlet />
 				{/* <Footer /> */}
 			</aside>
-
-			{showLoading && <LoadingScreen loading={loadingLecturer} />}
 		</main>
 	);
 };
