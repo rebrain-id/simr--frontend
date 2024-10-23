@@ -18,6 +18,7 @@ import {
 	getAgenda,
 	getDetailAgenda,
 	getHistoryAgenda,
+	getSearchAgenda,
 	updateAgenda,
 	updateMemberAgenda,
 } from '../../services/agenda';
@@ -31,6 +32,23 @@ export const fetchAgenda = createAsyncThunk(
 			dispatch(fetchAgendaRequest());
 
 			const dataset = await getAgenda();
+
+			const data = await convertAgendaData(dataset);
+
+			dispatch(fetchAgendaSuccess(data));
+		} catch (error) {
+			dispatch(fetchAgendaFailure(error));
+		}
+	},
+);
+
+export const fetchSearchAgenda = createAsyncThunk(
+	'agenda/fetchAgenda',
+	async ({ keyword }, { dispatch }) => {
+		try {
+			dispatch(fetchAgendaRequest());
+
+			const dataset = await getSearchAgenda(keyword);
 
 			const data = await convertAgendaData(dataset);
 

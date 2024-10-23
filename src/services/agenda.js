@@ -48,6 +48,45 @@ export const getAgenda = async (data) => {
 	}
 };
 
+export const getSearchAgenda = async (data) => {
+	const username = jwtDecode(access_token).username;
+
+	const url = `${API_URL()}/v1/detail-agendas?username=${username}&keyword=${data}`;
+
+	try {
+		const response = await axios({
+			method: 'get',
+			url: url,
+			headers: {
+				Authorization: `Bearer ${access_token}`,
+			},
+		});
+
+		return response.data;
+	} catch (error) {
+		if (error.response && error.response.status === 401) {
+			try {
+				await refreshTokenRequest();
+
+				const response = await axios({
+					method: 'get',
+					url: url,
+					headers: {
+						Authorization: `Bearer ${access_token}`,
+					},
+				});
+
+				return response.data.data;
+			} catch (error) {
+				console.log(error);
+				throw error;
+			}
+		}
+		console.log(error);
+		throw error;
+	}
+};
+
 export const getHistoryAgenda = async (data) => {
 	const username = jwtDecode(access_token).username;
 

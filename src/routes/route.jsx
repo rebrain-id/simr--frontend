@@ -11,6 +11,7 @@ import NotFound from '../pages/errors/404';
 import ChangePassword from '../pages/auth/ChangePassword';
 import ProtectedRoute from './ProtectedRoute';
 import TypeAgenda from '../pages/typeAgenda';
+import SearchPage from '../pages/agendas/SearchPage';
 
 export const router = createBrowserRouter([
 	{
@@ -54,6 +55,14 @@ export const router = createBrowserRouter([
 				element: (
 					<ProtectedRoute authorized={['PRODI', 'FAKULTAS']}>
 						<AddAgenda />
+					</ProtectedRoute>
+				),
+			},
+			{
+				path: 'agenda/search',
+				element: (
+					<ProtectedRoute authorized={['PRODI', 'FAKULTAS']}>
+						<SearchPage />
 					</ProtectedRoute>
 				),
 			},
