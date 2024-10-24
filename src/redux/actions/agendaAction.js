@@ -136,7 +136,6 @@ export const fetchAgendaToday = createAsyncThunk(
 			const dataset = await getAgenda(dataGetAgenda);
 
 			const data = await convertAgendaData(dataset);
-			console.log(data);
 
 			dispatch(fetchAgendaTodaySuccess(data));
 		} catch (error) {
