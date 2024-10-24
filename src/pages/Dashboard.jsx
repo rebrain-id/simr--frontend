@@ -43,7 +43,7 @@ const Dashboard = () => {
 		const agendaTimeStart = moment(item.start).subtract(7, 'hours');
 		const today = moment();
 
-		!item.isAuthor && agendaTimeStart.isSameOrAfter(today, 'minute');
+		return !item.isAuthor && agendaTimeStart.isSameOrAfter(today, 'minute');
 	});
 	const sortedAgenda = [...agendaToday].sort((a, b) => {
 		const timeA = moment(a.time.start, 'HH:mm');
