@@ -95,8 +95,9 @@ export const updateUser = (data) => {
 
 		try {
 			const response = await updateUserRequest(username, data);
+			console.log(response);
 
-			return response;
+			return response.data;
 		} catch (error) {
 			console.log(error);
 		}

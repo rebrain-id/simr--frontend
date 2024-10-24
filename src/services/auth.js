@@ -40,7 +40,6 @@ export const updateUserRequest = (username, data) => {
 	const url = `${API_URL()}/v1/user/${username}`;
 
 	const dataUser = {
-		username: username,
 		oldPassword: data.oldPassword,
 		newPassword: data.newPassword,
 	};
