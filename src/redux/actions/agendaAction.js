@@ -10,6 +10,9 @@ import {
 	fetchDetailAgendaSuccess,
 	closeDetailAgendaSuccess,
 	fetchAgendaFailure,
+	updateDetailAgendaSuccess,
+	changeStatus,
+	fetchAgendaSearchSuccess,
 } from '../slices/agendaSlice';
 import {
 	checkAgenda,
@@ -50,9 +53,9 @@ export const fetchSearchAgenda = createAsyncThunk(
 
 			const dataset = await getSearchAgenda(keyword);
 
-			const data = await convertAgendaData(dataset);
+			const data = await convertAgendaData(dataset.data);
 
-			dispatch(fetchAgendaSuccess(data));
+			dispatch(fetchAgendaSearchSuccess(data));
 		} catch (error) {
 			dispatch(fetchAgendaFailure(error));
 		}
@@ -166,13 +169,7 @@ export const fetchAgendaThisMonth = createAsyncThunk(
 
 			const dataThisMonth = await convertAgendaData(dataset);
 
-			const filteredAgenda = dataThisMonth.filter(
-				(item) =>
-					item.month.start == String(month + 1).padStart(2, '0') &&
-					item.year.start == year,
-			);
-
-			const groupByDate = filteredAgenda.reduce((acc, item) => {
+			const groupByDate = dataThisMonth.reduce((acc, item) => {
 				const date = item.date.start;
 				const existingGroup = acc.find((group) => group.date === date);
 
@@ -289,6 +286,11 @@ export const updateDetailAgenda = createAsyncThunk(
 			}
 
 			const response = await updateAgenda(data.uuid, data);
+
+			if (response && response.statusCode === 200) {
+				dispatch(updateDetailAgendaSuccess(response));
+				dispatch(changeStatus());
+			}
 
 			return response;
 		} catch (error) {

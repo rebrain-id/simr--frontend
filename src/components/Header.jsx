@@ -1,16 +1,17 @@
 import { faSearch, faUserAlt } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import UserDropdown from './UserDropdown';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import ModalLogout from './ModalLogout';
 import FormInput from '../elements/forms/FormInput';
 import { useFormik } from 'formik';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const Header = () => {
 	const [openDropdown, setOpenDropdown] = useState(false);
 	const [openModal, setOpenModal] = useState(false);
 	const navigate = useNavigate();
+	const location = useLocation();
 
 	const toggleDropdown = () => setOpenDropdown(!openDropdown);
 	const handleModal = () => setOpenModal(!openModal);
@@ -23,6 +24,15 @@ const Header = () => {
 			navigate(`/agenda/search?search=${values.search}`);
 		},
 	});
+
+	useEffect(() => {
+		setOpenDropdown(false);
+		formik.resetForm({
+			values: {
+				search: '',
+			},
+		});
+	}, [location]);
 
 	return (
 		<>

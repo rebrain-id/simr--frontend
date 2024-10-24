@@ -70,13 +70,16 @@ const agendaSlice = createSlice({
 			state.showSidebar = false;
 			state.detailAgenda = null;
 		},
-		updateDetailAgendaSuccess(state, action) {
+		updateDetailAgendaSuccess(state) {
 			state.loading = false;
-			state.detailAgenda = action.payload;
+			state.isUpdated = true;
 		},
 		fetchAgendaFailure(state, action) {
 			state.loading = false;
 			state.error = action.payload;
+		},
+		changeStatus(state) {
+			state.isUpdated = false;
 		},
 	},
 	extraReducers: (builder) => {
@@ -155,6 +158,7 @@ export const {
 	fetchDetailAgendaSuccess,
 	closeDetailAgendaSuccess,
 	updateDetailAgendaSuccess,
+	changeStatus,
 	fetchAgendaFailure,
 } = agendaSlice.actions;
 
