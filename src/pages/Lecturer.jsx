@@ -84,7 +84,7 @@ const Lecturer = () => {
 					onClick={handleDeleteLecturer}
 				/>
 			)}
-			<main className="bg-white px-10 pt-5 pb-10 rounded drop-shadow-bottom">
+			<main className="bg-white px-10 pt-5 mt-5 pb-10 rounded drop-shadow-bottom">
 				<div className="flex items-center justify-between">
 					<h1 className="text-base font-semibold">Dosen</h1>
 					<div className="flex items-center bg-light-primary text-white rounded text-sm">
