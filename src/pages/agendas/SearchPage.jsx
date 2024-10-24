@@ -10,11 +10,13 @@ const SearchPage = () => {
 
 	const search = searchParams.get('search');
 
-	const { agenda, loading } = useSelector((state) => state.agenda);
+	const { agenda, loading, isUpdated } = useSelector((state) => state.agenda);
 
 	useEffect(() => {
-		dispatch(fetchSearchAgenda({ keyword: search }));
-	}, [dispatch, search]);
+		if (search) {
+			dispatch(fetchSearchAgenda({ keyword: search }));
+		}
+	}, [dispatch, search, isUpdated]);
 
 	const monthList = [
 		'Januari',
@@ -31,6 +33,7 @@ const SearchPage = () => {
 		'Desember',
 	];
 
+	console.log(agenda);
 	return (
 		<div className="bg-white px-10 py-5 rounded drop-shadow-bottom mt-5">
 			<h1 className="text-base font-semibold mb-5">
@@ -40,7 +43,7 @@ const SearchPage = () => {
 				<p className="text-center text-xs text-light-secondary">
 					mencari data agenda
 				</p>
-			) : agenda.lenght > 0 ? (
+			) : agenda && agenda.length ? (
 				<div className="w-full h-full flex flex-col gap-5">
 					{agenda.map((item) => (
 						<ListAgenda

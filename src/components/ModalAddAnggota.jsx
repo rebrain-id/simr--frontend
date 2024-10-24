@@ -65,6 +65,8 @@ const ModalAddAnggota = (props) => {
 			}),
 		);
 
+		console.log(response);
+
 		if (response && response.payload.statusCode === 200) {
 			const conflictData = response.payload.data;
 			setCheckConflict(true);
@@ -101,8 +103,6 @@ const ModalAddAnggota = (props) => {
 		try {
 			const response = await dispatch(updateDepartmentAgenda({ data }));
 
-			console.log(response);
-
 			if (response && response.payload.statusCode === 200) {
 				dispatch(fetchDetailAgenda({ uuid }));
 				sessionStorage.setItem(
@@ -115,8 +115,6 @@ const ModalAddAnggota = (props) => {
 			console.log(error);
 		}
 	};
-
-	console.log(type);
 
 	return (
 		<div

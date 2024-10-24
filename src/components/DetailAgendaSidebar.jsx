@@ -28,6 +28,7 @@ const DetailAgendaSidebar = (props) => {
 	const username = jwtDecode(access_token).username;
 
 	const [showModal, setShowModal] = useState(false);
+	const [showDanger, setShowDanger] = useState(false);
 	const [showModalWarning, setShowModalWarning] = useState(false);
 	const [showModalDanger, setShowModalDanger] = useState(false);
 	const [member, setMember] = useState([]);
@@ -92,13 +93,14 @@ const DetailAgendaSidebar = (props) => {
 				updateDetailAgenda({ data: inputValue }),
 			);
 
-			console.log(response);
-
 			if (response && response.payload.statusCode === 200) {
 				dispatch(closeDetailAgenda());
 				sessionStorage.removeItem('member');
+			} else {
+				setShowDanger(true);
 			}
 		} catch (error) {
+			setShowDanger(true);
 			console.log(error);
 		}
 	};
@@ -133,8 +135,6 @@ const DetailAgendaSidebar = (props) => {
 		setShowModalDanger(!showModalDanger);
 	};
 
-	console.log(data);
-
 	return (
 		<>
 			{showModal && (
@@ -148,6 +148,13 @@ const DetailAgendaSidebar = (props) => {
 					onClick={handleOpenModal}
 					type="update"
 					uuid={data?.uuid}
+				/>
+			)}
+
+			{showDanger && (
+				<ModalDanger
+					onClick={() => setShowDanger(false)}
+					message="Kesalahan dalam memperbarui agenda, periksa kembali data anda"
 				/>
 			)}
 
@@ -184,7 +191,7 @@ const DetailAgendaSidebar = (props) => {
 						/>
 					</section>
 
-					<section className="flex flex-col px-8 gap-3 mt-5">
+					<form className="flex flex-col px-8 gap-3 mt-5">
 						<FormInput
 							variant="w-full flex flex-col gap-1"
 							inputvariant="text-sm font-normal w-full"
@@ -276,10 +283,11 @@ const DetailAgendaSidebar = (props) => {
 									))}
 							</div>
 
-							{username === data?.username && (
+							{username === data?.author && (
 								<div className="mt-1 flex justify-end">
 									<Button
-										text="Update Anggota"
+										type="button"
+										text="Ubah Anggota"
 										variant={`${data && data.isDone ? 'bg-light-secondary cursor-not-allowed bg-opacity-30 hover:bg-opacity-30' : 'bg-light-primary bg-opacity-90'} text-light-white text-sm hover:bg-opacity-100`}
 										onClick={handleOpenModal}
 									/>
@@ -346,13 +354,13 @@ const DetailAgendaSidebar = (props) => {
 							onChange={!data?.isDone && handleInputValue}
 							isChecked={inputValue.isDone}
 						/>
-					</section>
+					</form>
 
 					<section className="mt-5 flex items-center justify-between px-8">
 						<div className="flex items-center gap-2">
 							{username === data?.author && (
 								<Button
-									text="Update"
+									text="Perbarui"
 									variant={`${data && data.isDone ? 'bg-light-secondary cursor-not-allowed bg-opacity-30 hover:bg-opacity-30' : 'bg-light-primary bg-opacity-90'} text-light-white text-sm hover:bg-opacity-100`}
 									onClick={
 										data && data.isDone !== true

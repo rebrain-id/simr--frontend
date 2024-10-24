@@ -9,11 +9,11 @@ import { fetchTypeAgenda } from '../../redux/actions/typeAgendaAction';
 import { createAgenda } from '../../redux/actions/agendaAction';
 import moment from 'moment';
 import { useNavigate } from 'react-router-dom';
-import Alert from '../../elements/Alert';
 import { ErrorMessage, Form, Formik } from 'formik';
 import * as Yup from 'yup';
 import { fetchDepartmentsOptions } from '../../redux/actions/departmentAction';
 import { jwtDecode } from 'jwt-decode';
+import ModalDanger from '../../elements/modal/ModalDanger';
 
 const AddAgenda = () => {
 	const access_token = localStorage.getItem('access_token')
@@ -91,19 +91,30 @@ const AddAgenda = () => {
 				username: username,
 			};
 
-			const response = await dispatch(createAgenda({ data }));
-
-			if (response && response.payload.data.statusCode === 201) {
-				sessionStorage.removeItem('member');
-				navigation(
-					`/agenda/date?date=${moment(values.from).format('DD')}&month=${moment(values.from).format('MM')}&year=${moment(values.from).format('YYYY')}`,
-				);
-			} else {
+			if (uniqueDepartments.length === 0) {
 				setShowAlert({
 					status: 'error',
-					message: 'Gagal menyimpan data agenda',
+					message: 'Pastikan anggota tidak kosong',
 					visible: true,
 				});
+				setTimeout(() => {
+					setShowAlert({ status: '', message: '', visible: false });
+				}, 5000);
+			} else {
+				const response = await dispatch(createAgenda({ data }));
+
+				if (response && response.payload.data.statusCode === 201) {
+					sessionStorage.removeItem('member');
+					navigation(
+						`/agenda/date?date=${moment(values.from).format('DD')}&month=${moment(values.from).format('MM')}&year=${moment(values.from).format('YYYY')}`,
+					);
+				} else {
+					setShowAlert({
+						status: 'error',
+						message: 'Gagal menyimpan data agenda',
+						visible: true,
+					});
+				}
 			}
 		} catch (error) {
 			setShowAlert({
@@ -140,8 +151,7 @@ const AddAgenda = () => {
 	return (
 		<>
 			{showAlert.visible && (
-				<Alert
-					status={showAlert.status}
+				<ModalDanger
 					message={showAlert.message}
 					onClick={handleClose}
 				/>
