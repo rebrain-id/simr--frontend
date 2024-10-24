@@ -17,7 +17,7 @@ const Button = (props) => {
 					className={iconVariant ? iconVariant : 'mr-4'}
 				/>
 			)}
-			{text}
+			<p>{text}</p>
 		</button>
 	);
 };
