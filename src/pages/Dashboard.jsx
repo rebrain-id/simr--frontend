@@ -6,8 +6,12 @@ import { useEffect, useState } from 'react';
 import { fetchAgendaToday } from '../redux/actions/agendaAction';
 import moment from 'moment';
 import LoadingScreen from '../elements/LoadingScreen';
+import image1 from '../assets/images/image1.png';
+import { jwtDecode } from 'jwt-decode';
 
 const Dashboard = () => {
+	const access_token = sessionStorage.getItem('access_token');
+	const decode_token = jwtDecode(access_token);
 	const monthList = [
 		'Januari',
 		'Februari',
@@ -76,7 +80,21 @@ const Dashboard = () => {
 				/>
 			)}
 
-			<header className="bg-white px-10 py-5 rounded drop-shadow-bottom">
+			<section
+				className="relative w-full h-[250px] bg-cover bg-center rounded drop-shadow-bottom mt-5 p-5"
+				style={{
+					backgroundImage: `url(${image1})`,
+					backgroundSize: 'cover',
+					backgroundPosition: 'center',
+				}}
+			>
+				<h1 className="text-2xl text-secondary font-bold uppercase tracking-widest">
+					{decode_token.department.name}
+				</h1>
+				<p className="text-xs">Universitas Muhammadiyah Jember</p>
+			</section>
+
+			<header className="bg-white px-10 py-5 mt-5 rounded drop-shadow-bottom">
 				<h1 className="text-base font-semibold">Informasi Singkat</h1>
 
 				<section className="flex justify-between items-start mt-5">
