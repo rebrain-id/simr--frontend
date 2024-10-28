@@ -19,7 +19,9 @@ const AddAgenda = () => {
 	const access_token = localStorage.getItem('access_token')
 		? localStorage.getItem('access_token')
 		: sessionStorage.getItem('access_token');
-	const username = jwtDecode(access_token).username;
+	const decodeToken = jwtDecode(access_token);
+	const username = decodeToken.username;
+	const departmentUuid = decodeToken.department.uuid;
 
 	const navigation = useNavigate();
 	const dispatch = useDispatch();
@@ -163,6 +165,7 @@ const AddAgenda = () => {
 					departments={departments}
 					dateFrom={date.from}
 					dateTo={date.to}
+					selectedMember={[departmentUuid]}
 				/>
 			)}
 

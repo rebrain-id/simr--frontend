@@ -2,6 +2,7 @@ import {
 	faChevronLeft,
 	faChevronRight,
 	faPlus,
+	faTags,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useEffect } from 'react';
@@ -10,6 +11,8 @@ import { fetchAgendaByDate } from '../../redux/actions/agendaAction';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import ListAgenda from '../../elements/ListAgenda';
 import moment from 'moment';
+import ButtonMenu from '../../elements/calendar/ButtonMenu';
+import { jwtDecode } from 'jwt-decode';
 
 const AgendaByDate = () => {
 	const [searchParam] = useSearchParams();
@@ -88,25 +91,49 @@ const AgendaByDate = () => {
 		return timeA - timeB;
 	});
 
+	const role = jwtDecode(sessionStorage.getItem('access_token')).role;
+
 	return (
 		<>
 			<div className="bg-white px-10 py-5 rounded drop-shadow-bottom mt-5">
-				<div className="flex items-center gap-3 text-secondary mb-5">
-					<button onClick={handleDecrement}>
-						<FontAwesomeIcon
-							icon={faChevronLeft}
-							className="cursor-pointer"
-						/>
-					</button>
-					<button onClick={handleIncrement}>
-						<FontAwesomeIcon
-							icon={faChevronRight}
-							className="cursor-pointer"
-						/>
-					</button>
+				<div className="flex justify-between items-center  mb-5">
+					<div className="flex items-center gap-3 text-secondary">
+						<button onClick={handleDecrement}>
+							<FontAwesomeIcon
+								icon={faChevronLeft}
+								className="cursor-pointer"
+							/>
+						</button>
+						<button onClick={handleIncrement}>
+							<FontAwesomeIcon
+								icon={faChevronRight}
+								className="cursor-pointer"
+							/>
+						</button>
 
-					<div className="flex justify-center items-center font-semibold text-xl gap-2">
-						{getDate} {monthList[getMonth - 1]} {getYear}
+						<div className="flex justify-center items-center font-semibold text-xl gap-2">
+							{getDate} {monthList[getMonth - 1]} {getYear}
+						</div>
+					</div>
+
+					<div>
+						<ButtonMenu
+							link={'/agenda?menu=calendar'}
+							variant={`rounded-s-md border-y border-s`}
+							text="Kalender"
+						/>
+						<ButtonMenu
+							link={'/agenda?menu=list'}
+							variant={`border`}
+							text="Daftar"
+						/>
+						<ButtonMenu
+							link={
+								'/agenda?menu=history&from=null&to=null&type=null&take=10&skip=1'
+							}
+							variant={`rounded-e-md border-y border-e`}
+							text="Riwayat"
+						/>
 					</div>
 				</div>
 
@@ -134,10 +161,21 @@ const AgendaByDate = () => {
 					)}
 				</div>
 			</div>
-			<div className="fixed right-12 bottom-10 z-10">
+			<div className="fixed right-12 bottom-10 z-10 flex flex-col items-end gap-3">
+				{role === 'FAKULTAS' && (
+					<Link
+						to={'/type-agenda'}
+						className="flex justify-center items-center w-16 h-16 rounded-full bg-light-primary bg-opacity-80 hover:bg-opacity-100 cursor-pointer"
+					>
+						<FontAwesomeIcon
+							icon={faTags}
+							className="text-4xl text-light-white"
+						/>
+					</Link>
+				)}
 				<Link
 					to={'/agenda/new'}
-					className="mt-10 flex justify-center items-center w-16 h-16 rounded-full bg-light-primary bg-opacity-80 hover:bg-opacity-100 cursor-pointer"
+					className="flex justify-center items-center w-16 h-16 rounded-full bg-light-primary bg-opacity-80 hover:bg-opacity-100 cursor-pointer"
 				>
 					<FontAwesomeIcon
 						icon={faPlus}
