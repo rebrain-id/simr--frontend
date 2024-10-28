@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { closeDetailAgenda } from '../redux/actions/agendaAction';
 import Alert from '../elements/Alert';
+import Device from '../pages/errors/Device';
 
 const MainLayout = () => {
 	const [showSidebarDialogue, setShowSidebarDialogue] = useState(false);
@@ -14,6 +15,8 @@ const MainLayout = () => {
 	const { detailAgenda, showSidebar, message } = useSelector(
 		(state) => state.agenda,
 	);
+	const [deviceWidth, setDevideWidth] = useState(true);
+
 	const dispatch = useDispatch();
 
 	useEffect(() => {
@@ -45,38 +48,52 @@ const MainLayout = () => {
 		}
 	}, [message]);
 
+	useEffect(() => {
+		if (window.innerWidth < 768) {
+			setDevideWidth(false);
+		}
+	}, []);
+
 	const handleCloseAlert = () => {
 		setShowAlert(false);
 	};
 
 	return (
-		<main className="min-h-screen h-auto w-full flex p-2 bg-light-gray">
-			{showAlert && (
-				<Alert
-					status={message.status}
-					message={message.message}
-					onClick={handleCloseAlert}
-				/>
+		<>
+			{!deviceWidth ? (
+				<Device />
+			) : (
+				<main className="min-h-screen h-auto w-full flex p-2 bg-light-gray">
+					{showAlert && (
+						<Alert
+							status={message.status}
+							message={message.message}
+							onClick={handleCloseAlert}
+						/>
+					)}
+
+					<Sidebar />
+
+					<aside className="w-full px-10 pb-20">
+						{showSidebarDialogue && (
+							<DetailAgendaSidebar
+								onClick={() => dispatch(closeDetailAgenda())}
+								data={detailAgenda}
+								isShow={true}
+								variant={
+									showSidebar
+										? 'translate-x-0'
+										: 'translate-x-full'
+								}
+							/>
+						)}
+						<Header />
+						<Outlet />
+						{/* <Footer /> */}
+					</aside>
+				</main>
 			)}
-
-			<Sidebar />
-
-			<aside className="w-full px-10 pb-20">
-				{showSidebarDialogue && (
-					<DetailAgendaSidebar
-						onClick={() => dispatch(closeDetailAgenda())}
-						data={detailAgenda}
-						isShow={true}
-						variant={
-							showSidebar ? 'translate-x-0' : 'translate-x-full'
-						}
-					/>
-				)}
-				<Header />
-				<Outlet />
-				{/* <Footer /> */}
-			</aside>
-		</main>
+		</>
 	);
 };
 
