@@ -91,6 +91,8 @@ const AgendaByDate = () => {
 		return timeA - timeB;
 	});
 
+	console.log(agendaByDate);
+
 	const role = jwtDecode(sessionStorage.getItem('access_token')).role;
 
 	return (

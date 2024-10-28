@@ -345,7 +345,7 @@ const convertAgendaData = async (data) => {
 		? localStorage.getItem('access_token')
 		: sessionStorage.getItem('access_token');
 
-	const username = jwtDecode(access_token).username;
+	const departmentName = jwtDecode(access_token).department.name;
 
 	return data.map((item) => {
 		const startTime = moment.utc(item.start);
@@ -375,7 +375,8 @@ const convertAgendaData = async (data) => {
 				start: startTime.format('YYYY'),
 				finish: finishTime.format('YYYY'),
 			},
-			isAuthor: item.author.username === username ? true : false,
+			isAuthor:
+				item.author.departmentName === departmentName ? true : false,
 		};
 	});
 };

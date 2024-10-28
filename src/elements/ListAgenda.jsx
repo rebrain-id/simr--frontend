@@ -21,14 +21,14 @@ const ListAgenda = (props) => {
 			className={`px-5 py-3 border rounded flex items-center cursor-pointer ${isOwner ? 'border-light-primary' : 'border-light-warning'}`}
 			onClick={handleClick}
 		>
-			<div className={`pe-3 ${date ? 'w-1/3' : 'w-1/2'}`}>
+			<div className={`pe-3 ${date ? 'w-1/4' : 'w-2/6'}`}>
 				<h3 className="text-sm font-medium">{title}</h3>
 			</div>
 
 			<div
-				className={`flex items-center gap-5 ${date ? 'w-2/3' : 'w-1/2'}`}
+				className={`flex items-center gap-5 ${date ? 'w-3/4' : 'w-4/6'}`}
 			>
-				<div className="w-3/6 flex items-center gap-2">
+				<div className="w-2/6 flex items-center gap-2">
 					<FontAwesomeIcon
 						icon={faClockFour}
 						className={
@@ -40,7 +40,7 @@ const ListAgenda = (props) => {
 					<p className="text-xs font-medium">{time}</p>
 				</div>
 				{date && (
-					<div className="w-3/6 flex items-center gap-2">
+					<div className="w-2/6 flex items-center gap-2">
 						<FontAwesomeIcon
 							icon={faCalendarAlt}
 							className={
@@ -52,7 +52,7 @@ const ListAgenda = (props) => {
 						<p className="text-xs font-medium">{date}</p>
 					</div>
 				)}
-				<div className="w-1/3 flex items-center gap-2">
+				<div className="w-2/6 flex items-center gap-2">
 					<FontAwesomeIcon
 						icon={faDoorClosed}
 						className={
@@ -63,7 +63,7 @@ const ListAgenda = (props) => {
 					/>
 					<p className="text-xs font-medium">{room}</p>
 				</div>
-				<div className="w-1/3 flex items-center gap-2">
+				<div className="w-2/6 flex items-center gap-2">
 					<FontAwesomeIcon
 						icon={faUserAlt}
 						className={
@@ -73,7 +73,7 @@ const ListAgenda = (props) => {
 						}
 					/>
 					<p className="text-xs font-medium capitalize">
-						{data.author.username}
+						{data.author.departmentName}
 					</p>
 				</div>
 			</div>
