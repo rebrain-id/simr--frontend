@@ -99,7 +99,7 @@ const TypeAgenda = () => {
 							icon={faPlus}
 							className="text-white border-0 outline-none pl-2"
 						/>
-						<Button text="Tambah Dosen" />
+						<Button text="Tambah Data" />
 					</div>
 				</div>
 

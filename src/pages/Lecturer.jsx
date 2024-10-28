@@ -92,7 +92,7 @@ const Lecturer = () => {
 							icon={faPlus}
 							className="text-white border-0 outline-none pl-2"
 						/>
-						<Button text="Tambah Dosen" onClick={handleModal} />
+						<Button text="Tambah Data" onClick={handleModal} />
 					</div>
 				</div>
 
