@@ -10,9 +10,9 @@ const Alert = (props) => {
 
 	return (
 		<div
-			className={`fixed max-w-md top-10 right-10 z-[120] ${status === 'success' ? 'bg-[#e9ffdd] border-success' : 'bg-[#fff7f7]  text-danger'} px-5 py-2 rounded text-xs flex items-center gap-5`}
+			className={`fixed max-w-md top-10 right-1/2 translate-x-1/2 z-[120] ${status === 'success' ? 'bg-[#e9ffdd] border-success' : 'bg-[#fff7f7]  text-danger'} px-5 py-2 rounded text-sm flex items-center gap-10 drop-shadow-bottom`}
 		>
-			<div className="flex items-center gap-3">
+			<div className="flex items-center gap-10">
 				{status === 'success' ? (
 					<FontAwesomeIcon
 						icon={faCheck}
