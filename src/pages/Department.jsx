@@ -1,4 +1,3 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import Button from '../elements/Button';
 import ListDepartment from '../elements/ListDepartment';
@@ -81,13 +80,12 @@ const Department = () => {
 			<main className="bg-white px-10 pb-10 rounded drop-shadow-bottom mt-5">
 				<div className="flex items-center justify-between pt-4">
 					<h1 className="text-base font-semibold">Program Studi</h1>
-					<div className="flex items-center bg-light-primary text-white rounded text-sm">
-						<FontAwesomeIcon
-							icon={faPlus}
-							className="text-white border-0 outline-none pl-2"
-						/>
-						<Button text="Tambah Data" onClick={handleModal} />
-					</div>
+					<Button
+						icon={faPlus}
+						text="Tambah Data"
+						variant="flex items-center bg-light-primary text-white rounded text-sm"
+						onClick={handleModal}
+					/>
 				</div>
 
 				<section className="mt-5 flex flex-col gap-3">

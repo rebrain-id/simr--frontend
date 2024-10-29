@@ -1,5 +1,4 @@
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Button from '../elements/Button';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
@@ -91,16 +90,12 @@ const TypeAgenda = () => {
 				<div className="flex items-center justify-between">
 					<h1 className="text-base font-semibold">Jenis Agenda</h1>
 
-					<div
-						className="flex items-center bg-light-primary text-white rounded text-sm"
+					<Button
+						icon={faPlus}
+						text="Tambah Data"
+						variant="flex items-center bg-light-primary text-white rounded text-sm"
 						onClick={handleModal}
-					>
-						<FontAwesomeIcon
-							icon={faPlus}
-							className="text-white border-0 outline-none pl-2"
-						/>
-						<Button text="Tambah Data" />
-					</div>
+					/>
 				</div>
 
 				<main className="mt-5">
