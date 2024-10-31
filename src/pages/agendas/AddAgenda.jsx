@@ -16,12 +16,14 @@ import { jwtDecode } from 'jwt-decode';
 import ModalDanger from '../../elements/modal/ModalDanger';
 
 const AddAgenda = () => {
-	const access_token = localStorage.getItem('access_token')
-		? localStorage.getItem('access_token')
-		: sessionStorage.getItem('access_token');
+	const access_token = sessionStorage.getItem('access_token');
 	const decodeToken = jwtDecode(access_token);
 	const username = decodeToken.username;
 	const departmentUuid = decodeToken.department.uuid;
+
+	if (!sessionStorage.getItem('member')) {
+		sessionStorage.setItem('member', JSON.stringify([departmentUuid]));
+	}
 
 	const navigation = useNavigate();
 	const dispatch = useDispatch();
