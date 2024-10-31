@@ -1,4 +1,4 @@
-import { registerRequest } from '../../services/auth';
+import { deleteUserRequest, registerRequest } from '../../services/auth';
 import {
 	getDepartment,
 	postDepartment,
@@ -107,17 +107,50 @@ export const postDepartmentData = (department) => {
 					password: department.password,
 					departmentUuid: departmentResponse.data.uuid,
 					isAdmin: false,
+					jabatanValue: 4,
 				};
 
 				const userResponse = await registerRequest(userRequest);
 
 				if (userResponse && userResponse.statusCode === 201) {
-					dispatch(
-						fetchDepartmentsMessage({
-							status: 'success',
-							message: 'Berhasil menambahkan program studi',
-						}),
-					);
+					const sekretarisRequest = {
+						username: department.username + '-sek',
+						password: department.password,
+						departmentUuid: departmentResponse.data.uuid,
+						isAdmin: false,
+						jabatanValue: 5,
+					};
+					const sekretarisResponse =
+						await registerRequest(sekretarisRequest);
+
+					if (
+						sekretarisResponse &&
+						sekretarisResponse.statusCode === 201
+					) {
+						dispatch(
+							fetchDepartmentsMessage({
+								status: 'success',
+								message: 'Berhasil menambahkan program studi',
+							}),
+						);
+					} else {
+						const deleteUser = await deleteUserRequest(
+							department.username,
+						);
+
+						if (deleteUser && deleteUser.statusCode === 200) {
+							await deleteDepartment(
+								departmentResponse.data.uuid,
+							);
+
+							dispatch(
+								fetchDepartmentsMessage({
+									status: 'error',
+									message: 'Gagal menambahkan program studi',
+								}),
+							);
+						}
+					}
 				} else if (userResponse && userResponse.status === 400) {
 					const response = await deleteDepartment(
 						departmentResponse.data.uuid,
