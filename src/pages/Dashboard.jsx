@@ -70,6 +70,15 @@ const Dashboard = () => {
 		}
 	}, [loading]);
 
+	const jabatan = [
+		'',
+		'dekan',
+		'wakil dekan',
+		'pengajaram',
+		'kaprodi',
+		'sekretaris',
+	];
+
 	return (
 		<>
 			{showLoading && (
@@ -88,7 +97,8 @@ const Dashboard = () => {
 					backgroundPosition: 'center',
 				}}
 			>
-				<h1 className="text-2xl text-secondary font-bold uppercase tracking-widest">
+				<h1 className="text-lg text-secondary font-bold uppercase tracking-widest">
+					{jabatan[decode_token.jabatanValue]} -{' '}
 					{decode_token.department.name}
 				</h1>
 				<p className="text-xs">Universitas Muhammadiyah Jember</p>
