@@ -12,6 +12,7 @@ import ChangePassword from '../pages/auth/ChangePassword';
 import ProtectedRoute from './ProtectedRoute';
 import TypeAgenda from '../pages/typeAgenda';
 import SearchPage from '../pages/agendas/SearchPage';
+import User from '../pages/User';
 
 export const router = createBrowserRouter([
 	{
@@ -95,6 +96,14 @@ export const router = createBrowserRouter([
 				element: (
 					<ProtectedRoute authorized={['FAKULTAS']}>
 						<TypeAgenda />
+					</ProtectedRoute>
+				),
+			},
+			{
+				path: 'user',
+				element: (
+					<ProtectedRoute authorized={['FAKULTAS']}>
+						<User />
 					</ProtectedRoute>
 				),
 			},

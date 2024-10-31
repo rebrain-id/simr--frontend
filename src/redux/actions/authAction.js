@@ -1,5 +1,7 @@
 import { jwtDecode } from 'jwt-decode';
 import {
+	deleteUserRequest,
+	getUserRequest,
 	loginRequest,
 	logoutRequest,
 	registerRequest,
@@ -7,14 +9,25 @@ import {
 } from '../../services/auth';
 
 export const FETCH_AUTH_REQUEST = 'FETCH_AUTH_REQUEST';
+export const FETCH_GET_AUTH_SUCCESS = 'FETCH_GET_AUTH_SUCCESS';
 export const FETCH_REGISTER_SUCCESS = 'FETCH_REGISTER_SUCCESS';
 export const FETCH_LOGIN_SUCCESS = 'FETCH_LOGIN_SUCCESS';
 export const FETCH_UPDATE_SUCCESS = 'FETCH_UPDATE_SUCCESS';
 export const FETCH_LOGOUT_SUCCESS = 'FETCH_LOGOUT_SUCCESS';
+export const FETCH_DELETE_SUCCESS = 'FETCH_DELETE_SUCCESS';
 export const FETCH_AUTH_FAILURE = 'FETCH_AUTH_FAILURE';
+export const MESSAGE = 'MESSAGE';
+export const CLOSE_MESSAGE = 'CLOSE_MESSAGE';
+export const OPEN_MODAL = 'OPEN_MODAL';
+export const CLOSE_MODAL = 'CLOSE_MODAL';
 
 export const fetchAuthRequest = () => ({
 	type: FETCH_AUTH_REQUEST,
+});
+
+export const fetchGetAuthSuccess = (response) => ({
+	type: FETCH_GET_AUTH_SUCCESS,
+	payload: response,
 });
 
 export const fetchRegisterSuccess = (response) => ({
@@ -35,16 +48,104 @@ export const fetchLogoutSuccess = (response) => ({
 	type: FETCH_LOGOUT_SUCCESS,
 });
 
+export const fetchDeleteUserSuccess = (response) => ({
+	payload: response,
+	type: FETCH_DELETE_SUCCESS,
+});
+
 export const fetchAuthFailure = () => ({
 	type: FETCH_AUTH_FAILURE,
 });
+
+export const fetchMessage = (message) => ({
+	type: MESSAGE,
+	payload: message,
+});
+
+export const closeMessage = () => ({
+	type: CLOSE_MESSAGE,
+});
+
+export const openModal = (username) => ({
+	payload: username,
+	type: OPEN_MODAL,
+});
+
+export const closeModal = () => ({ type: CLOSE_MODAL });
+
+export const fetchUser = () => {
+	return async (dispatch) => {
+		dispatch(fetchAuthRequest());
+
+		try {
+			const response = await getUserRequest();
+
+			console.log(response);
+
+			if (response.code === 'ERR_NETWORK') {
+				dispatch(
+					fetchMessage({
+						status: 'error',
+						message: 'Jaringan internet anda tidak stabil',
+					}),
+				);
+			}
+
+			const groupedData = response.data.reduce((acc, item) => {
+				const departmentName = item.department.name;
+				const existingGroup = acc.find(
+					(group) => group.department === departmentName,
+				);
+
+				if (existingGroup) {
+					existingGroup.user.push(item);
+				} else {
+					acc.push({
+						department: departmentName,
+						user: [item],
+					});
+				}
+				return acc;
+			}, []);
+
+			dispatch(fetchGetAuthSuccess(groupedData));
+		} catch (error) {
+			console.log(error);
+		}
+	};
+};
 
 export const postRegister = (data) => {
 	return async (dispatch) => {
 		dispatch(fetchAuthRequest());
 
+		const requestData = {
+			username: data.username,
+			password: data.password,
+			departmentUuid: data.departmentUuid,
+			jabatanValue: Number(data.jabatanValue),
+		};
+
 		try {
-			const response = await registerRequest(data);
+			const response = await registerRequest(requestData);
+
+			console.log(response);
+
+			if (response && response.statusCode === 201) {
+				dispatch(
+					fetchMessage({
+						status: 'success',
+						message: 'Berhasil mendaftarkan akun',
+					}),
+				);
+			} else {
+				dispatch(
+					fetchMessage({
+						status: 'error',
+						message: 'Gagal mendaftarkan akun',
+					}),
+				);
+			}
 
 			dispatch(fetchRegisterSuccess(response));
 
@@ -93,9 +194,70 @@ export const updateUser = (data) => {
 	return async (dispatch) => {
 		dispatch(fetchAuthRequest());
 
+		if (data.jabatanValue) {
+			data = {
+				...data,
+				jabatanValue: Number(data.jabatanValue),
+			};
+		}
+
 		try {
 			const response = await updateUserRequest(username, data);
 			console.log(response);
+
+			if (response && response.statusCode === 200) {
+				dispatch(
+					fetchMessage({
+						status: 'success',
+						message: 'Berhasil memperbarui data akun',
+					}),
+				);
+			} else {
+				dispatch(
+					fetchMessage({
+						status: 'error',
+						message: 'Gagal memperbarui data akun',
+					}),
+				);
+			}
+
+			return response.data;
+		} catch (error) {
+			console.log(error);
+		}
+	};
+};
+
+export const updateDataUser = (username, data) => {
+	return async (dispatch) => {
+		dispatch(fetchAuthRequest());
+
+		if (data.jabatanValue) {
+			data = {
+				...data,
+				jabatanValue: Number(data.jabatanValue),
+			};
+		}
+
+		try {
+			const response = await updateUserRequest(username, data);
+			console.log(response);
+
+			if (response && response.statusCode === 200) {
+				dispatch(
+					fetchMessage({
+						status: 'success',
+						message: 'Berhasil memperbarui data akun',
+					}),
+				);
+			} else {
+				dispatch(
+					fetchMessage({
+						status: 'error',
+						message: 'Gagal memperbarui data akun',
+					}),
+				);
+			}
 
 			return response.data;
 		} catch (error) {
@@ -108,9 +270,7 @@ export const postLogout = () => {
 	return async () => {
 		// dispatch(fetchAuthRequest());
 
-		const access_token = localStorage.getItem('access_token')
-			? localStorage.getItem('access_token')
-			: sessionStorage.getItem('access_token');
+		const access_token = sessionStorage.getItem('access_token');
 
 		const decodeToken = jwtDecode(access_token);
 
@@ -125,6 +285,39 @@ export const postLogout = () => {
 			}
 
 			return response;
+		} catch (error) {
+			console.log(error);
+		}
+	};
+};
+
+export const deleteUser = (username) => {
+	return async (dispatch) => {
+		dispatch(fetchAuthRequest());
+
+		try {
+			const response = await deleteUserRequest(username);
+
+			dispatch(closeModal());
+
+			if (response && response.data.statusCode == 200) {
+				dispatch(
+					fetchMessage({
+						status: 'success',
+						message: 'Berhasil menghapus akun',
+					}),
+				);
+			} else {
+				dispatch(
+					fetchMessage({
+						status: 'error',
+						message: 'Gagal menghapus akun',
+					}),
+				);
+			}
+
+			dispatch(fetchDeleteUserSuccess(response));
+			return response.data;
 		} catch (error) {
 			console.log(error);
 		}

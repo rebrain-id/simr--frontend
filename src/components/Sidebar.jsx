@@ -3,6 +3,7 @@ import {
 	faSitemap,
 	faTableColumns,
 	faUserAlt,
+	faUsers,
 } from '@fortawesome/free-solid-svg-icons';
 import logo from '../assets/images/logo.png';
 import NavLink from '../elements/NavLink';
@@ -108,6 +109,17 @@ const Sidebar = () => {
 						to="/dosen"
 						variant={
 							isActive('/dosen')
+								? 'bg-light-primary text-white'
+								: ''
+						}
+					/>
+					<NavLink
+						isVisible={sidebarFull}
+						icon={faUsers}
+						title="Pengguna"
+						to="/user"
+						variant={
+							isActive('/user')
 								? 'bg-light-primary text-white'
 								: ''
 						}

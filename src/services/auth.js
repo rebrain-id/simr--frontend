@@ -1,6 +1,25 @@
 import axios from 'axios';
 import { API_URL } from './config';
 
+export const getUserRequest = async () => {
+	const url = `${API_URL()}/v1/user`;
+
+	try {
+		const response = await axios({
+			method: 'get',
+			url: url,
+			headers: {
+				Authorization: `Bearer ${sessionStorage.getItem('access_token')}`,
+			},
+		});
+
+		return response.data;
+	} catch (error) {
+		console.log(error);
+		return error;
+	}
+};
+
 export const registerRequest = async (data) => {
 	const url = `${API_URL()}/v1/user/register`;
 
@@ -39,16 +58,29 @@ export const updateUserRequest = (username, data) => {
 	const access_token = sessionStorage.getItem('access_token');
 	const url = `${API_URL()}/v1/user/${username}`;
 
-	const dataUser = {
-		oldPassword: data.oldPassword,
-		newPassword: data.newPassword,
-	};
-
 	try {
 		const response = axios({
 			method: 'patch',
 			url: url,
-			data: dataUser,
+			data: data,
+			headers: {
+				Authorization: `Bearer ${access_token}`,
+			},
+		});
+		return response;
+	} catch (error) {
+		console.log(error);
+	}
+};
+
+export const deleteUserRequest = (username) => {
+	const access_token = sessionStorage.getItem('access_token');
+	const url = `${API_URL()}/v1/user/${username}`;
+
+	try {
+		const response = axios({
+			method: 'delete',
+			url: url,
 			headers: {
 				Authorization: `Bearer ${access_token}`,
 			},
