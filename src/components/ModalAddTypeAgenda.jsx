@@ -61,7 +61,7 @@ const ModalAddTypeAgenda = (props) => {
 							text="Tambah Data"
 							type="submit"
 							onClick={() => {}}
-							variant="bg-light-primary/80 hover:bg-light-primary text-light-white text-xs"
+							variant="bg-light-primary/80 hover:bg-light-primary text-light-white text-sm"
 						/>
 						<Button
 							text="Batal"
