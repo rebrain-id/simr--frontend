@@ -19,7 +19,7 @@ const NavLink = (props) => {
 		>
 			<FontAwesomeIcon
 				icon={icon}
-				className={iconVariant ? iconVariant : 'h-5'}
+				className={iconVariant ? iconVariant : 'h-5 w-5'}
 			/>
 
 			{isVisible && (
