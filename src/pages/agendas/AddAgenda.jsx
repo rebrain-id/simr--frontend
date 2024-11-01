@@ -107,7 +107,9 @@ const AddAgenda = () => {
 			} else {
 				const response = await dispatch(createAgenda({ data }));
 
-				if (response && response.payload.data.statusCode === 201) {
+				console.log(response);
+
+				if (response && response.payload.statusCode === 201) {
 					sessionStorage.removeItem('member');
 					navigation(
 						`/agenda/date?date=${moment(values.from).format('DD')}&month=${moment(values.from).format('MM')}&year=${moment(values.from).format('YYYY')}`,

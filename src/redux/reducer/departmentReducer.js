@@ -9,6 +9,7 @@ import {
 	MESSAGE,
 	OPEN_MODAL,
 	CLOSE_MODAL,
+	CLOSE_MESSAGE,
 } from '../actions/departmentAction';
 
 const initialState = {
@@ -18,7 +19,7 @@ const initialState = {
 	isUpdated: true,
 	isOpenModal: false,
 	uuid: null,
-	message: '',
+	message: null,
 };
 
 const departmentReducer = (state = initialState, action) => {
@@ -71,6 +72,11 @@ const departmentReducer = (state = initialState, action) => {
 			return {
 				...state,
 				message: action.payload,
+			};
+		case CLOSE_MESSAGE:
+			return {
+				...state,
+				message: null,
 			};
 		case OPEN_MODAL:
 			return {

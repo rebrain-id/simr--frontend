@@ -20,6 +20,8 @@ import ModalAddAnggota from './ModalAddAnggota';
 import ModalWarning from '../elements/modal/ModalWarning';
 import ModalDanger from '../elements/modal/ModalDanger';
 import { jwtDecode } from 'jwt-decode';
+import { closeMessage } from '../redux/actions/messageAction';
+import Alert from '../elements/Alert';
 
 const DetailAgendaSidebar = (props) => {
 	const { onClick, data, isShow = false, variant } = props;
@@ -28,9 +30,8 @@ const DetailAgendaSidebar = (props) => {
 	const username = jwtDecode(access_token).username;
 
 	const [showModal, setShowModal] = useState(false);
-	const [showDanger, setShowDanger] = useState(false);
 	const [showModalWarning, setShowModalWarning] = useState(false);
-	const [showModalDanger, setShowModalDanger] = useState(false);
+	const [showAlert, setShowAlert] = useState(false);
 	const [member, setMember] = useState([]);
 
 	const dispatch = useDispatch();
@@ -38,6 +39,8 @@ const DetailAgendaSidebar = (props) => {
 	const department = useSelector(
 		(state) => state.fetchDepartments.department,
 	);
+
+	const { message, isOpen } = useSelector((state) => state.message);
 
 	useEffect(() => {
 		dispatch(fetchTypeAgenda());
@@ -96,11 +99,8 @@ const DetailAgendaSidebar = (props) => {
 			if (response && response.payload.statusCode === 200) {
 				dispatch(closeDetailAgenda());
 				sessionStorage.removeItem('member');
-			} else {
-				setShowDanger(true);
 			}
 		} catch (error) {
-			setShowDanger(true);
 			console.log(error);
 		}
 	};
@@ -112,11 +112,11 @@ const DetailAgendaSidebar = (props) => {
 				deleteDetailAgenda({ uuid: inputValue.uuid }),
 			);
 
-			if (response && response.payload.data.statusCode === 200) {
+			console.log(response);
+
+			if (response && response.payload.statusCode === 200) {
 				dispatch(closeDetailAgenda());
 				sessionStorage.removeItem('member');
-			} else {
-				setShowModalDanger(true);
 			}
 		} catch (error) {
 			console.log(error);
@@ -131,9 +131,27 @@ const DetailAgendaSidebar = (props) => {
 		setShowModalWarning(!showModalWarning);
 	};
 
-	const handleOpenDangerModal = () => {
-		setShowModalDanger(!showModalDanger);
-	};
+	useEffect(() => {
+		if (
+			message &&
+			message.status === 'success' &&
+			isOpen &&
+			(message.page === 'agenda' || message.page === '*')
+		) {
+			setShowAlert(true);
+			setTimeout(() => {
+				dispatch(closeMessage());
+				setShowAlert(false);
+			}, 5000);
+		} else if (
+			message &&
+			message.status === 'error' &&
+			isOpen &&
+			(message.page === 'agenda' || message.page === '*')
+		) {
+			setShowAlert(true);
+		}
+	}, [message, dispatch, isOpen]);
 
 	return (
 		<>
@@ -151,10 +169,18 @@ const DetailAgendaSidebar = (props) => {
 				/>
 			)}
 
-			{showDanger && (
+			{showAlert && message?.status === 'success' && (
+				<Alert
+					onClick={() => dispatch(closeMessage())}
+					status={message?.status}
+					message={message?.message}
+				/>
+			)}
+
+			{showAlert && message?.status === 'error' && (
 				<ModalDanger
-					onClick={() => setShowDanger(false)}
-					message="Kesalahan dalam memperbarui agenda, periksa kembali data anda"
+					onClick={() => dispatch(closeMessage())}
+					message={message?.message}
 				/>
 			)}
 
@@ -163,13 +189,6 @@ const DetailAgendaSidebar = (props) => {
 					onClick={handleDelete}
 					onClose={handleOpenWarningModal}
 					message="Apakah anda yakin ingin menghapus agenda ini?"
-				/>
-			)}
-
-			{showModalDanger && (
-				<ModalDanger
-					onClick={handleOpenDangerModal}
-					message="Kesalahan dalam menghapus agenda, periksa kembali data anda"
 				/>
 			)}
 
@@ -370,7 +389,7 @@ const DetailAgendaSidebar = (props) => {
 								/>
 							)}
 							<Button
-								onClick={handleCloseModal}
+								onClick={onClick}
 								text="Batal"
 								variant="bg-light-primary bg-opacity-30 text-light-primary text-sm hover:bg-opacity-50"
 							/>

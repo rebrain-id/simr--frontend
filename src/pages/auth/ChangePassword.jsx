@@ -7,20 +7,19 @@ import { Link } from 'react-router-dom';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { updateUser } from '../../redux/actions/authAction';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import Alert from '../../elements/Alert';
 import ModalDanger from '../../elements/modal/ModalDanger';
+import { closeMessage } from '../../redux/actions/messageAction';
 
 const ChangePassword = () => {
 	const access_token = sessionStorage.getItem('access_token');
 	const username = jwtDecode(access_token).username;
-	const [message, setMessage] = useState({
-		status: '',
-		message: '',
-	});
 	const [showAlert, setShowAlert] = useState(false);
 	const dispatch = useDispatch();
+
+	const { message, isOpen } = useSelector((state) => state.message);
 
 	const formik = useFormik({
 		initialValues: {
@@ -38,35 +37,34 @@ const ChangePassword = () => {
 		}),
 
 		onSubmit: async (values) => {
-			const response = await dispatch(updateUser(values));
-
-			if (response && response.statusCode === 200) {
-				setMessage({
-					status: 'success',
-					message: 'Password berhasil diganti',
-				});
-			} else {
-				setMessage({
-					status: 'error',
-					message: 'Password gagal diubah',
-				});
-			}
-			console.log(response);
+			await dispatch(updateUser(values));
 		},
 	});
 
 	useEffect(() => {
-		if (message.status === 'success') {
+		if (
+			message &&
+			message?.status === 'success' &&
+			isOpen &&
+			(message.page === 'change-password' || message.page === '*')
+		) {
 			setShowAlert(true);
 			setTimeout(() => {
+				dispatch(closeMessage());
 				setShowAlert(false);
 			}, 5000);
-		} else if (message.status === 'error') {
+		} else if (
+			message &&
+			message?.status === 'error' &&
+			isOpen &&
+			(message.page === 'change-password' || message.page === '*')
+		) {
 			setShowAlert(true);
 		}
-	}, [message]);
+	}, [message, dispatch, isOpen]);
 
 	const handleClose = () => {
+		dispatch(closeMessage());
 		setShowAlert(false);
 	};
 

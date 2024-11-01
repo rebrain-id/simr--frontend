@@ -113,17 +113,19 @@ const Sidebar = () => {
 								: ''
 						}
 					/>
-					<NavLink
-						isVisible={sidebarFull}
-						icon={faUsers}
-						title="Pengguna"
-						to="/user"
-						variant={
-							isActive('/user')
-								? 'bg-light-primary text-white'
-								: ''
-						}
-					/>
+					{role && role === 'FAKULTAS' && (
+						<NavLink
+							isVisible={sidebarFull}
+							icon={faUsers}
+							title="Pengguna"
+							to="/user"
+							variant={
+								isActive('/user')
+									? 'bg-light-primary text-white'
+									: ''
+							}
+						/>
+					)}
 				</menu>
 			</nav>
 		</>

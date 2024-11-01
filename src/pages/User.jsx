@@ -18,12 +18,13 @@ import ModalWarning from '../elements/modal/ModalWarning';
 const User = () => {
 	const dispatch = useDispatch();
 	const users = useSelector((state) => state.auth.auth);
-	const { loading, message, isUpdated, isOpenModal, username } = useSelector(
+	const { loading, isUpdated, isOpenModal, username } = useSelector(
 		(state) => state.auth,
 	);
 	const departments = useSelector(
 		(state) => state.fetchDepartments.department,
 	);
+	const { message, isOpen } = useSelector((state) => state.message);
 
 	const [openModal, setOpenModal] = useState(false);
 	const [openAlert, setOpenAlert] = useState(false);
@@ -38,16 +39,26 @@ const User = () => {
 	};
 
 	useEffect(() => {
-		if (message && message?.status === 'success') {
+		if (
+			message &&
+			message?.status === 'success' &&
+			isOpen &&
+			(message.page === 'user' || message.page === '*')
+		) {
 			setOpenAlert(true);
 			setTimeout(() => {
 				dispatch(closeMessage());
 				setOpenAlert(false);
 			}, 5000);
-		} else if (message && message?.status === 'error') {
+		} else if (
+			message &&
+			message?.status === 'error' &&
+			isOpen &&
+			(message.page === 'user' || message.page === '*')
+		) {
 			setOpenAlert(true);
 		}
-	}, [message, dispatch]);
+	}, [message, dispatch, isOpen]);
 
 	return (
 		<>

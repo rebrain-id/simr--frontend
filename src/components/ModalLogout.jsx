@@ -15,6 +15,8 @@ const ModalLogout = ({ onClick }) => {
 
 			if (response && response.statusCode == 200) {
 				navigate('/login');
+			} else {
+				navigate('/login');
 			}
 		} catch (error) {
 			console.log(error);

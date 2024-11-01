@@ -14,6 +14,7 @@ import { jwtDecode } from 'jwt-decode';
 import Alert from '../elements/Alert';
 import ModalDanger from '../elements/modal/ModalDanger';
 import ModalWarning from '../elements/modal/ModalWarning';
+import { closeMessage } from '../redux/actions/messageAction';
 
 const Lecturer = () => {
 	const [openModal, setOpenModal] = useState(false);
@@ -22,10 +23,11 @@ const Lecturer = () => {
 
 	const dispatch = useDispatch();
 
-	const { isUpdated, loading, message, uuid, isOpenModal } = useSelector(
+	const { isUpdated, loading, uuid, isOpenModal } = useSelector(
 		(state) => state.fetchLecturers,
 	);
 	const lecturers = useSelector((state) => state.fetchLecturers.lecturer);
+	const { message, isOpen } = useSelector((state) => state.message);
 
 	const access_token = sessionStorage.getItem('access_token');
 	const role = access_token && jwtDecode(access_token).role;
@@ -36,15 +38,26 @@ const Lecturer = () => {
 	}, [dispatch, isUpdated]);
 
 	useEffect(() => {
-		if (message && message?.status === 'success') {
+		if (
+			message &&
+			message?.status === 'success' &&
+			isOpen &&
+			(message.page === 'lecturer' || message.page === '*')
+		) {
 			setOpenAlert(true);
 			setTimeout(() => {
+				dispatch(closeMessage());
 				setOpenAlert(false);
 			}, 5000);
-		} else if (message && message?.status === 'error') {
+		} else if (
+			message &&
+			message?.status === 'error' &&
+			isOpen &&
+			(message.page === 'lecturer' || message.page === '*')
+		) {
 			setOpenAlert(true);
 		}
-	}, [message]);
+	}, [message, isOpen, dispatch]);
 
 	const handleDeleteLecturer = async () => {
 		const response = await dispatch(deleteLecturerData(uuid));
@@ -62,14 +75,14 @@ const Lecturer = () => {
 				<Alert
 					status={message?.status}
 					message={message.message}
-					onClick={() => setOpenAlert(false)}
+					onClick={() => dispatch(closeMessage())}
 				/>
 			)}
 
 			{openAlert && message?.status === 'error' && (
 				<ModalDanger
 					message={message.message}
-					onClick={() => setOpenAlert(false)}
+					onClick={() => dispatch(closeMessage())}
 				/>
 			)}
 

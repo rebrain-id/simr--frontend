@@ -12,6 +12,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Alert from '../elements/Alert';
 import ModalWarning from '../elements/modal/ModalWarning';
 import ModalDanger from '../elements/modal/ModalDanger';
+import { closeMessage } from '../redux/actions/messageAction';
 
 const Department = () => {
 	const [openModal, setOpenModal] = useState(false);
@@ -23,24 +24,37 @@ const Department = () => {
 	const departments = useSelector(
 		(state) => state.fetchDepartments.department,
 	);
-	const { isUpdated, message, loading, isOpenModal, uuid } = useSelector(
+	const { isUpdated, loading, isOpenModal, uuid } = useSelector(
 		(state) => state.fetchDepartments,
 	);
+
+	const { message, isOpen } = useSelector((state) => state.message);
 
 	useEffect(() => {
 		dispatch(fetchDepartments());
 	}, [dispatch, isUpdated]);
 
 	useEffect(() => {
-		if (message && message.status === 'success') {
+		if (
+			message &&
+			message.status === 'success' &&
+			isOpen &&
+			(message.page === 'department' || message.page === '*')
+		) {
 			setOpenAlert(true);
 			setTimeout(() => {
+				dispatch(closeMessage());
 				setOpenAlert(false);
 			}, 5000);
-		} else if (message && message.status === 'error') {
+		} else if (
+			message &&
+			message.status === 'error' &&
+			isOpen &&
+			(message.page === 'department' || message.page === '*')
+		) {
 			setOpenAlert(true);
 		}
-	}, [message]);
+	}, [message, dispatch, isOpen]);
 
 	const handleDeleteDepartment = async () => {
 		const response = await dispatch(deleteDepartmentData(uuid));
@@ -57,14 +71,14 @@ const Department = () => {
 				<Alert
 					status={message.status}
 					message={message.message}
-					onClick={() => setOpenAlert(false)}
+					onClick={() => dispatch(closeMessage())}
 				/>
 			)}
 
 			{openAlert && message?.status === 'error' && (
 				<ModalDanger
 					message={message.message}
-					onClick={() => setOpenAlert(false)}
+					onClick={() => dispatch(closeMessage())}
 				/>
 			)}
 
@@ -103,7 +117,7 @@ const Department = () => {
 							/>
 						))
 					) : (
-						<p className="text-center text-sm text-light-secondary">
+						<p className="text-center text-xs text-light-secondary">
 							Tidak ada data program studi
 						</p>
 					)}

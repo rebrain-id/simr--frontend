@@ -11,9 +11,9 @@ import {
 	fetchTypeAgendaFailure,
 	fetchTypeAgendaRequest,
 	fetchTypeAgendaSuccess,
-	message,
 	updateTypeAgendaSuccess,
 } from '../slices/typeAgendaSlice';
+import { openMessage } from './messageAction';
 
 export const fetchTypeAgenda = createAsyncThunk(
 	'typeAgenda/fetchTypeAgenda',
@@ -24,6 +24,14 @@ export const fetchTypeAgenda = createAsyncThunk(
 
 			dispatch(fetchTypeAgendaSuccess(data));
 		} catch (error) {
+			// dispatch(
+			// 	openMessage({
+			// 		page: 'type-agenda',
+			// 		status: 'error',
+			// 		message:
+			// 			'Gagal memuat data jenis agenda, jaringan anda tidak stabil',
+			// 	}),
+			// );
 			dispatch(fetchTypeAgendaFailure(error));
 		}
 	},
@@ -37,7 +45,8 @@ export const createTypeAgenda = createAsyncThunk(
 
 			if (response && response.statusCode === 201) {
 				dispatch(
-					message({
+					openMessage({
+						page: 'type-agenda',
 						status: 'success',
 						message: 'berhasil menambah data jenis agenda baru',
 					}),
@@ -46,16 +55,25 @@ export const createTypeAgenda = createAsyncThunk(
 				dispatch(createTypeAgendaSuccess(response));
 			} else {
 				dispatch(
-					message({
+					openMessage({
+						page: 'type-agenda',
 						status: 'error',
 						message:
-							'terjadi kesalahan dalam menambah jenis agenda baru',
+							'terjadi kesalahan dalam menambah jenis agenda baru, periksa kembali data yang anda masukkan',
 					}),
 				);
 			}
 
 			return response;
 		} catch (error) {
+			dispatch(
+				openMessage({
+					page: 'type-agenda',
+					status: 'error',
+					message:
+						'terjadi kesalahan dalam menambah jenis agenda baru, periksa kembali data yang anda masukkan',
+				}),
+			);
 			console.log(error);
 		}
 	},
@@ -69,7 +87,8 @@ export const updateTypeAgenda = createAsyncThunk(
 
 			if (response && response.statusCode === 200) {
 				dispatch(
-					message({
+					openMessage({
+						page: 'type-agenda',
 						status: 'success',
 						message: 'jenis agenda berhasil diperbarui',
 					}),
@@ -78,13 +97,23 @@ export const updateTypeAgenda = createAsyncThunk(
 				dispatch(updateTypeAgendaSuccess(response));
 			} else {
 				dispatch(
-					message({
+					openMessage({
+						page: 'type-agenda',
 						status: 'error',
-						message: 'terdapat kesalahan dalam memperbarui data',
+						message:
+							'terdapat kesalahan dalam memperbarui data, periksa kembali data yang anda masukkan',
 					}),
 				);
 			}
 		} catch (error) {
+			dispatch(
+				openMessage({
+					page: 'type-agenda',
+					status: 'error',
+					message:
+						'terdapat kesalahan dalam memperbarui data, periksa kembali data yang anda masukkan',
+				}),
+			);
 			console.log(error);
 		}
 	},
@@ -99,14 +128,16 @@ export const deleteTypeAgenda = createAsyncThunk(
 			if (response && response.statusCode === 200) {
 				dispatch(deleteTypeAgendaSuccess(response));
 				dispatch(
-					message({
+					openMessage({
+						page: 'type-agenda',
 						status: 'success',
 						message: 'data berhasil dihapus',
 					}),
 				);
 			} else {
 				dispatch(
-					message({
+					openMessage({
+						page: 'type-agenda',
 						status: 'error',
 						message: 'terdapat kesalahan dalam menghapus data',
 					}),
@@ -115,6 +146,13 @@ export const deleteTypeAgenda = createAsyncThunk(
 
 			return response;
 		} catch (error) {
+			dispatch(
+				openMessage({
+					page: 'type-agenda',
+					status: 'error',
+					message: 'terdapat kesalahan dalam menghapus data',
+				}),
+			);
 			console.log(error);
 		}
 	},

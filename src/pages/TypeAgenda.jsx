@@ -14,13 +14,17 @@ import {
 import ModalAddTypeAgenda from '../components/ModalAddTypeAgenda';
 import Alert from '../elements/Alert';
 import ModalWarning from '../elements/modal/ModalWarning';
+import { closeMessage } from '../redux/actions/messageAction';
 
 const TypeAgenda = () => {
 	const dispatch = useDispatch();
-	const { typeAgenda, isUpdated, loading, message, isOpen, uuid } =
-		useSelector((state) => state.typeAgenda);
+	const { typeAgenda, isUpdated, loading, uuid } = useSelector(
+		(state) => state.typeAgenda,
+	);
+	const openDelete = useSelector((state) => state.typeAgenda.isOpen);
 	const [showModal, setShowModal] = useState(false);
 	const [alert, setAlert] = useState(false);
+	const { message, isOpen } = useSelector((state) => state.message);
 
 	useEffect(() => {
 		dispatch(fetchTypeAgenda());
@@ -35,13 +39,26 @@ const TypeAgenda = () => {
 	};
 
 	useEffect(() => {
-		if (message && message.status) {
+		if (
+			message &&
+			message.status === 'success' &&
+			isOpen &&
+			(message.page === 'type-agenda' || message.page === '*')
+		) {
 			setAlert(true);
 			setTimeout(() => {
+				dispatch(closeMessage());
 				setAlert(false);
 			}, 5000);
+		} else if (
+			message &&
+			message.status === 'error' &&
+			isOpen &&
+			(message.page === 'type-agenda' || message.page === '*')
+		) {
+			setAlert(true);
 		}
-	}, [message]);
+	}, [message, dispatch, isOpen]);
 
 	const handleCloseModalDelete = () => {
 		dispatch(closeModalDelete());
@@ -53,13 +70,6 @@ const TypeAgenda = () => {
 
 			if (response && response.payload.statusCode === 200) {
 				dispatch(closeModalDelete());
-			} else {
-				dispatch(
-					message({
-						status: 'error',
-						message: 'terdapat kesalahan dalam menghapus data',
-					}),
-				);
 			}
 		} catch (error) {
 			console.log(error);
@@ -70,7 +80,7 @@ const TypeAgenda = () => {
 		<>
 			{showModal && <ModalAddTypeAgenda onClick={handleModal} />}
 
-			{isOpen && (
+			{openDelete && (
 				<ModalWarning
 					message="Apakah anda yakin akan menghapus jenis agenda ini?"
 					onClose={handleCloseModalDelete}
@@ -82,7 +92,7 @@ const TypeAgenda = () => {
 				<Alert
 					status={message.status}
 					message={message.message}
-					onClick={() => setAlert(false)}
+					onClick={() => dispatch(closeMessage())}
 				/>
 			)}
 

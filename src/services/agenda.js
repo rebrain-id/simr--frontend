@@ -40,11 +40,13 @@ export const getAgenda = async (data) => {
 				return response.data.data;
 			} catch (error) {
 				console.log(error);
-				throw error;
+
+				return null;
 			}
 		}
 		console.log(error);
-		throw error;
+
+		return null;
 	}
 };
 

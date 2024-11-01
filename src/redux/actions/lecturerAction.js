@@ -4,6 +4,7 @@ import {
 	updateLecturer,
 	deleteLecturer,
 } from '../../services/lecturer';
+import { openMessage } from './messageAction';
 export const FETCH_LECTURER_REQUEST = 'FETCH_LECTURER_REQUEST';
 export const FETCH_LECTURER_SUCCESS = 'FETCH_LECTURER_SUCCESS';
 export const POST_LECTURER_SUCCESS = 'POST_LECTURER_SUCCESS';
@@ -96,14 +97,16 @@ export const postLecturerData = (lecturer) => {
 
 			if (response && response.statusCode === 201) {
 				dispatch(
-					fetchMessage({
+					openMessage({
+						page: 'lecturer',
 						status: 'success',
 						message: 'Berhasil menambahkan data dosen',
 					}),
 				);
 			} else {
 				dispatch(
-					fetchMessage({
+					openMessage({
+						page: 'lecturer',
 						status: 'error',
 						message: 'Gagal menambahkan data dosen',
 					}),
@@ -125,14 +128,16 @@ export const updateLecturerData = (uuid, lecturer) => {
 
 			if (response && response.statusCode === 200) {
 				dispatch(
-					fetchMessage({
+					openMessage({
+						page: 'lecturer',
 						status: 'success',
 						message: 'Berhasil memperbarui data dosen',
 					}),
 				);
 			} else {
 				dispatch(
-					fetchMessage({
+					openMessage({
+						page: 'lecturer',
 						status: 'error',
 						message:
 							'Gagal memperbarui data dosen, pastikan data yang anda masukkan sesuai',
@@ -154,14 +159,16 @@ export const deleteLecturerData = (lecturer) => {
 
 			if (response && response.statusCode === 200) {
 				dispatch(
-					fetchMessage({
+					openMessage({
+						page: 'lecturer',
 						status: 'success',
 						message: 'Berhasil menghapus data dosen',
 					}),
 				);
 			} else {
 				dispatch(
-					fetchMessage({
+					openMessage({
+						page: 'lecturer',
 						status: 'error',
 						message: 'Gagal menghapus data dosen',
 					}),

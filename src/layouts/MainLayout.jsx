@@ -8,13 +8,15 @@ import { useEffect, useState } from 'react';
 import { closeDetailAgenda } from '../redux/actions/agendaAction';
 import Alert from '../elements/Alert';
 import Device from '../pages/errors/Device';
+import { closeMessage } from '../redux/actions/messageAction';
+import ModalDanger from '../elements/modal/ModalDanger';
 
 const MainLayout = () => {
 	const [showSidebarDialogue, setShowSidebarDialogue] = useState(false);
-	const [showAlert, setShowAlert] = useState(false);
-	const { detailAgenda, showSidebar, message } = useSelector(
-		(state) => state.agenda,
-	);
+	// const [showAlert, setShowAlert] = useState(false);
+	const [showAlertAgenda, setShowAlertAgenda] = useState(false);
+	const { detailAgenda, showSidebar } = useSelector((state) => state.agenda);
+	const { message, isOpen } = useSelector((state) => state.message);
 	const [deviceWidth, setDevideWidth] = useState(true);
 
 	const dispatch = useDispatch();
@@ -36,17 +38,26 @@ const MainLayout = () => {
 	}, [showSidebar]);
 
 	useEffect(() => {
-		if (message.status) {
-			setShowAlert(true);
+		if (
+			message &&
+			message.status === 'success' &&
+			isOpen &&
+			(message.page === 'agenda' || message.page === '*')
+		) {
+			setShowAlertAgenda(true);
 			setTimeout(() => {
-				setShowAlert(false);
+				dispatch(closeMessage());
+				setShowAlertAgenda(false);
 			}, 5000);
-		} else {
-			setTimeout(() => {
-				setShowAlert(false);
-			}, 5000);
+		} else if (
+			message &&
+			message.status === 'error' &&
+			isOpen &&
+			(message.page === 'agenda' || message.page === '*')
+		) {
+			setShowAlertAgenda(true);
 		}
-	}, [message]);
+	}, [message, dispatch, isOpen]);
 
 	useEffect(() => {
 		if (window.innerWidth < 768) {
@@ -54,9 +65,9 @@ const MainLayout = () => {
 		}
 	}, []);
 
-	const handleCloseAlert = () => {
-		setShowAlert(false);
-	};
+	// const handleCloseAlert = () => {
+	// 	setShowAlert(false);
+	// };
 
 	return (
 		<>
@@ -64,11 +75,27 @@ const MainLayout = () => {
 				<Device />
 			) : (
 				<main className="min-h-screen h-auto w-full flex p-2 bg-light-gray">
-					{showAlert && (
+					{/* {showAlert && (
 						<Alert
 							status={message.status}
 							message={message.message}
 							onClick={handleCloseAlert}
+						/>
+					)} */}
+
+					{showAlertAgenda && message?.status === 'success' && (
+						<Alert
+							status={message.status}
+							message={message.message}
+							onClick={() => dispatch(closeMessage())}
+						/>
+					)}
+
+					{showAlertAgenda && message?.status === 'error' && (
+						<ModalDanger
+							status={message.status}
+							message={message.message}
+							onClick={() => dispatch(closeMessage())}
 						/>
 					)}
 

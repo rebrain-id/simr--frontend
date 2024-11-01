@@ -13,6 +13,7 @@ import {
 	updateDetailAgendaSuccess,
 	changeStatus,
 	fetchAgendaSearchSuccess,
+	updateStatus,
 } from '../slices/agendaSlice';
 import {
 	checkAgenda,
@@ -27,6 +28,7 @@ import {
 } from '../../services/agenda';
 import { getTypeAgenda } from '../../services/typeAgenda';
 import { jwtDecode } from 'jwt-decode';
+import { openMessage } from './messageAction';
 
 export const fetchAgenda = createAsyncThunk(
 	'agenda/fetchAgenda',
@@ -70,11 +72,28 @@ export const createAgenda = createAsyncThunk(
 
 			const response = await createDataAgenda(data);
 
-			return {
-				data: response,
-				status: 'success',
-				message: 'Berhasil membuat agenda baru',
-			};
+			console.log(response);
+
+			if (response && response.statusCode === 201) {
+				dispatch(updateStatus());
+				dispatch(
+					openMessage({
+						page: 'agenda',
+						status: 'success',
+						message: 'Berhasil membuat agenda baru',
+					}),
+				);
+			} else {
+				dispatch(
+					openMessage({
+						page: 'agenda',
+						status: 'error',
+						message:
+							'terdapat kesalahan dalam membuat agenda baru, periksa kembali data anda',
+					}),
+				);
+			}
+			return response;
 		} catch (error) {
 			dispatch(fetchAgendaFailure(error));
 		}
@@ -192,6 +211,8 @@ export const fetchAgendaThisMonth = createAsyncThunk(
 export const fetchAgendaByDate = createAsyncThunk(
 	'agenda/fetchAgendaByDate',
 	async ({ year, month, date }, { dispatch }) => {
+		dispatch(fetchAgendaRequest());
+
 		const start = moment(
 			`${year}-${String(month).padStart(2, '0')}-${String(date).padStart(2, '0')}`,
 			'YYYY-MM-DD',
@@ -217,6 +238,8 @@ export const fetchAgendaByDate = createAsyncThunk(
 			const dataset = await getAgenda(dataGetAgenda);
 
 			const dataByDate = await convertAgendaData(dataset);
+
+			console.log(dataByDate);
 
 			dispatch(fetchAgendaByDateSuccess(dataByDate));
 		} catch (error) {
@@ -288,6 +311,24 @@ export const updateDetailAgenda = createAsyncThunk(
 			const response = await updateAgenda(data.uuid, data);
 
 			if (response && response.statusCode === 200) {
+				dispatch(updateStatus());
+				dispatch(
+					openMessage({
+						page: 'agenda',
+						status: 'success',
+						message: 'Berhasil memperbarui agenda',
+					}),
+				);
+			} else {
+				dispatch(
+					openMessage({
+						page: 'agenda',
+						status: 'error',
+						message:
+							'terdapat kesalahan dalam memperbarui agenda, periksa kembali data anda',
+					}),
+				);
+
 				dispatch(updateDetailAgendaSuccess(response));
 				dispatch(changeStatus());
 			}
@@ -309,6 +350,26 @@ export const updateDepartmentAgenda = createAsyncThunk(
 		try {
 			const response = await updateMemberAgenda(data);
 
+			if (response && response.statusCode === 200) {
+				dispatch(updateStatus());
+				dispatch(
+					openMessage({
+						page: 'agenda',
+						status: 'success',
+						message: 'Berhasil memperbarui data anggota',
+					}),
+				);
+			} else {
+				dispatch(
+					openMessage({
+						page: 'agenda',
+						status: 'error',
+						message:
+							'terdapat kesalahan dalam memperbarui data anggota, periksa kembali data anda',
+					}),
+				);
+			}
+
 			return response;
 		} catch (error) {
 			console.log(error);
@@ -326,11 +387,27 @@ export const deleteDetailAgenda = createAsyncThunk(
 		try {
 			const response = await deleteAgenda(uuid);
 
-			return {
-				data: response,
-				status: 'success',
-				message: 'Agenda berhasil dihapus',
-			};
+			if (response && response.statusCode === 200) {
+				dispatch(updateStatus());
+				dispatch(
+					openMessage({
+						page: 'agenda',
+						status: 'success',
+						message: 'Berhasil menghapus agenda',
+					}),
+				);
+			} else {
+				dispatch(
+					openMessage({
+						page: 'agenda',
+						status: 'error',
+						message:
+							'terdapat kesalahan dalam menghapus agenda, periksa kembali data anda',
+					}),
+				);
+			}
+
+			return response;
 		} catch (error) {
 			dispatch(fetchAgendaFailure(error.message));
 

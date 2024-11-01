@@ -6,6 +6,7 @@ import { useFormik } from 'formik';
 import Button from '../elements/Button';
 import { useDispatch } from 'react-redux';
 import { fetchUser, postRegister } from '../redux/actions/authAction';
+import Toggel from '../elements/forms/Toggel';
 
 const ModalAddUser = (props) => {
 	const { onClick, department } = props;
@@ -32,9 +33,11 @@ const ModalAddUser = (props) => {
 			password: '',
 			departmentUuid: '',
 			jabatanValue: '',
+			isAdmin: false,
 		},
 
 		onSubmit: async (values) => {
+			// console.log(values);
 			const response = await dispatch(postRegister(values));
 
 			if (response && response.statusCode === 201) {
@@ -115,6 +118,12 @@ const ModalAddUser = (props) => {
 							</option>
 						))}
 					</FormSelect>
+					<Toggel
+						name={'isAdmin'}
+						label="Admin"
+						onChange={formik.handleChange}
+						isChecked={formik.values.isAdmin}
+					/>
 
 					<div className="w-full flex items-center justify-end gap-3">
 						<Button

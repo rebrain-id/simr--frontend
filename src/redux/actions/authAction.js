@@ -7,6 +7,7 @@ import {
 	registerRequest,
 	updateUserRequest,
 } from '../../services/auth';
+import { openMessage } from './messageAction';
 
 export const FETCH_AUTH_REQUEST = 'FETCH_AUTH_REQUEST';
 export const FETCH_GET_AUTH_SUCCESS = 'FETCH_GET_AUTH_SUCCESS';
@@ -57,7 +58,7 @@ export const fetchAuthFailure = () => ({
 	type: FETCH_AUTH_FAILURE,
 });
 
-export const fetchMessage = (message) => ({
+export const fetchMessage1 = (message) => ({
 	type: MESSAGE,
 	payload: message,
 });
@@ -80,11 +81,10 @@ export const fetchUser = () => {
 		try {
 			const response = await getUserRequest();
 
-			console.log(response);
-
 			if (response.code === 'ERR_NETWORK') {
 				dispatch(
-					fetchMessage({
+					openMessage({
+						page: 'user',
 						status: 'error',
 						message: 'Jaringan internet anda tidak stabil',
 					}),
@@ -110,6 +110,14 @@ export const fetchUser = () => {
 
 			dispatch(fetchGetAuthSuccess(groupedData));
 		} catch (error) {
+			// dispatch(
+			// 	openMessage({
+			// 		page: 'user',
+			// 		status: 'error',
+			// 		message:
+			// 			'Gagal memuat data pengguna, jaringan internet anda tidak stabil',
+			// 	}),
+			// );
 			console.log(error);
 		}
 	};
@@ -129,20 +137,21 @@ export const postRegister = (data) => {
 		try {
 			const response = await registerRequest(requestData);
 
-			console.log(response);
-
 			if (response && response.statusCode === 201) {
 				dispatch(
-					fetchMessage({
+					openMessage({
+						page: 'user',
 						status: 'success',
 						message: 'Berhasil mendaftarkan akun',
 					}),
 				);
 			} else {
 				dispatch(
-					fetchMessage({
+					openMessage({
+						page: 'user',
 						status: 'error',
-						message: 'Gagal mendaftarkan akun',
+						message:
+							'Gagal mendaftarkan akun, periksa kembali username dan data lainnya',
 					}),
 				);
 			}
@@ -151,6 +160,14 @@ export const postRegister = (data) => {
 
 			return response;
 		} catch (error) {
+			dispatch(
+				openMessage({
+					page: 'user',
+					status: 'error',
+					message:
+						'Gagal mendaftarkan akun, periksa kembali username dan data lainnya',
+				}),
+			);
 			console.log(error);
 		}
 	};
@@ -203,26 +220,36 @@ export const updateUser = (data) => {
 
 		try {
 			const response = await updateUserRequest(username, data);
-			console.log(response);
 
-			if (response && response.statusCode === 200) {
+			if (response && response.data.statusCode === 200) {
 				dispatch(
-					fetchMessage({
+					openMessage({
+						page: 'change-password',
 						status: 'success',
-						message: 'Berhasil memperbarui data akun',
+						message: 'Berhasil memperbarui password',
 					}),
 				);
 			} else {
 				dispatch(
-					fetchMessage({
+					openMessage({
+						page: 'change-password',
 						status: 'error',
-						message: 'Gagal memperbarui data akun',
+						message:
+							'Gagal memperbarui password, periksa kembali password anda',
 					}),
 				);
 			}
 
 			return response.data;
 		} catch (error) {
+			dispatch(
+				openMessage({
+					page: 'change-password',
+					status: 'error',
+					message:
+						'Gagal memperbarui password, periksa kembali password anda',
+				}),
+			);
 			console.log(error);
 		}
 	};
@@ -241,18 +268,19 @@ export const updateDataUser = (username, data) => {
 
 		try {
 			const response = await updateUserRequest(username, data);
-			console.log(response);
 
 			if (response && response.statusCode === 200) {
 				dispatch(
-					fetchMessage({
+					openMessage({
+						page: 'user',
 						status: 'success',
 						message: 'Berhasil memperbarui data akun',
 					}),
 				);
 			} else {
 				dispatch(
-					fetchMessage({
+					openMessage({
+						page: 'user',
 						status: 'error',
 						message: 'Gagal memperbarui data akun',
 					}),
@@ -282,6 +310,11 @@ export const postLogout = () => {
 				sessionStorage.removeItem('access_token');
 				localStorage.removeItem('refresh_token');
 				sessionStorage.removeItem('refresh_token');
+			} else {
+				localStorage.removeItem('access_token');
+				sessionStorage.removeItem('access_token');
+				localStorage.removeItem('refresh_token');
+				sessionStorage.removeItem('refresh_token');
 			}
 
 			return response;
@@ -302,14 +335,16 @@ export const deleteUser = (username) => {
 
 			if (response && response.data.statusCode == 200) {
 				dispatch(
-					fetchMessage({
+					openMessage({
+						page: 'user',
 						status: 'success',
 						message: 'Berhasil menghapus akun',
 					}),
 				);
 			} else {
 				dispatch(
-					fetchMessage({
+					openMessage({
+						page: 'user',
 						status: 'error',
 						message: 'Gagal menghapus akun',
 					}),
@@ -319,6 +354,13 @@ export const deleteUser = (username) => {
 			dispatch(fetchDeleteUserSuccess(response));
 			return response.data;
 		} catch (error) {
+			dispatch(
+				openMessage({
+					page: 'user',
+					status: 'error',
+					message: 'Gagal menghapus akun',
+				}),
+			);
 			console.log(error);
 		}
 	};

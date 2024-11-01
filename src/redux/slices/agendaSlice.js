@@ -28,6 +28,9 @@ const agendaSlice = createSlice({
 	reducers: {
 		fetchAgendaRequest(state) {
 			state.loading = true;
+			state.agendaThisMonth = [];
+			state.agendaByDate = [];
+			state.agendaHistory = [];
 		},
 		fetchAgendaSuccess(state, action) {
 			state.loading = false;
@@ -47,14 +50,17 @@ const agendaSlice = createSlice({
 		},
 		fetchAgendaTodaySuccess(state, action) {
 			state.loading = false;
+			state.isUpdated = true;
 			state.agendaToday = action.payload;
 		},
 		fetchAgendaThisMonthSuccess(state, action) {
 			state.loading = false;
+			state.isUpdated = true;
 			state.agendaThisMonth = action.payload;
 		},
 		fetchAgendaByDateSuccess(state, action) {
 			state.loading = false;
+			state.isUpdated = true;
 			state.agendaByDate = action.payload;
 		},
 		fetchAgendaHistorySuccess(state, action) {
@@ -72,11 +78,13 @@ const agendaSlice = createSlice({
 		},
 		updateDetailAgendaSuccess(state) {
 			state.loading = false;
-			state.isUpdated = true;
 		},
 		fetchAgendaFailure(state, action) {
 			state.loading = false;
 			state.error = action.payload;
+		},
+		updateStatus(state) {
+			state.isUpdated = true;
 		},
 		changeStatus(state) {
 			state.isUpdated = false;
@@ -108,7 +116,6 @@ const agendaSlice = createSlice({
 			})
 			.addCase(updateDetailAgenda.fulfilled, (state) => {
 				state.loading = false;
-				state.isUpdated = true;
 			})
 			.addCase(updateDetailAgenda.rejected, (state, action) => {
 				state.loading = false;
@@ -117,7 +124,6 @@ const agendaSlice = createSlice({
 			.addCase(updateDepartmentAgenda.fulfilled, (state, action) => {
 				state.loading = false;
 				state.agenda.push(action.payload.data);
-				state.isUpdated = true;
 
 				if (
 					state.detailAgenda.uuid === action.payload.detailAgendaUuid
@@ -135,7 +141,6 @@ const agendaSlice = createSlice({
 			})
 			.addCase(deleteDetailAgenda.fulfilled, (state, action) => {
 				state.loading = false;
-				state.isUpdated = true;
 				state.message = action.payload;
 			})
 			.addCase(deleteDetailAgenda.rejected, (state, action) => {
@@ -158,6 +163,7 @@ export const {
 	fetchDetailAgendaSuccess,
 	closeDetailAgendaSuccess,
 	updateDetailAgendaSuccess,
+	updateStatus,
 	changeStatus,
 	fetchAgendaFailure,
 } = agendaSlice.actions;

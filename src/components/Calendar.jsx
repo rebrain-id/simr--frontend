@@ -9,7 +9,7 @@ import { useEffect, useState } from 'react';
 import CalendarList from '../elements/calendar/CalendarList';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchAgendaThisMonth } from '../redux/actions/agendaAction';
-import { useSearchParams } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import AgendaHistory from './AgendaHistory';
 
 const Calendar = () => {
@@ -21,6 +21,7 @@ const Calendar = () => {
 		year: getYear,
 		month: getMonth,
 	});
+	const navigate = useNavigate();
 	const [inputMonth, setInputMonth] = useState(getMonth);
 	const [inputYear, setInputYear] = useState(getYear);
 	const dispatch = useDispatch();
@@ -33,13 +34,21 @@ const Calendar = () => {
 	useEffect(() => {
 		setInputMonth(optionValue.month);
 		setInputYear(optionValue.year);
-		dispatch(
-			fetchAgendaThisMonth({
-				year: optionValue.year,
-				month: optionValue.month,
-			}),
-		);
-	}, [optionValue, dispatch, isUpdated]);
+
+		if (menu !== 'history') {
+			dispatch(
+				fetchAgendaThisMonth({
+					year: optionValue.year,
+					month: optionValue.month,
+				}),
+			);
+		}
+	}, [optionValue, dispatch, isUpdated, menu]);
+
+	const validMenuValues = ['calendar', 'list', 'history'];
+	if (!validMenuValues.includes(menu)) {
+		navigate('/agenda?menu=calendar');
+	}
 
 	const handleOptionValue = (event) => {
 		const { name, value } = event.target;

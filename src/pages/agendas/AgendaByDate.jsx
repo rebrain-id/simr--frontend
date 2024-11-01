@@ -18,7 +18,7 @@ const AgendaByDate = () => {
 	const [searchParam] = useSearchParams();
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
-	let { agendaByDate, isUpdated, loading } = useSelector(
+	const { agendaByDate, isUpdated, loading } = useSelector(
 		(state) => state.agenda,
 	);
 
@@ -76,24 +76,23 @@ const AgendaByDate = () => {
 			);
 		} else if (getMonth == 1) {
 			navigate(
-				`/agenda/date?date=${getTotalDate(getMonth, Number(getYear - 1))}&month=12&year=${Number(getYear) - 1}`,
+				`/agenda/date?date=${getTotalDate(12, Number(getYear) - 1)}&month=12&year=${Number(getYear) - 1}`,
 			);
 		} else {
 			navigate(
-				`/agenda/date?date=${getTotalDate(Number(getMonth - 1), getYear)}&month=${Number(getMonth) - 1}&year=${getYear}`,
+				`/agenda/date?date=${getTotalDate(Number(getMonth) - 1, getYear)}&month=${Number(getMonth) - 1}&year=${getYear}`,
 			);
 		}
 	};
 
-	agendaByDate = [...agendaByDate].sort((a, b) => {
+	const sortedAgenda = [...agendaByDate].sort((a, b) => {
 		const timeA = moment(a.time.start, 'HH:mm');
 		const timeB = moment(b.time.start, 'HH:mm');
 		return timeA - timeB;
 	});
 
-	console.log(agendaByDate);
-
-	const role = jwtDecode(sessionStorage.getItem('access_token')).role;
+	const token = sessionStorage.getItem('access_token');
+	const role = token ? jwtDecode(token).role : null;
 
 	return (
 		<>
@@ -141,11 +140,11 @@ const AgendaByDate = () => {
 
 				<div className="w-full flex flex-col gap-3">
 					{loading ? (
-						<p className="text-center text-xs text-light-secondary mt-5">
+						<p className="text-center text-xs text-light-secondary">
 							Sedang memuat data riwayat agenda
 						</p>
-					) : agendaByDate && agendaByDate.length > 0 ? (
-						agendaByDate.map((item, itemIndex) => (
+					) : sortedAgenda.length !== 0 ? (
+						sortedAgenda.map((item, itemIndex) => (
 							<ListAgenda
 								key={itemIndex}
 								data={item}
