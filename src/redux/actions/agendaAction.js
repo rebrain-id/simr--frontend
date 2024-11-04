@@ -257,13 +257,25 @@ export const fetchAgendaHistory = createAsyncThunk(
 		const dataGetAgenda = {
 			start: dateFrom,
 			finish: dateTo,
-			typeAgenda: type ? type : typeAgenda[0].uuid,
+			// typeAgenda: type ? type : typeAgenda[0].uuid,
 			skip: !skip || skip === 1 ? 0 : (skip - 1) * take,
 			take: take ? take : 10,
 		};
 
 		try {
 			let data = await getHistoryAgenda(dataGetAgenda);
+
+			const typeArray = type.split(',');
+
+			if (type === 'null') {
+				data.data = data.data.filter(
+					(item) => typeAgenda[0].uuid === item.typeAgenda.uuid,
+				);
+			} else {
+				data.data = data.data.filter((item) =>
+					typeArray.includes(item.typeAgenda.uuid),
+				);
+			}
 
 			data = {
 				...data,
@@ -281,7 +293,7 @@ export const fetchDetailAgenda = createAsyncThunk(
 	'agenda/fetchDetailAgenda',
 	async ({ uuid }, { dispatch }) => {
 		try {
-			dispatch(fetchAgendaRequest());
+			// dispatch(fetchAgendaRequest());
 
 			const data = await getDetailAgenda(uuid);
 
@@ -388,7 +400,7 @@ export const deleteDetailAgenda = createAsyncThunk(
 			const response = await deleteAgenda(uuid);
 
 			if (response && response.statusCode === 200) {
-				dispatch(updateStatus());
+				// dispatch(updateStatus());
 				dispatch(
 					openMessage({
 						page: 'agenda',

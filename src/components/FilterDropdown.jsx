@@ -8,35 +8,58 @@ import FormInputCheckbox from '../elements/forms/FormInputCheckbox';
 import moment from 'moment';
 
 const FilterDropdown = (props) => {
-	let { typeAgenda, typeAgendas, dateFrom, dateTo } = props;
+	const { typeAgenda, typeAgendas = [], dateFrom, dateTo } = props;
 	const navigate = useNavigate();
 
-	typeAgenda = typeAgenda ? typeAgenda.split(',') : [];
+	const initialTypeAgenda =
+		typeAgenda !== 'null' ? typeAgenda.split(',') : [];
 
 	const [inputValue, setInputValue] = useState({
 		from: dateFrom ? moment(dateFrom).format('YYYY-MM-DD') : '2020-01-01',
 		to: dateTo
 			? moment(dateTo).format('YYYY-MM-DD')
-			: moment().format('YYYY-MM-DD'),
-		type: typeAgenda.length === 0 ? typeAgendas[0].uuid : typeAgenda,
+			: moment().subtract(1, 'days').format('YYYY-MM-DD'),
+		type:
+			initialTypeAgenda.length > 0
+				? initialTypeAgenda
+				: typeAgendas.length > 0
+					? [typeAgendas[0].uuid]
+					: [],
 	});
 
 	const handleInputValue = (e) => {
 		const { name, type, value, checked } = e.target;
 
-		if (type === 'checkbox') {
-			setInputValue((prev) => ({
-				...prev,
-				type: checked
-					? [...prev.type, value]
-					: prev.type.filter((item) => item !== value),
-			}));
-		} else {
-			setInputValue((prev) => ({
-				...prev,
-				[name]: value,
-			}));
-		}
+		setInputValue((prev) => {
+			if (type === 'checkbox') {
+				const updatedType = checked
+					? [...new Set([...prev.type, value])]
+					: prev.type.filter((item) => item !== value);
+				return {
+					...prev,
+					[name]: updatedType,
+				};
+			} else {
+				return {
+					...prev,
+					[name]: value,
+				};
+			}
+		});
+	};
+
+	const handleFilterClick = () => {
+		const fromDate =
+			inputValue.from !== 'Invalid date' ? inputValue.from : '2020-01-01';
+		const toDate =
+			inputValue.to !== 'Invalid date'
+				? inputValue.to
+				: moment().subtract(1, 'days').format('YYYY-MM-DD');
+		const types = inputValue.type.join(',');
+
+		navigate(
+			`/agenda?menu=history&from=${fromDate}&to=${toDate}&type=${types}`,
+		);
 	};
 
 	return (
@@ -62,32 +85,27 @@ const FilterDropdown = (props) => {
 				value={inputValue.to}
 			/>
 			<FormCheckbox>
-				{typeAgendas &&
-					typeAgendas.map((item, index) => (
-						<FormInputCheckbox
-							key={index}
-							text={item.name}
-							variant={'px-0'}
-							checkboxVariant={'w-3 h-3'}
-							labelVariant={'text-sm font-normal ms-1'}
-							value={item.uuid}
-							onChange={handleInputValue}
-							isSelected={inputValue.type.includes(item.uuid)}
-							name="type"
-						/>
-					))}
+				{typeAgendas.map((item, index) => (
+					<FormInputCheckbox
+						key={index}
+						text={item.name}
+						variant="px-0"
+						checkboxVariant="w-3 h-3"
+						labelVariant="text-sm font-normal ms-1"
+						value={item.uuid}
+						onChange={handleInputValue}
+						isSelected={inputValue.type.includes(item.uuid)}
+						name="type"
+					/>
+				))}
 			</FormCheckbox>
 
 			<div className="flex justify-end">
 				<ButtonMenu
 					icon={faFilter}
 					text="Filter"
-					variant={`rounded-md bg-light-primary bg-opacity-90 text-white font-medium text-sm hover:bg-opacity-100`}
-					onClick={() => {
-						navigate(
-							`/agenda?menu=history&from=${inputValue.from}&to=${inputValue.to}&type=${inputValue.type.length === typeAgendas.length ? 'all' : inputValue.type}`,
-						);
-					}}
+					variant="rounded-md bg-light-primary bg-opacity-90 text-white font-medium text-sm hover:bg-opacity-100"
+					onClick={handleFilterClick}
 				/>
 			</div>
 		</div>

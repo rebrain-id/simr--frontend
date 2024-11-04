@@ -81,6 +81,7 @@ const FormInput = (props) => {
 							: `border border-light-gray focus:border-light-secondary rounded py-1 px-3 outline-none ${inputvariant}`
 					}
 					{...(type === 'file' ? { accept: fileAccept } : {})}
+					{...(type === 'time' ? { step: '' } : {})}
 					value={value}
 					placeholder={placeholderInput}
 					onFocus={handleFocus}

@@ -84,11 +84,14 @@ const AddAgenda = () => {
 		try {
 			const uniqueDepartments = [...new Set(departmentFromStorage)];
 
+			const startFrom = `${values.date}T${values.from}`;
+			const finishTo = `${values.date}T${values.to}`;
+
 			const data = {
 				title: values.title,
 				description: values.description,
-				start: moment(values.from).format('YYYY-MM-DD HH:mm:ss'),
-				finish: moment(values.to).format('YYYY-MM-DD HH:mm:ss'),
+				start: moment(startFrom).format('YYYY-MM-DD HH:mm:ss'),
+				finish: moment(finishTo).format('YYYY-MM-DD HH:mm:ss'),
 				typeAgendaUuid: values.typeAgenda,
 				location: values.location,
 				departmentsUuid: uniqueDepartments,
@@ -107,12 +110,10 @@ const AddAgenda = () => {
 			} else {
 				const response = await dispatch(createAgenda({ data }));
 
-				console.log(response);
-
 				if (response && response.payload.statusCode === 201) {
 					sessionStorage.removeItem('member');
 					navigation(
-						`/agenda/date?date=${moment(values.from).format('DD')}&month=${moment(values.from).format('MM')}&year=${moment(values.from).format('YYYY')}`,
+						`/agenda/date?date=${moment(values.date).format('DD')}&month=${moment(values.date).format('MM')}&year=${moment(values.date).format('YYYY')}`,
 					);
 				} else {
 					setShowAlert({
@@ -135,16 +136,16 @@ const AddAgenda = () => {
 
 	const validationSchema = Yup.object().shape({
 		title: Yup.string().required('Judul agenda tidak boleh kosong'),
-		from: Yup.string()
-			.required('Waktu mulai tidak boleh kosong')
-			.test(
-				'from-before-to',
-				'Waktu mulai harus sebelum waktu selesai',
-				function (value) {
-					const { to } = this.parent;
-					return moment(value).isBefore(moment(to));
-				},
-			),
+		date: Yup.string().required('Tanggal tidak boleh kosong'),
+		from: Yup.string().required('Waktu mulai tidak boleh kosong'),
+		// .test(
+		// 	'from-before-to',
+		// 	'Waktu mulai harus sebelum waktu selesai',
+		// 	function (value) {
+		// 		const { to } = this.parent;
+		// 		return moment(value).isBefore(moment(to));
+		// 	},
+		// ),
 		to: Yup.string().required('Waktu selesai tidak boleh kosong'),
 		location: Yup.string().required('Tempat tidak boleh kosong'),
 		typeAgenda: Yup.string().required('Jenis agenda tidak boleh kosong'),
@@ -167,8 +168,8 @@ const AddAgenda = () => {
 				<ModalAddAnggota
 					onClick={() => setOpenModal(false)}
 					departments={departments}
-					dateFrom={date.from}
-					dateTo={date.to}
+					dateFrom={`${date.date}T${date.from}`}
+					dateTo={`${date.date}T${date.to}`}
 					selectedMember={[departmentUuid]}
 				/>
 			)}
@@ -179,6 +180,7 @@ const AddAgenda = () => {
 				<Formik
 					initialValues={{
 						title: '',
+						date: '',
 						from: '',
 						to: '',
 						location: '',
@@ -210,45 +212,67 @@ const AddAgenda = () => {
 								/>
 							</div>
 							<div className="flex gap-5">
-								<div className="w-full">
+								<div className="w-1/2">
 									<FormInput
 										variant="w-full flex flex-col gap-1"
 										inputvariant="text-sm font-normal w-full"
 										labelvariant="text-xs"
-										label="Dari"
-										type="datetime-local"
-										name="from"
+										label="Tanggal"
+										type="date"
+										name="date"
 										onChange={(e) => {
 											handleChange(e);
 											handleChangeDate(e);
 										}}
-										value={values.from}
+										value={values.date}
 									/>
-									<ErrorMessage
+									{/* <ErrorMessage
 										name="from"
 										component="div"
 										className="text-xs text-danger font-light"
-									/>
+									/> */}
 								</div>
-								<div className="w-full">
-									<FormInput
-										variant="w-full flex flex-col gap-1"
-										inputvariant="text-sm font-normal w-full"
-										labelvariant="text-xs"
-										label="Sampai"
-										type="datetime-local"
-										name="to"
-										onChange={(e) => {
-											handleChange(e);
-											handleChangeDate(e);
-										}}
-										value={values.to}
-									/>
-									<ErrorMessage
-										name="to"
-										component="div"
-										className="text-xs text-danger font-light"
-									/>
+								<div className="w-1/2 flex gap-5">
+									<div className="w-1/2">
+										<FormInput
+											variant="w-full flex flex-col gap-1"
+											inputvariant="text-sm font-normal w-full"
+											labelvariant="text-xs"
+											label="Mulai"
+											type="time"
+											name="from"
+											onChange={(e) => {
+												handleChange(e);
+												handleChangeDate(e);
+											}}
+											value={values.from}
+										/>
+										<ErrorMessage
+											name="from"
+											component="div"
+											className="text-xs text-danger font-light"
+										/>
+									</div>
+									<div className="w-1/2">
+										<FormInput
+											variant="w-full flex flex-col gap-1"
+											inputvariant="text-sm font-normal w-full"
+											labelvariant="text-xs"
+											label="Sampai"
+											type="time"
+											name="to"
+											onChange={(e) => {
+												handleChange(e);
+												handleChangeDate(e);
+											}}
+											value={values.to}
+										/>
+										<ErrorMessage
+											name="to"
+											component="div"
+											className="text-xs text-danger font-light"
+										/>
+									</div>
 								</div>
 							</div>
 							<div className="flex gap-5 w-full">

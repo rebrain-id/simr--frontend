@@ -30,21 +30,39 @@ const AgendaHistory = () => {
 	const getTake = 10;
 
 	useEffect(() => {
-		dispatch(
-			fetchAgendaHistory({
-				dateFrom:
-					getDateFrom != 'null'
-						? `${getDateFrom} 00:00:00`
-						: '2020-01-01 00:00:00',
-				dateTo:
-					getDateTo != 'null'
-						? `${getDateTo} 23:59:59`
-						: `${moment().format('YYYY-MM-DD')} 23:59:59`,
-				type: getType,
-				skip: getSkip,
-				take: getTake,
-			}),
-		);
+		if (isUpdated) {
+			dispatch(
+				fetchAgendaHistory({
+					dateFrom:
+						getDateFrom != 'null'
+							? `${getDateFrom} 00:00:00`
+							: '2020-01-01 00:00:00',
+					dateTo:
+						getDateTo != 'null'
+							? `${getDateTo} 23:59:59`
+							: `${moment().format('YYYY-MM-DD')} 23:59:59`,
+					type: getType,
+					skip: getSkip,
+					take: getTake,
+				}),
+			);
+		} else {
+			dispatch(
+				fetchAgendaHistory({
+					dateFrom:
+						getDateFrom != 'null'
+							? `${getDateFrom} 00:00:00`
+							: '2020-01-01 00:00:00',
+					dateTo:
+						getDateTo != 'null'
+							? `${getDateTo} 23:59:59`
+							: `${moment().subtract(1, 'days').format('YYYY-MM-DD')} 23:59:59`,
+					type: getType,
+					skip: getSkip,
+					take: getTake,
+				}),
+			);
+		}
 	}, [
 		dispatch,
 		getDateFrom,

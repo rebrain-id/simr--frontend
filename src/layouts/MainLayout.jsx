@@ -10,12 +10,15 @@ import Alert from '../elements/Alert';
 import Device from '../pages/errors/Device';
 import { closeMessage } from '../redux/actions/messageAction';
 import ModalDanger from '../elements/modal/ModalDanger';
+import { changeStatus } from '../redux/slices/agendaSlice';
 
 const MainLayout = () => {
 	const [showSidebarDialogue, setShowSidebarDialogue] = useState(false);
 	// const [showAlert, setShowAlert] = useState(false);
 	const [showAlertAgenda, setShowAlertAgenda] = useState(false);
-	const { detailAgenda, showSidebar } = useSelector((state) => state.agenda);
+	const { detailAgenda, showSidebar, isUpdated } = useSelector(
+		(state) => state.agenda,
+	);
 	const { message, isOpen } = useSelector((state) => state.message);
 	const [deviceWidth, setDevideWidth] = useState(true);
 
@@ -24,6 +27,14 @@ const MainLayout = () => {
 	useEffect(() => {
 		dispatch(closeDetailAgenda());
 	}, [dispatch]);
+
+	// useEffect(() => {
+	// 	if (isUpdated) {
+	// 		setTimeout(() => {
+	// 			dispatch(changeStatus());
+	// 		}, 500);
+	// 	}
+	// }, [dispatch, isUpdated]);
 
 	useEffect(() => {
 		if (showSidebar) {

@@ -50,21 +50,22 @@ const agendaSlice = createSlice({
 		},
 		fetchAgendaTodaySuccess(state, action) {
 			state.loading = false;
-			state.isUpdated = true;
+			state.isUpdated = false;
 			state.agendaToday = action.payload;
 		},
 		fetchAgendaThisMonthSuccess(state, action) {
 			state.loading = false;
-			state.isUpdated = true;
+			state.isUpdated = false;
 			state.agendaThisMonth = action.payload;
 		},
 		fetchAgendaByDateSuccess(state, action) {
 			state.loading = false;
-			state.isUpdated = true;
+			state.isUpdated = false;
 			state.agendaByDate = action.payload;
 		},
 		fetchAgendaHistorySuccess(state, action) {
 			state.loading = false;
+			state.isUpdated = false;
 			state.agendaHistory = action.payload;
 		},
 		fetchDetailAgendaSuccess(state, action) {
@@ -84,7 +85,7 @@ const agendaSlice = createSlice({
 			state.error = action.payload;
 		},
 		updateStatus(state) {
-			state.isUpdated = true;
+			state.isUpdated = state.isUpdated ? false : true;
 		},
 		changeStatus(state) {
 			state.isUpdated = false;
@@ -137,6 +138,7 @@ const agendaSlice = createSlice({
 			})
 			.addCase(deleteDetailAgenda.pending, (state) => {
 				state.loading = true;
+				state.isUpdated = state.isUpdated ? false : true;
 				state.error = null;
 			})
 			.addCase(deleteDetailAgenda.fulfilled, (state, action) => {

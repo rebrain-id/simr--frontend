@@ -33,7 +33,11 @@ const Dashboard = () => {
 	);
 
 	useEffect(() => {
-		dispatch(fetchAgendaToday());
+		if (isUpdated) {
+			dispatch(fetchAgendaToday());
+		} else {
+			dispatch(fetchAgendaToday());
+		}
 	}, [dispatch, isUpdated]);
 
 	const agendaInternal = agendaToday.filter((item) => {

@@ -31,14 +31,27 @@ const AgendaByDate = () => {
 	};
 
 	useEffect(() => {
-		dispatch(
-			fetchAgendaByDate({
-				year: getYear,
-				month: getMonth,
-				date: getDate,
-			}),
-		);
+		if (isUpdated) {
+			dispatch(
+				fetchAgendaByDate({
+					year: getYear,
+					month: getMonth,
+					date: getDate,
+				}),
+			);
+		} else {
+			dispatch(
+				fetchAgendaByDate({
+					year: getYear,
+					month: getMonth,
+					date: getDate,
+				}),
+			);
+		}
+		console.log('apply');
 	}, [dispatch, getYear, getMonth, getDate, isUpdated]);
+
+	console.log(isUpdated);
 
 	const monthList = [
 		'Januari',

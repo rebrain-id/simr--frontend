@@ -10,7 +10,7 @@ const access_token = localStorage.getItem('access_token')
 
 export const getAgenda = async (data) => {
 	const username = jwtDecode(access_token).username;
-	const url = `${API_URL()}/v1/detail-agendas?username=${username}&start=${data.start}&finish=${data.finish}`;
+	const url = `${API_URL()}/v1/detail-agendas?username=${username}&start=${data.start}&finish=${data.finish}&page=${1}&limit=${100}`;
 
 	try {
 		const response = await axios({
@@ -92,7 +92,7 @@ export const getSearchAgenda = async (data) => {
 export const getHistoryAgenda = async (data) => {
 	const username = jwtDecode(access_token).username;
 
-	const url = `${API_URL()}/v1/detail-agendas?username=${username}&start=${data.start}&finish=${data.finish}&page=${data.skip}&limit=${data.take}&isDone=true`;
+	const url = `${API_URL()}/v1/detail-agendas?username=${username}&start=${data.start}&finish=${data.finish}&page=${data.skip}&limit=${data.take}`;
 
 	try {
 		const response = await axios({
