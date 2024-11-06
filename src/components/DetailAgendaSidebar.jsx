@@ -64,8 +64,9 @@ const DetailAgendaSidebar = (props) => {
 	const [inputValue, setInputValue] = useState({
 		uuid: data ? data.uuid : '',
 		title: data ? data.title : '',
-		start: data ? data.start : '',
-		finish: data ? data.finish : '',
+		date: data ? data.start.split('T')[0] : '',
+		start: data ? data.start.split('T')[1].split(':00.')[0] : '',
+		finish: data ? data.finish.split('T')[1].split(':00.')[0] : '',
 		typeAgenda: data ? data.typeAgenda.uuid : '',
 		description: data ? data.description : '',
 		location: data ? data.location : '',
@@ -91,9 +92,26 @@ const DetailAgendaSidebar = (props) => {
 	};
 
 	const handleSubmit = async () => {
+		const requestData = {
+			uuid: inputValue.uuid,
+			title: inputValue.title,
+			start: `${inputValue.date}T${inputValue.start}:00`,
+			finish: `${inputValue.date}T${inputValue.finish}:00`,
+			typeAgenda: inputValue.typeAgenda,
+			description: inputValue.description,
+			location: inputValue.location,
+			absent: inputValue.attendees,
+			notulen: inputValue.notulens,
+			department: member,
+		};
+
+		if (inputValue.isDone === true) {
+			requestData.push('isDone', true);
+		}
+
 		try {
 			const response = await dispatch(
-				updateDetailAgenda({ data: inputValue }),
+				updateDetailAgenda({ data: requestData }),
 			);
 
 			if (response && response.payload.statusCode === 200) {
@@ -224,26 +242,36 @@ const DetailAgendaSidebar = (props) => {
 							variant="w-full flex flex-col gap-1"
 							inputvariant="text-sm font-normal w-full"
 							labelvariant="text-xs"
-							label="Dari"
-							type="datetime-local"
+							label="Tanggal"
+							type="date"
 							value={moment
-								.utc(inputValue.start)
-								.format('YYYY-MM-DDTHH:mm')}
-							name="start"
+								.utc(inputValue.date)
+								.format('YYYY-MM-DD')}
+							name="date"
 							onChange={handleInputValue}
 						/>
-						<FormInput
-							variant="w-full flex flex-col gap-1"
-							inputvariant="text-sm font-normal w-full"
-							labelvariant="text-xs"
-							label="Sampai"
-							type="datetime-local"
-							value={moment
-								.utc(inputValue.finish)
-								.format('YYYY-MM-DDTHH:mm')}
-							name="finish"
-							onChange={handleInputValue}
-						/>
+						<div className="flex gap-5">
+							<FormInput
+								variant="w-full flex flex-col gap-1"
+								inputvariant="text-sm font-normal w-full"
+								labelvariant="text-xs"
+								label="Dari"
+								type="time"
+								value={inputValue.start}
+								name="start"
+								onChange={handleInputValue}
+							/>
+							<FormInput
+								variant="w-full flex flex-col gap-1"
+								inputvariant="text-sm font-normal w-full"
+								labelvariant="text-xs"
+								label="Sampai"
+								type="time"
+								value={inputValue.finish}
+								name="finish"
+								onChange={handleInputValue}
+							/>
+						</div>
 						<FormInput
 							variant="w-full flex flex-col gap-1"
 							inputvariant="text-sm font-normal w-full"

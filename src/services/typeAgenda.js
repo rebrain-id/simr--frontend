@@ -2,6 +2,7 @@ import axios from 'axios';
 import { API_URL } from './config';
 
 const access_token = sessionStorage.getItem('access_token');
+const refresh_token = sessionStorage.getItem('refresh_token');
 
 export const getTypeAgenda = async () => {
 	const url = `${API_URL()}/v1/type-agendas`;
@@ -10,7 +11,7 @@ export const getTypeAgenda = async () => {
 		method: 'get',
 		url: url,
 		headers: {
-			Authorization: `Bearer ${access_token}`,
+			Authorization: `Bearer ${refresh_token}`,
 		},
 	})
 		.then((res) => {

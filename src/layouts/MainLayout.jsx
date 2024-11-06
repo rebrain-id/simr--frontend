@@ -10,7 +10,6 @@ import Alert from '../elements/Alert';
 import Device from '../pages/errors/Device';
 import { closeMessage } from '../redux/actions/messageAction';
 import ModalDanger from '../elements/modal/ModalDanger';
-import { changeStatus } from '../redux/slices/agendaSlice';
 
 const MainLayout = () => {
 	const [showSidebarDialogue, setShowSidebarDialogue] = useState(false);
@@ -85,7 +84,10 @@ const MainLayout = () => {
 			{!deviceWidth ? (
 				<Device />
 			) : (
-				<main className="min-h-screen h-auto w-full flex p-2 bg-light-gray">
+				<main
+					className="min-h-screen h-auto w-full flex bg-light-gray p-2"
+					// style={{ backgroundImage: `url(${image2})` }}
+				>
 					{/* {showAlert && (
 						<Alert
 							status={message.status}

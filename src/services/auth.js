@@ -54,12 +54,12 @@ export const loginRequest = async (data) => {
 	}
 };
 
-export const updateUserRequest = (username, data) => {
+export const updateUserRequest = async (username, data) => {
 	const access_token = sessionStorage.getItem('access_token');
 	const url = `${API_URL()}/v1/user/${username}`;
 
 	try {
-		const response = axios({
+		const response = await axios({
 			method: 'patch',
 			url: url,
 			data: data,
@@ -67,7 +67,27 @@ export const updateUserRequest = (username, data) => {
 				Authorization: `Bearer ${access_token}`,
 			},
 		});
-		return response;
+
+		console.log(response);
+
+		if (response && response.data.statusCode === 200) {
+			sessionStorage.setItem(
+				'access_token',
+				response.data.data.access_token,
+			);
+			sessionStorage.getItem('refresh_token')
+				? sessionStorage.setItem(
+						'refresh_token',
+						response.data.data.access_token,
+					)
+				: localStorage.setItem(
+						'refresh_token',
+						response.data.data.access_token,
+					);
+			return response.data;
+		}
+
+		return response.data;
 	} catch (error) {
 		console.log(error);
 	}
@@ -96,31 +116,28 @@ export const refreshTokenRequest = async () => {
 	const refreshToken =
 		localStorage.getItem('refresh_token') ||
 		sessionStorage.getItem('refresh_token');
-	const accessToken = sessionStorage.getItem('access_token');
 
 	try {
 		const response = await axios({
 			method: 'post',
 			url: url,
-			body: {
+			data: {
 				refreshToken: refreshToken,
 			},
 			headers: {
-				Authorization: `Bearer ${accessToken}`,
+				Authorization: `Bearer ${refreshToken}`,
+				'Content-Type': 'application/json',
 			},
 		});
 
-		sessionStorage.setItem('access_token', response.data.data.access_token);
-		localStorage.setItem('refresh_token', response.data.data.refresh_token)
-			? localStorage.setItem(
-					'refresh_token',
-					response.data.data.refresh_token,
-				)
-			: sessionStorage.setItem(
-					'refresh_token',
-					response.data.data.refresh_token,
-				);
+		console.log(response);
 
+		if (response && response.data.statusCode === 200) {
+			sessionStorage.setItem(
+				'access_token',
+				response.data.data.access_token,
+			);
+		}
 		return response;
 	} catch (error) {
 		console.log(error);

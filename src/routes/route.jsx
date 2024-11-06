@@ -84,7 +84,7 @@ export const router = createBrowserRouter([
 				),
 			},
 			{
-				path: 'change-password',
+				path: 'setting-account',
 				element: (
 					<ProtectedRoute authorized={['PRODI', 'FAKULTAS']}>
 						<ChangePassword />

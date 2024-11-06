@@ -9,10 +9,10 @@ const UserDropdown = ({ logout }) => {
 			<div className="bg-white rounded-md absolute right-0 drop-shadow-right-bottom mt-2 p-3 flex flex-col gap-1 w-max">
 				<NavLink
 					icon={faKey}
-					title="Ubah Password"
+					title="Pengaturan Akun"
 					textVariant="font-medium text-sm"
 					iconVariant="h-4"
-					to="/change-password"
+					to="/setting-account"
 				/>
 				<Button
 					icon={faArrowRightFromBracket}

@@ -28,6 +28,7 @@ const agendaSlice = createSlice({
 	reducers: {
 		fetchAgendaRequest(state) {
 			state.loading = true;
+			state.agenda = [];
 			state.agendaThisMonth = [];
 			state.agendaByDate = [];
 			state.agendaHistory = [];
@@ -55,7 +56,7 @@ const agendaSlice = createSlice({
 		},
 		fetchAgendaThisMonthSuccess(state, action) {
 			state.loading = false;
-			state.isUpdated = false;
+			// state.isUpdated = false;
 			state.agendaThisMonth = action.payload;
 		},
 		fetchAgendaByDateSuccess(state, action) {

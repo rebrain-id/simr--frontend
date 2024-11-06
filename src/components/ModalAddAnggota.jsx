@@ -65,8 +65,6 @@ const ModalAddAnggota = (props) => {
 			}),
 		);
 
-		console.log(response);
-
 		if (response && response.payload.statusCode === 200) {
 			const conflictData = response.payload.data;
 			setCheckConflict(true);

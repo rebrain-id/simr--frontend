@@ -211,17 +211,16 @@ export const updateUser = (data) => {
 	return async (dispatch) => {
 		dispatch(fetchAuthRequest());
 
-		if (data.jabatanValue) {
-			data = {
-				...data,
-				jabatanValue: Number(data.jabatanValue),
-			};
-		}
+		// data = {
+		// 	...data,
+		// };
 
 		try {
 			const response = await updateUserRequest(username, data);
 
-			if (response && response.data.statusCode === 200) {
+			console.log(response);
+
+			if (response && response.statusCode === 200) {
 				dispatch(
 					openMessage({
 						page: 'change-password',
@@ -259,30 +258,26 @@ export const updateDataUser = (username, data) => {
 	return async (dispatch) => {
 		dispatch(fetchAuthRequest());
 
-		if (data.jabatanValue) {
-			data = {
-				...data,
-				jabatanValue: Number(data.jabatanValue),
-			};
-		}
-
 		try {
 			const response = await updateUserRequest(username, data);
+
+			console.log(response);
 
 			if (response && response.statusCode === 200) {
 				dispatch(
 					openMessage({
-						page: 'user',
+						page: 'change-password',
 						status: 'success',
-						message: 'Berhasil memperbarui data akun',
+						message: 'Berhasil memperbarui username',
 					}),
 				);
 			} else {
 				dispatch(
 					openMessage({
-						page: 'user',
+						page: 'change-password',
 						status: 'error',
-						message: 'Gagal memperbarui data akun',
+						message:
+							'Gagal memperbarui username, periksa kembali data anda',
 					}),
 				);
 			}

@@ -1,4 +1,9 @@
-import { faUser } from '@fortawesome/free-solid-svg-icons';
+import {
+	faPaperPlane,
+	faPen,
+	faUser,
+	faXmark,
+} from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { jwtDecode } from 'jwt-decode';
 import FormInput from '../../elements/forms/FormInput';
@@ -6,7 +11,7 @@ import Button from '../../elements/Button';
 import { Link } from 'react-router-dom';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { updateUser } from '../../redux/actions/authAction';
+import { updateDataUser, updateUser } from '../../redux/actions/authAction';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import Alert from '../../elements/Alert';
@@ -17,6 +22,7 @@ const ChangePassword = () => {
 	const access_token = sessionStorage.getItem('access_token');
 	const username = jwtDecode(access_token).username;
 	const [showAlert, setShowAlert] = useState(false);
+	const [showEdit, setShowEdit] = useState(false);
 	const dispatch = useDispatch();
 
 	const { message, isOpen } = useSelector((state) => state.message);
@@ -36,8 +42,23 @@ const ChangePassword = () => {
 			),
 		}),
 
+		onSubmit: async (values, { resetForm }) => {
+			const response = await dispatch(updateUser(values));
+
+			if (response && response.statusCode === 200) {
+				resetForm();
+			}
+		},
+	});
+
+	const updateUsername = useFormik({
+		initialValues: {
+			username: username ? username : '',
+		},
+
 		onSubmit: async (values) => {
-			await dispatch(updateUser(values));
+			await dispatch(updateDataUser(username, values));
+			setShowEdit(false);
 		},
 	});
 
@@ -68,6 +89,10 @@ const ChangePassword = () => {
 		setShowAlert(false);
 	};
 
+	const openEditUsername = () => {
+		setShowEdit(!showEdit);
+	};
+
 	return (
 		<>
 			{showAlert && message.status === 'success' && (
@@ -90,12 +115,50 @@ const ChangePassword = () => {
 								className="h-24 w-24 text-light-white"
 							/>
 						</div>
+						{!showEdit ? (
+							<div className="flex items-center justify-center w-full gap-3">
+								<p className="font-semibold capitalize">
+									{username}
+								</p>
 
-						<p className="font-semibold capitalize">{username}</p>
+								<FontAwesomeIcon
+									onClick={openEditUsername}
+									icon={faPen}
+									className="text-light-warning hover:text-warning cursor-pointer"
+								/>
+							</div>
+						) : (
+							<form
+								onSubmit={updateUsername.handleSubmit}
+								className="flex items-center justify-center w-full gap-1"
+							>
+								<FormInput
+									variant="w-full flex flex-col gap-1"
+									inputvariant="text-sm font-normal w-full"
+									labelvariant="text-xs"
+									name="username"
+									onChange={updateUsername.handleChange}
+									value={updateUsername.values.username}
+								/>
+
+								<Button
+									type="submit"
+									icon={faPaperPlane}
+									variant={`bg-primary/30 text-primary text-sm hover:bg-primary hover:text-light-white rounded flex justify-center items-center`}
+									iconVariant={'mr-0'}
+								/>
+								<Button
+									onClick={openEditUsername}
+									icon={faXmark}
+									variant={`border border-danger/30 text-danger text-sm hover:bg-danger hover:text-light-white rounded flex justify-center items-center`}
+									iconVariant={'mr-0'}
+								/>
+							</form>
+						)}
 					</div>
 					<div className="w-3/4 ps-10">
 						<h1 className="text-xl font-semibold">
-							Ganti Password
+							Pengaturan Akun
 						</h1>
 
 						<form

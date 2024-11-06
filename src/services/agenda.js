@@ -26,27 +26,31 @@ export const getAgenda = async (data) => {
 		return response.data.data;
 	} catch (error) {
 		if (error.response && error.response.status === 401) {
+			console.log('call');
 			try {
-				await refreshTokenRequest();
+				const refresh = await refreshTokenRequest();
 
-				const response = await axios({
-					method: 'get',
-					url: url,
-					headers: {
-						Authorization: `Bearer ${access_token}`,
-					},
-				});
+				console.log(refresh);
 
-				return response.data.data;
+				if (refresh && refresh.statusCode === 200) {
+					const response = await axios({
+						method: 'get',
+						url: url,
+						headers: {
+							Authorization: `Bearer ${access_token}`,
+						},
+					});
+					return response.data.data;
+				}
 			} catch (error) {
 				console.log(error);
 
-				return null;
+				return error;
 			}
 		}
 		console.log(error);
 
-		return null;
+		return error;
 	}
 };
 
@@ -81,11 +85,11 @@ export const getSearchAgenda = async (data) => {
 				return response.data.data;
 			} catch (error) {
 				console.log(error);
-				throw error;
+				return error;
 			}
 		}
 		console.log(error);
-		throw error;
+		return error;
 	}
 };
 
@@ -120,11 +124,11 @@ export const getHistoryAgenda = async (data) => {
 				return response.data.data;
 			} catch (error) {
 				console.log(error);
-				throw error;
+				return error;
 			}
 		}
 		console.log(error);
-		throw error;
+		return error;
 	}
 };
 
@@ -157,11 +161,11 @@ export const getDetailAgenda = async (uuid) => {
 				return response.data.data;
 			} catch (error) {
 				console.log(error);
-				throw error;
+				return error;
 			}
 		}
 		console.log(error);
-		throw error;
+		return error;
 	}
 };
 

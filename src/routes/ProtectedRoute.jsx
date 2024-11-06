@@ -16,6 +16,8 @@ const ProtectedRoute = ({ authorized, children }) => {
 				const decodedToken = jwtDecode(token);
 				const userRole = decodedToken.role;
 
+				console.log(decodedToken);
+
 				if (authorized.includes(userRole)) {
 					setIsAuthorized(true);
 				} else {
@@ -38,12 +40,11 @@ const ProtectedRoute = ({ authorized, children }) => {
 		return <LoadingScreen />;
 	}
 
-	// Menangani kasus isAuthorized yang null
 	if (isAuthorized === null) {
-		return null; // Atau bisa return <LoadingScreen /> jika diinginkan
+		return null;
 	}
 
-	return isAuthorized ? children : null; // Jika tidak diizinkan, jangan render apa pun
+	return isAuthorized ? children : null;
 };
 
 export default ProtectedRoute;

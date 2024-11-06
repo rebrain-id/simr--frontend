@@ -55,6 +55,16 @@ export const fetchSearchAgenda = createAsyncThunk(
 
 			const dataset = await getSearchAgenda(keyword);
 
+			if (dataset.code === 'ERR_NETWORK') {
+				dispatch(
+					openMessage({
+						page: 'agenda',
+						status: 'error',
+						message: 'Jaringan internet anda tidak stabil',
+					}),
+				);
+			}
+
 			const data = await convertAgendaData(dataset.data);
 
 			dispatch(fetchAgendaSearchSuccess(data));
@@ -154,6 +164,16 @@ export const fetchAgendaToday = createAsyncThunk(
 
 			const dataset = await getAgenda(dataGetAgenda);
 
+			if (dataset.code === 'ERR_NETWORK') {
+				dispatch(
+					openMessage({
+						page: 'agenda',
+						status: 'error',
+						message: 'Jaringan internet anda tidak stabil',
+					}),
+				);
+			}
+
 			const data = await convertAgendaData(dataset);
 
 			dispatch(fetchAgendaTodaySuccess(data));
@@ -185,6 +205,18 @@ export const fetchAgendaThisMonth = createAsyncThunk(
 
 		try {
 			const dataset = await getAgenda(dataGetAgenda);
+
+			if (dataset.code === 'ERR_NETWORK') {
+				dispatch(
+					openMessage({
+						page: 'agenda',
+						status: 'error',
+						message: 'Jaringan internet anda tidak stabil',
+					}),
+				);
+			}
+
+			console.log(dataset);
 
 			const dataThisMonth = await convertAgendaData(dataset);
 
@@ -237,9 +269,17 @@ export const fetchAgendaByDate = createAsyncThunk(
 		try {
 			const dataset = await getAgenda(dataGetAgenda);
 
-			const dataByDate = await convertAgendaData(dataset);
+			if (dataset.code === 'ERR_NETWORK') {
+				dispatch(
+					openMessage({
+						page: 'agenda',
+						status: 'error',
+						message: 'Jaringan internet anda tidak stabil',
+					}),
+				);
+			}
 
-			console.log(dataByDate);
+			const dataByDate = await convertAgendaData(dataset);
 
 			dispatch(fetchAgendaByDateSuccess(dataByDate));
 		} catch (error) {
@@ -264,6 +304,16 @@ export const fetchAgendaHistory = createAsyncThunk(
 
 		try {
 			let data = await getHistoryAgenda(dataGetAgenda);
+
+			if (data.code === 'ERR_NETWORK') {
+				dispatch(
+					openMessage({
+						page: 'agenda',
+						status: 'error',
+						message: 'Jaringan internet anda tidak stabil',
+					}),
+				);
+			}
 
 			const typeArray = type.split(',');
 
