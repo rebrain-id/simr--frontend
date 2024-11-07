@@ -16,8 +16,6 @@ const ProtectedRoute = ({ authorized, children }) => {
 				const decodedToken = jwtDecode(token);
 				const userRole = decodedToken.role;
 
-				console.log(decodedToken);
-
 				if (authorized.includes(userRole)) {
 					setIsAuthorized(true);
 				} else {

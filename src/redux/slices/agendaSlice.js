@@ -6,6 +6,7 @@ import {
 	updateDepartmentAgenda,
 	updateDetailAgenda,
 } from '../actions/agendaAction';
+import moment from 'moment';
 
 const initialState = {
 	agenda: [],
@@ -19,6 +20,7 @@ const initialState = {
 	loading: false,
 	isUpdated: false,
 	message: [],
+	date: moment().format('YYYY-MM-DD'),
 	error: null,
 };
 
@@ -77,6 +79,9 @@ const agendaSlice = createSlice({
 		closeDetailAgendaSuccess(state) {
 			state.showSidebar = false;
 			state.detailAgenda = null;
+		},
+		getDateSuccess(state, action) {
+			state.date = action.payload;
 		},
 		updateDetailAgendaSuccess(state) {
 			state.loading = false;
@@ -168,6 +173,7 @@ export const {
 	updateDetailAgendaSuccess,
 	updateStatus,
 	changeStatus,
+	getDateSuccess,
 	fetchAgendaFailure,
 } = agendaSlice.actions;
 

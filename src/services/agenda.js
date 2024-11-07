@@ -21,32 +21,29 @@ export const getAgenda = async (data) => {
 			},
 		});
 
-		// console.log(response);
+		console.log(response);
 
 		return response.data.data;
 	} catch (error) {
 		if (error.response && error.response.status === 401) {
-			console.log('call');
-			try {
-				const refresh = await refreshTokenRequest();
-
-				console.log(refresh);
-
-				if (refresh && refresh.statusCode === 200) {
-					const response = await axios({
-						method: 'get',
-						url: url,
-						headers: {
-							Authorization: `Bearer ${access_token}`,
-						},
-					});
-					return response.data.data;
-				}
-			} catch (error) {
-				console.log(error);
-
-				return error;
-			}
+			// console.log('call');
+			// try {
+			// 	const refresh = await refreshTokenRequest();
+			// 	console.log(refresh);
+			// 	if (refresh && refresh.statusCode === 200) {
+			// 		const response = await axios({
+			// 			method: 'get',
+			// 			url: url,
+			// 			headers: {
+			// 				Authorization: `Bearer ${access_token}`,
+			// 			},
+			// 		});
+			// 		return response.data.data;
+			// 	}
+			// } catch (error) {
+			// 	console.log(error);
+			// 	return error;
+			// }
 		}
 		console.log(error);
 

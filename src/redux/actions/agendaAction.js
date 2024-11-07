@@ -14,6 +14,7 @@ import {
 	changeStatus,
 	fetchAgendaSearchSuccess,
 	updateStatus,
+	getDateSuccess,
 } from '../slices/agendaSlice';
 import {
 	checkAgenda,
@@ -358,6 +359,13 @@ export const closeDetailAgenda = createAsyncThunk(
 	'agenda/closeDetailAgenda',
 	async (_, { dispatch }) => {
 		dispatch(closeDetailAgendaSuccess());
+	},
+);
+
+export const getDateForAddAgenda = createAsyncThunk(
+	'agenda/getDateForAddAgenda',
+	async ({ date }, { dispatch }) => {
+		dispatch(getDateSuccess(date));
 	},
 );
 

@@ -258,6 +258,7 @@ const DetailAgendaSidebar = (props) => {
 								label="Dari"
 								type="time"
 								value={inputValue.start}
+								note="format waktu 24 jam"
 								name="start"
 								onChange={handleInputValue}
 							/>
@@ -268,6 +269,7 @@ const DetailAgendaSidebar = (props) => {
 								label="Sampai"
 								type="time"
 								value={inputValue.finish}
+								note="format waktu 24 jam"
 								name="finish"
 								onChange={handleInputValue}
 							/>

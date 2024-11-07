@@ -1,4 +1,4 @@
-import { Outlet } from 'react-router-dom';
+import { Outlet, useNavigate } from 'react-router-dom';
 import Sidebar from '../components/Sidebar';
 import Header from '../components/Header';
 // import Footer from '../elements/Footer';
@@ -10,6 +10,7 @@ import Alert from '../elements/Alert';
 import Device from '../pages/errors/Device';
 import { closeMessage } from '../redux/actions/messageAction';
 import ModalDanger from '../elements/modal/ModalDanger';
+import { postLogout } from '../redux/actions/authAction';
 
 const MainLayout = () => {
 	const [showSidebarDialogue, setShowSidebarDialogue] = useState(false);
@@ -22,6 +23,7 @@ const MainLayout = () => {
 	const [deviceWidth, setDevideWidth] = useState(true);
 
 	const dispatch = useDispatch();
+	const navigate = useNavigate();
 
 	useEffect(() => {
 		dispatch(closeDetailAgenda());
@@ -66,6 +68,13 @@ const MainLayout = () => {
 			(message.page === 'agenda' || message.page === '*')
 		) {
 			setShowAlertAgenda(true);
+		} else if (
+			message &&
+			message.status === 'session' &&
+			isOpen &&
+			message.page === '*'
+		) {
+			setShowAlertAgenda(true);
 		}
 	}, [message, dispatch, isOpen]);
 
@@ -78,6 +87,20 @@ const MainLayout = () => {
 	// const handleCloseAlert = () => {
 	// 	setShowAlert(false);
 	// };
+
+	const handleLogout = async () => {
+		try {
+			const response = await dispatch(postLogout());
+
+			if (response && response.statusCode == 200) {
+				navigate('/login');
+			} else {
+				navigate('/login');
+			}
+		} catch (error) {
+			console.log(error);
+		}
+	};
 
 	return (
 		<>
@@ -109,6 +132,15 @@ const MainLayout = () => {
 							status={message.status}
 							message={message.message}
 							onClick={() => dispatch(closeMessage())}
+						/>
+					)}
+
+					{showAlertAgenda && message?.status === 'session' && (
+						<ModalDanger
+							status={message.status}
+							message={message.message}
+							onClick={handleLogout}
+							text="Logout"
 						/>
 					)}
 

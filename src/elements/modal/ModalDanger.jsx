@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import Button from '../Button';
 
-const ModalDanger = ({ onClick, message }) => {
+const ModalDanger = ({ onClick, message, text }) => {
 	const handleClose = (e) => {
 		if (e.target === e.currentTarget) {
 			onClick();
@@ -41,7 +41,7 @@ const ModalDanger = ({ onClick, message }) => {
 
 				<div className="flex justify-end items-center gap-3 w-full">
 					<Button
-						text="Tutup"
+						text={text ? text : 'Tutup'}
 						type="button"
 						onClick={onClick}
 						variant="bg-light-white border border-danger bg-opacity-30 text-danger text-xs hover:bg-danger hover:text-white"

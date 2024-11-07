@@ -4,9 +4,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
 import { faTags } from '@fortawesome/free-solid-svg-icons/faTags';
 import { jwtDecode } from 'jwt-decode';
+import { useDispatch } from 'react-redux';
+import { getDateForAddAgenda } from '../../redux/actions/agendaAction';
+import moment from 'moment';
 
 const Agenda = () => {
 	const role = jwtDecode(sessionStorage.getItem('access_token')).role;
+	const dispatch = useDispatch();
 
 	return (
 		<>
@@ -27,6 +31,13 @@ const Agenda = () => {
 				)}
 				<Link
 					to={'/agenda/new'}
+					onClick={() =>
+						dispatch(
+							getDateForAddAgenda({
+								date: moment().format('YYYY-MM-DD'),
+							}),
+						)
+					}
 					className="flex justify-center items-center w-16 h-16 rounded-full bg-light-primary bg-opacity-80 hover:bg-opacity-100 cursor-pointer"
 				>
 					<FontAwesomeIcon

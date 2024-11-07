@@ -31,11 +31,14 @@ const AddAgenda = () => {
 	const departments = useSelector(
 		(state) => state.fetchDepartments.department,
 	);
+	const setDateForInputDate = useSelector((state) => state.agenda.date);
+
+	console.log(setDateForInputDate);
 
 	useEffect(() => {
 		dispatch(fetchTypeAgenda());
 		dispatch(fetchDepartmentsOptions());
-	}, [dispatch]);
+	}, [dispatch, setDateForInputDate]);
 
 	const [openModal, setOpenModal] = useState(false);
 	const [date, setDate] = useState({ from: '', to: '' });
@@ -180,9 +183,11 @@ const AddAgenda = () => {
 				<Formik
 					initialValues={{
 						title: '',
-						date: '',
-						from: '',
-						to: '',
+						date: setDateForInputDate
+							? setDateForInputDate
+							: moment().format('YYYY-MM-DD'),
+						from: '23:00',
+						to: '23:00',
 						location: '',
 						typeAgenda: '',
 						description: '',
@@ -241,6 +246,7 @@ const AddAgenda = () => {
 											label="Mulai"
 											type="time"
 											name="from"
+											note="format waktu 24 jam"
 											onChange={(e) => {
 												handleChange(e);
 												handleChangeDate(e);
@@ -261,6 +267,7 @@ const AddAgenda = () => {
 											label="Sampai"
 											type="time"
 											name="to"
+											note="format waktu 24 jam"
 											onChange={(e) => {
 												handleChange(e);
 												handleChangeDate(e);
