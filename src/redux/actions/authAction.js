@@ -239,7 +239,7 @@ export const updateUser = (data) => {
 				);
 			}
 
-			return response.data;
+			return response;
 		} catch (error) {
 			dispatch(
 				openMessage({
@@ -282,7 +282,7 @@ export const updateDataUser = (username, data) => {
 				);
 			}
 
-			return response.data;
+			return response;
 		} catch (error) {
 			console.log(error);
 		}

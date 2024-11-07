@@ -48,6 +48,9 @@ const ChangePassword = () => {
 
 			if (response && response.statusCode === 200) {
 				resetForm();
+				setTimeout(() => {
+					window.location.reload();
+				}, 500);
 			}
 		},
 	});
@@ -58,8 +61,14 @@ const ChangePassword = () => {
 		},
 
 		onSubmit: async (values) => {
-			await dispatch(updateDataUser(username, values));
-			setShowEdit(false);
+			const response = await dispatch(updateDataUser(username, values));
+
+			if (response && response.statusCode === 200) {
+				setShowEdit(false);
+				setTimeout(() => {
+					window.location.reload();
+				}, 500);
+			}
 		},
 	});
 
