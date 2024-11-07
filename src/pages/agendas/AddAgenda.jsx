@@ -14,6 +14,7 @@ import * as Yup from 'yup';
 import { fetchDepartmentsOptions } from '../../redux/actions/departmentAction';
 import { jwtDecode } from 'jwt-decode';
 import ModalDanger from '../../elements/modal/ModalDanger';
+import { Helmet } from 'react-helmet';
 
 const AddAgenda = () => {
 	const access_token = sessionStorage.getItem('access_token');
@@ -167,6 +168,10 @@ const AddAgenda = () => {
 
 	return (
 		<>
+			<Helmet>
+				<title>Tambah Agenda</title>
+			</Helmet>
+
 			{showAlert.visible && (
 				<ModalDanger
 					message={showAlert.message}

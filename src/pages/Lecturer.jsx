@@ -15,6 +15,7 @@ import Alert from '../elements/Alert';
 import ModalDanger from '../elements/modal/ModalDanger';
 import ModalWarning from '../elements/modal/ModalWarning';
 import { closeMessage } from '../redux/actions/messageAction';
+import { Helmet } from 'react-helmet';
 
 const Lecturer = () => {
 	const [openModal, setOpenModal] = useState(false);
@@ -71,6 +72,10 @@ const Lecturer = () => {
 
 	return (
 		<>
+			<Helmet>
+				<title>Dosen</title>
+			</Helmet>
+
 			{openAlert && message?.status === 'success' && (
 				<Alert
 					status={message?.status}

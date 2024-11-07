@@ -7,6 +7,7 @@ import { jwtDecode } from 'jwt-decode';
 import { useDispatch } from 'react-redux';
 import { getDateForAddAgenda } from '../../redux/actions/agendaAction';
 import moment from 'moment';
+import { Helmet } from 'react-helmet';
 
 const Agenda = () => {
 	const role = jwtDecode(sessionStorage.getItem('access_token')).role;
@@ -14,6 +15,10 @@ const Agenda = () => {
 
 	return (
 		<>
+			<Helmet>
+				<title>Agenda</title>
+			</Helmet>
+
 			<div className="bg-white px-10 py-5 rounded drop-shadow-bottom mt-5">
 				<Calendar />
 			</div>

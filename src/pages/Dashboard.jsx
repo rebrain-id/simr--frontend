@@ -8,6 +8,7 @@ import moment from 'moment';
 import LoadingScreen from '../elements/LoadingScreen';
 import image1 from '../assets/images/image1.png';
 import { jwtDecode } from 'jwt-decode';
+import { Helmet } from 'react-helmet';
 
 const Dashboard = () => {
 	const access_token = sessionStorage.getItem('access_token');
@@ -92,6 +93,10 @@ const Dashboard = () => {
 					initialLoad={initialLoading}
 				/>
 			)}
+
+			<Helmet>
+				<title>SIMR - Fakultas Teknik</title>
+			</Helmet>
 
 			<section
 				className="relative w-full h-[250px] bg-cover bg-center rounded drop-shadow-bottom mt-5 p-5"

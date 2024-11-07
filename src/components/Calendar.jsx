@@ -11,6 +11,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchAgendaThisMonth } from '../redux/actions/agendaAction';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import AgendaHistory from './AgendaHistory';
+import { Helmet } from 'react-helmet';
 
 const Calendar = () => {
 	const [searchParam] = useSearchParams();
@@ -106,6 +107,14 @@ const Calendar = () => {
 
 	return (
 		<>
+			<Helmet>
+				<title>
+					{menu === 'history'
+						? 'Riwayat Agenda'
+						: `Agenda - ${monthList[inputMonth]} ${inputYear}`}
+				</title>
+			</Helmet>
+
 			{menu !== 'history' ? (
 				<>
 					<div className="flex items-center justify-between mb-5">

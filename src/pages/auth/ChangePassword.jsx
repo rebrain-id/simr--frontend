@@ -17,6 +17,7 @@ import { useEffect, useState } from 'react';
 import Alert from '../../elements/Alert';
 import ModalDanger from '../../elements/modal/ModalDanger';
 import { closeMessage } from '../../redux/actions/messageAction';
+import { Helmet } from 'react-helmet';
 
 const ChangePassword = () => {
 	const access_token = sessionStorage.getItem('access_token');
@@ -95,6 +96,10 @@ const ChangePassword = () => {
 
 	return (
 		<>
+			<Helmet>
+				<title>Pengaturan Akun</title>
+			</Helmet>
+
 			{showAlert && message.status === 'success' && (
 				<Alert
 					status={message.status}

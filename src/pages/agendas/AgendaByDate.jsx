@@ -16,6 +16,7 @@ import ListAgenda from '../../elements/ListAgenda';
 import moment from 'moment';
 import ButtonMenu from '../../elements/calendar/ButtonMenu';
 import { jwtDecode } from 'jwt-decode';
+import { Helmet } from 'react-helmet';
 
 const AgendaByDate = () => {
 	const [searchParam] = useSearchParams();
@@ -112,6 +113,12 @@ const AgendaByDate = () => {
 
 	return (
 		<>
+			<Helmet>
+				<title>
+					Agenda - {getDate} {monthList[getMonth - 1]} {getYear}
+				</title>
+			</Helmet>
+
 			<div className="bg-white px-10 py-5 rounded drop-shadow-bottom mt-5">
 				<div className="flex justify-between items-center  mb-5">
 					<div className="flex items-center gap-3 text-secondary">

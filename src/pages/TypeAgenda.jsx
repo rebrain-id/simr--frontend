@@ -15,6 +15,7 @@ import ModalAddTypeAgenda from '../components/ModalAddTypeAgenda';
 import Alert from '../elements/Alert';
 import ModalWarning from '../elements/modal/ModalWarning';
 import { closeMessage } from '../redux/actions/messageAction';
+import { Helmet } from 'react-helmet';
 
 const TypeAgenda = () => {
 	const dispatch = useDispatch();
@@ -78,6 +79,10 @@ const TypeAgenda = () => {
 
 	return (
 		<>
+			<Helmet>
+				<title>Jenis Agenda</title>
+			</Helmet>
+
 			{showModal && <ModalAddTypeAgenda onClick={handleModal} />}
 
 			{openDelete && (

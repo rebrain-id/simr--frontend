@@ -7,7 +7,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import logo from '../assets/images/logo.png';
 import NavLink from '../elements/NavLink';
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { jwtDecode } from 'jwt-decode';
 
@@ -39,7 +39,7 @@ const Sidebar = () => {
 				<header
 					className={`flex justify-between items-center mb-28 ${sidebarFull ? '' : 'flex-col justify-center gap-3'}`}
 				>
-					<div className="flex gap-3">
+					<Link to={'/'} className="flex gap-3">
 						<div className="mx-auto my-auto">
 							<img src={logo} alt="" className="w-12 h-auto" />
 						</div>
@@ -54,7 +54,7 @@ const Sidebar = () => {
 								</h2>
 							</div>
 						)}
-					</div>
+					</Link>
 
 					<div
 						onClick={handleSizeSidebar}

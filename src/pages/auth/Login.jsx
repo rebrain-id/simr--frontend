@@ -10,6 +10,7 @@ import { useEffect, useState } from 'react';
 import ModalDanger from '../../elements/modal/ModalDanger';
 import Device from '../errors/Device';
 import Image3 from '../../assets/images/image3.png';
+import { Helmet } from 'react-helmet';
 
 const Login = () => {
 	const [loading, setLoading] = useState(false);
@@ -54,6 +55,10 @@ const Login = () => {
 
 	return (
 		<>
+			<Helmet>
+				<title>Login</title>
+			</Helmet>
+
 			{openModal && (
 				<ModalDanger
 					onClick={handleOpenModal}

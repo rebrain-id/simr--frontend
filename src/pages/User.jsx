@@ -14,6 +14,7 @@ import ModalAddUser from '../components/ModalAddUser';
 import Alert from '../elements/Alert';
 import ModalDanger from '../elements/modal/ModalDanger';
 import ModalWarning from '../elements/modal/ModalWarning';
+import { Helmet } from 'react-helmet';
 
 const User = () => {
 	const dispatch = useDispatch();
@@ -62,6 +63,10 @@ const User = () => {
 
 	return (
 		<>
+			<Helmet>
+				<title>Pengguna</title>
+			</Helmet>
+
 			{openModal && (
 				<ModalAddUser
 					department={departments}
