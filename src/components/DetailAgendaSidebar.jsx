@@ -176,8 +176,8 @@ const DetailAgendaSidebar = (props) => {
 			{showModal && (
 				<ModalAddAnggota
 					departments={department}
-					dateFrom={inputValue.start}
-					dateTo={inputValue.finish}
+					dateFrom={`${inputValue.date}T${inputValue.start}:00`}
+					dateTo={`${inputValue.date}T${inputValue.finish}:00`}
 					selectedMember={(data?.departments || []).map(
 						(item) => item.uuid,
 					)}

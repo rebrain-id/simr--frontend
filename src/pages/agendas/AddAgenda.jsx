@@ -6,7 +6,7 @@ import FormSelect from '../../elements/forms/FormSelect';
 import FormTextarea from '../../elements/forms/FormTextarea';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchTypeAgenda } from '../../redux/actions/typeAgendaAction';
-import { createAgenda } from '../../redux/actions/agendaAction';
+import { createAgenda, timeAddAnggota } from '../../redux/actions/agendaAction';
 import moment from 'moment';
 import { useNavigate } from 'react-router-dom';
 import { ErrorMessage, Form, Formik } from 'formik';
@@ -33,30 +33,37 @@ const AddAgenda = () => {
 	);
 	const setDateForInputDate = useSelector((state) => state.agenda.date);
 
-	console.log(setDateForInputDate);
-
 	useEffect(() => {
 		dispatch(fetchTypeAgenda());
 		dispatch(fetchDepartmentsOptions());
 	}, [dispatch, setDateForInputDate]);
 
 	const [openModal, setOpenModal] = useState(false);
-	const [date, setDate] = useState({ from: '', to: '' });
+	const [date, setDate] = useState('');
 
 	const handleChangeDate = (e) => {
 		const { name, value } = e.target;
+		if (name === 'from' || name === 'to') {
+			if (!moment(value, 'HH:mm', true).isValid()) return;
+		} else if (name === 'date') {
+			if (!moment(value, 'YYYY-MM-DD', true).isValid()) return;
+		}
 		setDate((prev) => ({
 			...prev,
 			[name]: value,
 		}));
 	};
 
+	const dateData = useSelector((state) => state.agenda.addAnggota);
+
 	const handleOpenModal = (event, values) => {
+		console.log(dateData);
 		event.preventDefault();
-		if (moment(values.from).isAfter(moment(values.to))) {
+		if (moment(values.from, 'HH:mm').isAfter(moment(values.to, 'HH:mm'))) {
 			setShowAlert({
 				status: 'error',
-				message: 'Terdapat kesalahan dalam memasukkan hari atau jam',
+				message:
+					'Terdapat kesalahan dalam memasukkan jam mulai atau selesai',
 				visible: true,
 			});
 			setTimeout(() => {
@@ -171,13 +178,13 @@ const AddAgenda = () => {
 				<ModalAddAnggota
 					onClick={() => setOpenModal(false)}
 					departments={departments}
-					dateFrom={`${date.date}T${date.from}`}
-					dateTo={`${date.date}T${date.to}`}
+					dateFrom={`${dateData.date}T${dateData.from}:00`}
+					dateTo={`${dateData.date}T${dateData.to}:00`}
 					selectedMember={[departmentUuid]}
 				/>
 			)}
 
-			<div className="bg-white px-10 py-5 rounded drop-shadow-bottom mt-5">
+			<div className="relative w-full bg-white px-10 py-5 rounded drop-shadow-bottom mt-5">
 				<h1 className="text-lg font-semibold mb-5">Tambah Agenda</h1>
 
 				<Formik
@@ -196,178 +203,193 @@ const AddAgenda = () => {
 					onSubmit={handleSubmitData}
 				>
 					{({ values, handleChange, handleSubmit, isSubmitting }) => (
-						<Form
-							onSubmit={handleSubmit}
-							className="flex flex-col gap-3 mt-5 w-full"
-						>
-							<div>
-								<FormInput
-									variant="w-full flex flex-col gap-1"
-									inputvariant="text-sm font-normal w-full"
-									labelvariant="text-xs"
-									label="Agenda"
-									name="title"
-									onChange={handleChange}
-									value={values.title}
-								/>
-								<ErrorMessage
-									name="title"
-									component="div"
-									className="text-xs text-danger font-light"
-								/>
-							</div>
-							<div className="flex gap-5">
-								<div className="w-1/2">
+						<>
+							<Form
+								onSubmit={handleSubmit}
+								className="flex flex-col gap-3 mt-5 w-full"
+							>
+								<div>
 									<FormInput
 										variant="w-full flex flex-col gap-1"
 										inputvariant="text-sm font-normal w-full"
 										labelvariant="text-xs"
-										label="Tanggal"
-										type="date"
-										name="date"
-										onChange={(e) => {
-											handleChange(e);
-											handleChangeDate(e);
-										}}
-										value={values.date}
+										label="Agenda"
+										name="title"
+										onChange={handleChange}
+										value={values.title}
 									/>
-									{/* <ErrorMessage
+									<ErrorMessage
+										name="title"
+										component="div"
+										className="text-xs text-danger font-light"
+									/>
+								</div>
+								<div className="flex gap-5">
+									<div className="w-1/2">
+										<FormInput
+											variant="w-full flex flex-col gap-1"
+											inputvariant="text-sm font-normal w-full"
+											labelvariant="text-xs"
+											label="Tanggal"
+											type="date"
+											name="date"
+											onChange={(e) => {
+												handleChange(e);
+												handleChangeDate(e);
+											}}
+											value={values.date}
+										/>
+										{/* <ErrorMessage
 										name="from"
 										component="div"
 										className="text-xs text-danger font-light"
 									/> */}
+									</div>
+									<div className="w-1/2 flex gap-5">
+										<div className="w-1/2">
+											<FormInput
+												variant="w-full flex flex-col gap-1"
+												inputvariant="text-sm font-normal w-full"
+												labelvariant="text-xs"
+												label="Mulai"
+												type="time"
+												name="from"
+												note="format waktu 24 jam"
+												onChange={(e) => {
+													handleChange(e);
+													handleChangeDate(e);
+												}}
+												// onChange={handleChange}
+												value={values.from}
+											/>
+											<ErrorMessage
+												name="from"
+												component="div"
+												className="text-xs text-danger font-light"
+											/>
+										</div>
+										<div className="w-1/2">
+											<FormInput
+												variant="w-full flex flex-col gap-1"
+												inputvariant="text-sm font-normal w-full"
+												labelvariant="text-xs"
+												label="Sampai"
+												type="time"
+												name="to"
+												note="format waktu 24 jam"
+												onChange={(e) => {
+													handleChange(e);
+													handleChangeDate(e);
+												}}
+												// onChange={handleChange}
+												value={values.to}
+											/>
+											<ErrorMessage
+												name="to"
+												component="div"
+												className="text-xs text-danger font-light"
+											/>
+										</div>
+									</div>
 								</div>
-								<div className="w-1/2 flex gap-5">
-									<div className="w-1/2">
-										<FormInput
-											variant="w-full flex flex-col gap-1"
-											inputvariant="text-sm font-normal w-full"
-											labelvariant="text-xs"
-											label="Mulai"
-											type="time"
-											name="from"
-											note="format waktu 24 jam"
-											onChange={(e) => {
-												handleChange(e);
-												handleChangeDate(e);
-											}}
-											value={values.from}
-										/>
-										<ErrorMessage
-											name="from"
-											component="div"
-											className="text-xs text-danger font-light"
-										/>
-									</div>
-									<div className="w-1/2">
-										<FormInput
-											variant="w-full flex flex-col gap-1"
-											inputvariant="text-sm font-normal w-full"
-											labelvariant="text-xs"
-											label="Sampai"
-											type="time"
-											name="to"
-											note="format waktu 24 jam"
-											onChange={(e) => {
-												handleChange(e);
-												handleChangeDate(e);
-											}}
-											value={values.to}
-										/>
-										<ErrorMessage
-											name="to"
-											component="div"
-											className="text-xs text-danger font-light"
-										/>
-									</div>
-								</div>
-							</div>
-							<div className="flex gap-5 w-full">
-								<div className="flex flex-col gap-3 w-1/2">
-									<div>
-										<FormInput
-											variant="w-full flex flex-col gap-1"
-											inputvariant="text-sm font-normal w-full"
-											labelvariant="text-xs"
-											label="Tempat"
-											name="location"
-											onChange={handleChange}
-											value={values.location}
-										/>
-										<ErrorMessage
-											name="location"
-											component="div"
-											className="text-xs text-danger font-light"
-										/>
-									</div>
+								<div className="flex gap-5 w-full">
+									<div className="flex flex-col gap-3 w-1/2">
+										<div>
+											<FormInput
+												variant="w-full flex flex-col gap-1"
+												inputvariant="text-sm font-normal w-full"
+												labelvariant="text-xs"
+												label="Tempat"
+												name="location"
+												onChange={handleChange}
+												value={values.location}
+											/>
+											<ErrorMessage
+												name="location"
+												component="div"
+												className="text-xs text-danger font-light"
+											/>
+										</div>
 
-									<div>
-										<FormSelect
-											label="Kategori"
-											variant="w-full flex flex-col gap-1 text-sm"
-											name="typeAgenda"
-											labelVariant="text-xs"
-											onChange={handleChange}
-											value={values.typeAgenda}
-										>
-											<option
-												value=""
-												className="text-light-secondary"
+										<div>
+											<FormSelect
+												label="Kategori"
+												variant="w-full flex flex-col gap-1 text-sm"
+												name="typeAgenda"
+												labelVariant="text-xs"
+												onChange={handleChange}
+												value={values.typeAgenda}
 											>
-												Pilih jenis agenda
-											</option>
-											{typeAgenda.map((item, index) => (
 												<option
-													value={item.uuid}
-													className="text-secondary"
-													key={index}
+													value=""
+													className="text-light-secondary"
 												>
-													{item.name}
+													Pilih jenis agenda
 												</option>
-											))}
-										</FormSelect>
-										<ErrorMessage
-											name="typeAgenda"
-											component="div"
-											className="text-xs text-danger font-light"
+												{typeAgenda.map(
+													(item, index) => (
+														<option
+															value={item.uuid}
+															className="text-secondary"
+															key={index}
+														>
+															{item.name}
+														</option>
+													),
+												)}
+											</FormSelect>
+											<ErrorMessage
+												name="typeAgenda"
+												component="div"
+												className="text-xs text-danger font-light"
+											/>
+										</div>
+									</div>
+									<FormTextarea
+										label="Deskripsi"
+										variant="w-1/2"
+										rows={4}
+										name="description"
+										onChange={handleChange}
+										value={values.description}
+									/>
+								</div>
+
+								<div className="mt-5 flex items-center justify-between">
+									<Button
+										onClick={(event) => {
+											dispatch(
+												timeAddAnggota({
+													data: {
+														date: values.date,
+														from: values.from,
+														to: values.to,
+													},
+												}),
+											);
+											handleOpenModal(event, values);
+										}}
+										type="button"
+										text="Tambah Anggota"
+										variant="bg-light-primary bg-opacity-80 text-light-white text-sm hover:bg-opacity-100"
+									/>
+									<div className="flex items-center gap-2">
+										<Button
+											type="submit"
+											text="Simpan"
+											variant="bg-light-primary bg-opacity-90 text-light-white text-sm hover:bg-opacity-100"
+											isDisabled={isSubmitting}
+										/>
+										<Button
+											type="button"
+											onClick={() => navigation(-1)}
+											text="Batal"
+											variant="bg-light-primary bg-opacity-30 text-light-primary text-sm hover:bg-opacity-50"
 										/>
 									</div>
 								</div>
-								<FormTextarea
-									label="Deskripsi"
-									variant="w-1/2"
-									rows={4}
-									name="description"
-									onChange={handleChange}
-									value={values.description}
-								/>
-							</div>
-
-							<div className="mt-5 flex items-center justify-between">
-								<Button
-									onClick={(event) =>
-										handleOpenModal(event, values)
-									}
-									type="button"
-									text="Tambah Anggota"
-									variant="bg-light-primary bg-opacity-80 text-light-white text-sm hover:bg-opacity-100"
-								/>
-								<div className="flex items-center gap-2">
-									<Button
-										type="submit"
-										text="Simpan"
-										variant="bg-light-primary bg-opacity-90 text-light-white text-sm hover:bg-opacity-100"
-										isDisabled={isSubmitting}
-									/>
-									<Button
-										type="button"
-										onClick={() => navigation(-1)}
-										text="Batal"
-										variant="bg-light-primary bg-opacity-30 text-light-primary text-sm hover:bg-opacity-50"
-									/>
-								</div>
-							</div>
-						</Form>
+							</Form>
+						</>
 					)}
 				</Formik>
 			</div>

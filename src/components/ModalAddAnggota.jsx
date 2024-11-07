@@ -117,7 +117,7 @@ const ModalAddAnggota = (props) => {
 	return (
 		<div
 			onClick={handleCloseModal}
-			className="fixed top-0 left-0 w-full min-h-screen h-full z-30 bg-light-secondary bg-opacity-10 flex items-center justify-center"
+			className="fixed top-0 right-0 left-0 w-full h-full z-30 bg-light-secondary bg-opacity-10 flex items-center justify-center"
 		>
 			<div className="bg-light-white p-5 rounded w-1/2 shadow-md">
 				<div className="w-full flex items-center justify-between mb-5">
@@ -175,7 +175,7 @@ const ModalAddAnggota = (props) => {
 							onClick={handleCheckMemberAgenda}
 							text="Cek Agenda"
 							type="button"
-							variant="bg-light-primary bg-opacity-30 text-light-primary text-sm hover:bg-opacity-50"
+							variant="border border-light-primary hover:bg-light-primary bg-opacity-10 text-light-primary text-sm hover:bg-opacity-50"
 						/>
 						<Button
 							type="button"
@@ -189,8 +189,7 @@ const ModalAddAnggota = (props) => {
 									? 'Simpan Anggota'
 									: 'Update Anggota'
 							}
-							variant={`bg-opacity-90 ${!checkConflict ? 'bg-light-gray text-light-white cursor-not-allowed' : 'bg-light-primary text-light-white text-sm hover:bg-opacity-100'}`}
-							disabled={!checkConflict}
+							variant={`bg-opacity-90 bg-light-primary text-light-white text-sm hover:bg-opacity-100`}
 						/>
 					</div>
 				</form>

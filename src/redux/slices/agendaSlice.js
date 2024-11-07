@@ -21,6 +21,7 @@ const initialState = {
 	isUpdated: false,
 	message: [],
 	date: moment().format('YYYY-MM-DD'),
+	addAnggota: [],
 	error: null,
 };
 
@@ -82,6 +83,9 @@ const agendaSlice = createSlice({
 		},
 		getDateSuccess(state, action) {
 			state.date = action.payload;
+		},
+		timeAddAnggotaSuccess(state, action) {
+			state.addAnggota = action.payload;
 		},
 		updateDetailAgendaSuccess(state) {
 			state.loading = false;
@@ -172,6 +176,7 @@ export const {
 	closeDetailAgendaSuccess,
 	updateDetailAgendaSuccess,
 	updateStatus,
+	timeAddAnggotaSuccess,
 	changeStatus,
 	getDateSuccess,
 	fetchAgendaFailure,
