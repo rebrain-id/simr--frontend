@@ -40,6 +40,8 @@ const DetailAgendaSidebar = (props) => {
 		(state) => state.fetchDepartments.department,
 	);
 
+	const [submited, setSubmited] = useState(false);
+
 	const { message, isOpen } = useSelector((state) => state.message);
 
 	useEffect(() => {
@@ -109,11 +111,13 @@ const DetailAgendaSidebar = (props) => {
 		};
 
 		try {
+			setSubmited(true);
 			const response = await dispatch(
 				updateDetailAgenda({ data: requestData }),
 			);
 
 			if (response && response.payload.statusCode === 200) {
+				setSubmited(false);
 				dispatch(closeDetailAgenda());
 				sessionStorage.removeItem('member');
 			}
@@ -410,7 +414,7 @@ const DetailAgendaSidebar = (props) => {
 							{username === data?.author && (
 								<Button
 									text="Perbarui"
-									variant={`${data && data.isDone ? 'bg-light-secondary cursor-not-allowed bg-opacity-30 hover:bg-opacity-30' : 'bg-light-primary bg-opacity-90'} text-light-white text-sm hover:bg-opacity-100`}
+									variant={`${(data && data.isDone) || submited ? 'bg-light-secondary cursor-not-allowed bg-opacity-30 hover:bg-opacity-30' : 'bg-light-primary bg-opacity-90'} text-light-white text-sm hover:bg-opacity-100`}
 									onClick={
 										data && data.isDone !== true
 											? handleSubmit

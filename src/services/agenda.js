@@ -249,7 +249,7 @@ export const checkAgenda = async (data, type) => {
 
 export const updateAgenda = async (uuid, data) => {
 	const url = `${API_URL()}/v1/detail-agendas/${uuid}`;
-	const form = new FormData();
+	const form = await new FormData();
 
 	form.append('title', data.title);
 	form.append('description', data.description);
