@@ -351,6 +351,7 @@ const DetailAgendaSidebar = (props) => {
 								<a
 									href={`${API_URL()}/${data.notulen}`}
 									className="text-xs font-medium text-light-primary underline"
+									target="_blank"
 								>
 									<FontAwesomeIcon
 										icon={faLink}
