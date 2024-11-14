@@ -388,6 +388,8 @@ export const updateDetailAgenda = createAsyncThunk(
 
 			const response = await updateAgenda(data.uuid, data);
 
+			console.log(response);
+
 			if (response && response.statusCode === 200) {
 				dispatch(updateStatus());
 				dispatch(

@@ -127,7 +127,7 @@ const Lecturer = () => {
 							/>
 						))
 					) : (
-						<p className="text-center text-sm text-light-secondary">
+						<p className="text-center text-xs text-light-secondary">
 							Tidak ada data dosen
 						</p>
 					)}

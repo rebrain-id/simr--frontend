@@ -91,6 +91,8 @@ const DetailAgendaSidebar = (props) => {
 		}
 	};
 
+	console.log(data);
+
 	const handleSubmit = async () => {
 		const requestData = {
 			uuid: inputValue.uuid,
@@ -102,12 +104,9 @@ const DetailAgendaSidebar = (props) => {
 			location: inputValue.location,
 			absent: inputValue.attendees,
 			notulen: inputValue.notulens,
+			isDone: inputValue.isDone,
 			department: member,
 		};
-
-		if (inputValue.isDone === true) {
-			requestData.push('isDone', true);
-		}
 
 		try {
 			const response = await dispatch(

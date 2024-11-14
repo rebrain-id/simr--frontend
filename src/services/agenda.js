@@ -259,8 +259,8 @@ export const updateAgenda = async (uuid, data) => {
 		moment.utc(data.finish).format('YYYY-MM-DD HH:mm:ss'),
 	);
 	form.append('location', data.location);
-	form.append('absent', data.attendees);
-	form.append('notulen', data.notulens);
+	form.append('absent', data.absent);
+	form.append('notulen', data.notulen);
 	form.append('typeAgendaUuid', data.typeAgenda);
 	if (data.isDone) {
 		form.append('isDone', data.isDone);
