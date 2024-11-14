@@ -2,7 +2,7 @@ import axios from 'axios';
 import { API_URL } from './config';
 
 export const getUserRequest = async () => {
-	const url = `${API_URL()}/v1/user`;
+	const url = `${API_URL()}/v1/user?limit=100`;
 
 	try {
 		const response = await axios({

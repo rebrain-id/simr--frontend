@@ -81,6 +81,8 @@ export const fetchUser = () => {
 		try {
 			const response = await getUserRequest();
 
+			console.log(response);
+
 			if (response.code === 'ERR_NETWORK') {
 				dispatch(
 					openMessage({
@@ -326,6 +328,8 @@ export const deleteUser = (username) => {
 		try {
 			const response = await deleteUserRequest(username);
 
+			console.log(response);
+
 			dispatch(closeModal());
 
 			if (response && response.data.statusCode == 200) {
@@ -345,6 +349,7 @@ export const deleteUser = (username) => {
 					}),
 				);
 			}
+			dispatch(fetchUser());
 
 			dispatch(fetchDeleteUserSuccess(response));
 			return response.data;

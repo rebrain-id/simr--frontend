@@ -6,8 +6,8 @@ const access_token = sessionStorage.getItem('access_token');
 const decodeToken = access_token && jwtDecode(access_token);
 
 export const getLecturer = async () => {
-	const getAllLecturer = `${API_URL()}/v1/lecturer?username=${decodeToken.username}`;
-	const getLecturerByDepartment = `${API_URL()}/v1/lecturer?username=${decodeToken.username}&department=${decodeToken.username}`;
+	const getAllLecturer = `${API_URL()}/v1/lecturer?username=${decodeToken.username}&limit=1000`;
+	const getLecturerByDepartment = `${API_URL()}/v1/lecturer?username=${decodeToken.username}&department=${decodeToken.username}&limit=1000`;
 
 	const url =
 		decodeToken.role === 'FAKULTAS'

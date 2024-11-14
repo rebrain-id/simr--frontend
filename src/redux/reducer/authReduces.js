@@ -67,7 +67,7 @@ const authReducer = (state = initialState, action) => {
 			return {
 				...state,
 				loading: false,
-				isLogin: false,
+				// isLogin: false,
 				isUpdated: true,
 			};
 		case FETCH_AUTH_FAILURE:

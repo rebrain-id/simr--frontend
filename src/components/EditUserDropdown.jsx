@@ -27,10 +27,10 @@ const EditUserDropdown = (props) => {
 			jabatanValue: data.jabatanValue || '',
 		},
 
-		onSubmit: (values) => {
-			console.log(values);
-			dispatch(updateDataUser(data.username, values));
-		},
+		// onSubmit: (values) => {
+		// 	console.log(values);
+		// 	dispatch(updateDataUser(data.username, values));
+		// },
 	});
 
 	return (
@@ -104,13 +104,13 @@ const EditUserDropdown = (props) => {
 								variant="bg-light-primary/25 text-primary rounded text-sm hover:bg-danger hover:text-white transition ease-in 3s"
 								onClick={handleOpen}
 							/>
-							<Button
+							{/* <Button
 								onClick={() =>
 									dispatch(openModal(data.username))
 								}
 								text="Hapus"
 								variant="bg-light-danger text-white rounded text-sm hover:bg-danger hover:text-white transition ease-in 3s"
-							/>
+							/> */}
 							{/* </div> */}
 						</div>
 					</form>

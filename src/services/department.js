@@ -6,7 +6,7 @@ const access_token = sessionStorage.getItem('access_token') || null;
 const decodeToken = access_token && jwtDecode(access_token);
 
 export const getDepartment = async () => {
-	const url = `${API_URL()}/v1/department?username=${decodeToken.username}`;
+	const url = `${API_URL()}/v1/department?username=${decodeToken.username}&limit=1000`;
 
 	const response = await axios({
 		method: 'get',
