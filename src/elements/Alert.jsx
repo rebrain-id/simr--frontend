@@ -27,12 +27,12 @@ const Alert = (props) => {
 				<h1 className={status !== 'success' ? '' : ''}>{message}</h1>
 			</div>
 
-			<div
+			{/* <div
 				className="cursor-pointer flex items-center justify-center"
 				onClick={onClick}
 			>
 				<FontAwesomeIcon icon={faXmark} className="h-4 w-4" />
-			</div>
+			</div> */}
 		</div>
 	);
 };
