@@ -117,6 +117,10 @@ const Lecturer = () => {
 						<p className="text-center text-xs text-light-secondary">
 							sedang memuat data dosen
 						</p>
+					) : lecturers?.length === 0 ? (
+						<p className="text-center text-xs text-light-secondary">
+							Tidak ada data dosen
+						</p>
 					) : lecturers ? (
 						lecturers.map((item) => (
 							<ListLecturer
@@ -126,11 +130,7 @@ const Lecturer = () => {
 								lecturer={item.lecturer}
 							/>
 						))
-					) : (
-						<p className="text-center text-xs text-light-secondary">
-							Tidak ada data dosen
-						</p>
-					)}
+					) : null}
 				</section>
 			</main>
 			{openModal && (

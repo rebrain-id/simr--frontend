@@ -15,7 +15,8 @@ const Device = () => {
 					<p className="text-xs text-center">
 						Sistem ini tidak dapat digunakan dalam perangkat anda,
 						silahkan gunakan perangkat yang lebih besar seperti
-						tablet atau laptop
+						tablet atau laptop. Atau gunakan <b>mode dekstop</b>{' '}
+						apabila anda ingin tetap menggunakan smartphone
 					</p>
 				</div>
 			</div>

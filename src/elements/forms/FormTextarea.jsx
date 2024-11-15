@@ -1,5 +1,14 @@
 const FormTextarea = (props) => {
-	const { label, note, variant, rows = 5, value, name, onChange } = props;
+	const {
+		label,
+		note,
+		variant,
+		rows = 5,
+		value,
+		name,
+		onChange,
+		disabled,
+	} = props;
 
 	return (
 		<div className={variant ? variant : 'w-80'}>
@@ -10,6 +19,7 @@ const FormTextarea = (props) => {
 				value={value}
 				name={name}
 				onChange={onChange}
+				disabled={disabled}
 			></textarea>
 
 			{note && (

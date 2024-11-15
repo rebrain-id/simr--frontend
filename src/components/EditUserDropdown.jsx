@@ -68,6 +68,7 @@ const EditUserDropdown = (props) => {
 							selectVariant="w-full mt-1 text-sm"
 							value={formik.values.departmentUuid}
 							onChange={formik.handleChange}
+							disabled
 						>
 							<option>Pilih Program Studi</option>
 							{department.map((item, index) => (
@@ -84,6 +85,7 @@ const EditUserDropdown = (props) => {
 							selectVariant="w-full mt-1 text-sm"
 							value={formik.values.jabatanValue}
 							onChange={formik.handleChange}
+							disabled
 						>
 							{listJabatan.map((jabatan, index) => (
 								<option key={index} value={Number(index)}>

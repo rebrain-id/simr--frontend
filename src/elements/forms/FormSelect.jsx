@@ -9,6 +9,7 @@ const FormSelect = (props) => {
 		onChange,
 		value,
 		children,
+		disabled,
 	} = props;
 
 	return (
@@ -19,6 +20,7 @@ const FormSelect = (props) => {
 				className={`w-full border border-light-gray focus:border-light-secondary rounded py-1 px-3 ${selectVariant}`}
 				onChange={onChange}
 				value={value}
+				disabled={disabled}
 			>
 				{children}
 			</select>

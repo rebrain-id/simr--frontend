@@ -122,6 +122,7 @@ const DetailAgendaSidebar = (props) => {
 				sessionStorage.removeItem('member');
 			}
 		} catch (error) {
+			setSubmited(false);
 			console.log(error);
 		}
 	};
@@ -132,8 +133,6 @@ const DetailAgendaSidebar = (props) => {
 			const response = await dispatch(
 				deleteDetailAgenda({ uuid: inputValue.uuid }),
 			);
-
-			console.log(response);
 
 			if (response && response.payload.statusCode === 200) {
 				dispatch(closeDetailAgenda());
@@ -240,6 +239,7 @@ const DetailAgendaSidebar = (props) => {
 							value={inputValue.title}
 							name="title"
 							onChange={handleInputValue}
+							disabled={username !== data?.author ? true : false}
 						/>
 						<FormInput
 							variant="w-full flex flex-col gap-1"
@@ -252,6 +252,7 @@ const DetailAgendaSidebar = (props) => {
 								.format('YYYY-MM-DD')}
 							name="date"
 							onChange={handleInputValue}
+							disabled={username !== data?.author ? true : false}
 						/>
 						<div className="flex gap-5">
 							<FormInput
@@ -264,6 +265,9 @@ const DetailAgendaSidebar = (props) => {
 								note="format waktu 24 jam"
 								name="start"
 								onChange={handleInputValue}
+								disabled={
+									username !== data?.author ? true : false
+								}
 							/>
 							<FormInput
 								variant="w-full flex flex-col gap-1"
@@ -275,6 +279,9 @@ const DetailAgendaSidebar = (props) => {
 								note="format waktu 24 jam"
 								name="finish"
 								onChange={handleInputValue}
+								disabled={
+									username !== data?.author ? true : false
+								}
 							/>
 						</div>
 						<FormInput
@@ -285,12 +292,14 @@ const DetailAgendaSidebar = (props) => {
 							value={inputValue.location}
 							name="location"
 							onChange={handleInputValue}
+							disabled={username !== data?.author ? true : false}
 						/>
 						<FormTextarea
 							label="Deskripsi"
 							value={inputValue.description}
 							name="description"
 							onChange={handleInputValue}
+							disabled={username !== data?.author ? true : false}
 						/>
 						<FormSelect
 							label="Kategori"
@@ -299,6 +308,7 @@ const DetailAgendaSidebar = (props) => {
 							onChange={handleInputValue}
 							labelVariant="text-xs"
 							selectVariant="text-sm"
+							disabled={username !== data?.author ? true : false}
 						>
 							<option
 								value=""
@@ -341,7 +351,11 @@ const DetailAgendaSidebar = (props) => {
 										type="button"
 										text="Ubah Anggota"
 										variant={`${data && data.isDone ? 'bg-light-secondary cursor-not-allowed bg-opacity-30 hover:bg-opacity-30' : 'bg-light-primary bg-opacity-90'} text-light-white text-sm hover:bg-opacity-100`}
-										onClick={handleOpenModal}
+										onClick={() =>
+											data && data.isDone
+												? handleOpenModal
+												: ''
+										}
 									/>
 								</div>
 							)}
@@ -364,7 +378,16 @@ const DetailAgendaSidebar = (props) => {
 									Link Notulensi Agenda
 								</a>
 							</div>
-						) : (
+						) : username !== data?.author && !data?.notulen ? (
+							<div>
+								<h1 className="text-xs font-medium">
+									Notulensi
+								</h1>
+								<p className="text-xs text-center mt-2 text-light-secondary">
+									Pembuat belum mengunggah notulensi
+								</p>
+							</div>
+						) : !data?.notulen ? (
 							<FormInput
 								variant="w-full flex flex-col gap-1"
 								inputvariant="text-sm font-normal w-full"
@@ -376,7 +399,7 @@ const DetailAgendaSidebar = (props) => {
 								name="notulens"
 								onChange={handleInputValue}
 							/>
-						)}
+						) : null}
 
 						{data?.absent ? (
 							<div className="w-80">
@@ -387,7 +410,16 @@ const DetailAgendaSidebar = (props) => {
 									className="mt-1"
 								/>
 							</div>
-						) : (
+						) : username !== data?.author && !data?.absent ? (
+							<div>
+								<h1 className="text-xs font-medium">
+									Notulensi
+								</h1>
+								<p className="text-xs text-center mt-2 text-light-secondary">
+									Pembuat belum mengunggah absensi
+								</p>
+							</div>
+						) : !data?.absent ? (
 							<FormInput
 								variant="w-full flex flex-col gap-1"
 								inputvariant="text-sm font-normal w-full"
@@ -399,14 +431,16 @@ const DetailAgendaSidebar = (props) => {
 								name="attendees"
 								onChange={handleInputValue}
 							/>
-						)}
+						) : null}
 
-						<Toggel
-							name={'isDone'}
-							label="Agenda Selesai"
-							onChange={!data?.isDone && handleInputValue}
-							isChecked={inputValue.isDone}
-						/>
+						{username === data?.author && (
+							<Toggel
+								name={'isDone'}
+								label="Agenda Selesai"
+								onChange={!data?.isDone && handleInputValue}
+								isChecked={inputValue.isDone}
+							/>
+						)}
 					</form>
 
 					<section className="mt-5 flex items-center justify-between px-8">

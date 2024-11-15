@@ -16,6 +16,7 @@ const FormInput = (props) => {
 		onChange,
 		name,
 		isPassword = false,
+		disabled,
 	} = props;
 	const [placeholderInput, setPlaceholderInput] = useState(placeholder);
 	const [showPassword, setShowPassword] = useState(false);
@@ -87,6 +88,7 @@ const FormInput = (props) => {
 					onFocus={handleFocus}
 					onBlur={handleBlur}
 					onChange={onChange}
+					disabled={disabled}
 				/>
 			</div>
 
