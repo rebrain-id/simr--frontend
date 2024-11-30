@@ -6,6 +6,12 @@ import { router } from './routes/route';
 import { Provider } from 'react-redux';
 import store from './redux/store';
 
+if (import.meta.env.MODE === 'production') {
+	console.log = () => {};
+	console.warn = () => {};
+	console.error = () => {};
+}
+
 createRoot(document.getElementById('root')).render(
 	<StrictMode>
 		<Provider store={store}>
