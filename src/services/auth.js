@@ -15,7 +15,7 @@ export const getUserRequest = async () => {
 
 		return response.data;
 	} catch (error) {
-		console.log(error);
+		// console.log(error);
 		return error;
 	}
 };
@@ -32,7 +32,8 @@ export const registerRequest = async (data) => {
 
 		return response.data;
 	} catch (error) {
-		console.log(error);
+		return error;
+		// console.log(error);
 	}
 };
 
@@ -50,7 +51,8 @@ export const loginRequest = async (data) => {
 
 		return response.data;
 	} catch (error) {
-		console.log(error);
+		return error;
+		// console.log(error);
 	}
 };
 
@@ -68,7 +70,7 @@ export const updateUserRequest = async (username, data) => {
 			},
 		});
 
-		console.log(response);
+		// console.log(response);
 
 		if (response && response.data.statusCode === 200) {
 			sessionStorage.setItem(
@@ -89,7 +91,8 @@ export const updateUserRequest = async (username, data) => {
 
 		return response.data;
 	} catch (error) {
-		console.log(error);
+		return error;
+		// console.log(error);
 	}
 };
 
@@ -107,7 +110,8 @@ export const deleteUserRequest = (username) => {
 		});
 		return response;
 	} catch (error) {
-		console.log(error);
+		return error;
+		// console.log(error);
 	}
 };
 
@@ -130,7 +134,7 @@ export const refreshTokenRequest = async () => {
 			},
 		});
 
-		console.log(response);
+		// console.log(response);
 
 		if (response && response.data.statusCode === 200) {
 			sessionStorage.setItem(
@@ -140,7 +144,8 @@ export const refreshTokenRequest = async () => {
 		}
 		return response;
 	} catch (error) {
-		console.log(error);
+		return error;
+		// console.log(error);
 	}
 };
 
@@ -162,6 +167,7 @@ export const logoutRequest = async (data) => {
 
 		return response.data;
 	} catch (error) {
-		console.log(error);
+		return error;
+		// console.log(error);
 	}
 };

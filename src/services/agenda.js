@@ -21,8 +21,6 @@ export const getAgenda = async (data) => {
 			},
 		});
 
-		console.log(response);
-
 		return response.data.data;
 	} catch (error) {
 		if (error.response && error.response.status === 401) {
@@ -45,7 +43,7 @@ export const getAgenda = async (data) => {
 			// 	return error;
 			// }
 		}
-		console.log(error);
+		// console.log(error);
 
 		return error;
 	}
@@ -81,11 +79,11 @@ export const getSearchAgenda = async (data) => {
 
 				return response.data.data;
 			} catch (error) {
-				console.log(error);
+				// console.log(error);
 				return error;
 			}
 		}
-		console.log(error);
+		// console.log(error);
 		return error;
 	}
 };
@@ -120,11 +118,11 @@ export const getHistoryAgenda = async (data) => {
 
 				return response.data.data;
 			} catch (error) {
-				console.log(error);
+				// console.log(error);
 				return error;
 			}
 		}
-		console.log(error);
+		// console.log(error);
 		return error;
 	}
 };
@@ -157,11 +155,11 @@ export const getDetailAgenda = async (uuid) => {
 
 				return response.data.data;
 			} catch (error) {
-				console.log(error);
+				// console.log(error);
 				return error;
 			}
 		}
-		console.log(error);
+		// console.log(error);
 		return error;
 	}
 };
@@ -196,12 +194,12 @@ export const createDataAgenda = async (data) => {
 
 				return response.data.data;
 			} catch (error) {
-				console.log(error);
-				throw error;
+				// console.log(error);
+				return error;
 			}
 		}
-		console.log(error);
-		throw error;
+		// console.log(error);
+		return error;
 	}
 };
 
@@ -238,12 +236,12 @@ export const checkAgenda = async (data, type) => {
 
 				return response.data.data;
 			} catch (error) {
-				console.log(error);
-				throw error;
+				// console.log(error);
+				return error;
 			}
 		}
-		console.log(error);
-		throw error;
+		// console.log(error);
+		return error;
 	}
 };
 
@@ -291,7 +289,8 @@ export const updateAgenda = async (uuid, data) => {
 				return res.data;
 			})
 			.catch((err) => {
-				console.error(err);
+				// console.error(err);
+				return err;
 			});
 		return response;
 	} catch (error) {
@@ -311,12 +310,12 @@ export const updateAgenda = async (uuid, data) => {
 
 				return response;
 			} catch (error) {
-				console.log(error);
-				throw error;
+				// console.log(error);
+				return error;
 			}
 		}
-		console.log(error);
-		throw error;
+		// console.log(error);
+		return error;
 	}
 };
 
@@ -349,8 +348,8 @@ export const updateMemberAgenda = async (data) => {
 
 				return response.data;
 			} catch (error) {
-				console.log(error);
-				throw error;
+				// console.log(error);
+				return error;
 			}
 		}
 	}
@@ -383,11 +382,11 @@ export const deleteAgenda = async (uuid) => {
 
 				return response.data;
 			} catch (error) {
-				console.log(error);
-				throw error;
+				// console.log(error);
+				return error;
 			}
 		}
-		console.log(error);
-		throw error;
+		// console.log(error);
+		return error;
 	}
 };
