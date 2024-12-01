@@ -113,14 +113,21 @@ const Department = () => {
 							sedang memuat data program studi
 						</p>
 					) : departments ? (
-						departments.map((item, index) => (
-							<ListDepartment
-								key={index}
-								data={item.name}
-								uuid={item.uuid}
-								name={item.name}
-							/>
-						))
+						departments
+							.filter(
+								(item) =>
+									item.name !== 'Dekan' ||
+									item.name !== 'Wakil Dekan' ||
+									item.name !== 'Pengajaran',
+							)
+							.map((item, index) => (
+								<ListDepartment
+									key={index}
+									data={item.name}
+									uuid={item.uuid}
+									name={item.name}
+								/>
+							))
 					) : (
 						<p className="text-center text-xs text-light-secondary">
 							Tidak ada data program studi

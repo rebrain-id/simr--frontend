@@ -76,7 +76,8 @@ export const fetchDepartments = () => {
 	return async (dispatch) => {
 		dispatch(fetchDepartmentsRequest());
 		try {
-			const response = await getDepartment();
+			let response = await getDepartment();
+
 			dispatch(fetchDepartmentsSuccess(response));
 		} catch (error) {
 			dispatch(fetchDepartmentsFailure(error.message));
