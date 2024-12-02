@@ -2,15 +2,17 @@ import { Outlet, useNavigate } from 'react-router-dom';
 import Sidebar from '../components/Sidebar';
 import Header from '../components/Header';
 // import Footer from '../elements/Footer';
-import DetailAgendaSidebar from '../components/DetailAgendaSidebar';
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect, useState } from 'react';
+import { lazy, Suspense, useEffect, useState } from 'react';
 import { closeDetailAgenda } from '../redux/actions/agendaAction';
 import Alert from '../elements/Alert';
 import Device from '../pages/errors/Device';
 import { closeMessage } from '../redux/actions/messageAction';
 import ModalDanger from '../elements/modal/ModalDanger';
 import { postLogout } from '../redux/actions/authAction';
+const DetailAgendaSidebar = lazy(
+	() => import('../components/DetailAgendaSidebar'),
+);
 
 const MainLayout = () => {
 	const [showSidebarDialogue, setShowSidebarDialogue] = useState(false);
@@ -147,18 +149,22 @@ const MainLayout = () => {
 					<Sidebar />
 
 					<aside className="w-full px-10 pb-20">
-						{showSidebarDialogue && (
-							<DetailAgendaSidebar
-								onClick={() => dispatch(closeDetailAgenda())}
-								data={detailAgenda}
-								isShow={true}
-								variant={
-									showSidebar
-										? 'translate-x-0'
-										: 'translate-x-full'
-								}
-							/>
-						)}
+						<Suspense>
+							{showSidebarDialogue && (
+								<DetailAgendaSidebar
+									onClick={() =>
+										dispatch(closeDetailAgenda())
+									}
+									data={detailAgenda}
+									isShow={true}
+									variant={
+										showSidebar
+											? 'translate-x-0'
+											: 'translate-x-full'
+									}
+								/>
+							)}
+						</Suspense>
 						<Header />
 						<Outlet />
 						{/* <Footer /> */}
